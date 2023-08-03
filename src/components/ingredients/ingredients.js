@@ -11,18 +11,18 @@ export default function Ingredients() {
     ]
 
     return (
-        <div className={styles.content + ' pt-10'}>
+        <div className={styles.content}>
             {categories.map(({ type, ingredients }) => (
-                <>
+                <div key={type} >
                     <h2 className='text text_type_main-medium mb-6'>
                         {type}
                     </h2>
                     <div className={styles.ingredientsRow + ' pl-4 pr-4'}>
                         {ingredients.map(ingredient => (
-                            <IngredientCart count={ingredient.count} name={ingredient.name} price={ingredient.price} picture={ingredient.image} />
+                            <IngredientCart key={ingredient['_id']} count={ingredient.count} name={ingredient.name} price={ingredient.price} picture={ingredient.image} />
                         ))}
                     </div>
-                </>
+                </div>
             ))}
         </div>
     )

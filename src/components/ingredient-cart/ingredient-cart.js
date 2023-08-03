@@ -7,7 +7,7 @@ export default function IngredientCart(props) {
         <article className={styles.cart}>
             {props.count &&  (<Counter count={props.count} />)}
             <div className={styles.image + ' pl-4 pr-4 mb-1'}>
-                <img src={props.picture}></img>
+                <img alt={props.name} src={props.picture}></img>
             </div>
             <div className={styles.price + ' mb-1'}>
                 <span className='text text_type_digits-default'>{props.price}</span>
