@@ -1,6 +1,6 @@
 import styles from './ingredients.module.css';
-import IngredientCart from '../ingredient-cart/ingredient-cart';
-import ingredientData from '../../utils/data.js';
+import IngredientCart from './ingredient-cart/ingredient-cart';
+import ingredientData from '../../../utils/data';
 
 export default function Ingredients() {
 

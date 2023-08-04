@@ -1,10 +1,11 @@
 import styles from './burger-constructor.module.css';
-import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element';
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element';
 
 export default function BurgerConstructor() {
-    return(
+    return (
         <section className={styles.content}>
-            <ConstructorElement/>
+            <Constructor/>
+            <Info/>
         </section>
     )
 }
