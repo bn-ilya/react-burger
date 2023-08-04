@@ -1,6 +1,6 @@
 .content {
     width: 100%;
-    padding: 100px 16px 52px 16px;
+    padding: 100px 0px 52px 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -11,6 +11,7 @@
 .main {
     flex: 1 1 auto;
     overflow: auto;
+    padding-right: -8px;
 }
 
 .footer {
