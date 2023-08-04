@@ -1,0 +1,15 @@
+.content {
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: hidden;
+}
+
+.elements {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+}
