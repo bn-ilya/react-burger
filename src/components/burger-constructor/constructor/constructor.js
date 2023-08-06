@@ -4,8 +4,6 @@ import styles from './constructor.module.css';
 
 export default function Constructor({ ingredientsData }) {
 
-    console.log(ingredientsData)
-
     return (
         <div className={styles.content}>
             <div className={styles.header}>

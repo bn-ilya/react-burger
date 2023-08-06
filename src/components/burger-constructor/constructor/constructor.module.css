@@ -13,6 +13,11 @@
     gap: 10px;
     overflow-y: auto;
     padding-right: 8px;
+    scroll-snap-type: y mandatory;
+}
+
+.elements div {
+    scroll-snap-align: start;
 }
 
 .header,.footer {

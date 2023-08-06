@@ -5,10 +5,10 @@ import { Logo } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui
 
 const Button = (props) => {
     return (
-        <button className={styles.button + ' pl-5 pr-5 pt-4 pb-4'} aria-label={props.label}>
+        <a href='' className={styles.button + ' pl-5 pr-5 pt-4 pb-4'} aria-label={props.label}>
             <span className={styles.buttonIcon + ' mr-2'}>{props.icon}</span>
             <span className='text text_type_main-default'>{props.children}</span>
-        </button>
+        </a>
     );
 }
 
