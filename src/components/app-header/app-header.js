@@ -1,19 +1,9 @@
 import styles from './app-header.module.css';
-import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
-import { BurgerIcon, ListIcon, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import { Logo } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/logo";
-
-const Button = (props) => {
-    return (
-        <a href='' className={styles.button + ' pl-5 pr-5 pt-4 pb-4'} aria-label={props.label}>
-            <span className={styles.buttonIcon + ' mr-2'}>{props.icon}</span>
-            <span className='text text_type_main-default'>{props.children}</span>
-        </a>
-    );
-}
+import { BurgerIcon, ListIcon, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
+import Button from './button/button';
 
 export default function AppHeader() {
-
     return (
         <header className={styles.header + ' pt-4 pb-4'}>
             <div className={styles.content}>

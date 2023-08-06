@@ -1,6 +1,7 @@
 import styles from './ingredient-cart.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter';
+import PropTypes from 'prop-types';
 
 export default function IngredientCart(props) {
     return (
@@ -18,4 +19,11 @@ export default function IngredientCart(props) {
             </h2>
         </article>
     )
+}
+
+IngredientCart.propTypes = {
+    count: PropTypes.number,
+    name: PropTypes.string.isRequired,
+    picture: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired
 }
