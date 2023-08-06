@@ -1,9 +1,7 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element';
-import DraggableConstructorElement from './draggable-constructor-element/draggable-constructor-element';
 import styles from './constructor.module.css';
-import PropTypes from 'prop-types';
 
-export default function Constructor({ ingredientsData }) {
+export default function Constructor() {
 
     return (
         <div className={styles.content}>
@@ -17,15 +15,7 @@ export default function Constructor({ ingredientsData }) {
                     />
             </div>
             <div className={styles.elements}>
-                {ingredientsData.map(ingredientData => (
-                    <DraggableConstructorElement
-                        extraClass='pr-8'
-                        text={ingredientData.name}
-                        price={ingredientData.price}
-                        thumbnail={ingredientData.image}
-                        key={ingredientData['_id']}
-                    />
-                ))}
+                {/* {Здесь будут выбранные ингредиенты} */}
             </div>
             <div className={styles.footer}>
                 <ConstructorElement
@@ -38,24 +28,4 @@ export default function Constructor({ ingredientsData }) {
             </div>
         </div>
     )
-}
-
-const ingredientDataTypes = PropTypes.shape({
-    "_id": PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    calories: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    '__v': PropTypes.number.isRequired
-
-})
-
-Constructor.propTypes = {
-    ingredientsData: PropTypes.arrayOf(ingredientDataTypes)
 }
