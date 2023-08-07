@@ -3,6 +3,7 @@ import AppMain from '../app-main/app-main';
 import styles from './app.module.css';
 import Loading from './loading/loading';
 import ErrorRequest from './error-request/error-request';
+import Modal from '../modal/modal';
 import { useEffect, useState } from 'react';
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 
@@ -31,6 +32,7 @@ function App() {
   if (isErrorLoading) return (<ErrorRequest onClick={() => setIsLoading(true)} />);
   return (
     <div className={styles.app}>
+      <Modal header={<span className="text text_type_main-medium">Детали ингредиента</span>}/>
       <AppHeader />
       <AppMain ingredientsData={ingredientsData} />
     </div>
