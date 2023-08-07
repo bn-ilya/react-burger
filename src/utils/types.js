@@ -23,9 +23,14 @@ export const modalHeaderType = PropTypes.oneOfType([
     PropTypes.node
 ])
 
-export const modalMainType = PropTypes.oneOfType([
+export const modalChildType = PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
     PropTypes.element,
     PropTypes.node
 ])
+
+export const modalControlsType = PropTypes.shape({
+    setIsVisibleModal: PropTypes.func.isRequired,
+    setContentModal: PropTypes.func.isRequired
+})

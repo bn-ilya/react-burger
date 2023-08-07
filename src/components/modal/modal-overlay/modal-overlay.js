@@ -1,6 +1,6 @@
-import styles from './overlay.module.css';
+import styles from './modal-overlay.module.css';
 
-export default function Overlay({closeModal}) {
+export default function ModalOverlay({closeModal}) {
 
     const handlerClick = e => {
         e.stopPropagation()

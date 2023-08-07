@@ -1,7 +1,7 @@
 import styles from './ingredients.module.css';
 import IngredientCart from './ingredient-cart/ingredient-cart';
 import PropTypes from 'prop-types';
-import { ingredientType } from '../../../utils/types';
+import { ingredientType, modalControlsType } from '../../../utils/types';
 
 export default function Ingredients({ingredientsData, modalControls}) {
 
@@ -34,5 +34,6 @@ export default function Ingredients({ingredientsData, modalControls}) {
 }
 
 Ingredients.propTypes = {
-    ingredientsData: PropTypes.arrayOf(ingredientType)
+    ingredientsData: PropTypes.arrayOf(ingredientType),
+    modalControls: modalControlsType
 }

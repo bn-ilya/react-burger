@@ -3,13 +3,13 @@ import { useEffect } from "react";
 import styles from './modal.module.css';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Header from './header/header';
-import Overlay from "./overlay/overlay";
-import { modalHeaderType, modalMainType } from "../../utils/types";
+import ModalOverlay from "./modal-overlay/modal-overlay";
+import { modalHeaderType, modalChildType } from "../../utils/types";
 import PropTypes from 'prop-types';
 
 const modalRoot = document.getElementById("react-modals");
 
-export default function Modal({ header, main, closeModal, ...props }) {
+export default function Modal({ header, closeModal, children }) {
 
     useEffect(() => {
         const handleKeyDown = e => {
@@ -30,10 +30,10 @@ export default function Modal({ header, main, closeModal, ...props }) {
                             <CloseIcon type="primary" />
                         </div>
                         {header && (<Header children={header} />)}
-                        {props.children}
+                        {children}
                     </div>
                 </section>
-                <Overlay closeModal={closeModal} />
+                <ModalOverlay closeModal={closeModal} />
             </>
         ),
         modalRoot
@@ -42,6 +42,6 @@ export default function Modal({ header, main, closeModal, ...props }) {
 
 Modal.propTypes = {
     header: modalHeaderType,
-    main: modalMainType.isRequired,
+    children: modalChildType,
     closeModal: PropTypes.func.isRequired
 }

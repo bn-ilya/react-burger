@@ -2,7 +2,7 @@ import styles from './ingredient-cart.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import PropTypes from 'prop-types';
+import { ingredientType, modalControlsType } from '../../../../utils/types';
 
 export default function IngredientCart({ ingredient, modalControls }) {
 
@@ -39,8 +39,6 @@ export default function IngredientCart({ ingredient, modalControls }) {
 }
 
 IngredientCart.propTypes = {
-    count: PropTypes.number,
-    name: PropTypes.string.isRequired,
-    picture: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired
+   ingredient: ingredientType,
+   modalControls: modalControlsType
 }
