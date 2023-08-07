@@ -9,9 +9,9 @@ import PropTypes from 'prop-types';
 
 const modalRoot = document.getElementById("react-modals");
 
-export default function Modal({ header, main, closeModal }) {
+export default function Modal({ header, main, closeModal, ...props }) {
 
-    useEffect(()=>{
+    useEffect(() => {
         const handleKeyDown = e => {
             e.code === 'Escape' && closeModal();
         }
@@ -30,7 +30,7 @@ export default function Modal({ header, main, closeModal }) {
                             <CloseIcon type="primary" />
                         </div>
                         {header && (<Header children={header} />)}
-                        {main}
+                        {props.children}
                     </div>
                 </section>
                 <Overlay closeModal={closeModal} />

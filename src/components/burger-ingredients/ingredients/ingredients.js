@@ -3,7 +3,7 @@ import IngredientCart from './ingredient-cart/ingredient-cart';
 import PropTypes from 'prop-types';
 import { ingredientType } from '../../../utils/types';
 
-export default function Ingredients({ingredientsData, setIsVisibleModal, setContentModal}) {
+export default function Ingredients({ingredientsData, modalControls}) {
 
     const categories = [
         { type: 'Булки', ingredients: ingredientsData.filter(ingredient => ingredient.type === "bun") },
@@ -23,8 +23,7 @@ export default function Ingredients({ingredientsData, setIsVisibleModal, setCont
                             <IngredientCart
                                 key={ingredient['_id']}
                                 ingredient={ingredient}
-                                setIsVisibleModal={setIsVisibleModal}
-                                setContentModal={setContentModal}
+                                modalControls={modalControls}
                             />
                         ))}
                     </div>

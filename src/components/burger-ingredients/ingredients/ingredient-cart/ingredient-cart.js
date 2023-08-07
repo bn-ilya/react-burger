@@ -1,13 +1,13 @@
 import styles from './ingredient-cart.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter';
-import IngredientDetails from '../../../ingredient-details/ingredient-details';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 import PropTypes from 'prop-types';
 
-export default function IngredientCart({ ingredient, setIsVisibleModal, setContentModal }) {
+export default function IngredientCart({ ingredient, modalControls }) {
 
     const handlerClick = () => {
-        setContentModal({
+        modalControls.setContentModal({
             header: <span className='text text_type_main-large'>Детали ингредиента</span>,
             main: <IngredientDetails
                     image={ingredient.image_large}
@@ -18,7 +18,7 @@ export default function IngredientCart({ ingredient, setIsVisibleModal, setConte
                     carbohydrates={ingredient.carbohydrates}
                  />
         })
-        setIsVisibleModal(true)
+        modalControls.setIsVisibleModal(true)
     }
 
     return (

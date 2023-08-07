@@ -33,6 +33,13 @@ function App() {
       })
   }, [isLoadIng])
 
+  const modalControls = {
+    setIsVisibleModal: params => setIsVisibleModal(params),
+    setContentModal: params => setContentModal(params)
+  }
+
+  const handleCloseModal = () => setIsVisibleModal(false);
+
   if (isLoadIng) return (<Loading />);
   if (isErrorLoading) return (<ErrorRequest onClick={() => setIsLoading(true)} />);
 
@@ -40,10 +47,10 @@ function App() {
     <>
       <div className={styles.app}>
         <AppHeader />
-        <AppMain ingredientsData={ingredientsData} setIsVisibleModal={param => setIsVisibleModal(param)} setContentModal={(param) => setContentModal(param)} />
+        <AppMain ingredientsData={ingredientsData} modalControls={modalControls} />
       </div>
 
-      {isVisibleModal && <Modal {...contentModal} closeModal={() => setIsVisibleModal(false)}></Modal>}
+      {isVisibleModal && <Modal header={contentModal.header} closeModal={handleCloseModal}>{contentModal.main}</Modal>}
     </>
   );
 }
