@@ -4,7 +4,7 @@ import Tabs from './tabs/tabs';
 import PropTypes from 'prop-types';
 import { ingredientType } from '../../utils/types';
 
-export default function BurgerIngredients({ingredientsData}) {
+export default function BurgerIngredients({ingredientsData, setIsVisibleModal, setContentModal}) {
     return (
         <section className={styles.content + ' pt-10'}>
             <div className={styles.header}>
@@ -12,7 +12,7 @@ export default function BurgerIngredients({ingredientsData}) {
                 <Tabs />
             </div>
             <div className={styles.main}>
-                <Ingredients ingredientsData={ingredientsData} />
+                <Ingredients ingredientsData={ingredientsData} setIsVisibleModal={setIsVisibleModal} setContentModal={setContentModal}/>
             </div>
         </section>
     )

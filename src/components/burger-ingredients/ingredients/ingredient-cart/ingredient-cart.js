@@ -1,21 +1,38 @@
 import styles from './ingredient-cart.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter';
+import IngredientDetails from '../../../ingredient-details/ingredient-details';
 import PropTypes from 'prop-types';
 
-export default function IngredientCart(props) {
+export default function IngredientCart({ ingredient, setIsVisibleModal, setContentModal }) {
+
+    const handlerClick = () => {
+        setContentModal({
+            header: <span className='text text_type_main-large'>Детали ингредиента</span>,
+            main: <IngredientDetails
+                    image={ingredient.image_large}
+                    name={ingredient.name}
+                    calories={ingredient.calories}
+                    proteins={ingredient.proteins}
+                    fat={ingredient.fat}
+                    carbohydrates={ingredient.carbohydrates}
+                 />
+        })
+        setIsVisibleModal(true)
+    }
+
     return (
-        <article className={styles.cart}>
-            {props.count &&  (<Counter count={props.count} />)}
+        <article onClick={handlerClick} className={styles.cart}>
+            {ingredient.count && (<Counter count={ingredient.count} />)}
             <div className={styles.image + ' pl-4 pr-4 mb-1'}>
-                <img alt={props.name} src={props.picture}></img>
+                <img alt={ingredient.name} src={ingredient.image}></img>
             </div>
             <div className={styles.price + ' mb-1'}>
-                <span className='text text_type_digits-default'>{props.price}</span>
+                <span className='text text_type_digits-default'>{ingredient.price}</span>
                 <CurrencyIcon />
             </div>
             <h2 className={styles.name + ' text text_type_main-default'}>
-                {props.name}
+                {ingredient.name}
             </h2>
         </article>
     )

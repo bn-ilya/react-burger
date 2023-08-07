@@ -13,7 +13,11 @@ function App() {
   const [ingredientsData, setIngredientsData] = useState(null);
   const [isLoadIng, setIsLoading] = useState(true);
   const [isErrorLoading, setIsErrorLoading] = useState(false);
-  const [isOpenModal, setIsOpenModal] = useState(true);
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [contentModal, setContentModal] = useState({
+    header: null,
+    main: null
+  })
 
   useEffect(() => {
     if (!isLoadIng) return;
@@ -31,18 +35,16 @@ function App() {
 
   if (isLoadIng) return (<Loading />);
   if (isErrorLoading) return (<ErrorRequest onClick={() => setIsLoading(true)} />);
+
   return (
-    <div className={styles.app}>
-      
-      {isOpenModal &&
-      <Modal
-            header={<span className="text text_type_main-medium" >Детали ингредиента</span>}
-            closeModal={() => {setIsOpenModal(false)}}
-      />}
-      
-      <AppHeader />
-      <AppMain ingredientsData={ingredientsData} />
-    </div>
+    <>
+      <div className={styles.app}>
+        <AppHeader />
+        <AppMain ingredientsData={ingredientsData} setIsVisibleModal={param => setIsVisibleModal(param)} setContentModal={(param) => setContentModal(param)} />
+      </div>
+
+      {isVisibleModal && <Modal {...contentModal} closeModal={() => setIsVisibleModal(false)}></Modal>}
+    </>
   );
 }
 

@@ -3,7 +3,7 @@ import IngredientCart from './ingredient-cart/ingredient-cart';
 import PropTypes from 'prop-types';
 import { ingredientType } from '../../../utils/types';
 
-export default function Ingredients({ingredientsData}) {
+export default function Ingredients({ingredientsData, setIsVisibleModal, setContentModal}) {
 
     const categories = [
         { type: 'Булки', ingredients: ingredientsData.filter(ingredient => ingredient.type === "bun") },
@@ -20,7 +20,12 @@ export default function Ingredients({ingredientsData}) {
                     </h2>
                     <div className={styles.ingredientsRow + ' pl-4 pr-2'}>
                         {ingredients.map(ingredient => (
-                            <IngredientCart key={ingredient['_id']} count={ingredient.count} name={ingredient.name} price={ingredient.price} picture={ingredient.image} />
+                            <IngredientCart
+                                key={ingredient['_id']}
+                                ingredient={ingredient}
+                                setIsVisibleModal={setIsVisibleModal}
+                                setContentModal={setContentModal}
+                            />
                         ))}
                     </div>
                 </div>
