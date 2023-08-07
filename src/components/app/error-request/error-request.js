@@ -1,5 +1,6 @@
 import styles from './error-request.module.css';
 import { CloseIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types';
 
 export default function ErrorRequest({ onClick }) {
     return (
@@ -17,4 +18,8 @@ export default function ErrorRequest({ onClick }) {
             </div>
         </div>
     )
+}
+
+ErrorRequest.propTypes = {
+    onClick: PropTypes.func.isRequired
 }
