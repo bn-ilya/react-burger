@@ -1,6 +1,8 @@
 import AppHeader from '../app-header/app-header';
 import AppMain from '../app-main/app-main';
 import styles from './app.module.css';
+import Loading from './loading/loading';
+import ErrorRequest from './error-request/error-request';
 import { useEffect, useState } from 'react';
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 
@@ -12,8 +14,7 @@ function App() {
   const [isErrorLoading, setIsErrorLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-
+    if (!isLoadIng) return;
     fetch(URL_GET_INGREDIENTS)
       .then(res => res.json())
       .then(data => {
@@ -21,18 +22,17 @@ function App() {
         setIsLoading(false);
       })
       .catch(() => {
+        setIsLoading(false);
         setIsErrorLoading(true);
       })
-  }, [])
+  }, [isLoadIng])
 
+  if (isLoadIng) return (<Loading />);
+  if (isErrorLoading) return (<ErrorRequest onClick={() => setIsLoading(true)} />);
   return (
     <div className={styles.app}>
-      {!isLoadIng && (
-        <>
-          <AppHeader />
-          {!isErrorLoading ? (<AppMain ingredientsData={ingredientsData} />) : (<p>'Произошла ошибка запроса...'</p>)}
-        </>
-      )}
+      <AppHeader />
+      <AppMain ingredientsData={ingredientsData} />
     </div>
   );
 }
