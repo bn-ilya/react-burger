@@ -19,5 +19,13 @@ export const ingredientType = PropTypes.shape({
 export const modalHeaderType = PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-    PropTypes.element
+    PropTypes.element,
+    PropTypes.node
+])
+
+export const modalMainType = PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.element,
+    PropTypes.node
 ])

@@ -13,6 +13,7 @@ function App() {
   const [ingredientsData, setIngredientsData] = useState(null);
   const [isLoadIng, setIsLoading] = useState(true);
   const [isErrorLoading, setIsErrorLoading] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(true);
 
   useEffect(() => {
     if (!isLoadIng) return;
@@ -32,7 +33,13 @@ function App() {
   if (isErrorLoading) return (<ErrorRequest onClick={() => setIsLoading(true)} />);
   return (
     <div className={styles.app}>
-      <Modal header={<span className="text text_type_main-medium">Детали ингредиента</span>}/>
+      
+      {isOpenModal &&
+      <Modal
+            header={<span className="text text_type_main-medium" >Детали ингредиента</span>}
+            closeModal={() => {setIsOpenModal(false)}}
+      />}
+      
       <AppHeader />
       <AppMain ingredientsData={ingredientsData} />
     </div>
