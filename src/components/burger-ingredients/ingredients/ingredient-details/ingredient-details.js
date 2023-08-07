@@ -4,7 +4,7 @@ export default function IngredientDetails({ image, name, calories, proteins, fat
     return (
         <div className={styles.content}>
             <div className={styles.previewContainer}>
-                <img className={styles.preview} src={image}></img>
+                <img alt={name} className={styles.preview} src={image}/>
             </div>
             <span className='text text_type_main-medium mb-8'>{name}</span>
             <div className={styles.properties}>

@@ -38,7 +38,7 @@ function App() {
     setContentModal: params => setContentModal(params)
   }
 
-  const handleCloseModal = () => setIsVisibleModal(false);
+  const closeModal = () => setIsVisibleModal(false);
 
   if (isLoadIng) return (<Loading />);
   if (isErrorLoading) return (<ErrorRequest onClick={() => setIsLoading(true)} />);
@@ -50,7 +50,7 @@ function App() {
         <AppMain ingredientsData={ingredientsData} modalControls={modalControls} />
       </div>
 
-      {isVisibleModal && <Modal header={contentModal.header} closeModal={handleCloseModal}>{contentModal.main}</Modal>}
+      {isVisibleModal && <Modal header={contentModal.header} closeModal={closeModal}>{contentModal.main}</Modal>}
     </>
   );
 }
