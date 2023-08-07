@@ -15,3 +15,9 @@ export const ingredientType = PropTypes.shape({
     '__v': PropTypes.number.isRequired
 
 })
+
+export const modalHeaderType = PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.element
+])

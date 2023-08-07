@@ -1,4 +1,5 @@
 import styles from './header.module.css';
+import { modalHeaderType } from "../../../utils/types";
 
 export default function Header({children}) {
     return(
@@ -6,4 +7,8 @@ export default function Header({children}) {
             {children}
         </div>
     )
+}
+
+Header.propTypes = {
+    children: modalHeaderType
 }
