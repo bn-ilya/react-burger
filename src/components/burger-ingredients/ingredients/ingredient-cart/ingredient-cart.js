@@ -11,7 +11,7 @@ export default function IngredientCart({ ingredient, modalControls }) {
             header: <span className='text text_type_main-large'>Детали ингредиента</span>,
             main: <IngredientDetails ingredient={ingredient}/>
         })
-        modalControls.setIsVisibleModal(true)
+        modalControls.openModal(true)
     }
 
     return (

@@ -10,7 +10,7 @@ export default function Info({modalControls}) {
         modalControls.setContentModal({
             main: <OrderDetails/>
         })
-        modalControls.setIsVisibleModal(true);
+        modalControls.openModal(true);
     }
 
     return (

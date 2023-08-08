@@ -31,6 +31,6 @@ export const modalChildType = PropTypes.oneOfType([
 ])
 
 export const modalControlsType = PropTypes.shape({
-    setIsVisibleModal: PropTypes.func.isRequired,
+    openModal: PropTypes.func.isRequired,
     setContentModal: PropTypes.func.isRequired
 })
