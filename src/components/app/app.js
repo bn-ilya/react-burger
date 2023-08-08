@@ -22,7 +22,12 @@ function App() {
   useEffect(() => {
     if (!isLoadIng) return;
     fetch(URL_GET_INGREDIENTS)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error();
+        }
+        return res.json()
+      })
       .then(data => {
         setIngredientsData(data.data);
         setIsLoading(false);

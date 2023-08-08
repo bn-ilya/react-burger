@@ -1,7 +1,7 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styled from './draggable-constructor-element.module.css';
-import PropTypes from 'prop-types';
+import { ingredientType } from '../../../../utils/types';
 
 export default function DraggableConstructorElement({topping}) {
     return (
@@ -13,5 +13,5 @@ export default function DraggableConstructorElement({topping}) {
 }
 
 DraggableConstructorElement.propTypes = {
-    topping: PropTypes.string
+    topping: ingredientType
 }
