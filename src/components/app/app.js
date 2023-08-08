@@ -50,7 +50,7 @@ function App() {
         <AppMain ingredientsData={ingredientsData} modalControls={modalControls} />
       </div>
 
-      {isVisibleModal && <Modal header={contentModal.header} closeModal={closeModal}>{contentModal.main}</Modal>}
+      {isVisibleModal && <Modal header={contentModal?.header} closeModal={closeModal}>{contentModal.main}</Modal>}
     </>
   );
 }

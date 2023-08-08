@@ -1,13 +1,14 @@
 import styles from './burger-constructor.module.css';
 import Constructor from './constructor/constructor';
 import Info from './info/info';
-import { modalControlsType } from '../../utils/types';
+import PropTypes from 'prop-types';
+import { ingredientType, modalControlsType } from '../../utils/types';
 
-export default function BurgerConstructor({modalControls}) {
+export default function BurgerConstructor({ingredientsData, modalControls}) {
     return (
         <section className={styles.content}>
             <div className={styles.main}>
-                <Constructor />
+                <Constructor ingredientsData={ingredientsData} />
             </div>
             <div className={styles.footer}>
                 <Info modalControls={modalControls} />
@@ -17,5 +18,6 @@ export default function BurgerConstructor({modalControls}) {
 }
 
 BurgerConstructor.propTypes = {
+    ingredientsData: PropTypes.arrayOf(ingredientType),
     modalControls: modalControlsType
 }
