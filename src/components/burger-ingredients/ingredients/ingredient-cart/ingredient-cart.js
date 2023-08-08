@@ -9,14 +9,7 @@ export default function IngredientCart({ ingredient, modalControls }) {
     const handlerClick = () => {
         modalControls.setContentModal({
             header: <span className='text text_type_main-large'>Детали ингредиента</span>,
-            main: <IngredientDetails
-                    image={ingredient.image_large}
-                    name={ingredient.name}
-                    calories={ingredient.calories}
-                    proteins={ingredient.proteins}
-                    fat={ingredient.fat}
-                    carbohydrates={ingredient.carbohydrates}
-                 />
+            main: <IngredientDetails ingredient={ingredient}/>
         })
         modalControls.setIsVisibleModal(true)
     }

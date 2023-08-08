@@ -1,29 +1,29 @@
 import styles from './ingredient-details.module.css';
-import PropTypes from 'prop-types';
+import { ingredientType } from '../../../../utils/types';
 
-export default function IngredientDetails({ image, name, calories, proteins, fat, carbohydrates }) {
+export default function IngredientDetails({ ingredient}) {
     return (
         <div className={styles.content}>
             <div className={styles.previewContainer}>
-                <img alt={name} className={styles.preview} src={image}/>
+                <img alt={ingredient.name} className={styles.preview} src={ingredient.image}/>
             </div>
-            <span className='text text_type_main-medium mb-8'>{name}</span>
+            <span className='text text_type_main-medium mb-8'>{ingredient.name}</span>
             <div className={styles.properties}>
                 <div className={styles.property}>
                     <span className='text text_type_main-default text_color_inactive'>Калории,ккал</span>
-                    <span className='text text_type_digits-default text_color_inactive'>{calories}</span>
+                    <span className='text text_type_digits-default text_color_inactive'>{ingredient.calories}</span>
                 </div>
                 <div className={styles.property}>
                     <span className='text text_type_main-default text_color_inactive'>Белки, г</span>
-                    <span className='text text_type_digits-default text_color_inactive'>{proteins}</span>
+                    <span className='text text_type_digits-default text_color_inactive'>{ingredient.proteins}</span>
                 </div>
                 <div className={styles.property}>
                     <span className='text text_type_main-default text_color_inactive'>Жиры, г</span>
-                    <span className='text text_type_digits-default text_color_inactive'>{fat}</span>
+                    <span className='text text_type_digits-default text_color_inactive'>{ingredient.fat}</span>
                 </div>
                 <div className={styles.property}>
                     <span className='text text_type_main-default text_color_inactive'>Углеводы, г</span>
-                    <span className='text text_type_digits-default text_color_inactive'>{carbohydrates}</span>
+                    <span className='text text_type_digits-default text_color_inactive'>{ingredient.carbohydrates}</span>
                 </div>
             </div>
         </div>
@@ -31,10 +31,5 @@ export default function IngredientDetails({ image, name, calories, proteins, fat
 }
 
 IngredientDetails.propType = {
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    calories: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired, 
-    carbohydrates: PropTypes.number.isRequired
+    ingredient: ingredientType
 }
