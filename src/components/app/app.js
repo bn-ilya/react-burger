@@ -8,8 +8,7 @@ import { useEffect, useState } from 'react';
 import { useModal } from '../../hooks/useModal';
 import { IngredientsContext } from '../../services/ingredients-context';
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
-
-const URL_GET_INGREDIENTS = 'https://norma.nomoreparties.space/api/ingredients';
+import { getIngredients } from '../../utils/burger-api';
 
 function App() {
   const [ingredientsData, setIngredientsData] = useState(null);
@@ -23,16 +22,8 @@ function App() {
 
   useEffect(() => {
     if (!isLoadIng) return;
-    fetch(URL_GET_INGREDIENTS)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error();
-        }
-        return res.json()
-      })
-      .then(data => {
-        setIngredientsData(data.data);
-      })
+    getIngredients()
+      .then(setIngredientsData)
       .catch(() => {
         setIsErrorLoading(true);
       })
@@ -54,7 +45,7 @@ function App() {
       <div className={styles.app}>
         <AppHeader />
         <IngredientsContext.Provider value={{ ingredientsData }}>
-          <AppMain modalControls={modalControls}  ingredientsData={ingredientsData}/>
+          <AppMain modalControls={modalControls} ingredientsData={ingredientsData} />
         </IngredientsContext.Provider>
       </div>
 
