@@ -11,7 +11,7 @@ export default function BurgerIngredients({ ingredientsData, modalControls }) {
         <section className={styles.content + ' pt-10'}>
             <div className={styles.header}>
                 <h1 className='text text_type_main-large mb-5'>Соберите бургер</h1>
-                <Tabs currentTab={currentTab} setCurrentTab={setCurrentTab}/>
+                <Tabs />
             </div>
             <div className={styles.main}>
                 <Ingredients ingredientsData={ingredientsData} modalControls={modalControls} />
