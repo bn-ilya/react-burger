@@ -3,8 +3,13 @@ import Constructor from './constructor/constructor';
 import Info from './info/info';
 import PropTypes from 'prop-types';
 import { ingredientType, modalControlsType } from '../../utils/types';
+import { IngredientsContext } from '../../services/ingredients-context';
+import { useContext } from 'react';
 
-export default function BurgerConstructor({ingredientsData, modalControls}) {
+export default function BurgerConstructor({ modalControls }) {
+    
+    const {ingredientsData} = useContext(IngredientsContext)
+    
     return (
         <section className={styles.content}>
             <div className={styles.main}>

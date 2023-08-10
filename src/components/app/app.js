@@ -6,6 +6,7 @@ import ErrorRequest from './error-request/error-request';
 import Modal from '../modal/modal';
 import { useEffect, useState } from 'react';
 import { useModal } from '../../hooks/useModal';
+import { IngredientsContext } from '../../services/ingredients-context';
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 
 const URL_GET_INGREDIENTS = 'https://norma.nomoreparties.space/api/ingredients';
@@ -14,7 +15,7 @@ function App() {
   const [ingredientsData, setIngredientsData] = useState(null);
   const [isLoadIng, setIsLoading] = useState(true);
   const [isErrorLoading, setIsErrorLoading] = useState(false);
-  const {isModalOpen, openModal, closeModal} = useModal(false);
+  const { isModalOpen, openModal, closeModal } = useModal(false);
   const [contentModal, setContentModal] = useState({
     header: null,
     main: null
@@ -52,7 +53,9 @@ function App() {
     <>
       <div className={styles.app}>
         <AppHeader />
-        <AppMain ingredientsData={ingredientsData} modalControls={modalControls} />
+        <IngredientsContext.Provider value={{ ingredientsData }}>
+          <AppMain modalControls={modalControls}  ingredientsData={ingredientsData}/>
+        </IngredientsContext.Provider>
       </div>
 
       {isModalOpen && <Modal header={contentModal?.header} closeModal={closeModal}>{contentModal.main}</Modal>}

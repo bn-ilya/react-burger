@@ -10,7 +10,7 @@ export default function AppMain({ingredientsData, modalControls}) {
         <main className={styles.main}>
             <div className={styles.content}>
                 <BurgerIngredients ingredientsData={ingredientsData} modalControls={modalControls}/>
-                <BurgerConstructor ingredientsData={ingredientsData} modalControls={modalControls}/>
+                <BurgerConstructor modalControls={modalControls}/>
             </div>
         </main>
     )
