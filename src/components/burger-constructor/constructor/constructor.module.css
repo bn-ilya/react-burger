@@ -1,0 +1,26 @@
+.content {
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: hidden;
+}
+
+.elements {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    padding-right: 8px;
+    scroll-snap-type: y mandatory;
+}
+
+.elements div {
+    scroll-snap-align: start;
+}
+
+.header,.footer {
+    margin-left: 32px;
+    padding-right: 8px;
+}
