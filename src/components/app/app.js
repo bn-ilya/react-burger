@@ -12,6 +12,7 @@ import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 import { getIngredients } from '../../utils/burger-api';
 import { reducerTotalPrice, initialTotalPrice } from '../../reducers/totalPriceReducer';
 import { reducerOrders, initialOrders } from '../../reducers/ordersReducer';
+import { OrderContext } from '../../services/orders-context';
 
 function App() {
   const [ingredientsData, setIngredientsData] = useState(null);
@@ -79,7 +80,9 @@ function App() {
         <AppHeader />
         <ConstructorIngredients.Provider value={{ constructorIngredients }}>
           <TotalPriceContext.Provider value={{ stateTotalPrice }}>
-            <AppMain modalControls={modalControls} ingredientsData={ingredientsData} />
+            <OrderContext.Provider value={{stateOrders, dispatcherOrders}}>
+              <AppMain modalControls={modalControls} ingredientsData={ingredientsData} />
+            </OrderContext.Provider>
           </TotalPriceContext.Provider>
         </ConstructorIngredients.Provider>
       </div>
