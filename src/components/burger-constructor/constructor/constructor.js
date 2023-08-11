@@ -3,11 +3,14 @@ import DraggableConstructorElement from './draggable-constructor-element/draggab
 import styles from './constructor.module.css';
 import PropTypes from 'prop-types';
 import { ingredientType } from '../../../utils/types';
+import { ConstructorIngredientsContext } from '../../../services/constructor-ingredients-context';
+import { useContext } from 'react';
 
-export default function Constructor({ constructorIngredients }) {
+export default function Constructor() {
 
+    const {stateConstructorIngredients} = useContext(ConstructorIngredientsContext)
     
-    const {bunTop, bunBottom, toppings} = constructorIngredients || {};
+    const {bunTop, bunBottom, toppings} = stateConstructorIngredients.constructorIngredients || {};
 
     return (
         <div className={styles.content}>

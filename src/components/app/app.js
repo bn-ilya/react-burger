@@ -1,22 +1,27 @@
+import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+import styles from './app.module.css';
+// Components
 import AppHeader from '../app-header/app-header';
 import AppMain from '../app-main/app-main';
-import styles from './app.module.css';
 import Loading from './loading/loading';
 import ErrorRequest from './error-request/error-request';
 import Modal from '../modal/modal';
+// Hooks
 import { useEffect, useReducer, useState } from 'react';
 import { useModal } from '../../hooks/useModal';
-import { ConstructorIngredients } from '../../services/constructor-ingredients-context';
+// Contexts
+import { ConstructorIngredientsContext } from '../../services/constructor-ingredients-context';
 import { TotalPriceContext } from '../../services/total-price-context';
-import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
-import { getIngredients } from '../../utils/burger-api';
-import { reducerTotalPrice, initialTotalPrice } from '../../reducers/totalPriceReducer';
-import { reducerOrders, initialOrders } from '../../reducers/ordersReducer';
+import { IngredientsContext } from '../../services/ingredients-context';
 import { OrderContext } from '../../services/orders-context';
+import { getIngredients } from '../../utils/burger-api';
+// Reducers
+import { reducerTotalPrice, initialTotalPrice } from '../../reducers/total-price-reducer';
+import { reducerOrders, initialOrders } from '../../reducers/orders-reducer';
+import { reducerIngredients, initialIngredients } from '../../reducers/ingredients-reducer';
+import { reducerConstructorIngredients, initialConstructorIngredients } from '../../reducers/constructor-ingredients-reducer';
 
 function App() {
-  const [ingredientsData, setIngredientsData] = useState(null);
-  const [constructorIngredients, setConstructorIngredients] = useState(null);
   const [isLoadIng, setIsLoading] = useState(true);
   const [isErrorLoading, setIsErrorLoading] = useState(false);
   const { isModalOpen, openModal, closeModal } = useModal(false);
@@ -24,18 +29,22 @@ function App() {
     header: null,
     main: null
   })
+
+  const [stateConstructorIngredients, dispatchConstructorIngredients] = useReducer(reducerConstructorIngredients, initialConstructorIngredients);
+  const [stateIngredients, dispatcherIngredients] = useReducer(reducerIngredients, initialIngredients);
   const [stateOrders, dispatcherOrders] = useReducer(reducerOrders, initialOrders);
   const [stateTotalPrice, dispatcherTotalPrice] = useReducer(reducerTotalPrice, initialTotalPrice);
-
-  //ДЛЯ ДЕБАГА
-  useEffect(() => {
-    console.log(stateOrders)
-  }, [stateOrders])
 
   useEffect(() => {
     if (!isLoadIng) return;
     getIngredients()
-      .then(setIngredientsData)
+      .then(data => {
+        dispatcherIngredients({
+          type: 'SET_INGREDIENTS',
+          payload: data
+        }
+        )
+      })
       .catch(() => {
         setIsErrorLoading(true);
       })
@@ -44,22 +53,27 @@ function App() {
       })
   }, [isLoadIng])
 
+  // Сомневаюсь: смущает то как я храню булки (то что вынес в отдельные свойсва), но лучше не придумал
   useEffect(() => {
-    if (ingredientsData) {
-      const bun = ingredientsData.find(ingredient => ingredient.type === 'bun');
 
-      const toppings = ingredientsData.filter(ingredient => ingredient.type !== 'bun');
+    const ingredients = stateIngredients.ingredients
+    
+    if (ingredients) {
+      const bun = ingredients.find(ingredient => ingredient.type === 'bun');
+      const toppings = ingredients.filter(ingredient => ingredient.type !== 'bun');
 
-      setConstructorIngredients({ bunTop: bun, bunBottom: bun, toppings: toppings });
+      dispatchConstructorIngredients({
+        type: 'SET_CONSTRUCTOR_INGREDIENTS',
+        payload: { bunTop: bun, bunBottom: bun, toppings: toppings }
+      });
     }
-  }, [ingredientsData, setConstructorIngredients]);
+  }, [stateIngredients.ingredients, dispatchConstructorIngredients]);
 
-  const modalControls = {
-    openModal,
-    setContentModal: params => setContentModal(params)
-  }
-
+  /*  Сомневаюсь: хочется вынести этот код по подсчёту тотальной
+      стоимости в какое-то другое место, но не понимаю куда  */
   useEffect(() => {
+
+    const constructorIngredients = stateConstructorIngredients.constructorIngredients
 
     if (!constructorIngredients) return;
     const totalBuns = constructorIngredients.bunTop.price + constructorIngredients.bunBottom.price
@@ -72,22 +86,29 @@ function App() {
       type: "SET_TOTAL_PRICE",
       payload: total
     })
-  }, [constructorIngredients])
+  }, [stateConstructorIngredients.constructorIngredients])
 
   if (isLoadIng) return (<Loading />);
   if (isErrorLoading) return (<ErrorRequest onClick={() => setIsLoading(true)} />);
+
+  const modalControls = {
+    openModal,
+    setContentModal: params => setContentModal(params)
+  }
 
   return (
     <>
       <div className={styles.app}>
         <AppHeader />
-        <ConstructorIngredients.Provider value={{ constructorIngredients }}>
+        <ConstructorIngredientsContext.Provider value={{ stateConstructorIngredients }}>
           <TotalPriceContext.Provider value={{ stateTotalPrice }}>
             <OrderContext.Provider value={{ stateOrders, dispatcherOrders }}>
-              <AppMain modalControls={modalControls} ingredientsData={ingredientsData} />
+              <IngredientsContext.Provider value={{ stateIngredients }}>
+                <AppMain modalControls={modalControls} />
+              </IngredientsContext.Provider>
             </OrderContext.Provider>
           </TotalPriceContext.Provider>
-        </ConstructorIngredients.Provider>
+        </ConstructorIngredientsContext.Provider>
       </div>
 
       {isModalOpen && <Modal header={contentModal?.header} closeModal={closeModal}>{contentModal.main}</Modal>}

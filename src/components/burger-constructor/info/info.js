@@ -8,15 +8,19 @@ import { useContext } from 'react';
 import { TotalPriceContext } from '../../../services/total-price-context';
 import { OrderContext } from '../../../services/orders-context';
 import { createOrder } from '../../../utils/burger-api';
+import { ConstructorIngredientsContext } from '../../../services/constructor-ingredients-context';
 
-export default function Info({ constructorIngredients, modalControls }) {
+export default function Info({ modalControls }) {
+
+    const { stateConstructorIngredients } = useContext(ConstructorIngredientsContext)
 
     const { stateTotalPrice } = useContext(TotalPriceContext);
     const { dispatcherOrders } = useContext(OrderContext);
 
     const handleClick = () => {
 
-        const { bunTop, bunBottom, toppings } = constructorIngredients || {};
+        //Сомневаюсь: Нормально ли использовать такие конструкции?
+        const { bunTop, bunBottom, toppings } = stateConstructorIngredients.constructorIngredients || {};
         const ids = [bunTop?.['_id'], bunBottom?.['_id'], ...toppings.map(topping => topping['_id'])]
 
         if (!ids) return;

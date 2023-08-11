@@ -1,11 +1,11 @@
 import styles from './ingredient-details.module.css';
 import { ingredientType } from '../../../../utils/types';
 
-export default function IngredientDetails({ ingredient}) {
+export default function IngredientDetails({ ingredient }) {
     return (
         <div className={styles.content}>
             <div className={styles.previewContainer}>
-                <img alt={ingredient.name} className={styles.preview} src={ingredient.image}/>
+                <img alt={ingredient.name} className={styles.preview} src={ingredient.image} />
             </div>
             <span className='text text_type_main-medium mb-8'>{ingredient.name}</span>
             <div className={styles.properties}>

@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const ConstructorIngredients = createContext([]);
+export const ConstructorIngredientsContext = createContext([]);
