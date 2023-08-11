@@ -10,17 +10,8 @@ import { ConstructorIngredients } from '../../services/constructor-ingredients-c
 import { TotalPriceContext } from '../../services/total-price-context';
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 import { getIngredients } from '../../utils/burger-api';
-
-const initialTotalPrice = 0;
-
-const reducerTotalPrice = (state, action) => {
-  switch (action.type) {
-    case "SET_TOTAL_PRICE":
-      return (action.payload);
-    default:
-      return state;
-  }
-}
+import { reducerTotalPrice, initialTotalPrice } from '../../reducers/totalPriceReducer';
+import { reducerOrders, initialOrders } from '../../reducers/ordersReducer';
 
 function App() {
   const [ingredientsData, setIngredientsData] = useState(null);
@@ -32,6 +23,7 @@ function App() {
     header: null,
     main: null
   })
+  const [stateOrders, dispatcherOrders] = useReducer(reducerOrders, initialOrders);
   const [stateTotalPrice, dispatcherTotalPrice] = useReducer(reducerTotalPrice, initialTotalPrice);
 
   useEffect(() => {
