@@ -2,6 +2,7 @@ import styled from './info.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/button';
 import OrderDetails from '../../order-details/order-details';
+import ModalError from '../../ui/modal-error/modal-error';
 import { modalControlsType } from '../../../utils/types';
 import { useContext } from 'react';
 import { TotalPriceContext } from '../../../services/total-price-context';
@@ -32,7 +33,12 @@ export default function Info({ constructorIngredients, modalControls }) {
                 })
                 modalControls.openModal(true);
             })
-            //TODO: РЕАЛИЗОВАТЬ CATCH
+            .catch(data => {
+                modalControls.setContentModal({
+                    main: <ModalError error={data.message} />
+                })
+                modalControls.openModal(true);
+            })
     }
 
     return (

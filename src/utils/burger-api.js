@@ -26,7 +26,6 @@ export const createOrder = (ingredientsIds) => {
     })
         .then(checkResponse)
         .then(data => {
-            console.log(data);
             if (data?.success) return {name: data.name, order: data.order};
             return Promise.reject(data);
         })
