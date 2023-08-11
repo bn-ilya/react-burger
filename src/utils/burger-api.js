@@ -12,3 +12,22 @@ export const getIngredients = () => {
             return Promise.reject(data);
         });
 }
+
+export const createOrder = (ingredientsIds) => {
+    return fetch(`${URL_API}/orders`, {
+        method: "post",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            ingredients: ingredientsIds
+        })
+    })
+        .then(checkResponse)
+        .then(data => {
+            console.log(data);
+            if (data?.success) return {name: data.name, order: data.order};
+            return Promise.reject(data);
+        })
+}

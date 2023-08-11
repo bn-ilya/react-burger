@@ -27,6 +27,11 @@ function App() {
   const [stateOrders, dispatcherOrders] = useReducer(reducerOrders, initialOrders);
   const [stateTotalPrice, dispatcherTotalPrice] = useReducer(reducerTotalPrice, initialTotalPrice);
 
+  //ДЛЯ ДЕБАГА
+  useEffect(() => {
+    console.log(stateOrders)
+  }, [stateOrders])
+
   useEffect(() => {
     if (!isLoadIng) return;
     getIngredients()
@@ -63,8 +68,6 @@ function App() {
     }, 0)
     const total = totalBuns + totalToppings
 
-    console.log(total)
-
     dispatcherTotalPrice({
       type: "SET_TOTAL_PRICE",
       payload: total
@@ -80,7 +83,7 @@ function App() {
         <AppHeader />
         <ConstructorIngredients.Provider value={{ constructorIngredients }}>
           <TotalPriceContext.Provider value={{ stateTotalPrice }}>
-            <OrderContext.Provider value={{stateOrders, dispatcherOrders}}>
+            <OrderContext.Provider value={{ stateOrders, dispatcherOrders }}>
               <AppMain modalControls={modalControls} ingredientsData={ingredientsData} />
             </OrderContext.Provider>
           </TotalPriceContext.Provider>

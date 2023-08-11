@@ -3,7 +3,7 @@ export const reducerOrders = (state, action) => {
     switch (action.type) {
         case 'ADD_ORDER':
             return(
-                {...state, orders: action.payload}
+                {orders: [...state.orders, action.payload]}
             )
         default:
             return state

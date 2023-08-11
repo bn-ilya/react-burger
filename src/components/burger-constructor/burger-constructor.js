@@ -16,7 +16,7 @@ export default function BurgerConstructor({ modalControls }) {
                <Constructor constructorIngredients={constructorIngredients} />
             </div>
             <div className={styles.footer}>
-                <Info modalControls={modalControls} />
+                <Info constructorIngredients={constructorIngredients} modalControls={modalControls} />
             </div>
         </section>
     )
