@@ -1,19 +1,21 @@
-import styled from './info.module.css';
+import styles from './info.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/button';
 import OrderDetails from '../../order-details/order-details';
 import ModalError from '../../ui/modal-error/modal-error';
 import { modalControlsType } from '../../../utils/types';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { TotalPriceContext } from '../../../services/total-price-context';
 import { OrderContext } from '../../../services/orders-context';
 import { createOrder } from '../../../utils/burger-api';
 import { ConstructorIngredientsContext } from '../../../services/constructor-ingredients-context';
 import { ADD_ORDER } from '../../../actions/orders-actions';
+import BurgerSpinLoader from '../../ui/loaders/burger-spin-loader';
 
 export default function Info({ modalControls }) {
 
-    const { stateConstructorIngredients } = useContext(ConstructorIngredientsContext)
+    const { stateConstructorIngredients } = useContext(ConstructorIngredientsContext);
+    const [isCreateOrder, setIsCreateOrder] = useState(false);
 
     const { stateTotalPrice } = useContext(TotalPriceContext);
     const { dispatcherOrders } = useContext(OrderContext);
@@ -25,6 +27,8 @@ export default function Info({ modalControls }) {
         const ids = [bunTop?.['_id'], bunBottom?.['_id'], ...toppings.map(topping => topping['_id'])]
 
         if (!ids) return;
+
+        setIsCreateOrder(true);
 
         createOrder(ids)
             .then(data => {
@@ -44,16 +48,20 @@ export default function Info({ modalControls }) {
                 })
                 modalControls.openModal(true);
             })
+            .finally(() => {
+                setIsCreateOrder(false);
+            })
     }
 
     return (
-        <div className={styled.content}>
-            <div className={styled.price}>
+        <div className={styles.content}>
+            <div className={styles.price}>
                 <span className='text text_type_digits-medium'>{stateTotalPrice}</span>
                 <CurrencyIcon />
             </div>
-            <Button onClick={handleClick} htmlType="button" type="primary" size="large">
-                Оформить заказ
+            <Button disabled={isCreateOrder} loop={true} extraClass={styles.loaderBtn} onClick={handleClick} htmlType="button" type="primary" size="large">
+                {isCreateOrder && <BurgerSpinLoader type='secondary' />}
+                <span>Оформить заказ</span>
             </Button>
 
         </div>
