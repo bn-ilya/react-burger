@@ -1,16 +1,23 @@
+// Styles
 import styles from './info.module.css';
+// Components
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/button';
+import BurgerSpinLoader from '../../ui/loaders/burger-spin-loader';
 import OrderDetails from '../../order-details/order-details';
 import ModalError from '../../ui/modal-error/modal-error';
+// Types
 import { modalControlsType } from '../../../utils/types';
+// Hooks
 import { useContext, useState } from 'react';
+// Contexts
 import { TotalPriceContext } from '../../../services/total-price-context';
 import { OrderContext } from '../../../services/orders-context';
-import { createOrder } from '../../../utils/burger-api';
 import { ConstructorIngredientsContext } from '../../../services/constructor-ingredients-context';
+// API
+import { createOrder } from '../../../utils/burger-api';
+// Actions
 import { ADD_ORDER } from '../../../actions/orders-actions';
-import BurgerSpinLoader from '../../ui/loaders/burger-spin-loader';
 
 export default function Info({ modalControls }) {
 

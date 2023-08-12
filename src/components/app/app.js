@@ -1,3 +1,4 @@
+// Styles
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 import styles from './app.module.css';
 // Components
@@ -24,7 +25,6 @@ import { reducerConstructorIngredients, initialConstructorIngredients } from '..
 import { SET_TOTAL_PRICE } from '../../actions/total-price-actions';
 import { SET_INGREDIENTS } from '../../actions/ingredients-actions';
 import { SET_CONSTRUCTOR_INGREDIENTS } from '../../actions/constructor-ingredients-actions';
-
 
 function App() {
   const [isLoadIng, setIsLoading] = useState(true);

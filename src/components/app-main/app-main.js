@@ -1,7 +1,11 @@
+// Styles
 import styles from './app-main.module.css';
+// Components
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
+// Types
 import { modalControlsType } from '../../utils/types';
+
 export default function AppMain({ modalControls }) {
 
     return (
