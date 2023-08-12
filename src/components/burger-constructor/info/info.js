@@ -9,6 +9,7 @@ import { TotalPriceContext } from '../../../services/total-price-context';
 import { OrderContext } from '../../../services/orders-context';
 import { createOrder } from '../../../utils/burger-api';
 import { ConstructorIngredientsContext } from '../../../services/constructor-ingredients-context';
+import { ADD_ORDER } from '../../../actions/orders-actions';
 
 export default function Info({ modalControls }) {
 
@@ -28,7 +29,7 @@ export default function Info({ modalControls }) {
         createOrder(ids)
             .then(data => {
                 dispatcherOrders({
-                    type: "ADD_ORDER",
+                    type: ADD_ORDER,
                     payload: data
                 })
 

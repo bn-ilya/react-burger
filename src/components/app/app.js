@@ -20,6 +20,11 @@ import { reducerTotalPrice, initialTotalPrice } from '../../reducers/total-price
 import { reducerOrders, initialOrders } from '../../reducers/orders-reducer';
 import { reducerIngredients, initialIngredients } from '../../reducers/ingredients-reducer';
 import { reducerConstructorIngredients, initialConstructorIngredients } from '../../reducers/constructor-ingredients-reducer';
+// Actions
+import { SET_TOTAL_PRICE } from '../../actions/total-price-actions';
+import { SET_INGREDIENTS } from '../../actions/ingredients-actions';
+import { SET_CONSTRUCTOR_INGREDIENTS } from '../../actions/constructor-ingredients-actions';
+
 
 function App() {
   const [isLoadIng, setIsLoading] = useState(true);
@@ -40,7 +45,7 @@ function App() {
     getIngredients()
       .then(data => {
         dispatcherIngredients({
-          type: 'SET_INGREDIENTS',
+          type: SET_INGREDIENTS,
           payload: data
         }
         )
@@ -63,7 +68,7 @@ function App() {
       const toppings = ingredients.filter(ingredient => ingredient.type !== 'bun');
 
       dispatchConstructorIngredients({
-        type: 'SET_CONSTRUCTOR_INGREDIENTS',
+        type: SET_CONSTRUCTOR_INGREDIENTS,
         payload: { bunTop: bun, bunBottom: bun, toppings: toppings }
       });
     }
@@ -83,7 +88,7 @@ function App() {
     const total = totalBuns + totalToppings
 
     dispatcherTotalPrice({
-      type: "SET_TOTAL_PRICE",
+      type: SET_TOTAL_PRICE,
       payload: total
     })
   }, [stateConstructorIngredients.constructorIngredients])
