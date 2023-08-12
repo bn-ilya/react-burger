@@ -1,8 +1,6 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element';
 import DraggableConstructorElement from './draggable-constructor-element/draggable-constructor-element';
 import styles from './constructor.module.css';
-import PropTypes from 'prop-types';
-import { ingredientType } from '../../../utils/types';
 import { ConstructorIngredientsContext } from '../../../services/constructor-ingredients-context';
 import { useContext } from 'react';
 
@@ -37,8 +35,4 @@ export default function Constructor() {
             </div>
         </div>
     )
-}
-
-Constructor.propTypes = {
-    ingredientsData: PropTypes.arrayOf(ingredientType)
 }

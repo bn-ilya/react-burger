@@ -5,7 +5,7 @@ export default function IngredientDetails({ ingredient }) {
     return (
         <div className={styles.content}>
             <div className={styles.previewContainer}>
-                <img alt={ingredient.name} className={styles.preview} src={ingredient.image} />
+                <img alt={ingredient.name} className={styles.preview} src={ingredient.image_large} />
             </div>
             <span className='text text_type_main-medium mb-8'>{ingredient.name}</span>
             <div className={styles.properties}>
