@@ -2,11 +2,11 @@ import styles from './order-details.module.css';
 import IconsBackground from '../ui/icons/icons-background';
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export default function OrderDetails() {
+export default function OrderDetails({number}) {
     return (
         <div className={styles.content}>
             <div className={styles.info}>
-                <span className={styles.identifier + ' text text_type_digits-large'}>034536</span>
+                <span className={styles.identifier + ' text text_type_digits-large'}>{number}</span>
                 <span className='text text_type_main-medium'>идентификатор заказа</span>
             </div>
             <div className={styles.doneLabel}>

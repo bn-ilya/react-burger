@@ -1,40 +1,38 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element';
 import DraggableConstructorElement from './draggable-constructor-element/draggable-constructor-element';
 import styles from './constructor.module.css';
-import PropTypes from 'prop-types';
-import { ingredientType } from '../../../utils/types';
+import { ConstructorIngredientsContext } from '../../../services/constructor-ingredients-context';
+import { useContext } from 'react';
 
-export default function Constructor({ ingredientsData }) {
+export default function Constructor() {
 
-    const burgerTopping = ingredientsData.filter(ingredient => ingredient.type !== 'bun');
+    const {stateConstructorIngredients} = useContext(ConstructorIngredientsContext)
+    
+    const {bunTop, bunBottom, toppings} = stateConstructorIngredients.constructorIngredients || {};
 
     return (
         <div className={styles.content}>
             <div className={styles.header}>
-                <ConstructorElement
+                {bunTop && (<ConstructorElement
                     type="top"
                     isLocked={true}
-                    text="Краторная булка N-200i (верх)"
-                    price={200}
-                    thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-                />
+                    text={bunTop.name + ' (верх)'}
+                    price={bunTop.price}
+                    thumbnail={bunTop.image}
+                />)}
             </div>
             <div className={styles.elements}>
-                {burgerTopping.map(topping => <DraggableConstructorElement key={topping['_id']} topping={topping} />)}
+                {toppings && toppings.map(topping => <DraggableConstructorElement key={topping['_id']} topping={topping} />)}
             </div>
             <div className={styles.footer}>
-                <ConstructorElement
+                {bunBottom && (<ConstructorElement
                     type="bottom"
                     isLocked={true}
-                    text="Краторная булка N-200i (низ)"
-                    price={200}
-                    thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-                />
+                    text={bunBottom.name + ' (низ)'}
+                    price={bunBottom.price}
+                    thumbnail={bunBottom.image}
+                />)}
             </div>
         </div>
     )
-}
-
-Constructor.propTypes = {
-    ingredientsData: PropTypes.arrayOf(ingredientType)
 }
