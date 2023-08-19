@@ -10,6 +10,10 @@ import Modal from '../modal/modal';
 // Hooks
 import { useEffect, useReducer, useState } from 'react';
 import { useModal } from '../../hooks/useModal';
+
+// Redux hooks
+import {useSelector, useDispatch} from 'react-redux';
+
 // Contexts
 import { ConstructorIngredientsContext } from '../../services/constructor-ingredients-context';
 import { TotalPriceContext } from '../../services/total-price-context';
@@ -26,6 +30,9 @@ import { SET_TOTAL_PRICE } from '../../actions/total-price-actions';
 import { SET_INGREDIENTS } from '../../actions/ingredients-actions';
 import { SET_CONSTRUCTOR_INGREDIENTS } from '../../actions/constructor-ingredients-actions';
 
+// Redux actions
+import { setIngredients } from '../../services/reducers/ingredients';
+
 function App() {
   const [isLoadIng, setIsLoading] = useState(true);
   const [isErrorLoading, setIsErrorLoading] = useState(false);
@@ -40,15 +47,19 @@ function App() {
   const [stateOrders, dispatcherOrders] = useReducer(reducerOrders, initialOrders);
   const [stateTotalPrice, dispatcherTotalPrice] = useReducer(reducerTotalPrice, initialTotalPrice);
 
+  // Redux state
+  const dispatch = useDispatch();
+  const ingredients = useSelector(state => state.ingredients.ingredients)
+
+  useEffect(()=> {
+    console.log(ingredients)
+  }, [ingredients])
+
   useEffect(() => {
     if (!isLoadIng) return;
     getIngredients()
       .then(data => {
-        dispatcherIngredients({
-          type: SET_INGREDIENTS,
-          payload: data
-        }
-        )
+        dispatch(setIngredients(data))
       })
       .catch(() => {
         setIsErrorLoading(true);
@@ -62,7 +73,7 @@ function App() {
   useEffect(() => {
 
     const ingredients = stateIngredients.ingredients
-    
+
     if (ingredients) {
       const bun = ingredients.find(ingredient => ingredient.type === 'bun');
       const toppings = ingredients.filter(ingredient => ingredient.type !== 'bun');
