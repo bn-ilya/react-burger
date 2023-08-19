@@ -10,8 +10,8 @@ import ModalError from '../../ui/modal-error/modal-error';
 import { modalControlsType } from '../../../utils/types';
 // Hooks
 import { useContext, useState } from 'react';
+import {useSelector} from 'react-redux';
 // Contexts
-import { TotalPriceContext } from '../../../services/total-price-context';
 import { OrderContext } from '../../../services/orders-context';
 import { ConstructorIngredientsContext } from '../../../services/constructor-ingredients-context';
 // API
@@ -23,8 +23,8 @@ export default function Info({ modalControls }) {
 
     const { stateConstructorIngredients } = useContext(ConstructorIngredientsContext);
     const [isCreateOrder, setIsCreateOrder] = useState(false);
-
-    const { stateTotalPrice } = useContext(TotalPriceContext);
+    const totalPrice = useSelector(state => state.totalPrice.totalPrice);
+    
     const { dispatcherOrders } = useContext(OrderContext);
 
     const handleClick = () => {
@@ -63,7 +63,7 @@ export default function Info({ modalControls }) {
     return (
         <div className={styles.content}>
             <div className={styles.price}>
-                <span className='text text_type_digits-medium'>{stateTotalPrice}</span>
+                <span className='text text_type_digits-medium'>{totalPrice}</span>
                 <CurrencyIcon />
             </div>
             <Button disabled={isCreateOrder} loop={true} extraClass={styles.loaderBtn} onClick={handleClick} htmlType="button" type="primary" size="large">

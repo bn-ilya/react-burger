@@ -1,14 +1,24 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element';
 import DraggableConstructorElement from './draggable-constructor-element/draggable-constructor-element';
 import styles from './constructor.module.css';
-import { ConstructorIngredientsContext } from '../../../services/constructor-ingredients-context';
-import { useContext } from 'react';
+// hooks
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { setTotalPrice } from '../../../services/reducers/total-price';
 
 export default function Constructor() {
+    const dispatch = useDispatch();
+    const { ingredients, bunTop, bunBottom } = useSelector(state => state.ingredientsConstructor);
 
-    const {stateConstructorIngredients} = useContext(ConstructorIngredientsContext)
-    
-    const {bunTop, bunBottom, toppings} = stateConstructorIngredients.constructorIngredients || {};
+    // Подсчёт общей стоимости
+    useEffect(() => {
+        const totalBuns = bunTop && bunBottom ? bunTop.price + bunBottom.price : 0
+        const totalIngredients = ingredients.length ? ingredients.reduce((acc, ingredient) => {
+            return acc += ingredient.price
+        }, 0) : 0
+        const total = totalBuns + totalIngredients
+        dispatch(setTotalPrice(total));
+    }, [ingredients, bunTop, bunBottom, dispatch])
 
     return (
         <div className={styles.content}>
@@ -22,7 +32,7 @@ export default function Constructor() {
                 />)}
             </div>
             <div className={styles.elements}>
-                {toppings && toppings.map(topping => <DraggableConstructorElement key={topping['_id']} topping={topping} />)}
+                {ingredients && ingredients.map(ingredient => <DraggableConstructorElement key={ingredient['_id']} ingredient={ingredient} />)}
             </div>
             <div className={styles.footer}>
                 {bunBottom && (<ConstructorElement

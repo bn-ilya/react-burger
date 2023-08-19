@@ -1,17 +1,38 @@
 import styles from './ingredients.module.css';
 import IngredientCart from './ingredient-cart/ingredient-cart';
-import {modalControlsType } from '../../../utils/types';
-import { useContext } from 'react';
-import { IngredientsContext } from '../../../services/ingredients-context';
+import { modalControlsType } from '../../../utils/types';
+// Hooks
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+// Actions
+import { getIngredients } from '../../../services/reducers/ingredients';
+import { addingredients, setBunBottom, setBunTop } from '../../../services/reducers/ingredients-constructor';
 
 export default function Ingredients({ modalControls }) {
+    const dispatch = useDispatch();
+    const ingredients = useSelector(state => state.ingredients.ingredients);
 
-    const { stateIngredients } = useContext(IngredientsContext);
+    useEffect(() => {
+        if (!ingredients.length) dispatch(getIngredients())
+    }, [dispatch, ingredients])
+
+    useEffect(() => {
+        if (ingredients.length) {
+            const bun = ingredients.find(ingredient => ingredient.type === 'bun');
+            const toppings = ingredients.filter(ingredient => ingredient.type !== 'bun');
+
+            dispatch(addingredients(toppings));
+            dispatch(setBunTop(bun));
+            dispatch(setBunBottom(bun));
+        }
+    }, [ingredients, dispatch]);
+
+    if (!ingredients.length) return false;
 
     const categories = [
-        { name: 'Булки', type: 'bun', ingredients: stateIngredients.ingredients.filter(ingredient => ingredient.type === "bun") },
-        { name: 'Соусы', type: 'sauce', ingredients: stateIngredients.ingredients.filter(ingredient => ingredient.type === "sauce") },
-        { name: 'Начинки', type: 'main', ingredients: stateIngredients.ingredients.filter(ingredient => ingredient.type === "main") }
+        { name: 'Булки', type: 'bun', ingredients: ingredients.filter(ingredient => ingredient.type === "bun") },
+        { name: 'Соусы', type: 'sauce', ingredients: ingredients.filter(ingredient => ingredient.type === "sauce") },
+        { name: 'Начинки', type: 'main', ingredients: ingredients.filter(ingredient => ingredient.type === "main") }
     ]
 
     return (
