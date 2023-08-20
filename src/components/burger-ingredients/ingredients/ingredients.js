@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { getIngredients } from '../../../services/reducers/ingredients';
 import { addingredients, setBunBottom, setBunTop } from '../../../services/reducers/ingredients-constructor';
 
-export default function Ingredients({ modalControls }) {
+export default function Ingredients() {
     const dispatch = useDispatch();
     const ingredients = useSelector(state => state.ingredients.ingredients);
 
@@ -47,7 +47,6 @@ export default function Ingredients({ modalControls }) {
                             <IngredientCart
                                 key={ingredient['_id']}
                                 ingredient={ingredient}
-                                modalControls={modalControls}
                             />
                         ))}
                     </div>

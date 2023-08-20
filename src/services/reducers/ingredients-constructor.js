@@ -5,7 +5,7 @@ const ingredientsConstructorSlice = createSlice({
     initialState: {
         ingredients: [],
         bunTop: null,
-        bunBottom: null
+        bunBottom: null,
     },
     reducers: {
         addingredients: (state, action) => {

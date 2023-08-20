@@ -9,7 +9,6 @@ import ErrorRequest from './error-request/error-request';
 import Modal from '../modal/modal';
 // Hooks
 import { useReducer, useState } from 'react';
-import { useModal } from '../../hooks/useModal';
 // Contexts
 import { OrderContext } from '../../services/orders-context';
 // Reducers
@@ -19,14 +18,9 @@ import { useSelector } from 'react-redux';
 
 function App() {
 
+  console.log('render-app')
   const isFetchIngredients = useSelector(state => state.ingredients.ingredientsRequest);
   const isFailedIngredients = useSelector(state => state.ingredients.ingredientsFailed)
-
-  const { isModalOpen, openModal, closeModal } = useModal(false);
-  const [contentModal, setContentModal] = useState({
-    header: null,
-    main: null
-  })
 
   const [stateOrders, dispatcherOrders] = useReducer(reducerOrders, initialOrders);
 
@@ -34,21 +28,16 @@ function App() {
   // При клике на кнопку должно быть действие
   if (isFailedIngredients) return (<ErrorRequest />);
 
-  const modalControls = {
-    openModal,
-    setContentModal: params => setContentModal(params)
-  }
-
   return (
     <>
       <div className={styles.app}>
         <AppHeader />
         <OrderContext.Provider value={{ stateOrders, dispatcherOrders }}>
-          <AppMain modalControls={modalControls} />
+          <AppMain />
         </OrderContext.Provider>
       </div>
 
-      {isModalOpen && <Modal header={contentModal?.header} closeModal={closeModal}>{contentModal.main}</Modal>}
+      <Modal />
     </>
   );
 }

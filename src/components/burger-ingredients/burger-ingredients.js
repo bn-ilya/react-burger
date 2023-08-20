@@ -4,7 +4,7 @@ import Ingredients from './ingredients/ingredients';
 import Tabs from './tabs/tabs';
 import { modalControlsType } from '../../utils/types';
 
-export default function BurgerIngredients({ modalControls }) {
+export default function BurgerIngredients() {
 
     return (
         <section className={styles.content + ' pt-10'}>
@@ -13,7 +13,7 @@ export default function BurgerIngredients({ modalControls }) {
                 <Tabs />
             </div>
             <div className={styles.main}>
-                <Ingredients modalControls={modalControls} />
+                <Ingredients />
             </div>
         </section>
     )

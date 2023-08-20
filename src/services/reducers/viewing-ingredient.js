@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     viewingIngredient: {}
@@ -18,4 +18,4 @@ const viewingIngredientSlice = createSlice({
 })
 
 export default viewingIngredientSlice.reducer;
-export const {setViewingIngredient, clearViewingIngredient} = viewingIngredientSlice.actions; 
+export const { setViewingIngredient, clearViewingIngredient } = viewingIngredientSlice.actions; 

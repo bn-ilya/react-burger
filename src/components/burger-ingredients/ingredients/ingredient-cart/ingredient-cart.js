@@ -4,14 +4,12 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components/dist
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { ingredientType, modalControlsType } from '../../../../utils/types';
 
-export default function IngredientCart({ ingredient, modalControls }) {
-
+import { openModal } from '../../../../services/reducers/modal';
+import { useDispatch } from 'react-redux';
+export default function IngredientCart({ ingredient }) {
+    const dispatch = useDispatch();
     const handlerClick = () => {
-        modalControls.setContentModal({
-            header: <span className='text text_type_main-large'>Детали ингредиента</span>,
-            main: <IngredientDetails ingredient={ingredient}/>
-        })
-        modalControls.openModal(true)
+        dispatch(openModal({ content: ingredient, type: 'viewingIngredient'}))
     }
 
     return (
@@ -32,6 +30,6 @@ export default function IngredientCart({ ingredient, modalControls }) {
 }
 
 IngredientCart.propTypes = {
-   ingredient: ingredientType,
-   modalControls: modalControlsType
+    ingredient: ingredientType,
+    modalControls: modalControlsType
 }
