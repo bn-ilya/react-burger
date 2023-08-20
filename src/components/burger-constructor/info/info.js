@@ -10,18 +10,21 @@ import ModalError from '../../ui/modal-error/modal-error';
 import { modalControlsType } from '../../../utils/types';
 // Hooks
 import { useContext, useState } from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+// Actions
+import { createOrder } from '../../../services/reducers/orders';
 
 export default function Info() {
 
-    const ingredients = useSelector(state => state.constructorIngredients.ingredients)
+    const dispatch = useDispatch();
+    const {ingredients, bunTop, bunBottom} = useSelector(state => state.ingredientsConstructor)
+    const {orderRequest} = useSelector(state => state.orders)
     const totalPrice = useSelector(state => state.totalPrice.totalPrice);
     
     const handleClick = () => {
+        const ids = [bunTop?.['_id'], bunBottom?.['_id'], ...ingredients.map(topping => topping['_id'])]
 
-        const { bunTop, bunBottom, toppings } = stateConstructorIngredients.constructorIngredients || {};
-        const ids = [bunTop?.['_id'], bunBottom?.['_id'], ...toppings.map(topping => topping['_id'])]
-
+        dispatch(createOrder(ids))
         if (!ids) return;
     }
 
@@ -31,8 +34,8 @@ export default function Info() {
                 <span className='text text_type_digits-medium'>{totalPrice}</span>
                 <CurrencyIcon />
             </div>
-            <Button disabled={isCreateOrder} loop={true} extraClass={styles.loaderBtn} onClick={handleClick} htmlType="button" type="primary" size="large">
-                {isCreateOrder && <BurgerSpinLoader type='secondary' />}
+            <Button disabled={orderRequest} loop={true} extraClass={styles.loaderBtn} onClick={handleClick} htmlType="button" type="primary" size="large">
+                {orderRequest && <BurgerSpinLoader type='secondary' />}
                 <span>Оформить заказ</span>
             </Button>
 

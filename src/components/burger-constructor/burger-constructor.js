@@ -10,7 +10,7 @@ export default function BurgerConstructor() {
                 <Constructor />
             </div>
             <div className={styles.footer}>
-                {/* <Info /> */}
+                <Info />
             </div>
         </section>
     )

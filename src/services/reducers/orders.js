@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createOrder as createOrderApi } from '../../utils/burger-api';
+import { openModal } from './modal';
 
 const ordersSlice = createSlice({
     name: 'orders',
@@ -11,33 +12,33 @@ const ordersSlice = createSlice({
     reducers: {
         addOrder: (state, action) => {
             state.orders.push(action.payload)
+        },
+        setOrderRequest(state, action) {
+            state.orderRequest = action.payload
+        },
+        setOrderFailed(state, action) {
+            state.orderFailed = action.payload
         }
     }
 })
 
 export const createOrder = (ids) => {
-    createOrderApi(ids)
-        .then(data => {
-            dispatcherOrders({
-                type: ADD_ORDER,
-                payload: data
+    return (dispatch) => {
+        createOrderApi(ids)
+            .then(data => {
+                dispatch(addOrder(data))
+                dispatch(openModal({ content: data.order.number, type: 'order' }))
+                dispatch(setOrderFailed(false))
             })
-
-            modalControls.setContentModal({
-                main: <OrderDetails number={data.order.number} />
+            .catch(data => {
+                dispatch(openModal({ content: data.message, type: 'error' }))
+                dispatch(setOrderFailed(true))
             })
-            modalControls.openModal(true);
-        })
-        .catch(data => {
-            modalControls.setContentModal({
-                main: <ModalError error={data.message} />
+            .finally(() => {
+                dispatch(setOrderRequest(false))
             })
-            modalControls.openModal(true);
-        })
-        .finally(() => {
-            setIsCreateOrder(false);
-        })
+    }
 }
 
 export default ordersSlice.reducer;
-export const { addOrder } = ordersSlice.actions; 
+export const { addOrder, setOrderRequest, setOrderFailed } = ordersSlice.actions; 

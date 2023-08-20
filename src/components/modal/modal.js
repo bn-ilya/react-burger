@@ -5,6 +5,8 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Header from './header/header';
 import ModalOverlay from "./modal-overlay/modal-overlay";
 import IngredientDetails from "../burger-ingredients/ingredients/ingredient-details/ingredient-details";
+import OrderDetails from "../order-details/order-details";
+import ModalError from "../ui/modal-error/modal-error";
 
 import { closeModal } from "../../services/reducers/modal";
 import { useSelector, useDispatch } from 'react-redux';
@@ -35,8 +37,10 @@ export default function Modal() {
                 setMain(<IngredientDetails ingredient={contentModal} />)
                 break;
             case 'order':
-                setHeader(<span className='text text_type_main-large'>Ура</span>)
-                setMain(<IngredientDetails ingredient={contentModal} />)
+                setMain(<OrderDetails number={contentModal} />)
+                break;
+            case 'error':
+                setMain(<ModalError error={contentModal} />)
                 break;
         }
     }, [typeModal])
@@ -48,7 +52,7 @@ export default function Modal() {
             <>
                 <section className={styles.modal}>
                     <div className={styles.content}>
-                        <div onClick={closeModal} className={styles.close}>
+                        <div onClick={() => dispatch(closeModal())} className={styles.close}>
                             <CloseIcon type="primary" />
                         </div>
                         {header && (<Header children={header} />)}
