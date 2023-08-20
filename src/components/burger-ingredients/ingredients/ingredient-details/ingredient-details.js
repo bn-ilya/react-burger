@@ -6,7 +6,6 @@ import { setViewingIngredient, clearViewingIngredient } from '../../../../servic
 
 export default function IngredientDetails({ ingredient }) {
 
-    console.log(ingredient)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(setViewingIngredient(ingredient));

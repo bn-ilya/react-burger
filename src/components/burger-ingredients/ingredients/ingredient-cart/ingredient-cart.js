@@ -1,9 +1,7 @@
 import styles from './ingredient-cart.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter';
-import IngredientDetails from '../ingredient-details/ingredient-details';
-import { ingredientType, modalControlsType } from '../../../../utils/types';
-
+import { ingredientType } from '../../../../utils/types';
 import { openModal } from '../../../../services/reducers/modal';
 import { useDispatch } from 'react-redux';
 export default function IngredientCart({ ingredient }) {
@@ -30,6 +28,5 @@ export default function IngredientCart({ ingredient }) {
 }
 
 IngredientCart.propTypes = {
-    ingredient: ingredientType,
-    modalControls: modalControlsType
+    ingredient: ingredientType
 }

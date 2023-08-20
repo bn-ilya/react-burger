@@ -1,6 +1,5 @@
 import styles from './ingredients.module.css';
 import IngredientCart from './ingredient-cart/ingredient-cart';
-import { modalControlsType } from '../../../utils/types';
 // Hooks
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -54,8 +53,4 @@ export default function Ingredients() {
             ))}
         </div>
     )
-}
-
-Ingredients.propTypes = {
-    modalControls: modalControlsType
 }
