@@ -18,9 +18,9 @@ export default function Info() {
 
     const dispatch = useDispatch();
     const {ingredients, bunTop, bunBottom} = useSelector(state => state.ingredientsConstructor)
-    const {orderRequest} = useSelector(state => state.orders)
+    const orderRequest = useSelector(state => state.orders.orderRequest)
     const totalPrice = useSelector(state => state.totalPrice.totalPrice);
-    
+
     const handleClick = () => {
         const ids = [bunTop?.['_id'], bunBottom?.['_id'], ...ingredients.map(topping => topping['_id'])]
 

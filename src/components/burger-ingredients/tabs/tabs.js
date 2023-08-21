@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styles from './tabs.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab';
 import {useSelector, useDispatch} from 'react-redux';

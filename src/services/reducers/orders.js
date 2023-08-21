@@ -24,6 +24,7 @@ const ordersSlice = createSlice({
 
 export const createOrder = (ids) => {
     return (dispatch) => {
+        dispatch(setOrderRequest(true))
         createOrderApi(ids)
             .then(data => {
                 dispatch(addOrder(data))
