@@ -5,6 +5,7 @@ import viewingIngredientSlice from "./viewing-ingredient";
 import ordersSlice from './orders'
 import totalPriceSlice from "./total-price";
 import modalSlice from './modal';
+import tabsSlice from './tabs';
 
 const rootReducer = combineReducers({
     ingredients: ingredientsSlice,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     viewingIngredient: viewingIngredientSlice,
     orders: ordersSlice,
     totalPrice: totalPriceSlice,
-    modal: modalSlice
+    modal: modalSlice,
+    tabs: tabsSlice
 })
 
 export const store = configureStore({

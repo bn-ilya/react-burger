@@ -1,56 +1,46 @@
 import styles from './ingredients.module.css';
-import IngredientCart from './ingredient-cart/ingredient-cart';
+import IngredientsCategory from './ingredients-category/ingredients-category';
+import { setActiveTab } from '../../../services/reducers/tabs';
+
 // Hooks
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-// Actions
-import { getIngredients } from '../../../services/reducers/ingredients';
-import { addingredients, setBunBottom, setBunTop } from '../../../services/reducers/ingredients-constructor';
+import { useRef } from 'react';
 
 export default function Ingredients() {
     const dispatch = useDispatch();
     const ingredients = useSelector(state => state.ingredients.ingredients);
 
-    useEffect(() => {
-        if (!ingredients.length) dispatch(getIngredients())
-    }, [dispatch, ingredients])
+    const titleBuns = useRef();
+    const titleSauces = useRef();
+    const titleMains = useRef();
 
-    useEffect(() => {
-        if (ingredients.length) {
-            const bun = ingredients.find(ingredient => ingredient.type === 'bun');
-            const toppings = ingredients.filter(ingredient => ingredient.type !== 'bun');
+    const scrollHandler = (e) => {
+        const containerPosition = e.target.getBoundingClientRect().top
+        const titlesPositions = [
+            { element: titleBuns, value: titleBuns.current.getBoundingClientRect().top },
+            { element: titleSauces, value: titleSauces.current.getBoundingClientRect().top },
+            { element: titleMains, value: titleMains.current.getBoundingClientRect().top }
+        ]
+        let closest = titlesPositions.reduce(function (prev, curr) {
+            return (Math.abs(curr.value - containerPosition) < Math.abs(prev.value - containerPosition) ? curr : prev);
+        });
 
-            dispatch(addingredients(toppings));
-            dispatch(setBunTop(bun));
-            dispatch(setBunBottom(bun));
-        }
-    }, [ingredients, dispatch]);
+        dispatch(setActiveTab(closest.element.current.getAttribute('id')))
+    }
 
-    if (!ingredients.length) return false;
+    if (!ingredients.length) return;
 
-    const categories = [
-        { name: 'Булки', type: 'bun', ingredients: ingredients.filter(ingredient => ingredient.type === "bun") },
-        { name: 'Соусы', type: 'sauce', ingredients: ingredients.filter(ingredient => ingredient.type === "sauce") },
-        { name: 'Начинки', type: 'main', ingredients: ingredients.filter(ingredient => ingredient.type === "main") }
-    ]
+    const buns = ingredients.filter(ingredient => ingredient.type === "bun")
+    const sauces = ingredients.filter(ingredient => ingredient.type === "sauce")
+    const mains = ingredients.filter(ingredient => ingredient.type === "main")
 
     return (
-        <div className={styles.content}>
-            {categories.map(({ name, type, ingredients }) => (
-                <div key={type} id={type} >
-                    <h2 className='text text_type_main-medium mb-6'>
-                        {name}
-                    </h2>
-                    <div className={styles.ingredientsRow + ' pl-4 pr-2'}>
-                        {ingredients.map(ingredient => (
-                            <IngredientCart
-                                key={ingredient['_id']}
-                                ingredient={ingredient}
-                            />
-                        ))}
-                    </div>
-                </div>
-            ))}
+        <div className={styles.main} onScroll={scrollHandler}>
+            <div className={styles.content}>
+                <IngredientsCategory ref={titleBuns} name='Булки' id='bun' ingredients={buns} />
+                <IngredientsCategory ref={titleSauces} name='Соусы' id='sauce' ingredients={sauces} />
+                <IngredientsCategory ref={titleMains} name='Начинки' id='main' ingredients={mains} />
+            </div>
         </div>
     )
 }
