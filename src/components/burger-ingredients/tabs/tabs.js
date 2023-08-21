@@ -1,7 +1,7 @@
 import styles from './tabs.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab';
-import {useSelector, useDispatch} from 'react-redux';
-import { setActiveTab } from '../../../services/reducers/tabs'; 
+import { useSelector, useDispatch } from 'react-redux';
+import { setActiveTab } from '../../../services/reducers/tabs';
 
 export default function Tabs() {
     const activeTab = useSelector(state => state.tabs.activeTab);
@@ -10,7 +10,7 @@ export default function Tabs() {
     const handleClickTab = tab => {
         dispatch(setActiveTab)
         const element = document.getElementById(tab);
-        element && element.scrollIntoView({behavior: 'smooth'})
+        element && element.scrollIntoView({ behavior: 'smooth' })
     }
 
     return (

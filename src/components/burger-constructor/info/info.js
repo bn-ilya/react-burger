@@ -4,12 +4,9 @@ import styles from './info.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/button';
 import BurgerSpinLoader from '../../ui/loaders/burger-spin-loader';
-import OrderDetails from '../../order-details/order-details';
-import ModalError from '../../ui/modal-error/modal-error';
 // Types
 import { modalControlsType } from '../../../utils/types';
 // Hooks
-import { useContext, useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 // Actions
 import { createOrder } from '../../../services/reducers/orders';
