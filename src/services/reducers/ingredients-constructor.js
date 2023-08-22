@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuid } from 'uuid';
 
 const ingredientsConstructorSlice = createSlice({
     name: 'ingredientsConstructor',
@@ -18,7 +19,7 @@ const ingredientsConstructorSlice = createSlice({
             state.bunBottom = action.payload
         },
         addIngredients: (state, action) => {
-            state.ingredients.push({...action.payload, sort: state.ingredients.length})
+            state.ingredients.push({...action.payload, sort: uuid()})
         },
         removeIngredient: (state, action) => {
             state.ingredients = state.ingredients.filter(ingredient => ingredient.sort !== action.payload)
