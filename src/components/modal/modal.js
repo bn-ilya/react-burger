@@ -28,7 +28,7 @@ export default function Modal() {
         document.addEventListener('keydown', handleKeyDown);
 
         return () => document.removeEventListener('keydown', handleKeyDown);
-    }, [closeModal]);
+    }, [dispatch]);
 
     useEffect(() => {
         switch (typeModal) {
@@ -42,8 +42,10 @@ export default function Modal() {
             case 'error':
                 setMain(<ModalError error={contentModal} />)
                 break;
+            default:
+                break;
         }
-    }, [typeModal])
+    }, [typeModal, contentModal])
 
     if (!isModalOpen) return null;
 

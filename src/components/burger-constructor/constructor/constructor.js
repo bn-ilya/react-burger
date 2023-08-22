@@ -1,7 +1,6 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element';
 import DraggableConstructorElement from './draggable-constructor-element/draggable-constructor-element';
 import styles from './constructor.module.css';
-// hooks
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { setTotalPrice } from '../../../services/reducers/total-price';
@@ -22,7 +21,7 @@ export default function Constructor() {
             dispatch(setBunTop(bun));
             dispatch(setBunBottom(bun));
         }
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         if (!ingredients) return;
@@ -31,7 +30,7 @@ export default function Constructor() {
             ingredientsCount[ingredient['_id']] = (ingredientsCount[ingredient['_id']] ?? 0) + 1
         })
         dispatch(setCountIngredients(ingredientsCount))
-    }, [ingredients])
+    }, [ingredients, dispatch])
 
     useEffect(() => {
         if (!bunTop || !bunBottom) return;
@@ -41,7 +40,7 @@ export default function Constructor() {
         bunsCount[bunBottom['_id']] = (bunsCount[bunBottom['_id']] ?? 0) + 1
 
         dispatch(setCountBuns(bunsCount))
-    }, [bunTop, bunBottom])
+    }, [bunTop, bunBottom, dispatch])
 
     const onDropHandler = ({ ingredient }) => {
         if (ingredient.type === 'bun') {

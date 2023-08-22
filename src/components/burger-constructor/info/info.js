@@ -1,20 +1,14 @@
-// Styles
 import styles from './info.module.css';
-// Components
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/button';
 import BurgerSpinLoader from '../../ui/loaders/burger-spin-loader';
-// Types
-import { modalControlsType } from '../../../utils/types';
-// Hooks
-import {useSelector, useDispatch} from 'react-redux';
-// Actions
+import { useSelector, useDispatch } from 'react-redux';
 import { createOrder } from '../../../services/reducers/orders';
 
 export default function Info() {
 
     const dispatch = useDispatch();
-    const {ingredients, bunTop, bunBottom} = useSelector(state => state.ingredientsConstructor)
+    const { ingredients, bunTop, bunBottom } = useSelector(state => state.ingredientsConstructor)
     const orderRequest = useSelector(state => state.orders.orderRequest)
     const totalPrice = useSelector(state => state.totalPrice.totalPrice);
 
@@ -35,12 +29,7 @@ export default function Info() {
                 {orderRequest && <BurgerSpinLoader type='secondary' />}
                 <span>Оформить заказ</span>
             </Button>
-
         </div>
     )
-}
-
-Info.propTypes = {
-    modalControls: modalControlsType
 }
 

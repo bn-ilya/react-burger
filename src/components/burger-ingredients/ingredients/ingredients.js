@@ -1,8 +1,6 @@
 import styles from './ingredients.module.css';
 import IngredientsCategory from './ingredients-category/ingredients-category';
 import { setActiveTab } from '../../../services/reducers/tabs';
-
-// Hooks
 import { useSelector, useDispatch } from 'react-redux';
 import { useRef } from 'react';
 

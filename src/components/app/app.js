@@ -7,8 +7,6 @@ import ErrorRequest from './error-request/error-request';
 import Modal from '../modal/modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-
-// Actions
 import { getIngredients } from '../../services/reducers/ingredients';
 
 function App() {
@@ -18,7 +16,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getIngredients())
-  }, [])
+  }, [dispatch])
 
   if (isFetchIngredients) return (<Loading />);
   if (isFailedIngredients) return (<ErrorRequest />);

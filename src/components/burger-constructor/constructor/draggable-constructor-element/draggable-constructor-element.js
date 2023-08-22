@@ -2,13 +2,11 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styled from './draggable-constructor-element.module.css';
 import { ingredientType } from '../../../../utils/types';
-import { useDispatch, useSelector } from 'react-redux';
-import { removeIngredient } from '../../../../services/reducers/ingredients-constructor';
+import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from 'react'
-import { useEffect } from 'react';
-import { updateIndexIngredients } from '../../../../services/reducers/ingredients-constructor';
-import { moveIngredients, changeIndexIngredients } from '../../../../services/reducers/ingredients-constructor';
+import PropTypes from 'prop-types';
+import { updateIndexIngredients, moveIngredients, removeIngredient } from '../../../../services/reducers/ingredients-constructor';
 
 export default function DraggableConstructorElement({ ingredient, index }) {
     const dispatch = useDispatch();
@@ -50,6 +48,7 @@ export default function DraggableConstructorElement({ ingredient, index }) {
             ingredient.index = hoverIndex
         }
     })
+
     const [{ isDragging }, dragRef] = useDrag({
         type: 'ingredientsConstruct',
         item: () => {
@@ -79,5 +78,6 @@ export default function DraggableConstructorElement({ ingredient, index }) {
 }
 
 DraggableConstructorElement.propTypes = {
-    ingredient: ingredientType
+    ingredient: ingredientType,
+    index: PropTypes.number.isRequired
 }

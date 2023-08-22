@@ -1,6 +1,8 @@
 import styles from './ingredients-category.module.css';
 import IngredientCart from '../ingredient-cart/ingredient-cart';
 import { forwardRef } from 'react';
+import { ingredientType } from '../../../../utils/types';
+import PropTypes from 'prop-types';
 
 const IngredientsCategory = forwardRef((props, ref) => {
     return (
@@ -21,3 +23,8 @@ const IngredientsCategory = forwardRef((props, ref) => {
 })
 
 export default IngredientsCategory
+
+IngredientsCategory.propTypes = {
+    name: PropTypes.string.isRequired,
+    ingredients:  PropTypes.arrayOf(ingredientType)
+}

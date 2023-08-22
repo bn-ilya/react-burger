@@ -13,7 +13,6 @@ export const ingredientType = PropTypes.shape({
     image_mobile: PropTypes.string.isRequired,
     image_large: PropTypes.string.isRequired,
     '__v': PropTypes.number.isRequired
-
 })
 
 export const modalHeaderType = PropTypes.oneOfType([
@@ -22,15 +21,3 @@ export const modalHeaderType = PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.node
 ])
-
-export const modalChildType = PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.element,
-    PropTypes.node
-])
-
-export const modalControlsType = PropTypes.shape({
-    openModal: PropTypes.func.isRequired,
-    setContentModal: PropTypes.func.isRequired
-})
