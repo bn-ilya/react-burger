@@ -19,10 +19,10 @@ const ingredientsConstructorSlice = createSlice({
             state.bunBottom = action.payload
         },
         addIngredients: (state, action) => {
-            state.ingredients.push({...action.payload, sort: uuid()})
+            state.ingredients.push({...action.payload, uniqueId: uuid()})
         },
         removeIngredient: (state, action) => {
-            state.ingredients = state.ingredients.filter(ingredient => ingredient.sort !== action.payload)
+            state.ingredients = state.ingredients.filter(ingredient => ingredient.uniqueId !== action.payload)
         }
     }
 })

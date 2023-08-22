@@ -11,7 +11,7 @@ export default function DraggableConstructorElement({ingredient}) {
     const handleClose = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        dispatch(removeIngredient(ingredient.sort))
+        dispatch(removeIngredient(ingredient.uniqueId))
     }
 
     return (
