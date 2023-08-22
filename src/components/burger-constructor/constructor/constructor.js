@@ -7,8 +7,9 @@ import { useEffect } from 'react';
 import { setTotalPrice } from '../../../services/reducers/total-price';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 import { addIngredients } from '../../../services/reducers/ingredients-constructor';
-import { incrementCount, setCountIngredients } from '../../../services/reducers/ingredients';
+import { setCountIngredients, setCountBuns } from '../../../services/reducers/ingredients';
 import { setBunBottom, setBunTop } from '../../../services/reducers/ingredients-constructor';
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default function Constructor() {
@@ -25,23 +26,11 @@ export default function Constructor() {
         }
     }, [])
 
-    const onDropHandler = ({ ingredient }) => {
-        if (ingredient.type === 'bun') {
-            dispatch(setBunTop(ingredient));
-            dispatch(setBunBottom(ingredient));
-        } else {
-            dispatch(addIngredients(ingredient))
-        }
-    }
-
     useEffect(() => {
         if (!ingredients) return;
         const ingredientsCount = {}
         ingredients.forEach(ingredient => {
-            ingredientsCount[ingredient['_id']] = {
-                count: (ingredientsCount[ingredient['_id']]?.count ?? 0) + 1,
-                type: ingredient.type
-            }
+            ingredientsCount[ingredient['_id']] = (ingredientsCount[ingredient['_id']] ?? 0) + 1
         })
         dispatch(setCountIngredients(ingredientsCount))
     }, [ingredients])
@@ -50,16 +39,20 @@ export default function Constructor() {
         if (!bunTop || !bunBottom) return;
 
         const bunsCount = {};
-        bunsCount[bunTop['_id']] = {
-            count: (bunsCount[bunTop['_id']]?.count ?? 0) + 1,
-            type: bunTop.type
-        }
-        bunsCount[bunBottom['_id']] = {
-            count: (bunsCount[bunBottom['_id']]?.count ?? 0) + 1,
-            type: bunBottom.type
-        }
-        dispatch(setCountIngredients(bunsCount))
+        bunsCount[bunTop['_id']] = (bunsCount[bunTop['_id']] ?? 0) + 1
+        bunsCount[bunBottom['_id']] = (bunsCount[bunBottom['_id']] ?? 0) + 1
+
+        dispatch(setCountBuns(bunsCount))
     }, [bunTop, bunBottom])
+
+    const onDropHandler = ({ ingredient }) => {
+        if (ingredient.type === 'bun') {
+            dispatch(setBunTop(ingredient));
+            dispatch(setBunBottom(ingredient));
+        } else {
+            dispatch(addIngredients(ingredient))
+        }
+    }
 
     const [, dropRef] = useDrop({
         accept: 'ingredient',
@@ -89,7 +82,7 @@ export default function Constructor() {
                 />)}
             </div>
             <div className={styles.elements} ref={dropRef}>
-                {ingredients && ingredients.map(ingredient => <DraggableConstructorElement key={ingredient['_id']} ingredient={ingredient} />)}
+                {ingredients && ingredients.map((ingredient, index) => <DraggableConstructorElement key={uuidv4()} ingredient={ingredient} />)}
             </div>
             <div className={styles.footer}>
                 {bunBottom && (<ConstructorElement

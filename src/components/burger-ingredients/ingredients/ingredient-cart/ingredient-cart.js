@@ -20,8 +20,10 @@ export default function IngredientCart({ ingredient }) {
         dispatch(openModal({ content: ingredient, type: 'viewingIngredient' }))
     }
 
+    const opacity = isDrag ? 0.5 : 1;
+
     return (
-        !isDrag && (<article onClick={handlerClick} className={styles.cart} ref={dragRef}>
+         <article onClick={handlerClick} style={{opacity: opacity}} className={styles.cart} ref={dragRef}>
             {ingredient.count && (<Counter count={ingredient.count} />)}
             <div className={styles.image + ' pl-4 pr-4 mb-1'}>
                 <img alt={ingredient.name} src={ingredient.image}></img>
@@ -33,7 +35,7 @@ export default function IngredientCart({ ingredient }) {
             <h2 className={styles.name + ' text text_type_main-default'}>
                 {ingredient.name}
             </h2>
-        </article>)
+        </article>
     )
 }
 
