@@ -13,10 +13,10 @@ const ordersSlice = createSlice({
         addOrder: (state, action) => {
             state.orders.push(action.payload)
         },
-        setOrderRequest(state, action) {
+        setOrderRequest: (state, action) => {
             state.orderRequest = action.payload
         },
-        setOrderFailed(state, action) {
+        setOrderFailed: (state, action) => {
             state.orderFailed = action.payload
         }
     }
