@@ -29,8 +29,6 @@ export default function Ingredients() {
 
     const {buns, sauces, mains} = useSelector(state => state.ingredients);
 
-    console.log(buns, sauces, mains)
-
     return (
         <div className={styles.main} onScroll={scrollHandler}>
             <div className={styles.content}>

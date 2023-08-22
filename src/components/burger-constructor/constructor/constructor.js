@@ -8,7 +8,7 @@ import { setTotalPrice } from '../../../services/reducers/total-price';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 import { addIngredients } from '../../../services/reducers/ingredients-constructor';
 import { setCountIngredients, setCountBuns } from '../../../services/reducers/ingredients';
-import { setBunBottom, setBunTop } from '../../../services/reducers/ingredients-constructor';
+import { setBunBottom, setBunTop, updateIndexIngredients } from '../../../services/reducers/ingredients-constructor';
 
 export default function Constructor() {
     const dispatch = useDispatch();
@@ -49,6 +49,7 @@ export default function Constructor() {
             dispatch(setBunBottom(ingredient));
         } else {
             dispatch(addIngredients(ingredient))
+            dispatch(updateIndexIngredients())
         }
     }
 
@@ -80,7 +81,7 @@ export default function Constructor() {
                 />)}
             </div>
             <div className={styles.elements} ref={dropRef}>
-                {ingredients && ingredients.map((ingredient) => <DraggableConstructorElement key={ingredient.sort} ingredient={ingredient} />)}
+                {ingredients && ingredients.map((ingredient, index) => <DraggableConstructorElement index={index} key={ingredient.uniqueId} ingredient={ingredient} />)}
             </div>
             <div className={styles.footer}>
                 {bunBottom && (<ConstructorElement
