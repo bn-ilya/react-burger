@@ -8,7 +8,7 @@ const ingredientsConstructorSlice = createSlice({
         bunBottom: null,
     },
     reducers: {
-        addingredients: (state, action) => {
+        setIngredients: (state, action) => {
             state.ingredients = action.payload
         },
         setBunTop: (state, action) => {
@@ -16,9 +16,12 @@ const ingredientsConstructorSlice = createSlice({
         },
         setBunBottom: (state, action) => {
             state.bunBottom = action.payload
+        },
+        addIngredients: (state, action) => {
+            state.ingredients.push(action.payload)
         }
     }
 })
 
 export default ingredientsConstructorSlice.reducer;
-export const { addingredients, setBunTop, setBunBottom } = ingredientsConstructorSlice.actions; 
+export const { setIngredients, setBunTop, setBunBottom, addIngredients } = ingredientsConstructorSlice.actions; 

@@ -8,7 +8,6 @@ import { useRef } from 'react';
 
 export default function Ingredients() {
     const dispatch = useDispatch();
-    const ingredients = useSelector(state => state.ingredients.ingredients);
 
     const titleBuns = useRef();
     const titleSauces = useRef();
@@ -28,11 +27,9 @@ export default function Ingredients() {
         dispatch(setActiveTab(closest.element.current.getAttribute('id')))
     }
 
-    if (!ingredients.length) return;
+    const {buns, sauces, mains} = useSelector(state => state.ingredients);
 
-    const buns = ingredients.filter(ingredient => ingredient.type === "bun")
-    const sauces = ingredients.filter(ingredient => ingredient.type === "sauce")
-    const mains = ingredients.filter(ingredient => ingredient.type === "main")
+    console.log(buns, sauces, mains)
 
     return (
         <div className={styles.main} onScroll={scrollHandler}>

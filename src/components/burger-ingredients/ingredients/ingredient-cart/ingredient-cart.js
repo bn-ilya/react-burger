@@ -4,14 +4,24 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components/dist
 import { ingredientType } from '../../../../utils/types';
 import { openModal } from '../../../../services/reducers/modal';
 import { useDispatch } from 'react-redux';
+import { useDrag } from 'react-dnd/dist/hooks';
+
 export default function IngredientCart({ ingredient }) {
+
+    const [{isDrag}, dragRef] = useDrag({
+        type: 'ingredient',
+        item: { ingredient },
+        collect: monitor => ({
+            isDrag: monitor.isDragging()
+        })
+    })
     const dispatch = useDispatch();
     const handlerClick = () => {
-        dispatch(openModal({ content: ingredient, type: 'viewingIngredient'}))
+        dispatch(openModal({ content: ingredient, type: 'viewingIngredient' }))
     }
 
     return (
-        <article onClick={handlerClick} className={styles.cart}>
+        !isDrag && (<article onClick={handlerClick} className={styles.cart} ref={dragRef}>
             {ingredient.count && (<Counter count={ingredient.count} />)}
             <div className={styles.image + ' pl-4 pr-4 mb-1'}>
                 <img alt={ingredient.name} src={ingredient.image}></img>
@@ -23,7 +33,7 @@ export default function IngredientCart({ ingredient }) {
             <h2 className={styles.name + ' text text_type_main-default'}>
                 {ingredient.name}
             </h2>
-        </article>
+        </article>)
     )
 }
 
