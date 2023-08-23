@@ -11,6 +11,8 @@ export default function Ingredients() {
     const titleSauces = useRef();
     const titleMains = useRef();
 
+    const activeTab = useSelector(state => state.tabs.activeTab);
+
     const scrollHandler = (e) => {
         const containerPosition = e.target.getBoundingClientRect().top
         const titlesPositions = [
@@ -18,11 +20,12 @@ export default function Ingredients() {
             { element: titleSauces, value: titleSauces.current.getBoundingClientRect().top },
             { element: titleMains, value: titleMains.current.getBoundingClientRect().top }
         ]
-        let closest = titlesPositions.reduce(function (prev, curr) {
+        let closestTitle = titlesPositions.reduce(function (prev, curr) {
             return (Math.abs(curr.value - containerPosition) < Math.abs(prev.value - containerPosition) ? curr : prev);
         });
 
-        dispatch(setActiveTab(closest.element.current.getAttribute('id')))
+        const closestTab = closestTitle.element.current.getAttribute('id')
+        activeTab !== closestTab && dispatch(setActiveTab(closestTab))
     }
 
     const {buns, sauces, mains} = useSelector(state => state.ingredients);
