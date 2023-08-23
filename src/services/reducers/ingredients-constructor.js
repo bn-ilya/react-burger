@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuid } from 'uuid';
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const ingredientsConstructorSlice = createSlice({
     name: 'ingredientsConstructor',
@@ -18,8 +17,14 @@ const ingredientsConstructorSlice = createSlice({
         setBunBottom: (state, action) => {
             state.bunBottom = action.payload
         },
-        addIngredients: (state, action) => {
-            state.ingredients.push({ ...action.payload, uniqueId: uuid() })
+        addIngredients: {
+            reducer: (state, action) => {
+                state.ingredients.push({ ...action.payload.ingredient, uniqueId: action.payload.uniqueId })
+            },
+            prepare: (ingredient) => {
+                const uniqueId = nanoid()
+                return {payload: {ingredient, uniqueId}}
+            },
         },
         removeIngredient: (state, action) => {
             state.ingredients = state.ingredients.filter(ingredient => ingredient.uniqueId !== action.payload)
@@ -28,7 +33,7 @@ const ingredientsConstructorSlice = createSlice({
             state.ingredients = state.ingredients.map((ingredient, index) => ({ ...ingredient, index: index }));
         },
         sortedIngredients: (state) => {
-            state.ingredients = state.ingredients.sort((a, b) => {
+            state.ingredients.sort((a, b) => {
                 return a.index - b.index;
             })
         },
