@@ -8,6 +8,7 @@ import Modal from '../modal/modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getIngredients } from '../../services/reducers/ingredients';
+import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   const dispatch = useDispatch();
@@ -22,14 +23,16 @@ function App() {
   if (isFailedIngredients) return (<ErrorRequest />);
 
   return (
-    <>
+    <Router>
+      <Routes>
       <div className={styles.app}>
         <AppHeader />
         <AppMain />
       </div>
 
       <Modal />
-    </>
+      </Routes>
+    </Router>
   );
 }
 
