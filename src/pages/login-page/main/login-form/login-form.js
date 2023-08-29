@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './login-form.module.css';
 
 export default function LoginForm() {
@@ -15,6 +15,7 @@ export default function LoginForm() {
 
     return (
         <form className={styles.form}>
+            <h1 className={'text text_type_main-medium ' + styles.title}>Вход</h1>
             <Input
                 type={'text'}
                 placeholder={'E-mail'}
@@ -35,8 +36,9 @@ export default function LoginForm() {
                 errorText={'Ошибка'}
                 size={'default'}
             />
-            {formData.email}
-            {formData.password}
+            <Button htmlType="button" type="primary" size="medium">
+                Войти
+            </Button>
         </form>
     )
 }
