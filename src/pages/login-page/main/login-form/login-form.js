@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import styles from './login-form.module.css';
 
 export default function LoginForm() {
     const [formData, setFormData] = useState({
@@ -13,10 +14,10 @@ export default function LoginForm() {
     }
 
     return (
-        <form style={{ color: 'white' }}>
+        <form className={styles.form}>
             <Input
                 type={'text'}
-                placeholder={'placeholder'}
+                placeholder={'E-mail'}
                 onChange={handleInputs}
                 icon={'CurrencyIcon'}
                 name={'email'}
@@ -26,7 +27,7 @@ export default function LoginForm() {
             />
             <Input
                 type={'text'}
-                placeholder={'placeholder'}
+                placeholder={'Пароль'}
                 onChange={handleInputs}
                 icon={'CurrencyIcon'}
                 name={'password'}
