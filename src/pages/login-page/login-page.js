@@ -1,12 +1,13 @@
 import Header from "../../components/header/header"
+import ContainerPage from "../../components/container-page/container-page";
 import Main from "./main/main"
-import styles from './login-page.module.css';
+
 
 export default function LoginPage() {
     return (
-        <div className={styles.content}>
+        <ContainerPage>
             <Header />
             <Main />
-        </div>
+        </ContainerPage>
     )
 }
