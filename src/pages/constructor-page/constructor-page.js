@@ -3,7 +3,7 @@ import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 import styles from './constructor-page.module.css';
 // Components
 import Header from '../../components/header/header';
-import AppMain from './app-main/app-main';
+import Main from './main/main';
 import Loading from './loading/loading';
 import ErrorRequest from './error-request/error-request';
 import Modal from '../../components/modal/modal';
@@ -29,7 +29,7 @@ export default function ConstructorPage() {
         <>
             <div className={styles.app}>
                 <Header />
-                <AppMain />
+                <Main />
             </div>
 
             <Modal />
