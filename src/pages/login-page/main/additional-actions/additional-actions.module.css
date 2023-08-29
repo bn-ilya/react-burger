@@ -1,0 +1,10 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.link {
+    color: #4C4CFF;
+}
