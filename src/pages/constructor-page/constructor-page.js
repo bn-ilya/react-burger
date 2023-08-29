@@ -27,7 +27,7 @@ export default function ConstructorPage() {
 
     return (
         <>
-            <div className={styles.app}>
+            <div className={styles.container}>
                 <Header />
                 <Main />
             </div>
