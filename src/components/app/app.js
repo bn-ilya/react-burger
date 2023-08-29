@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ConstructorPage from '../../pages/constructor-page/constructor-page';
-import LoginPage from '../../pages/login-page/login-page';
+import {LoginPage, ConstructorPage} from '../../pages'
 
 function App() {
   return (
