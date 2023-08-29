@@ -1,17 +1,16 @@
 import styles from './main.module.css';
-import LoginForm from './login-form/login-form';
+import RegisterForm from './register-form/register-form';
 import AdditionalActionsForm from '../../../components/additional-actions-form/additional-actions-form';
 
 export default function Main() {
-    
+
     const additionalActions = [
-        {text:'Вы новый пользователь?', link: '', linkText: 'Зарегистрироваться' },
-        {text: 'Забыли пароль?', link:'', linkText:'Восстановить пароль'}
+        {text: 'Уже зарегистрированы?', link: '', linkText: 'Войти'}
     ]
 
     return (
         <div className={styles.content}>
-            <LoginForm />
+            <RegisterForm />
             <AdditionalActionsForm additionalActions={additionalActions} />
         </div>
     )
