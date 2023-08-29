@@ -1,8 +1,8 @@
 import styles from './ingredient-cart.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter';
-import { ingredientType } from '../../../../utils/types';
-import { openModal } from '../../../../services/reducers/modal';
+import { ingredientType } from '../../../../../utils/types';
+import { openModal } from '../../../../../services/reducers/modal';
 import { useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd/dist/hooks';
 

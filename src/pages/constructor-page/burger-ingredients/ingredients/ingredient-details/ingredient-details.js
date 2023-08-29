@@ -1,8 +1,8 @@
 import styles from './ingredient-details.module.css';
-import { ingredientType } from '../../../../utils/types';
+import { ingredientType } from '../../../../../utils/types';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { setViewingIngredient, clearViewingIngredient } from '../../../../services/reducers/viewing-ingredient';
+import { setViewingIngredient, clearViewingIngredient } from '../../../../../services/reducers/viewing-ingredient';
 
 export default function IngredientDetails({ ingredient }) {
 

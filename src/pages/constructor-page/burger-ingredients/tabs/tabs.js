@@ -1,7 +1,7 @@
 import styles from './tabs.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab';
 import { useSelector, useDispatch } from 'react-redux';
-import { setActiveTab } from '../../../services/reducers/tabs';
+import { setActiveTab } from '../../../../services/reducers/tabs';
 
 export default function Tabs() {
     const activeTab = useSelector(state => state.tabs.activeTab);

@@ -1,5 +1,5 @@
 import styles from './order-details.module.css';
-import IconsBackground from '../ui/icons/icons-background';
+import IconsBackground from '../../../components/ui/icons/icons-background';
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export default function OrderDetails({number}) {

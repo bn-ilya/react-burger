@@ -1,7 +1,7 @@
 import styles from './ingredients-category.module.css';
 import IngredientCart from '../ingredient-cart/ingredient-cart';
 import { forwardRef } from 'react';
-import { ingredientType } from '../../../../utils/types';
+import { ingredientType } from '../../../../../utils/types';
 import PropTypes from 'prop-types';
 
 const IngredientsCategory = forwardRef((props, ref) => {

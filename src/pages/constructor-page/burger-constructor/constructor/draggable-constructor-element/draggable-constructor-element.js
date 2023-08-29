@@ -1,12 +1,12 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styled from './draggable-constructor-element.module.css';
-import { ingredientType } from '../../../../utils/types';
+import { ingredientType } from '../../../../../utils/types';
 import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from 'react'
 import PropTypes from 'prop-types';
-import { updateIndexIngredients, moveIngredients, removeIngredient } from '../../../../services/reducers/ingredients-constructor';
+import { updateIndexIngredients, moveIngredients, removeIngredient } from '../../../../../services/reducers/ingredients-constructor';
 
 export default function DraggableConstructorElement({ ingredient, index }) {
     const dispatch = useDispatch();

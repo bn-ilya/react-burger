@@ -1,9 +1,9 @@
-import styles from './app-header.module.css';
+import styles from './header.module.css';
 import { BurgerIcon, ListIcon, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import Button from './button/button';
 
-export default function AppHeader() {
+export default function Header() {
     return (
         <header className={styles.header + ' pt-4 pb-4'}>
             <div className={styles.content}>

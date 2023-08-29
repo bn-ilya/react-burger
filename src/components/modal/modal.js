@@ -4,8 +4,8 @@ import styles from './modal.module.css';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Header from './header/header';
 import ModalOverlay from "./modal-overlay/modal-overlay";
-import IngredientDetails from "../burger-ingredients/ingredients/ingredient-details/ingredient-details";
-import OrderDetails from "../order-details/order-details";
+import IngredientDetails from "../../pages/constructor-page/burger-ingredients/ingredients/ingredient-details/ingredient-details";
+import OrderDetails from "../../pages/constructor-page/order-details/order-details";
 import ModalError from "../ui/modal-error/modal-error";
 
 import { closeModal } from "../../services/reducers/modal";

@@ -1,5 +1,5 @@
 import styles from './loading.module.css';
-import BurgerSpinLoader from '../../ui/loaders/burger-spin-loader';
+import BurgerSpinLoader from '../../../components/ui/loaders/burger-spin-loader';
 
 export default function Loading() {
     return (

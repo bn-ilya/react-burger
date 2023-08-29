@@ -3,11 +3,11 @@ import DraggableConstructorElement from './draggable-constructor-element/draggab
 import styles from './constructor.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { setTotalPrice } from '../../../services/reducers/total-price';
+import { setTotalPrice } from '../../../../services/reducers/total-price';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
-import { addIngredients } from '../../../services/reducers/ingredients-constructor';
-import { setCountIngredients, setCountBuns } from '../../../services/reducers/ingredients';
-import { setBunBottom, setBunTop, updateIndexIngredients } from '../../../services/reducers/ingredients-constructor';
+import { addIngredients } from '../../../../services/reducers/ingredients-constructor';
+import { setCountIngredients, setCountBuns } from '../../../../services/reducers/ingredients';
+import { setBunBottom, setBunTop, updateIndexIngredients } from '../../../../services/reducers/ingredients-constructor';
 
 export default function Constructor() {
     const dispatch = useDispatch();
