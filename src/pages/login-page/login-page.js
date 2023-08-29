@@ -1,9 +1,7 @@
-
+import Header from "../../components/header/header"
 
 export default function LoginPage() {
     return (
-        <div>
-            Страница авторизации
-        </div>
+        <Header />
     )
 }
