@@ -20,7 +20,6 @@ export default function LoginForm() {
                 type={'text'}
                 placeholder={'E-mail'}
                 onChange={handleInputs}
-                icon={'CurrencyIcon'}
                 name={'email'}
                 error={false}
                 errorText={'Ошибка'}
@@ -30,7 +29,7 @@ export default function LoginForm() {
                 type={'text'}
                 placeholder={'Пароль'}
                 onChange={handleInputs}
-                icon={'CurrencyIcon'}
+                icon={'ShowIcon'}
                 name={'password'}
                 error={false}
                 errorText={'Ошибка'}
