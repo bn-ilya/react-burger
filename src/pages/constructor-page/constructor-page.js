@@ -5,7 +5,6 @@ import Header from '../../components/header/header';
 import Main from './main/main';
 import Loading from './loading/loading';
 import ErrorRequest from './error-request/error-request';
-import Modal from '../../components/modal/modal';
 import ContainerPage from '../../components/container-page/container-page';
 // Hooks
 import { useSelector, useDispatch } from 'react-redux';
@@ -26,13 +25,9 @@ export default function ConstructorPage() {
     if (isFailedIngredients) return (<ErrorRequest />);
 
     return (
-        <>
-            <ContainerPage>
-                <Header />
-                <Main />
-            </ContainerPage>
-
-            <Modal />
-        </>
+        <ContainerPage>
+            <Header />
+            <Main />
+        </ContainerPage>
     )
 }
