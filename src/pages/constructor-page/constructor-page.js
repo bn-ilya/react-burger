@@ -19,7 +19,7 @@ export default function ConstructorPage() {
     const isFailedIngredients = useSelector(state => state.ingredients.ingredientsFailed);
 
     useEffect(() => {
-        dispatch(getIngredients())
+        dispatch(getIngredients()).then
     }, [dispatch])
 
     if (isFetchIngredients) return (<Loading />);

@@ -6,7 +6,7 @@ export default function Main() {
     
     const additionalActions = [
         {text:'Вы новый пользователь?', link: '/register', linkText: 'Зарегистрироваться' },
-        {text: 'Забыли пароль?', link:'', linkText:'Восстановить пароль'}
+        {text: 'Забыли пароль?', link:'/forgot-password', linkText:'Восстановить пароль'}
     ]
 
     return (
