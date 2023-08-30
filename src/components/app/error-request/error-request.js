@@ -1,8 +1,13 @@
 import styles from './error-request.module.css';
 import { CloseIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
+import { getIngredients } from '../../../services/reducers/ingredients';
+import { useDispatch } from 'react-redux';
 
-export default function ErrorRequest({ onClick }) {
+export default function ErrorRequest() {
+    const dispatch = useDispatch();
+    const handleClick = () => {
+        dispatch(getIngredients());
+    }
     return (
         <div className={styles.content}>
             <div className={styles.errorContainer}>
@@ -12,14 +17,10 @@ export default function ErrorRequest({ onClick }) {
                 </div>
             </div>
             <div className={styles.reloadContainer}>
-                <Button onClick={onClick} htmlType="button" type="primary" size="small" extraClass="ml-2">
+                <Button onClick={handleClick} htmlType="button" type="primary" size="small" extraClass="ml-2">
                     <span className='text text_type_main-small'>Давай по новой</span>
                 </Button>
             </div>
         </div>
     )
-}
-
-ErrorRequest.propTypes = {
-    onClick: PropTypes.func.isRequired
 }

@@ -1,7 +1,20 @@
 import styles from './ingredient-details.module.css';
 import { ingredientType } from '../../../../utils/types';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { setViewingIngredient, clearViewingIngredient } from '../../../../services/reducers/viewing-ingredient';
 
 export default function IngredientDetails({ ingredient }) {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(setViewingIngredient(ingredient));
+
+        return () => {
+            dispatch(clearViewingIngredient());
+        }
+    }, [dispatch, ingredient]);
+
     return (
         <div className={styles.content}>
             <div className={styles.previewContainer}>

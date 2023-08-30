@@ -1,21 +1,29 @@
 import styles from './ingredient-cart.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter';
-import IngredientDetails from '../ingredient-details/ingredient-details';
-import { ingredientType, modalControlsType } from '../../../../utils/types';
+import { ingredientType } from '../../../../utils/types';
+import { openModal } from '../../../../services/reducers/modal';
+import { useDispatch } from 'react-redux';
+import { useDrag } from 'react-dnd/dist/hooks';
 
-export default function IngredientCart({ ingredient, modalControls }) {
+export default function IngredientCart({ ingredient }) {
 
-    const handlerClick = () => {
-        modalControls.setContentModal({
-            header: <span className='text text_type_main-large'>Детали ингредиента</span>,
-            main: <IngredientDetails ingredient={ingredient}/>
+    const [{isDrag}, dragRef] = useDrag({
+        type: 'ingredient',
+        item: { ingredient },
+        collect: monitor => ({
+            isDrag: monitor.isDragging()
         })
-        modalControls.openModal(true)
+    })
+    const dispatch = useDispatch();
+    const handlerClick = () => {
+        dispatch(openModal({ content: ingredient, type: 'viewingIngredient' }))
     }
 
+    const opacity = isDrag ? 0.5 : 1;
+
     return (
-        <article onClick={handlerClick} className={styles.cart}>
+         <article onClick={handlerClick} style={{opacity: opacity}} className={styles.cart} ref={dragRef}>
             {ingredient.count && (<Counter count={ingredient.count} />)}
             <div className={styles.image + ' pl-4 pr-4 mb-1'}>
                 <img alt={ingredient.name} src={ingredient.image}></img>
@@ -32,6 +40,5 @@ export default function IngredientCart({ ingredient, modalControls }) {
 }
 
 IngredientCart.propTypes = {
-   ingredient: ingredientType,
-   modalControls: modalControlsType
+    ingredient: ingredientType
 }
