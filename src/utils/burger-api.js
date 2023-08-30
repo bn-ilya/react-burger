@@ -26,7 +26,25 @@ export const createOrder = (ingredientsIds) => {
     })
         .then(checkResponse)
         .then(data => {
-            if (data?.success) return {name: data.name, order: data.order};
+            if (data?.success) return { name: data.name, order: data.order };
+            return Promise.reject(data);
+        })
+}
+
+export const resetPassword = (email) => {
+    return fetch(`${URL_API}/password-reset`, {
+        method: "post",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email
+        })
+    })
+        .then(checkResponse)
+        .then(data => {
+            if (data?.success) return { name: data.name, order: data.order };
             return Promise.reject(data);
         })
 }

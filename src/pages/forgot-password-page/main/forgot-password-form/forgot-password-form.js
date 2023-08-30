@@ -2,6 +2,7 @@ import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-component
 import styles from './forgot-password-form.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setFieldValue } from "../../../../services/reducers/forgot-password";
+import { resetPassword } from "../../../../services/reducers/forgot-password";
 
 export default function ForgotPasswordForm() {
     const {email} = useSelector(state => state.forgotPassword)
@@ -12,8 +13,13 @@ export default function ForgotPasswordForm() {
         dispatch(setFieldValue({ field, value }))
     }
 
+    const handleSubmit = e => {
+        e.preventDefault();
+        dispatch(resetPassword())
+    }
+
     return (
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
             <h1 className={'text text_type_main-medium ' + styles.title}>Восстановление пароля</h1>
             <Input
                 type={'text'}
@@ -25,7 +31,7 @@ export default function ForgotPasswordForm() {
                 errorText={'Ошибка'}
                 size={'default'}
             />
-            <Button htmlType="button" type="primary" size="medium">
+            <Button htmlType="submit" type="primary" size="medium">
                 Восстановить
             </Button>
         </form>
