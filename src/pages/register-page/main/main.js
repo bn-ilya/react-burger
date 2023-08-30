@@ -5,7 +5,7 @@ import AdditionalActionsForm from '../../../components/additional-actions-form/a
 export default function Main() {
 
     const additionalActions = [
-        {text: 'Уже зарегистрированы?', link: '', linkText: 'Войти'}
+        {text: 'Уже зарегистрированы?', link: '/login', linkText: 'Войти'}
     ]
 
     return (
