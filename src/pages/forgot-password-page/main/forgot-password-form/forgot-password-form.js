@@ -1,17 +1,15 @@
-import { useState } from "react"
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './forgot-password-form.module.css';
+import { useDispatch, useSelector } from "react-redux";
+import { setFieldValue } from "../../../../services/reducers/forgot-password";
 
 export default function ForgotPasswordForm() {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: ''
-    })
+    const {email} = useSelector(state => state.forgotPassword)
+    const dispatch = useDispatch();
 
     const handleInputs = e => {
-        const [value, name] = [e.target.value, e.target.name];
-        setFormData({ ...formData, [name]: value })
+        const [value, field] = [e.target.value, e.target.name];
+        dispatch(setFieldValue({ field, value }))
     }
 
     return (
@@ -20,6 +18,7 @@ export default function ForgotPasswordForm() {
             <Input
                 type={'text'}
                 placeholder={'E-mail'}
+                value={email}
                 onChange={handleInputs}
                 name={'email'}
                 error={false}
