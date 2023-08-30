@@ -18,7 +18,6 @@ export default function Info() {
 
         dispatch(createOrder(ids))
             .then(res => {
-                console.log(res)
                 dispatch(openModal({ content: res.payload.order.number, type: 'order' }))
             })
             .catch(error => {

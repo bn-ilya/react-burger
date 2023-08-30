@@ -10,7 +10,7 @@ export const resetPassword = createAsyncThunk(
 
             return res;
         } catch (error) {
-            return rejectWithValue;
+            return rejectWithValue(error);
         }
     }
 )

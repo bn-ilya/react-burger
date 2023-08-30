@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFieldValue } from "../../../../services/reducers/forgot-password";
 import { resetPassword } from "../../../../services/reducers/forgot-password";
 import { useNavigate } from "react-router-dom";
+import { openModal } from "../../../../services/reducers/modal";
 
 export default function ForgotPasswordForm() {
-    const {email} = useSelector(state => state.forgotPassword)
+    const { email } = useSelector(state => state.forgotPassword)
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
@@ -18,9 +19,13 @@ export default function ForgotPasswordForm() {
     const handleSubmit = e => {
         e.preventDefault();
         dispatch(resetPassword())
-        .then(()=>{
-            navigate('/reset-password', {replace: true})
-        })
+            .unwrap()
+            .then(() => {
+                navigate('/reset-password', { replace: true })
+            })
+            .catch(error => {
+                dispatch(openModal({ content: error.message, type: 'error' }))
+            })
     }
 
     return (
