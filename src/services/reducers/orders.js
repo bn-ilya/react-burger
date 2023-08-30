@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { createOrder as createOrderApi } from '../../utils/burger-api';
-import { openModal } from './modal';
 
 export const createOrder = createAsyncThunk(
     "orders/createOrder",
@@ -8,9 +7,8 @@ export const createOrder = createAsyncThunk(
         try {
             const res = await createOrderApi(ids);
             dispatch(addOrder(res));
-            dispatch(openModal({ content: res.order.number, type: 'order' }))
+            return res
         } catch (error) {
-            dispatch(openModal({ content: error.message, type: 'error' }))
             return rejectWithValue(error);
         };
     }

@@ -4,6 +4,7 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components/dist/
 import BurgerSpinLoader from '../../../../components/ui/loaders/burger-spin-loader';
 import { useSelector, useDispatch } from 'react-redux';
 import { createOrder } from '../../../../services/reducers/orders';
+import { openModal } from '../../../../services/reducers/modal';
 
 export default function Info() {
 
@@ -16,7 +17,13 @@ export default function Info() {
         const ids = [bunTop?.['_id'], bunBottom?.['_id'], ...ingredients.map(topping => topping['_id'])]
 
         dispatch(createOrder(ids))
-        if (!ids) return;
+            .then(res => {
+                console.log(res)
+                dispatch(openModal({ content: res.payload.order.number, type: 'order' }))
+            })
+            .catch(error => {
+                dispatch(openModal({ content: error.message, type: 'error' }))
+            })
     }
 
     return (
