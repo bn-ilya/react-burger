@@ -37,18 +37,19 @@ const ingredientsSlice = createSlice({
             state.buns = state.buns.map(bun => action.payload[bun['_id']] ? { ...bun, count: action.payload[bun['_id']] } : { ...bun, count: null });
         }
     },
-    extraReducers: {
-        [getIngredients.pending]: (state) => {
-            state.ingredientsRequest = true
-        },
-        [getIngredients.fulfilled]: (state) => {
-            state.ingredientsRequest = false
-            state.ingredientsFailed = false
-        },
-        [getIngredients.rejected]: (state) => {
-            state.ingredientsRequest = false
-            state.ingredientsFailed = true
-        }
+    extraReducers: (builder) => {
+        builder
+            .addCase(getIngredients.pending, (state) => {
+                state.ingredientsRequest = true
+            })
+            .addCase(getIngredients.fulfilled, (state) => {
+                state.ingredientsRequest = false
+                state.ingredientsFailed = false
+            })
+            .addCase(getIngredients.rejected, (state) => {
+                state.ingredientsRequest = false
+                state.ingredientsFailed = true
+            })
     }
 })
 

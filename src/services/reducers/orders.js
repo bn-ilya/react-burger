@@ -26,20 +26,21 @@ const ordersSlice = createSlice({
             state.orders.push(action.payload)
         }
     },
-    extraReducers: {
-        [createOrder.pending]: (state) => {
-            state.orderRequest = true
-        },
-        [createOrder.fulfilled]: (state) => {
-            state.orderRequest = false
-            state.orderFailed = false
-        },
-        [createOrder.rejected]: (state) => {
-            state.orderRequest = false
-            state.orderFailed = true
-        }
+    extraReducers: (builder) => {
+        builder
+            .addCase(createOrder.pending, (state) => {
+                state.orderRequest = true
+            })
+            .addCase(createOrder.fulfilled, (state) => {
+                state.orderRequest = false
+                state.orderFailed = false
+            })
+            .addCase(createOrder.rejected, (state) => {
+                state.orderRequest = false
+                state.orderFailed = true
+            })
     }
 })
 
 export default ordersSlice.reducer;
-export const { addOrder} = ordersSlice.actions; 
+export const { addOrder } = ordersSlice.actions; 
