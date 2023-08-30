@@ -3,10 +3,12 @@ import styles from './forgot-password-form.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setFieldValue } from "../../../../services/reducers/forgot-password";
 import { resetPassword } from "../../../../services/reducers/forgot-password";
+import { useNavigate } from "react-router-dom";
 
 export default function ForgotPasswordForm() {
     const {email} = useSelector(state => state.forgotPassword)
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const handleInputs = e => {
         const [value, field] = [e.target.value, e.target.name];
@@ -16,6 +18,9 @@ export default function ForgotPasswordForm() {
     const handleSubmit = e => {
         e.preventDefault();
         dispatch(resetPassword())
+        .then(()=>{
+            navigate('/reset-password', {replace: true})
+        })
     }
 
     return (
