@@ -1,9 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { createOrder as createOrderApi } from '../../utils/burger-api';
 import { openModal } from './modal';
 
+export const createOrder = createAsyncThunk(
+    "orders/createOrder",
+    async function (ids, { rejectWithValue, dispatch }) {
+        try {
+            const res = await createOrderApi(ids);
+            dispatch(addOrder(res));
+            dispatch(openModal({ content: res.order.number, type: 'order' }))
+        } catch (error) {
+            dispatch(openModal({ content: error.message, type: 'error' }))
+            return rejectWithValue(error);
+        };
+    }
+)
+
 const ordersSlice = createSlice({
-    name: 'orders',
+    name: "orders",
     initialState: {
         orders: [],
         orderRequest: false,
@@ -12,34 +26,22 @@ const ordersSlice = createSlice({
     reducers: {
         addOrder: (state, action) => {
             state.orders.push(action.payload)
+        }
+    },
+    extraReducers: {
+        [createOrder.pending]: (state) => {
+            state.orderRequest = true
         },
-        setOrderRequest: (state, action) => {
-            state.orderRequest = action.payload
+        [createOrder.fulfilled]: (state) => {
+            state.orderRequest = false
+            state.orderFailed = false
         },
-        setOrderFailed: (state, action) => {
-            state.orderFailed = action.payload
+        [createOrder.rejected]: (state) => {
+            state.orderRequest = false
+            state.orderFailed = true
         }
     }
 })
 
-export const createOrder = (ids) => {
-    return (dispatch) => {
-        dispatch(setOrderRequest(true))
-        createOrderApi(ids)
-            .then(data => {
-                dispatch(addOrder(data))
-                dispatch(openModal({ content: data.order.number, type: 'order' }))
-                dispatch(setOrderFailed(false))
-            })
-            .catch(data => {
-                dispatch(openModal({ content: data.message, type: 'error' }))
-                dispatch(setOrderFailed(true))
-            })
-            .finally(() => {
-                dispatch(setOrderRequest(false))
-            })
-    }
-}
-
 export default ordersSlice.reducer;
-export const { addOrder, setOrderRequest, setOrderFailed } = ordersSlice.actions; 
+export const { addOrder} = ordersSlice.actions; 
