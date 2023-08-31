@@ -1,8 +1,7 @@
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './forgot-password-form.module.css';
-import { useDispatch, useSelector } from "react-redux";
-import { setFieldValue } from "../../../../services/reducers/forgot-password";
-import { resetPassword } from "../../../../services/reducers/forgot-password";
+import { useDispatch } from "react-redux";
+import { forgotPassword } from "../../../../services/reducers/forgot-password";
 import { useNavigate } from "react-router-dom";
 import { openModal } from "../../../../services/reducers/modal";
 import { useState } from "react";
@@ -19,7 +18,7 @@ export default function ForgotPasswordForm() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(resetPassword(email))
+        dispatch(forgotPassword(email))
             .unwrap()
             .then((response) => {
                 if (response.success)

@@ -31,7 +31,7 @@ export const createOrder = (ingredientsIds) => {
         })
 }
 
-export const resetPassword = (email) => {
+export const forgotPassword = (email) => {
     return fetch(`${URL_API}/password-reset`, {
         method: "post",
         headers: {
@@ -40,6 +40,25 @@ export const resetPassword = (email) => {
         },
         body: JSON.stringify({
             email
+        })
+    })
+        .then(checkResponse)
+        .then(data => {
+            if (data?.success) return data;
+            return Promise.reject(data);
+        })
+}
+
+export const resetPassword = (password, token) => {
+    return fetch(`${URL_API}/password-reset/reset`, {
+        method: "post",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            password,
+            token
         })
     })
         .then(checkResponse)

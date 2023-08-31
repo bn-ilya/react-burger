@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { resetPassword as resetPasswordApi } from "../../utils/burger-api";
+import { forgotPassword as forgotPasswordApi } from "../../utils/burger-api";
 
-export const resetPassword = createAsyncThunk(
-    "forgotPassword/resetPassword",
+export const forgotPassword = createAsyncThunk(
+    "forgotPassword/forgotPassword",
     async function (email, { rejectWithValue }) {
         try {
-            const res = await resetPasswordApi(email);
+            const res = await forgotPasswordApi(email);
 
             return res;
         } catch (error) {
@@ -24,14 +24,14 @@ const forgotPasswordSlice = createSlice({
     initialState,
     extraReducers: buider => {
         buider
-            .addCase(resetPassword.pending, (state) => {
+            .addCase(forgotPassword.pending, (state) => {
                 state.forgotPasswordRequest = true;
             })
-            .addCase(resetPassword.fulfilled, (state) => {
+            .addCase(forgotPassword.fulfilled, (state) => {
                 state.forgotPasswordRequest = false
                 state.forgotPasswordFailed = false
             })
-            .addCase(resetPassword.rejected, (state) => {
+            .addCase(forgotPassword.rejected, (state) => {
                 state.forgotPasswordRequest = false
                 state.forgotPasswordFailed = true
             })
