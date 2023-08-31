@@ -3,9 +3,8 @@ import { resetPassword as resetPasswordApi } from "../../utils/burger-api";
 
 export const resetPassword = createAsyncThunk(
     "forgotPassword/resetPassword",
-    async function (_, { rejectWithValue, dispatch, getState }) {
+    async function (email, { rejectWithValue }) {
         try {
-            const { email } = getState().forgotPassword;
             const res = await resetPasswordApi(email);
 
             return res;
@@ -16,7 +15,6 @@ export const resetPassword = createAsyncThunk(
 )
 
 const initialState = {
-    email: "",
     forgotPasswordRequest: false,
     forgotPasswordFailed: false
 }
@@ -24,11 +22,6 @@ const initialState = {
 const forgotPasswordSlice = createSlice({
     name: "forgotPassword",
     initialState,
-    reducers: {
-        setFieldValue: (state, action) => {
-            state[action.payload.field] = action.payload.value
-        }
-    },
     extraReducers: buider => {
         buider
             .addCase(resetPassword.pending, (state) => {

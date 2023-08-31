@@ -1,5 +1,12 @@
+import Header from "../../components/header/header"
+import ContainerPage from "../../components/container-page/container-page";
+import Main from "./main/main"
+
 export default function ResetPasswordPage() {
     return (
-        <>RESET Password Page</>
+        <ContainerPage>
+            <Header />
+            <Main />
+        </ContainerPage>
     )
 }

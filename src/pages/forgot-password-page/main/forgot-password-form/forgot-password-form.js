@@ -5,20 +5,21 @@ import { setFieldValue } from "../../../../services/reducers/forgot-password";
 import { resetPassword } from "../../../../services/reducers/forgot-password";
 import { useNavigate } from "react-router-dom";
 import { openModal } from "../../../../services/reducers/modal";
+import { useState } from "react";
 
 export default function ForgotPasswordForm() {
-    const { email } = useSelector(state => state.forgotPassword)
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const handleInputs = e => {
-        const [value, field] = [e.target.value, e.target.name];
-        dispatch(setFieldValue({ field, value }))
+    const [email, setEmail] = useState('')
+
+    const handleInput = e => {
+        setEmail(e.target.value)
     }
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(resetPassword())
+        dispatch(resetPassword(email))
             .unwrap()
             .then((response) => {
                 if (response.success)
@@ -38,8 +39,7 @@ export default function ForgotPasswordForm() {
                 type={'text'}
                 placeholder={'E-mail'}
                 value={email}
-                onChange={handleInputs}
-                name={'email'}
+                onChange={handleInput}
                 error={false}
                 errorText={'Ошибка'}
                 size={'default'}
