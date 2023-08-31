@@ -17,8 +17,9 @@ export default function Info() {
         const ids = [bunTop?.['_id'], bunBottom?.['_id'], ...ingredients.map(topping => topping['_id'])]
 
         dispatch(createOrder(ids))
+            .unwrap()
             .then(res => {
-                dispatch(openModal({ content: res.payload.order.number, type: 'order' }))
+                dispatch(openModal({ content: res.order.number, type: 'order' }))
             })
             .catch(error => {
                 dispatch(openModal({ content: error.message, type: 'error' }))
