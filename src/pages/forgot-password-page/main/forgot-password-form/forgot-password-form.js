@@ -20,8 +20,11 @@ export default function ForgotPasswordForm() {
         e.preventDefault();
         dispatch(resetPassword())
             .unwrap()
-            .then(() => {
-                navigate('/reset-password', { replace: true })
+            .then((response) => {
+                if (response.success)
+                    navigate('/reset-password', { replace: true })
+                else
+                    throw new Error(response.message)
             })
             .catch(error => {
                 dispatch(openModal({ content: error.message, type: 'error' }))
