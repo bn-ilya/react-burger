@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { LoginPage, ConstructorPage, RegisterPage, ResetPasswordPage, NotFoundPage, ForgotPasswordPage } from '../../pages'
+import { LoginPage, ConstructorPage, RegisterPage, ResetPasswordPage, NotFoundPage, ForgotPasswordPage, ProfilePage} from '../../pages'
 import Modal from '../modal/modal';
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/reset-password' element={<ResetPasswordPage />} />
           <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+          <Route path='/profile' element={<ProfilePage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Router>
