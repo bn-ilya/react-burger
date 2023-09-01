@@ -8,6 +8,7 @@ import modalSlice from './modal';
 import tabsSlice from './tabs';
 import forgotPasswordSlice from './forgot-password';
 import resetPasswordSlice from './reset-password';
+import profileSlice from './profile';
 
 const rootReducer = combineReducers({
     ingredients: ingredientsSlice,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     modal: modalSlice,
     tabs: tabsSlice,
     forgotPassword: forgotPasswordSlice,
-    resetPassword: resetPasswordSlice
+    resetPassword: resetPasswordSlice,
+    profile: profileSlice
 })
 
 export const store = configureStore({
