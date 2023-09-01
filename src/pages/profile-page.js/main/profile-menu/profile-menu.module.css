@@ -4,11 +4,16 @@
     margin-bottom: 80px;
 }
 
-.link {
+.linkActive, .linkInActive {
     display: flex;
     align-items: center;
     width: 100%;
     height: 64px;
+}
+
+.linkInActive:hover {
+    color: #6b6b90;
+    transition: 0.2s ease-out;
 }
 
 .description {
