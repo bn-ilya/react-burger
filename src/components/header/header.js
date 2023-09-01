@@ -1,23 +1,25 @@
 import styles from './header.module.css';
 import { BurgerIcon, ListIcon, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
-import Button from './button/button';
+import Link from './link/link';
+import { useCallback } from 'react';
 
 export default function Header() {
+
     return (
         <header className={styles.header + ' pt-4 pb-4'}>
             <div className={styles.content}>
                 <nav className={styles.navigation}>
                     <ul className={styles.navigationList}>
                         <li>
-                            <Button icon={<BurgerIcon />} label={'Конструктор'}>
+                            <Link iconCb={(type) => <BurgerIcon type={type} />} label={"Конструктор"} to={"/"}>
                                 Конструктор
-                            </Button>
+                            </Link>
                         </li>
                         <li>
-                            <Button icon={<ListIcon />} label={'Лента заказов'}>
+                            <Link iconCb={(type) => <ListIcon type={type} />} label={'Лента заказов'} to={"/undefined"}>
                                 Лента заказов
-                            </Button>
+                            </Link>
                         </li>
                     </ul>
                 </nav>
@@ -25,9 +27,9 @@ export default function Header() {
                     <Logo />
                 </div>
                 <div className={styles.profile}>
-                    <Button icon={<ProfileIcon />} label={'Личный кабинет'}>
+                    <Link iconCb={(type) => <ProfileIcon type={type} />} label={'Личный кабинет'} to={"/profile"}>
                         Личный кабинет
-                    </Button>
+                    </Link>
                 </div>
             </div>
         </header>

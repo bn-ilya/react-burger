@@ -1,3 +1,4 @@
+import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LoginPage, ConstructorPage, RegisterPage, ResetPasswordPage, NotFoundPage, ForgotPasswordPage, ProfilePage} from '../../pages'
 import Modal from '../modal/modal';

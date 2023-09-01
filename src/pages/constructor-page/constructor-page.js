@@ -1,5 +1,3 @@
-// Styles
-import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 // Components
 import Header from '../../components/header/header';
 import Main from './main/main';

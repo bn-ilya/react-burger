@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './profile-form.module.css';
 
 export default function ProfileForm() {
