@@ -17,11 +17,12 @@ export const register = createAsyncThunk(
 
 export const login = createAsyncThunk(
     "profile/login",
-    async function ({email, password}, {rejectWithValue, dispatch}) {
+    async function ({ email, password }, { rejectWithValue, dispatch }) {
         try {
             const res = await loginApi(email, password);
             dispatch(setName(res.user.name))
             dispatch(setEmail(res.user.email));
+            return res;
         } catch (error) {
             return rejectWithValue(error)
         }
@@ -74,4 +75,4 @@ const profileSlice = createSlice({
 })
 
 export default profileSlice.reducer;
-const {setEmail, setName} = profileSlice.actions;
+const { setEmail, setName } = profileSlice.actions;

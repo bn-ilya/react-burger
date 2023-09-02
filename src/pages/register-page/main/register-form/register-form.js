@@ -28,7 +28,6 @@ export default function RegisterForm() {
         } catch (error) {
             dispatch(openModal({ content: error.message, type: 'error' }))
         }
-
     }
 
     return (
