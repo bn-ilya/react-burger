@@ -116,3 +116,26 @@ export const login = (email, password) => {
             return Promise.reject(data)
         })
 }
+
+export const logout = () => {
+    return fetch(`${URL_API}/auth/logout`, {
+        method: "post",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            token: localStorage.getItem('refreshToken'),
+        })
+    })
+    .then(checkResponse)
+        .then(data => {
+            if (data?.success) {
+                localStorage.setItem("accesToken", "");
+                localStorage.setItem("refreshToken", "");
+                return data
+            }
+
+            return Promise.reject(data)
+        })
+}

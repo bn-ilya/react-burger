@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { register as registerApi, login as loginApi } from '../../utils/burger-api';
+import { register as registerApi, login as loginApi, logout as logoutApi } from '../../utils/burger-api';
 
 export const register = createAsyncThunk(
     "profile/register",
@@ -29,6 +29,20 @@ export const login = createAsyncThunk(
     }
 )
 
+export const logout = createAsyncThunk(
+    "profile/logout",
+    async function (_, { rejectWithValue, dispatch }) {
+        try {
+            const res = await logoutApi();
+            dispatch(setName(''))
+            dispatch(setEmail(''));
+            return res;
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
+
 const profileSlice = createSlice({
     name: "profile",
     initialState: {
@@ -38,6 +52,8 @@ const profileSlice = createSlice({
         registerFailed: false,
         loginRequest: false,
         loginFailed: false,
+        logoutRequest: false,
+        logoutFailed: false
     },
     reducers: {
         setName: (state, action) => {
@@ -70,6 +86,17 @@ const profileSlice = createSlice({
             .addCase(login.rejected, (state) => {
                 state.loginRequest = false;
                 state.loginFailed = true
+            })
+            .addCase(logout.pending, (state) => {
+                state.logoutRequest = true
+            })
+            .addCase(logout.fulfilled, (state) => {
+                state.logoutRequest = false;
+                state.logoutFailed = false;
+            })
+            .addCase(logout.rejected, (state) => {
+                state.logoutRequestlogoutRequest = false;
+                state.logoutFailed = true
             })
     }
 })
