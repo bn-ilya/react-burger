@@ -84,7 +84,7 @@ export const register = (email, password, name) => {
         .then(checkResponse)
         .then(data => {
             if (data?.success) {
-                localStorage.setItem("accesToken", data.accessToken.split("Bearer ")[1]);
+                localStorage.setItem("accessToken", data.accessToken.split("Bearer ")[1]);
                 localStorage.setItem("refreshToken", data.refreshToken);
                 return data
             }
@@ -108,7 +108,7 @@ export const login = (email, password) => {
         .then(checkResponse)
         .then(data => {
             if (data?.success) {
-                localStorage.setItem("accesToken", data.accessToken.split("Bearer ")[1]);
+                localStorage.setItem("accessToken", data.accessToken.split("Bearer ")[1]);
                 localStorage.setItem("refreshToken", data.refreshToken);
                 return data
             }
@@ -131,7 +131,7 @@ export const logout = () => {
         .then(checkResponse)
         .then(data => {
             if (data?.success) {
-                localStorage.setItem("accesToken", "");
+                localStorage.setItem("accessToken", "");
                 localStorage.setItem("refreshToken", "");
                 return data
             }
@@ -161,12 +161,21 @@ export const fetchWithRefresh = async (url, options) => {
             const refreshData = await refreshToken();
             if (!refreshData.success) return Promise.reject(refreshData);
             localStorage.setItem("refreshToken", refreshData.refreshToken);
-            localStorage.setItem("accesToken", refreshData.accessToken);
-            options.headers.authorization = refreshData.accessToken;
+            localStorage.setItem("accessToken", refreshData.accessToken);
+            options.headers.authorization = 'Bearer ' + refreshData.accessToken;
             const res = await fetch(url, options);
             return await checkResponse(res);
         } else {
             return Promise.reject(error)
         }
     }
+}
+
+export const getUserData = () => {
+    return fetchWithRefresh(`${URL_API}/auth/user`, {
+        headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: 'Bearer ' + localStorage.getItem("accessToken")
+        }
+    }).then(checkResponse);
 }

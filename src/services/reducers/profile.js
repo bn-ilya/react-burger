@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { register as registerApi, login as loginApi, logout as logoutApi } from '../../utils/burger-api';
+import { register as registerApi, login as loginApi, logout as logoutApi, getUserData as getUserDataApi} from '../../utils/burger-api';
 
 export const register = createAsyncThunk(
     "profile/register",
@@ -43,6 +43,21 @@ export const logout = createAsyncThunk(
     }
 )
 
+
+export const getUserData = createAsyncThunk(
+    "profile/getUserData",
+    async function (_, { rejectWithValue, dispatch }) {
+        try {
+            const res = await getUserDataApi();
+            dispatch(setName(res.user.name));
+            dispatch(setEmail(res.user.email));
+            return res;
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
+
 const profileSlice = createSlice({
     name: "profile",
     initialState: {
@@ -53,7 +68,9 @@ const profileSlice = createSlice({
         loginRequest: false,
         loginFailed: false,
         logoutRequest: false,
-        logoutFailed: false
+        logoutFailed: false,
+        getUserDataRequest: false,
+        getUserDataFailed: false,
     },
     reducers: {
         setName: (state, action) => {
@@ -97,6 +114,17 @@ const profileSlice = createSlice({
             .addCase(logout.rejected, (state) => {
                 state.logoutRequestlogoutRequest = false;
                 state.logoutFailed = true
+            })
+            .addCase(getUserData.pending, (state) => {
+                state.getUserDataRequest = true
+            })
+            .addCase(getUserData.fulfilled, (state) => {
+                state.getUserDataRequest = false;
+                state.getUserDataFailed = false;
+            })
+            .addCase(getUserData.rejected, (state) => {
+                state.getUserDataRequest = false;
+                state.getUserDataFailed = true
             })
     }
 })
