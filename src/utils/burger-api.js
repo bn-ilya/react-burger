@@ -92,3 +92,27 @@ export const register = (email, password, name) => {
             return Promise.reject(data)
         })
 }
+
+export const login = (email, password) => {
+    return fetch(`${URL_API}/auth/login`, {
+        method: "post",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email,
+            password,
+        })
+    })
+    .then(checkResponse)
+        .then(data => {
+            if (data?.success) {
+                localStorage.setItem("accesToken", data.accessToken.split("Bearer ")[1]);
+                localStorage.setItem("refreshToken", data.refreshToken);
+                return data
+            }
+
+            return Promise.reject(data)
+        })
+}

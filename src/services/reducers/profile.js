@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { register as registerApi } from '../../utils/burger-api';
+import { register as registerApi, login as loginApi } from '../../utils/burger-api';
 
 export const register = createAsyncThunk(
     "profile/register",
@@ -15,6 +15,19 @@ export const register = createAsyncThunk(
     }
 )
 
+export const login = createAsyncThunk(
+    "profile/login",
+    async function ({email, password}, {rejectWithValue, dispatch}) {
+        try {
+            const res = await loginApi(email, password);
+            dispatch(setName(res.user.name))
+            dispatch(setEmail(res.user.email));
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
+
 const profileSlice = createSlice({
     name: "profile",
     initialState: {
@@ -22,6 +35,8 @@ const profileSlice = createSlice({
         email: '',
         registerRequest: false,
         registerFailed: false,
+        loginRequest: false,
+        loginFailed: false,
     },
     reducers: {
         setName: (state, action) => {
@@ -43,6 +58,17 @@ const profileSlice = createSlice({
             .addCase(register.rejected, (state) => {
                 state.registerRequest = false;
                 state.registerFailed = true
+            })
+            .addCase(login.pending, (state) => {
+                state.loginRequest = true
+            })
+            .addCase(login.fulfilled, (state) => {
+                state.loginRequest = false;
+                state.loginFailed = false;
+            })
+            .addCase(login.rejected, (state) => {
+                state.loginRequest = false;
+                state.loginFailed = true
             })
     }
 })
