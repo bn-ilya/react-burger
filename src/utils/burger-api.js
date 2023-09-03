@@ -155,14 +155,14 @@ export const refreshToken = () => {
 export const fetchWithRefresh = async (url, options) => {
     try {
         const res = await fetch(url, options);
-        return await res;
+        return await checkResponse(res);
     } catch (error) {
         if (error.message === "jwt expired") {
             const refreshData = await refreshToken();
             if (!refreshData.success) return Promise.reject(refreshData);
             localStorage.setItem("refreshToken", refreshData.refreshToken);
-            localStorage.setItem("accessToken", refreshData.accessToken);
-            options.headers.authorization = 'Bearer ' + refreshData.accessToken;
+            localStorage.setItem("accessToken", refreshData.accessToken.split("Bearer ")[1]);
+            options.headers.authorization = refreshData.accessToken;
             const res = await fetch(url, options);
             return await checkResponse(res);
         } else {
@@ -177,5 +177,5 @@ export const getUserData = () => {
             "Content-Type": "application/json;charset=utf-8",
             Authorization: 'Bearer ' + localStorage.getItem("accessToken")
         }
-    }).then(checkResponse);
+    })
 }
