@@ -10,7 +10,7 @@ import { updateUserData } from "../../../../services/reducers/profile";
 import { openModal } from "../../../../services/reducers/modal";
 
 export default function ProfileForm() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const { request, failed } = useSelector(selectUserDataFetch);
     const { name, email } = useSelector(selectUserData);
     const password = '';
@@ -41,7 +41,7 @@ export default function ProfileForm() {
 
     const save = async () => {
         try {
-            await dispatch(updateUserData({ name: formData.name, email: formData.email, password: formData.password })).unwrap();
+            await dispatch(updateUserData({...formData})).unwrap();
         } catch (error) {
             dispatch(openModal({ content: error.message, type: 'error' }))
         }
