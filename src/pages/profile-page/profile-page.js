@@ -2,8 +2,8 @@ import Header from "../../components/header/header";
 import ContainerPage from "../../components/container-page/container-page";
 import Main from "./main/main";
 import { useDispatch } from 'react-redux';
-import { getUserData } from "../../utils/burger-api";
 import { useEffect } from 'react';
+import { getUserData } from "../../services/reducers/profile";
 
 export default function ProfilePage() {
 
