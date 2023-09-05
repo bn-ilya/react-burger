@@ -5,6 +5,7 @@ import BurgerSpinLoader from '../../../../components/ui/loaders/burger-spin-load
 import { useSelector, useDispatch } from 'react-redux';
 import { createOrder } from '../../../../services/reducers/orders';
 import { openModal } from '../../../../services/reducers/modal';
+import ButtonLoader from '../../../../components/button-loader/button-loader';
 
 export default function Info() {
 
@@ -32,10 +33,9 @@ export default function Info() {
                 <span className='text text_type_digits-medium'>{totalPrice}</span>
                 <CurrencyIcon />
             </div>
-            <Button disabled={orderRequest} loop={true} extraClass={styles.loaderBtn} onClick={handleClick} htmlType="button" type="primary" size="large">
-                {orderRequest && <BurgerSpinLoader type='secondary' />}
+            <ButtonLoader load={orderRequest} loop={true} onClick={handleClick} htmlType="button" type="primary" size="large">
                 <span>Оформить заказ</span>
-            </Button>
+            </ButtonLoader>
         </div>
     )
 }

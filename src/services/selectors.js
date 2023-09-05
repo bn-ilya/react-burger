@@ -17,3 +17,5 @@ export const selectUserDataFetch = createSelector(
     [getUserDataRequest, getUserDataFailed],
     (request, failed) => ({request, failed})
 )
+
+export const selectUpdateUserDataRequest = state => state.profile.updateUserDataRequest;
