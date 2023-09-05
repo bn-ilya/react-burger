@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useState, useEffect } from "react"
 import { selectUserData } from "../../../../../services/selectors";
 import { Input, PasswordInput, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
-
+import InputEdit from '../../../../../components/input-edit/input-edit';
 
 export default function Inputs() {
     const { name, email } = useSelector(selectUserData);
@@ -24,25 +24,17 @@ export default function Inputs() {
         setFormData({ ...formData, name: name, email: email })
     }, [name, email])
 
-    const handleInputClick = e => {
-        console.log(e.target)
-        e.target.disabled = !e.target.disabled;
-    }
-
     return (
         <>
-            <Input
+            <InputEdit
                 placeholder={'Имя'}
                 onChange={handleInputs}
                 name={'name'}
                 value={formData.name}
                 error={false}
-                isIcon={true}
                 icon={'EditIcon'}
                 errorText={'Ошибка'}
                 size={'default'}
-                disabled={true}
-                onIconClick={handleInputClick}
             />
             <EmailInput
                 placeholder={'Логин'}
