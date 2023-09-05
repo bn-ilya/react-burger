@@ -1,5 +1,5 @@
 
-import { Input, PasswordInput, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { PasswordInput, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import InputEdit from '../../../../../components/input-edit/input-edit';
 
 export default function Inputs({formData, setFormData}) {

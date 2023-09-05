@@ -2,8 +2,9 @@ import { selectUserDataFetch } from "../../../../services/selectors";
 import { useSelector } from "react-redux";
 import styles from './profile-form.module.css';
 import Inputs from "./inputs/inputs";
+import Controls from "./controls/controls";
 import { useState, useEffect } from "react"
-import { selectUserData } from "../../../../services/selectors";
+import { selectUserData } from "../../../../services/selectors"; 
 
 export default function ProfileForm() {
     const { request, failed } = useSelector(selectUserDataFetch);
@@ -18,8 +19,8 @@ export default function ProfileForm() {
     const [showControls, setShowControls] = useState(false);
 
     useEffect(() => {
-        setFormData({ ...formData, name: name, email: email })
-    }, [name, email])
+        setFormData({ ...formData, name, email })
+    }, [name, email,])
 
     useEffect(() => {
         if (
@@ -31,28 +32,24 @@ export default function ProfileForm() {
         } else {
             setShowControls(false)
         }
-    }, [formData])
+    }, [formData, name, email, password])
 
-    const Content = function () {
-        if (request) {
-            return <div>Загрузка...</div>
-        } else if (failed) {
-            return <div>Ошибка...</div>
-        } else {
-            return (
-                <>
-                    <Inputs formData={formData} setFormData={setFormData} />
-                    {showControls && <button>Сохранить</button>}
-                </>
-            )
-        }
+    const save = () => {
+
     }
+
+    const cancel = () => {
+        setFormData({name, email, password})
+    }
+
+    if (request) return <div>Загрузка...</div>
+    if (failed) return <div>Ошибка...</div>
 
     return (
         <form className={styles.form}>
             <h1 className={'text text_type_main-medium ' + styles.title}>Вход</h1>
-            <Content />
-
+            <Inputs formData={formData} setFormData={setFormData} />
+            {showControls && <Controls cancel={cancel} />}
         </form>
     )
 }
