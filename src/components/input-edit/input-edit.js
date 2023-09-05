@@ -4,16 +4,16 @@ import { useRef, useState } from "react"
 export default function InputEdit(props) {
 
     const [disabled, setDisabled] = useState(true);
-    const inputRef = useRef()
+    const inputRef = useRef();
 
-    const handleIconClick = e => {
-        setDisabled(false)
-        setTimeout(() => inputRef.current.focus(), 0)
-    }
+    const handleIconClick = () => {
+        setDisabled(false);
+        setTimeout(() => inputRef.current.focus(), 0);
+    };
 
-    const handleBlurInput = e => {
-        setDisabled(true)
-    }
+    const handleBlurInput = () => {
+        setDisabled(true);
+    };
 
     return (
         <Input
