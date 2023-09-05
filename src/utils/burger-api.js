@@ -179,3 +179,18 @@ export const getUserData = () => {
         }
     })
 }
+
+export const updateUserData = (name, email, password) => {
+    return fetchWithRefresh(`${URL_API}/auth/user`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: 'Bearer ' + localStorage.getItem("accessToken") 
+        },
+        body: JSON.stringify({
+           name,
+           email,
+           password
+        })
+    })
+}

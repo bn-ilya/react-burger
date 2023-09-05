@@ -6,6 +6,7 @@ import Controls from "./controls/controls";
 import { useState, useEffect } from "react"
 import { selectUserData } from "../../../../services/selectors";
 import SceletonLoader from "./sceleton-loader/sceleton-loader";
+import { updateUserData } from "../../../../services/reducers/profile";
 import { openModal } from "../../../../services/reducers/modal";
 
 export default function ProfileForm() {
@@ -37,8 +38,9 @@ export default function ProfileForm() {
         }
     }, [formData, name, email, password])
 
-    const save = () => {
-
+    const save = async () => {
+        const res = await dispatch(updateUserData({name: formData.name, email: formData.email, password: formData.password}))
+        console.log(res);
     }
 
     const cancel = () => {
@@ -52,7 +54,7 @@ export default function ProfileForm() {
         <form className={styles.form}>
             <h1 className={'text text_type_main-medium ' + styles.title}>Вход</h1>
             <Inputs formData={formData} setFormData={setFormData} />
-            {showControls && <Controls cancel={cancel} />}
+            {showControls && <Controls cancel={cancel} save={save} />}
         </form>
     )
 }

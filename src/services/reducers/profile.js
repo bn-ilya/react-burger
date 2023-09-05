@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { register as registerApi, login as loginApi, logout as logoutApi, getUserData as getUserDataApi} from '../../utils/burger-api';
+import { register as registerApi, login as loginApi, logout as logoutApi, getUserData as getUserDataApi, updateUserData as updateUserDataApi } from '../../utils/burger-api';
 
 export const register = createAsyncThunk(
     "profile/register",
@@ -57,6 +57,20 @@ export const getUserData = createAsyncThunk(
     }
 )
 
+export const updateUserData = createAsyncThunk(
+    "profile/updateUserData",
+    async function ({ name, email, password }, { rejectWithValue, dispatch }) {
+        try {
+            const res = await updateUserDataApi(name, email, password);
+            dispatch(setName(res.user.name));
+            dispatch(setEmail(res.user.email));
+            return res;
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
+
 const profileSlice = createSlice({
     name: "profile",
     initialState: {
@@ -70,6 +84,8 @@ const profileSlice = createSlice({
         logoutFailed: false,
         getUserDataRequest: false,
         getUserDataFailed: false,
+        updateUserDataRequest: false,
+        updateUserDataFailed: false
     },
     reducers: {
         setName: (state, action) => {
@@ -124,6 +140,17 @@ const profileSlice = createSlice({
             .addCase(getUserData.rejected, (state) => {
                 state.getUserDataRequest = false;
                 state.getUserDataFailed = true
+            })
+            .addCase(updateUserData.pending, (state) => {
+                state.updateUserDataRequest = true
+            })
+            .addCase(updateUserData.fulfilled, (state) => {
+                state.updateUserDataRequest = false;
+                state.updateUserDataFailed = false;
+            })
+            .addCase(updateUserData.rejected, (state) => {
+                state.updateUserDataRequest = false;
+                state.updateUserDataFailed = true
             })
     }
 })
