@@ -3,9 +3,10 @@ import styles from "./controls.module.css";
 import ButtonLoader from "../../../../../components/button-loader/button-loader";
 import { useSelector } from "react-redux";
 import { selectUpdateUserDataRequest } from "../../../../../services/selectors";
+import {memo} from 'react';
 
-export default function Controls({ cancel, save }) {
-
+const Controls = memo(({ cancel }) => {
+    console.log('render controls');
     const updateUserDataRequest = useSelector(selectUpdateUserDataRequest);
 
     return (
@@ -13,9 +14,11 @@ export default function Controls({ cancel, save }) {
             <Button htmlType="button" type="secondary" size="medium" onClick={() => cancel()}>
                 Отмена
             </Button>
-            <ButtonLoader load={updateUserDataRequest} loop={true} onClick={() => save()} htmlType="button" type="primary" size="large">
+            <ButtonLoader load={updateUserDataRequest} loop={true} htmlType="submit" type="primary" size="large">
                 Сохранить
             </ButtonLoader>
         </div >
     )
-}
+})
+
+export default Controls;
