@@ -4,7 +4,8 @@ import styles from './profile-form.module.css';
 import Inputs from "./inputs/inputs";
 import Controls from "./controls/controls";
 import { useState, useEffect } from "react"
-import { selectUserData } from "../../../../services/selectors"; 
+import { selectUserData } from "../../../../services/selectors";
+import SceletonLoader from "./sceleton-loader/sceleton-loader";
 
 export default function ProfileForm() {
     const { request, failed } = useSelector(selectUserDataFetch);
@@ -42,7 +43,7 @@ export default function ProfileForm() {
         setFormData({name, email, password})
     }
 
-    if (request) return <div>Загрузка...</div>
+    if (request) return <SceletonLoader/>
     if (failed) return <div>Ошибка...</div>
 
     return (

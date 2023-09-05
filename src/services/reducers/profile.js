@@ -43,12 +43,12 @@ export const logout = createAsyncThunk(
     }
 )
 
-
 export const getUserData = createAsyncThunk(
     "profile/getUserData",
     async function (_, { rejectWithValue, dispatch }) {
         try {
             const res = await getUserDataApi();
+            await new Promise((resolve) => {setTimeout(()=>resolve(), 3000)})
             dispatch(setName(res.user.name));
             dispatch(setEmail(res.user.email));
             return res;
