@@ -3,7 +3,7 @@ import { useRef, useState } from "react"
 
 export default function InputEdit(props) {
 
-    const [disabled, setDisabled] = useState(true);    
+    const [disabled, setDisabled] = useState(true);
     const inputRef = useRef()
 
     const handleIconClick = e => {
@@ -13,15 +13,8 @@ export default function InputEdit(props) {
 
     return (
         <Input
+            {...props}
             ref={inputRef}
-            placeholder={props.name}
-            onChange={props.onChange}
-            name={props.name}
-            value={props.value}
-            error={false}
-            icon={'EditIcon'}
-            errorText={'Ошибка'}
-            size={'default'}
             disabled={disabled}
             onIconClick={handleIconClick}
         />
