@@ -48,7 +48,6 @@ export const getUserData = createAsyncThunk(
     async function (_, { rejectWithValue, dispatch }) {
         try {
             const res = await getUserDataApi();
-            await new Promise((resolve) => {setTimeout(()=>resolve(), 3000)})
             dispatch(setName(res.user.name));
             dispatch(setEmail(res.user.email));
             return res;

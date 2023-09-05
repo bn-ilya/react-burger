@@ -1,13 +1,15 @@
 import { selectUserDataFetch } from "../../../../services/selectors";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styles from './profile-form.module.css';
 import Inputs from "./inputs/inputs";
 import Controls from "./controls/controls";
 import { useState, useEffect } from "react"
 import { selectUserData } from "../../../../services/selectors";
 import SceletonLoader from "./sceleton-loader/sceleton-loader";
+import { openModal } from "../../../../services/reducers/modal";
 
 export default function ProfileForm() {
+    const dispatch = useDispatch()
     const { request, failed } = useSelector(selectUserDataFetch);
     const { name, email } = useSelector(selectUserData);
     const password = '';
@@ -40,11 +42,11 @@ export default function ProfileForm() {
     }
 
     const cancel = () => {
-        setFormData({name, email, password})
+        setFormData({ name, email, password })
     }
 
-    if (request) return <SceletonLoader/>
-    if (failed) return <div>Ошибка...</div>
+    if (request) return <SceletonLoader />
+    if (failed) dispatch(openModal({ content: "", type: "error" }))
 
     return (
         <form className={styles.form}>
