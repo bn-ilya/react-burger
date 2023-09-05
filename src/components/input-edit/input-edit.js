@@ -7,8 +7,12 @@ export default function InputEdit(props) {
     const inputRef = useRef()
 
     const handleIconClick = e => {
-        setDisabled(!inputRef.current.disabled)
+        setDisabled(false)
         setTimeout(() => inputRef.current.focus(), 0)
+    }
+
+    const handleBlurInput = e => {
+        setDisabled(true)
     }
 
     return (
@@ -17,6 +21,7 @@ export default function InputEdit(props) {
             ref={inputRef}
             disabled={disabled}
             onIconClick={handleIconClick}
+            onBlur={handleBlurInput}
         />
     )
 }
