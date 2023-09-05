@@ -27,6 +27,7 @@ export default function ProfileForm() {
     }, [name, email,])
 
     useEffect(() => {
+        if (request) return;
         if (
             name !== formData.name ||
             email !== formData.email ||
@@ -36,7 +37,7 @@ export default function ProfileForm() {
         } else {
             showControls && setShowControls(false)
         }
-    }, [formData, name, email, password])
+    }, [formData, name, email, password, showControls])
 
     const save = async () => {
         try {
