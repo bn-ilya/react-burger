@@ -10,6 +10,13 @@ export const selectUserData = createSelector(
     }
 );
 
+export const selectIsAuth = createSelector(
+    [selectNameUser, selectEmailUser],
+    (name, email) => {
+        return (!name || !email) ? false : true;
+    }
+)
+
 export const getUserDataRequest = state => state.profile.getUserDataRequest;
 export const getUserDataFailed = state => state.profile.getUserDataFailed;
 

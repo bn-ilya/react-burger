@@ -23,7 +23,7 @@ export default function LoginForm() {
         e.preventDefault();
         try {
             const res = await dispatch(login(formData)).unwrap();
-            if (res.success) navigate('/', { replace: true })
+            navigate('/profile', { replace: true })
         } catch (error) {
             dispatch(openModal({ content: error.message, type: 'error' }))
         }

@@ -24,7 +24,7 @@ export default function RegisterForm() {
         e.preventDefault();
         try {
             const res = await dispatch(register(formData)).unwrap();
-            if (res.success) navigate('/profile', {replace: true})
+            navigate('/profile', {replace: true})
         } catch (error) {
             dispatch(openModal({ content: error.message, type: 'error' }))
         }
@@ -38,6 +38,7 @@ export default function RegisterForm() {
                 placeholder={'Имя'}
                 onChange={handleInputs}
                 name={'name'}
+                value={formData.name}
                 error={false}
                 errorText={'Ошибка'}
                 size={'default'}
@@ -47,6 +48,7 @@ export default function RegisterForm() {
                 placeholder={'E-mail'}
                 onChange={handleInputs}
                 name={'email'}
+                value={formData.email}
                 error={false}
                 errorText={'Ошибка'}
                 size={'default'}
@@ -57,6 +59,7 @@ export default function RegisterForm() {
                 onChange={handleInputs}
                 icon={'ShowIcon'}
                 name={'password'}
+                value={formData.password}
                 error={false}
                 errorText={'Ошибка'}
                 size={'default'}
