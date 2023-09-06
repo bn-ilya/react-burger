@@ -16,15 +16,11 @@ export default function ProfileForm() {
     const password = '';
 
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
+        name: name,
+        email: email,
         password: ''
     })
     const [showControls, setShowControls] = useState(false);
-
-    useEffect(() => {
-        setFormData({ ...formData, name, email })
-    }, [name, email,])
 
     useEffect(() => {
         if (request) return;

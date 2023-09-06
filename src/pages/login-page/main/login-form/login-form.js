@@ -22,7 +22,7 @@ export default function LoginForm() {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            const res = await dispatch(login(formData)).unwrap();
+            await dispatch(login(formData)).unwrap();
             navigate('/profile', { replace: true })
         } catch (error) {
             dispatch(openModal({ content: error.message, type: 'error' }))

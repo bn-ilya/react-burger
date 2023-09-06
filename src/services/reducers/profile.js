@@ -49,12 +49,12 @@ export const logout = createAsyncThunk(
     async function (_, { rejectWithValue, dispatch }) {
         try {
             const res = await logoutApi();
-            dispatch(setName(''))
-            dispatch(setEmail(''));
+            dispatch(setName(initialState.name));
+            dispatch(setEmail(initialState.email));
             return res;
         } catch (error) {
             dispatch(setName(initialState.name));
-            dispatch(setEmail(initialState.name));
+            dispatch(setEmail(initialState.email));
             return rejectWithValue(error)
         }
     }
@@ -70,7 +70,7 @@ export const getUserData = createAsyncThunk(
             return res;
         } catch (error) {
             dispatch(setName(initialState.name));
-            dispatch(setEmail(initialState.name));
+            dispatch(setEmail(initialState.email));
             return rejectWithValue(error)
         }
     }
@@ -115,15 +115,15 @@ const profileSlice = createSlice({
                 state.registerFailed = true
             })
             .addCase(login.pending, (state) => {
-                state.loginRequest = true
+                state.getUserDataRequest = true;
             })
             .addCase(login.fulfilled, (state) => {
-                state.loginRequest = false;
-                state.loginFailed = false;
+                state.getUserDataRequest = false;
+                state.getUserDataFailed = false;
             })
             .addCase(login.rejected, (state) => {
-                state.loginRequest = false;
-                state.loginFailed = true
+                state.getUserDataRequest = false;
+                state.getUserDataFailed = true;
             })
             .addCase(logout.pending, (state) => {
                 state.logoutRequest = true
@@ -133,7 +133,7 @@ const profileSlice = createSlice({
                 state.logoutFailed = false;
             })
             .addCase(logout.rejected, (state) => {
-                state.logoutRequestlogoutRequest = false;
+                state.logoutRequest = false;
                 state.logoutFailed = true
             })
             .addCase(getUserData.pending, (state) => {
@@ -145,7 +145,7 @@ const profileSlice = createSlice({
             })
             .addCase(getUserData.rejected, (state) => {
                 state.getUserDataRequest = false;
-                state.getUserDataFailed = true
+                state.getUserDataFailed = true;
             })
             .addCase(updateUserData.pending, (state) => {
                 state.updateUserDataRequest = true
