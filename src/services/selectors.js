@@ -26,3 +26,5 @@ export const selectUserDataFetch = createSelector(
 )
 
 export const selectUpdateUserDataRequest = state => state.profile.updateUserDataRequest;
+
+export const selectIsForgotPassword = state =>state.forgotPassword.forgotPassword;

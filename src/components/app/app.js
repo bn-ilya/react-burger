@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LoginPage, ConstructorPage, RegisterPage, ResetPasswordPage, NotFoundPage, ForgotPasswordPage, ProfilePage } from '../../pages'
 import Modal from '../modal/modal';
 import ProtectedRouteElement from '../protected-route-element/protected-route-element';
+import ProtectedRouteResetPassword from '../protected-route-reset-password/protected-route-reset-password';
 
 function App() {
   return (
@@ -10,11 +11,11 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<ConstructorPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/reset-password' element={<ResetPasswordPage />} />
-          <Route path='/forgot-password' element={<ForgotPasswordPage />} />
-          <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} />} />
+          <Route path='/login' element={<ProtectedRouteElement element={<LoginPage />} accessAuth={false} />} />
+          <Route path='/register' element={<ProtectedRouteElement element={<RegisterPage />} accessAuth={false} />} />
+          <Route path='/reset-password' element={<ProtectedRouteResetPassword element={<ResetPasswordPage />} accessAuth={false} />} />
+          <Route path='/forgot-password' element={<ProtectedRouteElement element={<ForgotPasswordPage />} accessAuth={false} />} />
+          <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} accessAuth={true} />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Router>

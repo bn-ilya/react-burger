@@ -4,7 +4,7 @@ import { getUserData } from "../../services/reducers/profile";
 import { selectIsAuth } from "../../services/selectors";
 import { Navigate } from "react-router-dom";
 
-export default function ProtectedRouteElement({ element }) {
+export default function ProtectedRouteElement({ element, accessAuth }) {
     const [isUserLoaded, setIsUserLoaded] = useState(false);
     const isAuth = useSelector(selectIsAuth);
     const dispatch = useDispatch();
@@ -19,5 +19,9 @@ export default function ProtectedRouteElement({ element }) {
 
     if (!isUserLoaded) return null;
 
-    return isAuth ? element : <Navigate to={"/login"} replace />
+    if (accessAuth) {
+        return isAuth ? element : <Navigate to={"/login"} replace />;
+    } else {
+        return isAuth ? <Navigate to={"/"} replace /> : element;
+    }
 }

@@ -1,6 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { register as registerApi, login as loginApi, logout as logoutApi, getUserData as getUserDataApi, updateUserData as updateUserDataApi } from '../../utils/burger-api';
 
+const initialState = {
+    name: '',
+    email: '',
+    registerRequest: false,
+    registerFailed: false,
+    loginRequest: false,
+    loginFailed: false,
+    logoutRequest: false,
+    logoutFailed: false,
+    getUserDataRequest: false,
+    getUserDataFailed: false,
+    updateUserDataRequest: false,
+    updateUserDataFailed: false
+}
+
 export const register = createAsyncThunk(
     "profile/register",
     async function ({ email, password, name }, { rejectWithValue, dispatch }) {
@@ -38,6 +53,8 @@ export const logout = createAsyncThunk(
             dispatch(setEmail(''));
             return res;
         } catch (error) {
+            dispatch(setName(initialState.name));
+            dispatch(setEmail(initialState.name));
             return rejectWithValue(error)
         }
     }
@@ -52,6 +69,8 @@ export const getUserData = createAsyncThunk(
             dispatch(setEmail(res.user.email));
             return res;
         } catch (error) {
+            dispatch(setName(initialState.name));
+            dispatch(setEmail(initialState.name));
             return rejectWithValue(error)
         }
     }
@@ -73,20 +92,7 @@ export const updateUserData = createAsyncThunk(
 
 const profileSlice = createSlice({
     name: "profile",
-    initialState: {
-        name: '',
-        email: '',
-        registerRequest: false,
-        registerFailed: false,
-        loginRequest: false,
-        loginFailed: false,
-        logoutRequest: false,
-        logoutFailed: false,
-        getUserDataRequest: false,
-        getUserDataFailed: false,
-        updateUserDataRequest: false,
-        updateUserDataFailed: false
-    },
+    initialState,
     reducers: {
         setName: (state, action) => {
             state.name = action.payload;
