@@ -16,6 +16,7 @@ function App() {
           <Route path='/reset-password' element={<ProtectedRouteResetPassword element={<ResetPasswordPage />} accessAuth={false} />} />
           <Route path='/forgot-password' element={<ProtectedRouteElement element={<ForgotPasswordPage />} accessAuth={false} />} />
           <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} accessAuth={true} />} />
+          <Route path='/ingredients/:id' element={<ConstructorPage />}/>
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Router>
