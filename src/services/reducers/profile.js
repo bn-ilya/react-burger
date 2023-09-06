@@ -4,10 +4,6 @@ import { register as registerApi, login as loginApi, logout as logoutApi, getUse
 const initialState = {
     name: '',
     email: '',
-    registerRequest: false,
-    registerFailed: false,
-    loginRequest: false,
-    loginFailed: false,
     logoutRequest: false,
     logoutFailed: false,
     getUserDataRequest: false,
@@ -104,15 +100,15 @@ const profileSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(register.pending, (state) => {
-                state.registerRequest = true
+                state.getUserDataRequest = true
             })
             .addCase(register.fulfilled, (state) => {
-                state.registerRequest = false;
-                state.registerFailed = false;
+                state.getUserDataRequest = false;
+                state.getUserDataFailed = false;
             })
             .addCase(register.rejected, (state) => {
-                state.registerRequest = false;
-                state.registerFailed = true
+                state.getUserDataRequest = false;
+                state.getUserDataFailed = true
             })
             .addCase(login.pending, (state) => {
                 state.getUserDataRequest = true;
