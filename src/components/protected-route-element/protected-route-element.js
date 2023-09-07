@@ -4,9 +4,11 @@ import { getUserData } from "../../services/reducers/profile";
 import { selectIsAuth } from "../../services/selectors";
 import { Navigate } from "react-router-dom";
 import {PropTypes} from 'prop-types';
+import { useLocation } from "react-router-dom";
 
 export default function ProtectedRouteElement({ element, accessAuth }) {
     const [isUserLoaded, setIsUserLoaded] = useState(false);
+    const location = useLocation();
     const isAuth = useSelector(selectIsAuth);
     const dispatch = useDispatch();
 
@@ -21,7 +23,7 @@ export default function ProtectedRouteElement({ element, accessAuth }) {
     if (!isUserLoaded) return null;
 
     if (accessAuth) {
-        return isAuth ? element : <Navigate to={"/login"} replace />;
+        return isAuth ? element : <Navigate to={"/login"} state={{goBack: location}} replace />;
     } else {
         return isAuth ? <Navigate to={"/"} replace /> : element;
     }

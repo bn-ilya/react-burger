@@ -7,18 +7,20 @@ import { openModal } from "../../../../services/reducers/modal";
 import useFormAndValidation from "../../../../hooks/use-form-and-validation";
 import { selectUserDataRequest } from "../../../../services/selectors";
 import ButtonLoader from "../../../../components/button-loader/button-loader";
+import { useLocation } from "react-router-dom";
 
 export default function LoginForm() {
+    const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const userDataRequest = useSelector(selectUserDataRequest);
-    const { values, errors, isValid, handleChange } = useFormAndValidation()
+    const { values, errors, isValid, handleChange } = useFormAndValidation();
 
     const handleSubmit = async e => {
         e.preventDefault();
         try {
             await dispatch(login(values)).unwrap();
-            navigate('/', { replace: true })
+            location?.state?.goBack ? navigate(location.state.goBack.pathname, { replace: true }) : navigate('/', { replace: true })
         } catch (error) {
             dispatch(openModal({ content: error.message, type: 'error' }))
         }
