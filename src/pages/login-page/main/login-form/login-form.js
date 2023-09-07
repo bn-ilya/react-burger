@@ -1,4 +1,4 @@
-import { PasswordInput, EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { PasswordInput, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './login-form.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../../services/reducers/profile";
