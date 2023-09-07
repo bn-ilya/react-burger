@@ -6,8 +6,10 @@ import { openModal } from '../../../../../services/reducers/modal';
 import { useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd/dist/hooks';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 export default function IngredientCart({ ingredient }) {
+    let location = useLocation();
 
     const [{isDrag}, dragRef] = useDrag({
         type: 'ingredient',
@@ -24,7 +26,7 @@ export default function IngredientCart({ ingredient }) {
     const opacity = isDrag ? 0.5 : 1;
 
     return (
-         <Link to={`/ingredients/${ingredient["_id"]}`} onClick={handlerClick} style={{opacity: opacity}} className={styles.cart} ref={dragRef}>
+         <Link to={`/ingredients/${ingredient["_id"]}`} state={{background: location}} style={{opacity: opacity}} className={styles.cart} ref={dragRef}>
             {ingredient.count && (<Counter count={ingredient.count} />)}
             <div className={styles.image + ' pl-4 pr-4 mb-1'}>
                 <img alt={ingredient.name} src={ingredient.image}></img>

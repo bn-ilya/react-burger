@@ -5,6 +5,7 @@ import { ingredientType } from '../../../../../utils/types';
 import PropTypes from 'prop-types';
 
 const IngredientsCategory = forwardRef((props, ref) => {
+
     return (
         <div >
             <h2 id={props.id} ref={ref} className='text text_type_main-medium mb-6'>

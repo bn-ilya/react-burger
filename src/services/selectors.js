@@ -1,4 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
+import ingredients from "./reducers/ingredients";
 
 export const selectNameUser = state => state.profile.name;
 export const selectEmailUser = state => state.profile.email;
@@ -28,3 +29,15 @@ export const selectUserDataFetch = createSelector(
 export const selectUpdateUserDataRequest = state => state.profile.updateUserDataRequest;
 
 export const selectIsForgotPassword = state =>state.forgotPassword.forgotPassword;
+
+export const selectSauces = state => state.ingredients.sauces;
+export const selectMains = state => state.ingredients.mains;
+export const selectBuns = state => state.ingredients.buns;
+
+export const selectIngredientById = (ingredientId) => createSelector(
+    [selectBuns, selectMains, selectSauces],
+    (buns, mains, sauces) => {
+        const ingredients = [...buns, ...mains, ...sauces];
+        return ingredients.find(ingredient => ingredient['_id'] === ingredientId );
+    }
+)
