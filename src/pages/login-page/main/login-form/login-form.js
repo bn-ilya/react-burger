@@ -1,28 +1,21 @@
 import { useState } from "react"
-import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { PasswordInput, EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './login-form.module.css';
 import { useDispatch } from "react-redux";
 import { login } from "../../../../services/reducers/profile";
 import { useNavigate } from "react-router-dom";
 import { openModal } from "../../../../services/reducers/modal";
+import useFormAndValidation from "../../../../hooks/use-form-and-validation";
 
 export default function LoginForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    })
-
-    const handleInputs = e => {
-        const [value, name] = [e.target.value, e.target.name];
-        setFormData({ ...formData, [name]: value })
-    }
+    const {values, errors, isValid, handleChange} = useFormAndValidation()
 
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await dispatch(login(formData)).unwrap();
+            await dispatch(login(values)).unwrap();
             navigate('/profile', { replace: true })
         } catch (error) {
             dispatch(openModal({ content: error.message, type: 'error' }))
@@ -32,28 +25,27 @@ export default function LoginForm() {
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <h1 className={'text text_type_main-medium ' + styles.title}>Вход</h1>
-            <Input
-                type={'text'}
+            <EmailInput
                 placeholder={'E-mail'}
-                onChange={handleInputs}
+                onChange={handleChange}
                 name={'email'}
-                value={formData.email}
-                error={false}
-                errorText={'Ошибка'}
+                value={values.email ?? ""}
+                error={!!errors.email}
+                errorText={errors.email}
                 size={'default'}
+                required={true}
             />
-            <Input
-                type={'text'}
+            <PasswordInput
                 placeholder={'Пароль'}
-                onChange={handleInputs}
+                onChange={handleChange}
                 icon={'ShowIcon'}
                 name={'password'}
-                value={formData.password}
-                error={false}
-                errorText={'Ошибка'}
+                value={values.password ?? ""}
+                error={!!errors.password}
+                errorText={errors.password}
                 size={'default'}
             />
-            <Button htmlType="submit" type="primary" size="medium">
+            <Button disabled={!isValid} htmlType="submit" type="primary" size="medium">
                 Войти
             </Button>
         </form>
