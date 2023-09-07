@@ -1,30 +1,24 @@
-import { useState } from "react"
-import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
+import { Input, EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useDispatch, useSelector } from "react-redux";
 import styles from './register-form.module.css';
 import { register } from "../../../../services/reducers/profile";
 import { openModal } from "../../../../services/reducers/modal";
 import { useNavigate } from "react-router-dom";
+import useFormAndValidation from "../../../../hooks/use-form-and-validation";
+import ButtonLoader from "../../../../components/button-loader/button-loader";
+import { getUserDataRequest } from "../../../../services/selectors";
 
 export default function RegisterForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: ''
-    })
-
-    const handleInputs = e => {
-        const [value, name] = [e.target.value, e.target.name];
-        setFormData({ ...formData, [name]: value })
-    }
+    const { values, errors, isValid, handleChange } = useFormAndValidation();
+    const userDataRequest = useSelector(getUserDataRequest);
 
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            const res = await dispatch(register(formData)).unwrap();
-            navigate('/profile', {replace: true})
+            await dispatch(register(values)).unwrap();
+            navigate('/profile', { replace: true })
         } catch (error) {
             dispatch(openModal({ content: error.message, type: 'error' }))
         }
@@ -36,37 +30,38 @@ export default function RegisterForm() {
             <Input
                 type={'text'}
                 placeholder={'Имя'}
-                onChange={handleInputs}
+                onChange={handleChange}
                 name={'name'}
-                value={formData.name}
-                error={false}
-                errorText={'Ошибка'}
+                value={values.name ?? ""}
+                error={!!errors.name}
+                errorText={errors.name}
                 size={'default'}
+                required={true}
             />
-            <Input
-                type={'text'}
+            <EmailInput
                 placeholder={'E-mail'}
-                onChange={handleInputs}
+                onChange={handleChange}
                 name={'email'}
-                value={formData.email}
-                error={false}
-                errorText={'Ошибка'}
+                value={values.email ?? ""}
+                error={!!errors.email}
+                errorText={errors.email}
                 size={'default'}
+                required={true}
             />
-            <Input
-                type={'text'}
+            <PasswordInput
                 placeholder={'Пароль'}
-                onChange={handleInputs}
+                onChange={handleChange}
                 icon={'ShowIcon'}
                 name={'password'}
-                value={formData.password}
-                error={false}
-                errorText={'Ошибка'}
+                value={values.password ?? ""}
+                error={!!errors.password}
+                errorText={errors.password}
                 size={'default'}
+                required={true}
             />
-            <Button htmlType="submit" type="primary" size="medium">
+            <ButtonLoader disabled={!isValid} load={userDataRequest} loop={true} htmlType="submit" type="primary" size="medium">
                 Зарегистрироваться
-            </Button>
+            </ButtonLoader>
         </form>
     )
 }
