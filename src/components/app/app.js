@@ -9,9 +9,8 @@ function App() {
     <>
       <Router>
         <RoutesApp />
+        <Modal />
       </Router>
-
-      <Modal />
     </>
   );
 }

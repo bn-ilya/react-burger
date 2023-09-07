@@ -11,7 +11,7 @@ export default function IngredientModal() {
 
     useEffect(()=>{
         ingredient &&
-        dispatch(openModal({ content: ingredient, type: 'viewingIngredient' })) 
+        dispatch(openModal({ content: ingredient, type: 'viewingIngredient', goBack: true })) 
     }, [ingredient])
     return null;
 }

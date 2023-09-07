@@ -28,7 +28,6 @@ export default function RoutesApp() {
                         path='/ingredients/:ingredientId'
                         element={
                             <>
-                                <ConstructorPage />
                                 <IngredientModal />
                             </>
                         }
