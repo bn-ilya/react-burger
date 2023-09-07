@@ -1,9 +1,9 @@
-import styles from './error-request.module.css';
+import styles from './error-request-page.module.css';
 import { CloseIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getIngredients } from '../../../services/reducers/ingredients';
+import { getIngredients } from '../../services/reducers/ingredients';
 import { useDispatch } from 'react-redux';
 
-export default function ErrorRequest() {
+export default function ErrorRequestPage() {
     const dispatch = useDispatch();
     const handleClick = () => {
         dispatch(getIngredients());

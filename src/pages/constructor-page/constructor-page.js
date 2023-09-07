@@ -1,8 +1,8 @@
 // Components
 import Header from '../../components/header/header';
 import Main from './main/main';
-import Loading from './loading/loading';
-import ErrorRequest from './error-request/error-request';
+import LoadingPage from '../../components/loading-page/loading-page';
+import ErrorRequestPage from '../../components/error-request-page/error-request-page';
 import ContainerPage from '../../components/container-page/container-page';
 // Hooks
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,8 +19,8 @@ export default function ConstructorPage() {
         dispatch(getIngredients())
     }, [dispatch])
 
-    if (isFetchIngredients) return (<Loading />);
-    if (isFailedIngredients) return (<ErrorRequest />);
+    if (isFetchIngredients) return (<LoadingPage />);
+    if (isFailedIngredients) return (<ErrorRequestPage />);
 
     return (
         <ContainerPage>

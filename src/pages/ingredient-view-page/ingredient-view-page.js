@@ -1,8 +1,8 @@
 import Header from "../../components/header/header"
 import ContainerPage from "../../components/container-page/container-page";
 import Main from "./main/main";
-import Loading from "../constructor-page/loading/loading";
-import ErrorRequest from "../constructor-page/error-request/error-request";
+import LoadingPage from "../../components/loading-page/loading-page";
+import ErrorRequestPage from "../../components/error-request-page/error-request-page";
 // Hooks
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -20,10 +20,10 @@ export default function IngredientViewPage() {
         dispatch(getIngredients())
     }, [dispatch])
 
-    if (isFetchIngredients) return (<Loading />);
-    if (isFailedIngredients) return (<ErrorRequest />);
+    if (isFetchIngredients) return (<LoadingPage />);
+    if (isFailedIngredients) return (<ErrorRequestPage />);
     if (!isLoadedIngredients) return null;
-    
+
     return (
         <ContainerPage>
             <Header />

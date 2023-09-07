@@ -1,7 +1,7 @@
-import styles from './loading.module.css';
-import BurgerSpinLoader from '../../../components/ui/loaders/burger-spin-loader';
+import styles from './loading-page.module.css';
+import BurgerSpinLoader from '../ui/loaders/burger-spin-loader';
 
-export default function Loading() {
+export default function LoadingPage() {
     return (
         <div className={styles.content}>
             <div className={styles.loaderContainer}>
