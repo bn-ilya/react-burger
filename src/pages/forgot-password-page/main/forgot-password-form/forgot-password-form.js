@@ -1,15 +1,18 @@
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './forgot-password-form.module.css';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { forgotPassword } from "../../../../services/reducers/forgot-password";
 import { useNavigate } from "react-router-dom";
 import { openModal } from "../../../../services/reducers/modal";
 import useFormAndValidation from "../../../../hooks/use-form-and-validation";
+import { selectForgotPasswordRequest } from "../../../../services/selectors";
+import ButtonLoader from "../../../../components/button-loader/button-loader";
 
 export default function ForgotPasswordForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { values, errors, isValid, handleChange } = useFormAndValidation();
+    const forgotPasswordRequest = useSelector(selectForgotPasswordRequest);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,9 +21,9 @@ export default function ForgotPasswordForm() {
             await dispatch(forgotPassword(values.email)).unwrap();
             navigate('/reset-password', { replace: true })
         } catch (error) {
-            dispatch(openModal({ content: error.message, type: 'error' }))
+            dispatch(openModal({ content: error.message, type: 'error' }));
         }
-    }
+    };
 
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -35,9 +38,9 @@ export default function ForgotPasswordForm() {
                 size={'default'}
                 required={true}
             />
-            <Button disabled={!isValid} htmlType="submit" type="primary" size="medium">
+            <ButtonLoader disabled={!isValid} load={forgotPasswordRequest} loop={true} htmlType="submit" type="primary" size="medium">
                 Восстановить
-            </Button>
+            </ButtonLoader>
         </form>
     )
 }

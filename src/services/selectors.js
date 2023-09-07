@@ -47,3 +47,5 @@ export const selectIsLoadedIngredients = createSelector(
         return [...buns, ...mains, ...sauces].length ? true : false;
     }
 )
+
+export const selectForgotPasswordRequest = state => state.forgotPassword.forgotPasswordRequest;
