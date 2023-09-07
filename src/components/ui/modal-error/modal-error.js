@@ -1,5 +1,6 @@
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './modal-error.module.css';
+import { PropTypes } from 'prop-types';
 
 export default function ModalError({ error }) {
 
@@ -16,4 +17,8 @@ export default function ModalError({ error }) {
             </div>
         </>
     )
+}
+
+ModalError.propTypes = {
+    error: PropTypes.string.isRequired
 }

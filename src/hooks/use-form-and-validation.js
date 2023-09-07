@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import {PropTypes} from 'prop-types';
 
 export default function useFormAndValidation(initialValues = null) {
     const [values, setValues] = useState(initialValues ?? {});
@@ -16,7 +17,11 @@ export default function useFormAndValidation(initialValues = null) {
         setValues(newValues);
         setErrors(newErrors);
         setIsValid(newIsValid);
-    })
+    }, [])
 
     return { handleChange, resetForm, values, errors, isValid, setValues, setErrors, setIsValid }
+}
+
+useFormAndValidation.propTypes = {
+    initialValues: PropTypes.object
 }

@@ -1,6 +1,7 @@
 import styles from './order-details.module.css';
 import IconsBackground from '../../../components/ui/icons/icons-background';
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import {PropTypes} from 'prop-types';
 
 export default function OrderDetails({number}) {
     return (
@@ -21,4 +22,10 @@ export default function OrderDetails({number}) {
             </div>
         </div>
     )
+}
+
+OrderDetails.propTypes = {
+    number: PropTypes.oneOfType([
+        PropTypes.string, PropTypes.number
+    ]).isRequired
 }

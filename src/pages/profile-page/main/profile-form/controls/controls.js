@@ -4,6 +4,7 @@ import ButtonLoader from "../../../../../components/button-loader/button-loader"
 import { useSelector } from "react-redux";
 import { selectUpdateUserDataRequest } from "../../../../../services/selectors";
 import { memo } from 'react';
+import {PropTypes} from 'prop-types';
 
 const Controls = memo(({ isValid, cancel }) => {
     const updateUserDataRequest = useSelector(selectUpdateUserDataRequest);
@@ -21,3 +22,8 @@ const Controls = memo(({ isValid, cancel }) => {
 })
 
 export default Controls;
+
+Controls.propTypes = {
+    isValid: PropTypes.bool.isRequired,
+    cancel: PropTypes.func
+}

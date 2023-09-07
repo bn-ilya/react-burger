@@ -43,6 +43,6 @@ export default function IngredientDetails({ ingredient }) {
     )
 }
 
-IngredientDetails.propType = {
+IngredientDetails.propTypes = {
     ingredient: ingredientType
 }

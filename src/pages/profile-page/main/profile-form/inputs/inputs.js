@@ -1,8 +1,9 @@
 
 import { PasswordInput, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import InputEdit from '../../../../../components/input-edit/input-edit';
+import { PropTypes } from 'prop-types';
 
-export default function Inputs({values, errors, handleChange}) {
+export default function Inputs({ values, errors, handleChange }) {
 
     return (
         <>
@@ -37,7 +38,15 @@ export default function Inputs({values, errors, handleChange}) {
                 errorText={errors.password}
                 size={'default'}
             />
-            
+
         </>
     )
+}
+
+Inputs.propTypes = {
+    values: PropTypes.object.isRequired,
+    errors: PropTypes.oneOfType([
+        PropTypes.bool, PropTypes.object
+    ]).isRequired,
+    handleChange: PropTypes.func.isRequired
 }

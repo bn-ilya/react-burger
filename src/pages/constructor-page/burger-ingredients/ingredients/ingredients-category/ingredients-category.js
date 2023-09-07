@@ -27,5 +27,6 @@ export default IngredientsCategory
 
 IngredientsCategory.propTypes = {
     name: PropTypes.string.isRequired,
-    ingredients:  PropTypes.arrayOf(ingredientType)
+    ingredients:  PropTypes.arrayOf(ingredientType).isRequired,
+    id: PropTypes.string.isRequired
 }

@@ -25,5 +25,6 @@ export default function Link({ iconCb, children, label, to }) {
 Link.propTypes = {
     label: PropTypes.string.isRequired,
     children: PropTypes.string.isRequired,
-
+    to: PropTypes.string,
+    iconCb: PropTypes.func
 }
