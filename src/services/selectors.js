@@ -40,3 +40,10 @@ export const selectIngredientById = (ingredientId) => createSelector(
         return ingredients.find(ingredient => ingredient['_id'] === ingredientId );
     }
 )
+
+export const selectIsLoadedIngredients = createSelector(
+    [selectBuns, selectMains, selectSauces],
+    (buns, mains, sauces) => {
+        return [...buns, ...mains, ...sauces].length ? true : false;
+    }
+)
