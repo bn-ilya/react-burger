@@ -1,14 +1,17 @@
-import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { PasswordInput, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./reset-password-form.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { openModal } from "../../../../services/reducers/modal";
 import { resetPassword } from "../../../../services/reducers/reset-password";
 import useFormAndValidation from "../../../../hooks/use-form-and-validation";
+import { selectResetPasswordRequest } from "../../../../services/selectors";
+import ButtonLoader from "../../../../components/button-loader/button-loader";
 
 export default function ResetPasswordForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const resetPasswordRequest = useSelector(selectResetPasswordRequest);
     const { values, errors, isValid, handleChange } = useFormAndValidation();
 
     const handleSubmit = async (e) => {
@@ -46,9 +49,9 @@ export default function ResetPasswordForm() {
                 size={'default'}
                 required={true}
             />
-            <Button disabled={!isValid} htmlType="submit" type="primary" size="medium">
+            <ButtonLoader disabled={!isValid} load={resetPasswordRequest} loop={true} htmlType="submit" type="primary" size="medium">
                 Сохранить
-            </Button>
+            </ButtonLoader>
         </form>
     )
 }

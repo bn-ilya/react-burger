@@ -49,3 +49,4 @@ export const selectIsLoadedIngredients = createSelector(
 )
 
 export const selectForgotPasswordRequest = state => state.forgotPassword.forgotPasswordRequest;
+export const selectResetPasswordRequest = state => state.resetPassword.resetPasswordRequest;
