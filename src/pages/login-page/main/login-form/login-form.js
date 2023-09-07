@@ -43,6 +43,7 @@ export default function LoginForm() {
                 error={!!errors.password}
                 errorText={errors.password}
                 size={'default'}
+                required={true}
             />
             <Button disabled={!isValid} htmlType="submit" type="primary" size="medium">
                 Войти

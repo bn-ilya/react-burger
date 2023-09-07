@@ -8,14 +8,14 @@ import useFormAndValidation from "../../../../hooks/use-form-and-validation";
 
 export default function ForgotPasswordForm() {
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { values, errors, isValid, handleChange } = useFormAndValidation();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         e.stopPropagation();
         try {
-            const res = await dispatch(forgotPassword(values.email)).unwrap();
+            await dispatch(forgotPassword(values.email)).unwrap();
             navigate('/reset-password', { replace: true })
         } catch (error) {
             dispatch(openModal({ content: error.message, type: 'error' }))
@@ -33,6 +33,7 @@ export default function ForgotPasswordForm() {
                 error={!!errors.email}
                 errorText={errors.email}
                 size={'default'}
+                required={true}
             />
             <Button disabled={!isValid} htmlType="submit" type="primary" size="medium">
                 Восстановить
