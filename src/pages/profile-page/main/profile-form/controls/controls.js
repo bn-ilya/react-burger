@@ -5,8 +5,7 @@ import { useSelector } from "react-redux";
 import { selectUpdateUserDataRequest } from "../../../../../services/selectors";
 import {memo} from 'react';
 
-const Controls = memo(({ cancel }) => {
-    console.log('render controls');
+const Controls = memo(({ isValid, cancel }) => {
     const updateUserDataRequest = useSelector(selectUpdateUserDataRequest);
 
     return (
@@ -14,7 +13,7 @@ const Controls = memo(({ cancel }) => {
             <Button htmlType="button" type="secondary" size="medium" onClick={() => cancel()}>
                 Отмена
             </Button>
-            <ButtonLoader load={updateUserDataRequest} loop={true} htmlType="submit" type="primary" size="large">
+            <ButtonLoader disabled={!isValid} load={updateUserDataRequest} loop={true} htmlType="submit" type="primary" size="large">
                 Сохранить
             </ButtonLoader>
         </div >

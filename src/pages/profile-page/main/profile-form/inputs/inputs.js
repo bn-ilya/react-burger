@@ -2,46 +2,39 @@
 import { PasswordInput, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import InputEdit from '../../../../../components/input-edit/input-edit';
 
-export default function Inputs({formData, setFormData}) {
-
-    const handleInputs = e => {
-        e.preventDefault()
-        e.stopPropagation()
-        const [value, name] = [e.target.value, e.target.name];
-        setFormData({ ...formData, [name]: value })
-    }
+export default function Inputs({values, errors, handleChange}) {
 
     return (
         <>
             <InputEdit
                 placeholder={'Имя'}
-                onChange={handleInputs}
+                onChange={handleChange}
                 name={'name'}
-                value={formData.name}
-                error={false}
+                value={values.name ?? ""}
+                error={!!errors.name}
+                errorText={errors.name}
                 icon={'EditIcon'}
-                errorText={'Ошибка'}
                 size={'default'}
             />
             <EmailInput
                 placeholder={'Логин'}
-                onChange={handleInputs}
+                onChange={handleChange}
                 name={'email'}
-                value={formData.email}
-                error={false}
+                value={values.email ?? ""}
+                error={!!errors.email}
+                errorText={errors.email}
                 isIcon={true}
                 icon={'EditIcon'}
-                errorText={'Ошибка'}
                 size={'default'}
             />
             <PasswordInput
                 placeholder={'Пароль'}
-                onChange={handleInputs}
+                onChange={handleChange}
                 icon={'EditIcon'}
                 name={'password'}
-                value={formData.password}
-                error={false}
-                errorText={'Ошибка'}
+                value={values.password ?? ""}
+                error={!!errors.password}
+                errorText={errors.password}
                 size={'default'}
             />
             

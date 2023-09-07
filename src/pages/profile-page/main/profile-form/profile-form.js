@@ -8,6 +8,7 @@ import { selectUserData } from "../../../../services/selectors";
 import SceletonLoader from "./sceleton-loader/sceleton-loader";
 import { updateUserData } from "../../../../services/reducers/profile";
 import { openModal } from "../../../../services/reducers/modal";
+import useFormAndValidation from "../../../../hooks/use-form-and-validation";
 
 
 export default function ProfileForm() {
@@ -16,36 +17,37 @@ export default function ProfileForm() {
     const { name, email } = useSelector(selectUserData);
     const password = '';
 
-    const [formData, setFormData] = useState({
+    const { values, errors, isValid, handleChange, resetForm } = useFormAndValidation({
         name: name,
         email: email,
         password: ''
     })
+
     const [showControls, setShowControls] = useState(false);
 
     useEffect(() => {
         if (request) return;
         if (
-            name !== formData.name ||
-            email !== formData.email ||
-            password !== formData.password
+            name !== values.name ||
+            email !== values.email ||
+            password !== values.password
         ) {
             setShowControls(true)
         } else {
             showControls && setShowControls(false)
         }
-    }, [formData, name, email, password, showControls])
+    }, [values, name, email, password, showControls])
 
     const save = async () => {
         try {
-            await dispatch(updateUserData({...formData})).unwrap();
+            await dispatch(updateUserData(values)).unwrap();
         } catch (error) {
             dispatch(openModal({ content: error.message, type: 'error' }))
         }
     }
 
     const cancel = useCallback(() => {
-        setFormData({ name, email, password })
+        resetForm({ name, email, password })
     }, [name, email, password])
 
     const handleSubmitForm = e => {
@@ -60,8 +62,8 @@ export default function ProfileForm() {
     return (
         <form className={styles.form} onSubmit={handleSubmitForm}>
             <h1 className={'text text_type_main-medium ' + styles.title}>Вход</h1>
-            <Inputs formData={formData} setFormData={setFormData} />
-            {showControls && <Controls cancel={cancel} />}
+            <Inputs values={values}  errors={errors} isValid={isValid} handleChange={handleChange}/>
+            {showControls && <Controls isValid={isValid} cancel={cancel} />}
         </form>
     )
 }
