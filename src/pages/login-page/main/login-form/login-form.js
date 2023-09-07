@@ -18,7 +18,7 @@ export default function LoginForm() {
         e.preventDefault();
         try {
             await dispatch(login(values)).unwrap();
-            navigate('/profile', { replace: true })
+            navigate('/', { replace: true })
         } catch (error) {
             dispatch(openModal({ content: error.message, type: 'error' }))
         }

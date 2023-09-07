@@ -16,7 +16,7 @@ export default function ProfileMenu() {
         e.preventDefault();
         try {
             await dispatch(logout()).unwrap();
-            navigate("/", {replace: true})   
+            navigate("/login", {replace: true})   
         } catch (error) {
             openModal({content: error.message, type: "error"})
         }
