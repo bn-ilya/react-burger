@@ -6,13 +6,13 @@ import { openModal } from "../../../../services/reducers/modal";
 import { useNavigate } from "react-router-dom";
 import useFormAndValidation from "../../../../hooks/use-form-and-validation";
 import ButtonLoader from "../../../../components/button-loader/button-loader";
-import { getUserDataRequest } from "../../../../services/selectors";
+import { selectUserDataRequest } from "../../../../services/selectors";
 
 export default function RegisterForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { values, errors, isValid, handleChange } = useFormAndValidation();
-    const userDataRequest = useSelector(getUserDataRequest);
+    const userDataRequest = useSelector(selectUserDataRequest);
 
     const handleSubmit = async e => {
         e.preventDefault();

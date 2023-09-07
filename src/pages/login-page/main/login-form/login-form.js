@@ -1,15 +1,18 @@
 import { PasswordInput, EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './login-form.module.css';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../../services/reducers/profile";
 import { useNavigate } from "react-router-dom";
 import { openModal } from "../../../../services/reducers/modal";
 import useFormAndValidation from "../../../../hooks/use-form-and-validation";
+import { selectUserDataRequest } from "../../../../services/selectors";
+import ButtonLoader from "../../../../components/button-loader/button-loader";
 
 export default function LoginForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {values, errors, isValid, handleChange} = useFormAndValidation()
+    const userDataRequest = useSelector(selectUserDataRequest);
+    const { values, errors, isValid, handleChange } = useFormAndValidation()
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -45,9 +48,9 @@ export default function LoginForm() {
                 size={'default'}
                 required={true}
             />
-            <Button disabled={!isValid} htmlType="submit" type="primary" size="medium">
+            <ButtonLoader disabled={!isValid} load={userDataRequest} loop={true} htmlType="submit" type="primary" size="medium">
                 Войти
-            </Button>
+            </ButtonLoader>
         </form>
     )
 }

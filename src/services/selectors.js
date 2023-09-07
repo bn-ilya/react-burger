@@ -17,11 +17,11 @@ export const selectIsAuth = createSelector(
     }
 )
 
-export const getUserDataRequest = state => state.profile.getUserDataRequest;
-export const getUserDataFailed = state => state.profile.getUserDataFailed;
+export const selectUserDataRequest = state => state.profile.getUserDataRequest;
+export const selectUserDataFailed = state => state.profile.getUserDataFailed;
 
 export const selectUserDataFetch = createSelector(
-    [getUserDataRequest, getUserDataFailed],
+    [selectUserDataRequest, selectUserDataFailed],
     (request, failed) => ({ request, failed })
 )
 
