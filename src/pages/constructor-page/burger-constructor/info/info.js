@@ -1,7 +1,5 @@
 import styles from './info.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/button';
-import BurgerSpinLoader from '../../../../components/ui/loaders/burger-spin-loader';
 import { useSelector, useDispatch } from 'react-redux';
 import { createOrder } from '../../../../services/reducers/orders';
 import { openModal } from '../../../../services/reducers/modal';

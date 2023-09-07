@@ -15,7 +15,7 @@ export default function ProtectedRouteElement({ element, accessAuth }) {
             setIsUserLoaded(true);
         }
         init()
-    }, [])
+    }, [dispatch])
 
     if (!isUserLoaded) return null;
 

@@ -3,7 +3,7 @@ import styles from "./controls.module.css";
 import ButtonLoader from "../../../../../components/button-loader/button-loader";
 import { useSelector } from "react-redux";
 import { selectUpdateUserDataRequest } from "../../../../../services/selectors";
-import {memo} from 'react';
+import { memo } from 'react';
 
 const Controls = memo(({ isValid, cancel }) => {
     const updateUserDataRequest = useSelector(selectUpdateUserDataRequest);

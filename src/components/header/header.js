@@ -2,7 +2,6 @@ import styles from './header.module.css';
 import { BurgerIcon, ListIcon, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import Link from './link/link';
-import { useCallback } from 'react';
 
 export default function Header() {
 

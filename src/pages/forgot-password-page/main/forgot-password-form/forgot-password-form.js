@@ -1,4 +1,4 @@
-import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './forgot-password-form.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import { forgotPassword } from "../../../../services/reducers/forgot-password";

@@ -36,7 +36,7 @@ export default function ProfileForm() {
         } else {
             showControls && setShowControls(false)
         }
-    }, [values, name, email, password, showControls])
+    }, [values, name, email, password, showControls, request])
 
     const save = async () => {
         try {
@@ -48,7 +48,7 @@ export default function ProfileForm() {
 
     const cancel = useCallback(() => {
         resetForm({ name, email, password })
-    }, [name, email, password])
+    }, [name, email, password, resetForm])
 
     const handleSubmitForm = e => {
         e.preventDefault();
