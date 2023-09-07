@@ -18,6 +18,7 @@ export default function RoutesApp() {
                 <Route path='/reset-password' element={<ProtectedRouteResetPassword element={<ResetPasswordPage />} accessAuth={false} />} />
                 <Route path='/forgot-password' element={<ProtectedRouteElement element={<ForgotPasswordPage />} accessAuth={false} />} />
                 <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} accessAuth={true} />} />
+                <Route path='/profile/orders' element={<ProtectedRouteElement element={<ProfilePage />} accessAuth={true} />} />
                 <Route path='/ingredients/:id' element={<IngredientViewPage />} />
                 <Route path='*' element={<NotFoundPage />} />
             </Routes>

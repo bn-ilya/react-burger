@@ -25,8 +25,8 @@ export default function ProfileMenu() {
     return (
         <div>
             <ul className={styles.list}>
-                <NavLink to="/profile" className={({isActive}) => isActive ? classActive : classInActive}>Профиль</NavLink>
-                <NavLink to="/profile/orders/id" className={({isActive}) => isActive ? classActive : classInActive}>История заказов</NavLink>
+                <NavLink to="/profile" end className={({isActive}) => isActive ? classActive : classInActive}>Профиль</NavLink>
+                <NavLink to="/profile/orders" end className={({isActive}) => isActive ? classActive : classInActive}>История заказов</NavLink>
                 <button onClick={handleLogout} className={classInActive}>Выход</button>
             </ul>
             <span className={"text text_type_main-default " + styles.description}>
