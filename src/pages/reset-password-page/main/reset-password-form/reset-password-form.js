@@ -1,57 +1,52 @@
-import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./reset-password-form.module.css";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { openModal } from "../../../../services/reducers/modal";
-import { useState } from 'react';
-import {resetPassword} from "../../../../services/reducers/reset-password";
+import { resetPassword } from "../../../../services/reducers/reset-password";
+import useFormAndValidation from "../../../../hooks/use-form-and-validation";
 
 export default function ResetPasswordForm() {
-    const dispatch = useDispatch()
-    const [formData, setFormData] = useState({
-        password: '',
-        token: ''
-    })
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { values, errors, isValid, handleChange } = useFormAndValidation();
 
-    const handleInputs = e => {
-        const [value, field] = [e.target.value, e.target.name];
-        setFormData({ ...formData, [field]: value });
-    }
-
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(resetPassword(formData))
-        .unwrap() 
-        .catch(error => {
+        try {
+            await dispatch(resetPassword(values)).unwrap();
+            navigate('/login', { replace: true });
+        } catch (error) {
             dispatch(openModal({ content: error.message, type: 'error' }))
-        })   
-        // .then()
+        }
     }
 
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <h1 className={'text text_type_main-medium ' + styles.title}>Восстановление пароля</h1>
-            <Input
-                type={'text'}
+            <PasswordInput
                 placeholder={'Введите новый пароль'}
-                value={formData.password}
-                onChange={handleInputs}
+                value={values.password ?? ""}
+                onChange={handleChange}
                 name={'password'}
                 icon={'ShowIcon'}
-                error={false}
-                errorText={'Ошибка'}
+                error={!!errors.password}
+                errorText={errors.password}
                 size={'default'}
+                required={true}
             />
             <Input
                 type={'text'}
                 placeholder={'Введите код из письма'}
-                value={formData.token}
-                onChange={handleInputs}
+                value={values.token ?? ""}
+                onChange={handleChange}
                 name={'token'}
-                error={false}
-                errorText={'Ошибка'}
+                error={!!errors.token}
+                errorText={errors.token}
                 size={'default'}
+                required={true}
             />
-            <Button htmlType="submit" type="primary" size="medium">
+            <Button disabled={!isValid} htmlType="submit" type="primary" size="medium">
                 Сохранить
             </Button>
         </form>
