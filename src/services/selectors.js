@@ -1,5 +1,4 @@
 import { createSelector } from "@reduxjs/toolkit";
-import ingredients from "./reducers/ingredients";
 
 export const selectNameUser = state => state.profile.name;
 export const selectEmailUser = state => state.profile.email;

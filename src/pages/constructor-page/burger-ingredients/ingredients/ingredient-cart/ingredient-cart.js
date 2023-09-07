@@ -2,8 +2,6 @@ import styles from './ingredient-cart.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter';
 import { ingredientType } from '../../../../../utils/types';
-import { openModal } from '../../../../../services/reducers/modal';
-import { useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd/dist/hooks';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -18,10 +16,6 @@ export default function IngredientCart({ ingredient }) {
             isDrag: monitor.isDragging()
         })
     })
-    const dispatch = useDispatch();
-    const handlerClick = () => {
-        dispatch(openModal({ content: ingredient, type: 'viewingIngredient' }))
-    }
 
     const opacity = isDrag ? 0.5 : 1;
 

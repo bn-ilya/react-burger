@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 export default function RoutesApp() {
     const location = useLocation();
     const background = location?.state?.background;
-
+    
     return (
         <>
             <Routes location={background || location}>
@@ -27,7 +27,10 @@ export default function RoutesApp() {
                     <Route
                         path='/ingredients/:ingredientId'
                         element={
-                            <IngredientModal />
+                            <>
+                                <ConstructorPage />
+                                <IngredientModal />
+                            </>
                         }
                     />
                 </Routes>
