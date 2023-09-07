@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { forgotPassword } from "../../../../services/reducers/forgot-password";
 import { useNavigate } from "react-router-dom";
 import { openModal } from "../../../../services/reducers/modal";
-import { useState } from "react";
 import useFormAndValidation from "../../../../hooks/use-form-and-validation";
 
 export default function ForgotPasswordForm() {
