@@ -4,17 +4,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createOrder } from '../../../../services/reducers/orders';
 import { openModal } from '../../../../services/reducers/modal';
 import ButtonLoader from '../../../../components/button-loader/button-loader';
+import { selectIsAuth } from '../../../../services/selectors';
+import { useNavigate } from 'react-router-dom';
 
 export default function Info() {
-
+    const isAuth = useSelector(selectIsAuth);
     const dispatch = useDispatch();
     const { ingredients, bunTop, bunBottom } = useSelector(state => state.ingredientsConstructor)
     const orderRequest = useSelector(state => state.orders.orderRequest)
     const totalPrice = useSelector(state => state.totalPrice.totalPrice);
+    const navigate = useNavigate();
 
     const handleClick = () => {
         const ids = [bunTop?.['_id'], bunBottom?.['_id'], ...ingredients.map(topping => topping['_id'])]
-
+        if (!isAuth) {
+            navigate('/login');
+            return;
+        }
         dispatch(createOrder(ids))
             .unwrap()
             .then(res => {
