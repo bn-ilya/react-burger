@@ -154,6 +154,7 @@ export const refreshToken = () => {
 
 export const fetchWithRefresh = async (url, options) => {
     try {
+        if (!localStorage.getItem("accessToken")) return Promise.reject("Токен авторизации не обноружен");
         const res = await fetch(url, options);
         return await checkResponse(res);
     } catch (error) {
@@ -171,7 +172,7 @@ export const fetchWithRefresh = async (url, options) => {
     }
 }
 
-export const getUserData = () => {
+export const getUserData = () => {    
     return fetchWithRefresh(`${URL_API}/auth/user`, {
         headers: {
             "Content-Type": "application/json;charset=utf-8",
