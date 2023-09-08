@@ -6,8 +6,8 @@ import {useEffect} from "react";
 
 export default function IngredientModal() {
     const dispatch = useDispatch();
-    const {ingredientId} = useParams();
-    const ingredient = useSelector(selectIngredientById(ingredientId));
+    const {id} = useParams();
+    const ingredient = useSelector(selectIngredientById(id));
 
     useEffect(()=>{
         ingredient &&
