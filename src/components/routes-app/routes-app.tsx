@@ -1,14 +1,15 @@
+import { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { LoginPage, ConstructorPage, RegisterPage, ResetPasswordPage, NotFoundPage, ForgotPasswordPage, ProfilePage, IngredientViewPage} from '../../pages'
 import ProtectedRouteElement from '../protected-route-element/protected-route-element';
 import ProtectedRouteResetPassword from '../protected-route-reset-password/protected-route-reset-password';
 import IngredientModal from '../../pages/constructor-page/burger-ingredients/ingredients/ingredient-modal/ingredient-modal';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Location } from 'react-router-dom';
 import { home, login, register, resetPassword, forgotPassword, profile, profileOrders, ingredientId, all} from '../../utils/routes';
 
-export default function RoutesApp() {
-    const location = useLocation();
-    const background = location?.state?.background;
+const RoutesApp: FC = () => {
+    const location: Location = useLocation();
+    const background: undefined | Location = location?.state?.background;
     
     return (
         <>
@@ -39,3 +40,5 @@ export default function RoutesApp() {
         </>
     )
 }
+
+export default RoutesApp;
