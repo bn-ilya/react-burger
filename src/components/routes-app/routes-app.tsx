@@ -7,9 +7,11 @@ import IngredientModal from '../../pages/constructor-page/burger-ingredients/ing
 import { useLocation, Location } from 'react-router-dom';
 import { home, login, register, resetPassword, forgotPassword, profile, profileOrders, ingredientId, all} from '../../utils/routes';
 
+type TBackground = undefined | Location;
+
 const RoutesApp: FC = () => {
     const location: Location = useLocation();
-    const background: undefined | Location = location?.state?.background;
+    const background: TBackground = location.state?.background;
     
     return (
         <>
