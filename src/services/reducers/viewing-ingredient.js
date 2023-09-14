@@ -1,21 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    viewingIngredient: {}
-}
+  viewingIngredient: {},
+};
 
 const viewingIngredientSlice = createSlice({
-    name: 'viewingIngredient',
-    initialState,
-    reducers: {
-        setViewingIngredient: (state, action) => {
-            state.viewingIngredient = action.payload
-        },
-        clearViewingIngredient: (state) => {
-            state.viewingIngredient = initialState.viewingIngredient
-        }
-    }
-})
+  name: 'viewingIngredient',
+  initialState,
+  reducers: {
+    setViewingIngredient: (state, action) => {
+      state.viewingIngredient = action.payload;
+    },
+    clearViewingIngredient: (state) => {
+      state.viewingIngredient = initialState.viewingIngredient;
+    },
+  },
+});
 
 export default viewingIngredientSlice.reducer;
-export const { setViewingIngredient, clearViewingIngredient } = viewingIngredientSlice.actions; 
+export const { setViewingIngredient, clearViewingIngredient } =
+  viewingIngredientSlice.actions;

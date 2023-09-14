@@ -1,18 +1,30 @@
+import { PropTypes } from 'prop-types';
+
 import styles from './modal-overlay.module.css';
-import {PropTypes} from 'prop-types';
 
-export default function ModalOverlay({closeModal}) {
+export default function ModalOverlay({ closeModal }) {
+  const handlerClick = (e) => {
+    e.stopPropagation();
+    closeModal();
+  };
 
-    const handlerClick = e => {
-        e.stopPropagation()
-        closeModal()
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === 'Escape') {
+      closeModal();
     }
+  };
 
-    return (
-        <div onClick={handlerClick} className={styles.content}></div>
-    )
+  return (
+    <div
+      role='button'
+      tabIndex={0}
+      onClick={handlerClick}
+      onKeyDown={handleKeyDown}
+      className={styles.content}
+    ></div>
+  );
 }
 
 ModalOverlay.propTypes = {
-    closeModal: PropTypes.func.isRequired
-}
+  closeModal: PropTypes.func.isRequired,
+};
