@@ -34,14 +34,10 @@ export default function IngredientCart({ ingredient }) {
         <img alt={ingredient.name} src={ingredient.image}></img>
       </div>
       <div className={styles.price + ' mb-1'}>
-        <span className='text text_type_digits-default'>
-          {ingredient.price}
-        </span>
+        <span className='text text_type_digits-default'>{ingredient.price}</span>
         <CurrencyIcon />
       </div>
-      <h2 className={styles.name + ' text text_type_main-default'}>
-        {ingredient.name}
-      </h2>
+      <h2 className={styles.name + ' text text_type_main-default'}>{ingredient.name}</h2>
     </Link>
   );
 }

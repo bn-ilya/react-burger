@@ -1,7 +1,4 @@
-import {
-  PasswordInput,
-  Input,
-} from '@ya.praktikum/react-developer-burger-ui-components';
+import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -32,9 +29,7 @@ export default function ResetPasswordForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h1 className={'text text_type_main-medium ' + styles.title}>
-        Восстановление пароля
-      </h1>
+      <h1 className={'text text_type_main-medium ' + styles.title}>Восстановление пароля</h1>
       <PasswordInput
         placeholder={'Введите новый пароль'}
         value={values.password ?? ''}

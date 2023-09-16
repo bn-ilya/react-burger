@@ -9,10 +9,7 @@ import styles from './constructor.module.css';
 
 import DraggableConstructorElement from './draggable-constructor-element/draggable-constructor-element';
 
-import {
-  setCountIngredients,
-  setCountBuns,
-} from '../../../../services/reducers/ingredients';
+import { setCountIngredients, setCountBuns } from '../../../../services/reducers/ingredients';
 import {
   addIngredients,
   setBunBottom,
@@ -24,9 +21,7 @@ import { setTotalPrice } from '../../../../services/reducers/total-price';
 
 export default function Constructor() {
   const dispatch = useDispatch();
-  const { ingredients, bunTop, bunBottom } = useSelector(
-    (state) => state.ingredientsConstructor,
-  );
+  const { ingredients, bunTop, bunBottom } = useSelector((state) => state.ingredientsConstructor);
   const buns = useSelector((state) => state.ingredients.buns);
 
   useEffect(() => {
@@ -42,8 +37,7 @@ export default function Constructor() {
     if (!ingredients) return;
     const ingredientsCount = {};
     ingredients.forEach((ingredient) => {
-      ingredientsCount[ingredient['_id']] =
-        (ingredientsCount[ingredient['_id']] ?? 0) + 1;
+      ingredientsCount[ingredient['_id']] = (ingredientsCount[ingredient['_id']] ?? 0) + 1;
     });
     dispatch(setCountIngredients(ingredientsCount));
   }, [ingredients, dispatch]);

@@ -31,9 +31,7 @@ export default function ForgotPasswordForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h1 className={'text text_type_main-medium ' + styles.title}>
-        Восстановление пароля
-      </h1>
+      <h1 className={'text text_type_main-medium ' + styles.title}>Восстановление пароля</h1>
       <EmailInput
         placeholder={'E-mail'}
         value={values.email ?? ''}

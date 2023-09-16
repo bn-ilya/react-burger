@@ -18,5 +18,4 @@ const viewingIngredientSlice = createSlice({
 });
 
 export default viewingIngredientSlice.reducer;
-export const { setViewingIngredient, clearViewingIngredient } =
-  viewingIngredientSlice.actions;
+export const { setViewingIngredient, clearViewingIngredient } = viewingIngredientSlice.actions;

@@ -14,12 +14,7 @@ const Controls = memo(function Controls({ isValid, cancel }) {
 
   return (
     <div className={styles.content}>
-      <Button
-        htmlType='button'
-        type='secondary'
-        size='medium'
-        onClick={() => cancel()}
-      >
+      <Button htmlType='button' type='secondary' size='medium' onClick={() => cancel()}>
         Отмена
       </Button>
       <ButtonLoader

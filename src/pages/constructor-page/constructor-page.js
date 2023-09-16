@@ -15,12 +15,8 @@ import { getIngredients } from '../../services/reducers/ingredients';
 
 export default function ConstructorPage() {
   const dispatch = useDispatch();
-  const isFetchIngredients = useSelector(
-    (state) => state.ingredients.ingredientsRequest,
-  );
-  const isFailedIngredients = useSelector(
-    (state) => state.ingredients.ingredientsFailed,
-  );
+  const isFetchIngredients = useSelector((state) => state.ingredients.ingredientsRequest);
+  const isFailedIngredients = useSelector((state) => state.ingredients.ingredientsFailed);
 
   useEffect(() => {
     dispatch(getIngredients());

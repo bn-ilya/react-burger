@@ -13,9 +13,7 @@ import { selectIsAuth } from '../../../../services/selectors';
 export default function Info() {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
-  const { ingredients, bunTop, bunBottom } = useSelector(
-    (state) => state.ingredientsConstructor,
-  );
+  const { ingredients, bunTop, bunBottom } = useSelector((state) => state.ingredientsConstructor);
   const orderRequest = useSelector((state) => state.orders.orderRequest);
   const totalPrice = useSelector((state) => state.totalPrice.totalPrice);
   const navigate = useNavigate();

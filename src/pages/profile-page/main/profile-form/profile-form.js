@@ -9,10 +9,7 @@ import SceletonLoader from './sceleton-loader/sceleton-loader';
 import useFormAndValidation from '../../../../hooks/use-form-and-validation';
 import { openModal } from '../../../../services/reducers/modal';
 import { updateUserData } from '../../../../services/reducers/profile';
-import {
-  selectUserData,
-  selectUserDataFetch,
-} from '../../../../services/selectors';
+import { selectUserData, selectUserDataFetch } from '../../../../services/selectors';
 
 export default function ProfileForm() {
   const dispatch = useDispatch();
@@ -20,22 +17,17 @@ export default function ProfileForm() {
   const { name, email } = useSelector(selectUserData);
   const password = '';
 
-  const { values, errors, isValid, handleChange, resetForm } =
-    useFormAndValidation({
-      name: name,
-      email: email,
-      password: '',
-    });
+  const { values, errors, isValid, handleChange, resetForm } = useFormAndValidation({
+    name: name,
+    email: email,
+    password: '',
+  });
 
   const [showControls, setShowControls] = useState(false);
 
   useEffect(() => {
     if (request) return;
-    if (
-      name !== values.name ||
-      email !== values.email ||
-      password !== values.password
-    ) {
+    if (name !== values.name || email !== values.email || password !== values.password) {
       setShowControls(true);
     } else {
       showControls && setShowControls(false);
@@ -66,12 +58,7 @@ export default function ProfileForm() {
   return (
     <form className={styles.form} onSubmit={handleSubmitForm}>
       <h1 className={'text text_type_main-medium ' + styles.title}>Вход</h1>
-      <Inputs
-        values={values}
-        errors={errors}
-        isValid={isValid}
-        handleChange={handleChange}
-      />
+      <Inputs values={values} errors={errors} isValid={isValid} handleChange={handleChange} />
       {showControls && <Controls isValid={isValid} cancel={cancel} />}
     </form>
   );

@@ -8,9 +8,7 @@ export default function LoadingPage() {
       <div className={styles.loaderContainer}>
         <BurgerSpinLoader type={'secondary'} />
         <div>
-          <span className='text text_type_main-medium text_color_inactive'>
-            Загрузка...
-          </span>
+          <span className='text text_type_main-medium text_color_inactive'>Загрузка...</span>
         </div>
       </div>
     </div>

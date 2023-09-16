@@ -32,8 +32,7 @@ export default function Ingredients() {
       },
     ];
     const closestTitle = titlesPositions.reduce(function (prev, curr) {
-      return Math.abs(curr.value - containerPosition) <
-        Math.abs(prev.value - containerPosition)
+      return Math.abs(curr.value - containerPosition) < Math.abs(prev.value - containerPosition)
         ? curr
         : prev;
     });
@@ -47,24 +46,9 @@ export default function Ingredients() {
   return (
     <div className={styles.main} onScroll={scrollHandler}>
       <div className={styles.content}>
-        <IngredientsCategory
-          ref={titleBuns}
-          name='Булки'
-          id='bun'
-          ingredients={buns}
-        />
-        <IngredientsCategory
-          ref={titleSauces}
-          name='Соусы'
-          id='sauce'
-          ingredients={sauces}
-        />
-        <IngredientsCategory
-          ref={titleMains}
-          name='Начинки'
-          id='main'
-          ingredients={mains}
-        />
+        <IngredientsCategory ref={titleBuns} name='Булки' id='bun' ingredients={buns} />
+        <IngredientsCategory ref={titleSauces} name='Соусы' id='sauce' ingredients={sauces} />
+        <IngredientsCategory ref={titleMains} name='Начинки' id='main' ingredients={mains} />
       </div>
     </div>
   );

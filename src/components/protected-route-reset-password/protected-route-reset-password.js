@@ -8,9 +8,5 @@ import ProtectedRouteElement from '../protected-route-element/protected-route-el
 export default function ProtectedRouteResetPassword(props) {
   const isForgotPassword = useSelector(selectIsForgotPassword);
 
-  return isForgotPassword ? (
-    <ProtectedRouteElement {...props} />
-  ) : (
-    <Navigate to={'/'} replace />
-  );
+  return isForgotPassword ? <ProtectedRouteElement {...props} /> : <Navigate to={'/'} replace />;
 }

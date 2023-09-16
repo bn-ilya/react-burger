@@ -1,7 +1,4 @@
-import {
-  CloseIcon,
-  Button,
-} from '@ya.praktikum/react-developer-burger-ui-components';
+import { CloseIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { useDispatch } from 'react-redux';
 

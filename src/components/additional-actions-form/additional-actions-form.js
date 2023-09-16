@@ -9,10 +9,7 @@ export default function AdditionalActionsForm({ additionalActions }) {
   return (
     <div className={styles.content}>
       {additionalActions.map((additionalAction, index) => (
-        <span
-          key={index}
-          className='text text_type_main-default text_color_inactive'
-        >
+        <span key={index} className='text text_type_main-default text_color_inactive'>
           {additionalAction.text}{' '}
           <Link to={additionalAction.link} className={styles.link}>
             {additionalAction.linkText}

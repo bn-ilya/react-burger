@@ -18,9 +18,7 @@ export default function ModalError({ error }) {
             </span>
           </div>
         </div>
-        <div className={'text text_type_main-default ' + styles.errorText}>
-          {error}
-        </div>
+        <div className={'text text_type_main-default ' + styles.errorText}>{error}</div>
       </div>
     </>
   );

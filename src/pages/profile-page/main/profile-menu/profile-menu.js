@@ -11,13 +11,9 @@ import { logout } from '../../../../services/reducers/profile';
 export default function ProfileMenu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const classActive = useMemo(
-    () => styles.linkActive + ' text text_type_main-medium',
-    [],
-  );
+  const classActive = useMemo(() => styles.linkActive + ' text text_type_main-medium', []);
   const classInActive = useMemo(
-    () =>
-      styles.linkInActive + ' text text_type_main-medium text_color_inactive',
+    () => styles.linkInActive + ' text text_type_main-medium text_color_inactive',
     [],
   );
 

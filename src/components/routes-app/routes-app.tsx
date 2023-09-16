@@ -38,54 +38,29 @@ const RoutesApp: FC = () => {
         <Route path={home} element={<ConstructorPage />} />
         <Route
           path={login}
-          element={
-            <ProtectedRouteElement element={<LoginPage />} accessAuth={false} />
-          }
+          element={<ProtectedRouteElement element={<LoginPage />} accessAuth={false} />}
         />
         <Route
           path={register}
-          element={
-            <ProtectedRouteElement
-              element={<RegisterPage />}
-              accessAuth={false}
-            />
-          }
+          element={<ProtectedRouteElement element={<RegisterPage />} accessAuth={false} />}
         />
         <Route
           path={resetPassword}
           element={
-            <ProtectedRouteResetPassword
-              element={<ResetPasswordPage />}
-              accessAuth={false}
-            />
+            <ProtectedRouteResetPassword element={<ResetPasswordPage />} accessAuth={false} />
           }
         />
         <Route
           path={forgotPassword}
-          element={
-            <ProtectedRouteElement
-              element={<ForgotPasswordPage />}
-              accessAuth={false}
-            />
-          }
+          element={<ProtectedRouteElement element={<ForgotPasswordPage />} accessAuth={false} />}
         />
         <Route
           path={profile}
-          element={
-            <ProtectedRouteElement
-              element={<ProfilePage />}
-              accessAuth={true}
-            />
-          }
+          element={<ProtectedRouteElement element={<ProfilePage />} accessAuth={true} />}
         />
         <Route
           path={profileOrders}
-          element={
-            <ProtectedRouteElement
-              element={<ProfilePage />}
-              accessAuth={true}
-            />
-          }
+          element={<ProtectedRouteElement element={<ProfilePage />} accessAuth={true} />}
         />
         <Route path={ingredientId} element={<IngredientViewPage />} />
         <Route path={all} element={<NotFoundPage />} />

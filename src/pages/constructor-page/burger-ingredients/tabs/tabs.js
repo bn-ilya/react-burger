@@ -20,11 +20,7 @@ export default function Tabs() {
       <Tab value='bun' active={activeTab === 'bun'} onClick={handleClickTab}>
         Булки
       </Tab>
-      <Tab
-        value='sauce'
-        active={activeTab === 'sauce'}
-        onClick={handleClickTab}
-      >
+      <Tab value='sauce' active={activeTab === 'sauce'} onClick={handleClickTab}>
         Соусы
       </Tab>
       <Tab value='main' active={activeTab === 'main'} onClick={handleClickTab}>

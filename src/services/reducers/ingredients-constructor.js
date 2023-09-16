@@ -47,11 +47,7 @@ const ingredientsConstructorSlice = createSlice({
     },
     moveIngredients: (state, action) => {
       state.ingredients.splice(action.payload.dragIndex, 1);
-      state.ingredients.splice(
-        action.payload.hoverIndex,
-        0,
-        action.payload.ingredient,
-      );
+      state.ingredients.splice(action.payload.hoverIndex, 0, action.payload.ingredient);
     },
   },
 });

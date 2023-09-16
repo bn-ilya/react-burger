@@ -1,7 +1,4 @@
-import {
-  ConstructorElement,
-  DragIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import PropTypes from 'prop-types';
 import { useRef } from 'react';
@@ -41,8 +38,7 @@ export default function DraggableConstructorElement({ ingredient, index }) {
       }
 
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
-      const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
@@ -85,12 +81,7 @@ export default function DraggableConstructorElement({ ingredient, index }) {
 
   const opacity = isDragging ? 0.5 : 1;
   return (
-    <div
-      className={styled.dragElement}
-      ref={ref}
-      style={{ opacity }}
-      data-handler-id={handlerId}
-    >
+    <div className={styled.dragElement} ref={ref} style={{ opacity }} data-handler-id={handlerId}>
       <DragIcon />
       <ConstructorElement
         text={ingredient.name}

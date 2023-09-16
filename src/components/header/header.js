@@ -15,11 +15,7 @@ export default function Header() {
         <nav className={styles.navigation}>
           <ul className={styles.navigationList}>
             <li>
-              <Link
-                iconCb={(type) => <BurgerIcon type={type} />}
-                label={'Конструктор'}
-                to={'/'}
-              >
+              <Link iconCb={(type) => <BurgerIcon type={type} />} label={'Конструктор'} to={'/'}>
                 Конструктор
               </Link>
             </li>

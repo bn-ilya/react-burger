@@ -33,9 +33,7 @@ export default function RegisterForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h1 className={'text text_type_main-medium ' + styles.title}>
-        Регистрация
-      </h1>
+      <h1 className={'text text_type_main-medium ' + styles.title}>Регистрация</h1>
       <Input
         type={'text'}
         placeholder={'Имя'}

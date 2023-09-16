@@ -24,11 +24,7 @@ export default function ProtectedRouteElement({ element, accessAuth }) {
   if (!isUserLoaded) return null;
 
   if (accessAuth) {
-    return isAuth ? (
-      element
-    ) : (
-      <Navigate to={'/login'} state={{ goBack: location }} replace />
-    );
+    return isAuth ? element : <Navigate to={'/login'} state={{ goBack: location }} replace />;
   } else {
     return isAuth ? <Navigate to={'/'} replace /> : element;
   }
