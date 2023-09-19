@@ -54,3 +54,6 @@ export const selectModal = createSelector(
     return { contentModal, typeModal, isModalOpen, goBack };
   },
 );
+// Ингредиенты
+export const ingredientsRequest = (state) => state.ingredients.ingredientsRequest;
+export const ingredientsFailed = (state) => state.ingredients.ingredientsFailed;
