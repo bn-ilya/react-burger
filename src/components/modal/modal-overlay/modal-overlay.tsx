@@ -1,4 +1,4 @@
-import type { FC, MouseEvent, KeyboardEvent} from 'react';
+import type { FC, MouseEvent, KeyboardEvent } from 'react';
 import IModalOverlayProps from './modal-overlay-props';
 
 import styles from './modal-overlay.module.css';
@@ -23,6 +23,6 @@ const ModalOverlay: FC<IModalOverlayProps> = ({ closeModal }) => {
       className={styles.content}
     ></button>
   );
-}
+};
 
 export default ModalOverlay;

@@ -1,6 +1,6 @@
 // Components
 import { useEffect } from 'react';
-import type {FC} from 'react';
+import type { FC } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/rtk-hooks';
 
 import Main from './main/main';
@@ -32,4 +32,6 @@ const ConstructorPage: FC = () => {
       <Main />
     </ContainerPage>
   );
-}
+};
+
+export default ConstructorPage;

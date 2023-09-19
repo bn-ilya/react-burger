@@ -1,3 +1,3 @@
 export default interface IModalOverlayProps {
-    closeModal ():void;
+  closeModal(): void;
 }

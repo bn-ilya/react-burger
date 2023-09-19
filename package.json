@@ -34,7 +34,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint -c .eslintrc --ext .js,.jsx .",
     "lint:fix": "npm run lint -- --fix",
-    "prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,json}' --config ./.prettierrc.json",
+    "prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,json}' --config ./.prettierrc.json"
   },
   "browserslist": {
     "production": [

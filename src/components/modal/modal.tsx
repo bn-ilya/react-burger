@@ -1,11 +1,10 @@
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import {
   useEffect,
-  useState,
-  type ReactNode,
-  type KeyboardEvent as ReactKeyboardEvent,
+  useState
 } from 'react';
 import { createPortal } from 'react-dom';
+import type { FC, ReactNode, KeyboardEvent as ReactKeyboardEvent, } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -24,7 +23,7 @@ import ModalError from '../ui/modal-error/modal-error';
 
 const modalRoot: HTMLElement | null = document.getElementById('react-modals');
 
-export default function Modal() {
+const Modal: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { contentModal, typeModal, isModalOpen, goBack } = useAppSelector(selectModal);
@@ -71,26 +70,28 @@ export default function Modal() {
     }
   };
 
-  if (modalRoot !== null) {
-    return createPortal(
-      <>
-        <section className={styles.modal}>
-          <div className={styles.content}>
-            <button
-              tabIndex={0}
-              onKeyDown={handleKeyDown}
-              onClick={() => close()}
-              className={styles.close}
-            >
-              <CloseIcon type='primary' />
-            </button>
-            {header && <Header>{header}</Header>}
-            {main}
-          </div>
-        </section>
-        <ModalOverlay closeModal={() => close()} />
-      </>,
-      modalRoot,
-    );
-  }
-}
+  return modalRoot
+    ? createPortal(
+        <>
+          <section className={styles.modal}>
+            <div className={styles.content}>
+              <button
+                tabIndex={0}
+                onKeyDown={handleKeyDown}
+                onClick={() => close()}
+                className={styles.close}
+              >
+                <CloseIcon type='primary' />
+              </button>
+              {header && <Header>{header}</Header>}
+              {main}
+            </div>
+          </section>
+          <ModalOverlay closeModal={() => close()} />
+        </>,
+        modalRoot,
+      )
+    : null;
+};
+
+export default Modal;
