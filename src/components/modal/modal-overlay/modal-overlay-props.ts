@@ -1,3 +1,3 @@
-export default interface ModalOverlayProps {
+export default interface IModalOverlayProps {
     closeModal ():void;
 }

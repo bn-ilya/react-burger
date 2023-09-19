@@ -1,8 +1,8 @@
 import styles from './header.module.css';
-import type HeaderProps from './header-props';
+import type IHeaderProps from './header-props';
 import type { FC } from 'react';
 
-const Header: FC<HeaderProps> = ({ children }) => {
+const Header: FC<IHeaderProps> = ({ children }) => {
   return <div className={styles.content}>{children}</div>;
 }
 
