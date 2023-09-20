@@ -1,7 +1,5 @@
 // Components
 import { useEffect } from 'react';
-import type { FC } from 'react';
-import { useAppSelector, useAppDispatch } from '../../hooks/rtk-hooks';
 
 import Main from './main/main';
 
@@ -9,15 +7,17 @@ import ContainerPage from '../../components/container-page/container-page';
 import ErrorRequestPage from '../../components/error-request-page/error-request-page';
 import Header from '../../components/header/header';
 import LoadingPage from '../../components/loading-page/loading-page';
+import { useAppSelector, useAppDispatch } from '../../hooks/rtk-hooks';
 
 import { getIngredients } from '../../services/reducers/ingredients';
-import { ingredientsRequest } from '../../services/selectors';
-import { ingredientsFailed } from '../../services/selectors';
+import { selectIngredientsRequest, selectIngredientsFailed } from '../../services/selectors';
+
+import type { FC } from 'react';
 
 const ConstructorPage: FC = () => {
   const dispatch = useAppDispatch();
-  const isFetchIngredients = useAppSelector(ingredientsRequest);
-  const isFailedIngredients = useAppSelector(ingredientsFailed);
+  const isFetchIngredients = useAppSelector(selectIngredientsRequest);
+  const isFailedIngredients = useAppSelector(selectIngredientsFailed);
 
   useEffect(() => {
     dispatch(getIngredients());

@@ -2,7 +2,9 @@ import styles from './burger-ingredients.module.css';
 import Ingredients from './ingredients/ingredients';
 import Tabs from './tabs/tabs';
 
-export default function BurgerIngredients() {
+import type { FC } from 'react';
+
+const BurgerIngredients: FC = () => {
   return (
     <section className={styles.content + ' pt-10'}>
       <div className={styles.header}>
@@ -12,4 +14,6 @@ export default function BurgerIngredients() {
       <Ingredients />
     </section>
   );
-}
+};
+
+export default BurgerIngredients;

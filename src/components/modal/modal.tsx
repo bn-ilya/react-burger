@@ -1,10 +1,6 @@
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import {
-  useEffect,
-  useState
-} from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import type { FC, ReactNode, KeyboardEvent as ReactKeyboardEvent, } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -20,6 +16,8 @@ import OrderDetails from '../../pages/constructor-page/order-details/order-detai
 import { closeModal } from '../../services/reducers/modal';
 import { selectModal } from '../../services/selectors';
 import ModalError from '../ui/modal-error/modal-error';
+
+import type { FC, ReactNode, KeyboardEvent as ReactKeyboardEvent } from 'react';
 
 const modalRoot: HTMLElement | null = document.getElementById('react-modals');
 

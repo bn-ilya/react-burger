@@ -55,5 +55,7 @@ export const selectModal = createSelector(
   },
 );
 // Ингредиенты
-export const ingredientsRequest = (state) => state.ingredients.ingredientsRequest;
-export const ingredientsFailed = (state) => state.ingredients.ingredientsFailed;
+export const selectIngredientsRequest = (state) => state.ingredients.ingredientsRequest;
+export const selectIngredientsFailed = (state) => state.ingredients.ingredientsFailed;
+// Tabs
+export const selectActiveTab = (state) => state.tabs.activeTab;
