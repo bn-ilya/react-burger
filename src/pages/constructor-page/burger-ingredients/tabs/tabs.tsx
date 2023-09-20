@@ -1,19 +1,17 @@
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab';
+import Tab from './tab/tab';
 
 import styles from './tabs.module.css';
 
 import { useAppSelector, useAppDispatch } from '../../../../hooks/rtk-hooks';
 import { setActiveTab } from '../../../../services/reducers/tabs';
 import { selectActiveTab } from '../../../../services/selectors';
-import Ingredients from './../ingredients/ingredients';
- 
-type TIngredientsTypes = 'bun' | 'sauce' | 'main' ;
+import { EIngredients } from '../../../../utils/types';
 
 export default function Tabs() {
   const activeTab = useAppSelector(selectActiveTab);
   const dispatch = useAppDispatch();
 
-  function handleClickTab(tab: TIngredientsTypes) :void {
+  function handleClickTab(tab: EIngredients) :void {
     dispatch(setActiveTab);
     const element = document.getElementById(tab);
     element && element.scrollIntoView({ behavior: 'smooth' });
@@ -21,13 +19,13 @@ export default function Tabs() {
 
   return (
     <div className={styles.tabs}>
-      <Tab value='bun' active={activeTab === 'bun'} onClick={(value: string) => handleClickTab(value as TIngredientsTypes)}>
+      <Tab value={EIngredients.BUN} active={activeTab === EIngredients.BUN} onClick={handleClickTab}>
         Булки
       </Tab>
-      <Tab value='sauce' active={activeTab === 'sauce'} onClick={(value: string) => handleClickTab(value as TIngredientsTypes)}>
+      <Tab value={EIngredients.SAUCE} active={activeTab === EIngredients.SAUCE} onClick={handleClickTab}>
         Соусы
       </Tab>
-      <Tab value='main' active={activeTab === 'main'} onClick={(value: string) => handleClickTab(value as TIngredientsTypes)}>
+      <Tab value={EIngredients.MAIN} active={activeTab === EIngredients.MAIN} onClick={handleClickTab}>
         Начинки
       </Tab>
     </div>
