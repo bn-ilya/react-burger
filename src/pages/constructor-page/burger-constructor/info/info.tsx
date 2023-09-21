@@ -1,28 +1,35 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
-import { useSelector, useDispatch } from 'react-redux';
+import { FC } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 import styles from './info.module.css';
 
 import ButtonLoader from '../../../../components/button-loader/button-loader';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
 import { openModal } from '../../../../services/reducers/modal';
 import { createOrder } from '../../../../services/reducers/orders';
-import { selectIsAuth } from '../../../../services/selectors';
+import {
+  selectAllIngredientsConstructor,
+  selectIsAuth,
+  selectOrderRequest,
+  selectTotalPrice,
+} from '../../../../services/selectors';
+import { IIngredient } from '../../../../utils/types';
 
-export default function Info() {
-  const isAuth = useSelector(selectIsAuth);
-  const dispatch = useDispatch();
-  const { ingredients, bunTop, bunBottom } = useSelector((state) => state.ingredientsConstructor);
-  const orderRequest = useSelector((state) => state.orders.orderRequest);
-  const totalPrice = useSelector((state) => state.totalPrice.totalPrice);
+const Info: FC = () => {
+  const isAuth = useAppSelector(selectIsAuth);
+  const dispatch = useAppDispatch();
+  const { ingredients, bunTop, bunBottom } = useAppSelector(selectAllIngredientsConstructor);
+  const orderRequest = useAppSelector(selectOrderRequest);
+  const totalPrice = useAppSelector(selectTotalPrice);
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    const ids = [
-      bunTop?.['_id'],
-      bunBottom?.['_id'],
-      ...ingredients.map((topping) => topping['_id']),
+  const handleClick = (): void => {
+    const ids: Array<number> = [
+      bunTop['_id'],
+      bunBottom['_id'],
+      ...ingredients.map((topping: IIngredient) => topping['_id']),
     ];
     if (!isAuth) {
       navigate('/login');
@@ -42,7 +49,7 @@ export default function Info() {
     <div className={styles.content}>
       <div className={styles.price}>
         <span className='text text_type_digits-medium'>{totalPrice}</span>
-        <CurrencyIcon />
+        <CurrencyIcon type='primary' />
       </div>
       <ButtonLoader
         load={orderRequest}
@@ -56,4 +63,6 @@ export default function Info() {
       </ButtonLoader>
     </div>
   );
-}
+};
+
+export default Info;

@@ -54,8 +54,22 @@ export const selectModal = createSelector(
     return { contentModal, typeModal, isModalOpen, goBack };
   },
 );
-// Ингредиенты
+// Ingredients
 export const selectIngredientsRequest = (state) => state.ingredients.ingredientsRequest;
 export const selectIngredientsFailed = (state) => state.ingredients.ingredientsFailed;
 // Tabs
 export const selectActiveTab = (state) => state.tabs.activeTab;
+// Orders
+export const selectOrderRequest = (state) => state.orders.orderRequest;
+// Total price
+export const selectTotalPrice = (state) => state.totalPrice.totalPrice;
+// IngredientsConstructor
+export const selectIngredientsConstructor = (state) => state.ingredientsConstructor.ingredients;
+export const selectBunTopConstructor = (state) => state.ingredientsConstructor.bunTop;
+export const selectBunBottomConstructor = (state) => state.ingredientsConstructor.bunBottom;
+export const selectAllIngredientsConstructor = createSelector(
+  [selectIngredientsConstructor, selectBunTopConstructor, selectBunBottomConstructor],
+  (ingredients, bunTop, bunBottom) => {
+    return { ingredients, bunTop, bunBottom };
+  },
+);

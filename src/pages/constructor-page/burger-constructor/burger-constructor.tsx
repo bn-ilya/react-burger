@@ -1,8 +1,10 @@
+import { FC } from 'react';
+
 import styles from './burger-constructor.module.css';
 import Constructor from './constructor/constructor';
 import Info from './info/info';
 
-export default function BurgerConstructor() {
+const BurgerConstructor: FC = () => {
   return (
     <section className={styles.content}>
       <div className={styles.main}>
@@ -13,4 +15,6 @@ export default function BurgerConstructor() {
       </div>
     </section>
   );
-}
+};
+
+export default BurgerConstructor;

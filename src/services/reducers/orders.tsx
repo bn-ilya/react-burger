@@ -4,9 +4,9 @@ import { createOrder as createOrderApi } from '../../utils/burger-api';
 
 export const createOrder = createAsyncThunk(
   'orders/createOrder',
-  async function (ids, { rejectWithValue, dispatch }) {
+  async function (ids: Array<number>, { rejectWithValue, dispatch }) {
     try {
-      const res = await createOrderApi(ids);
+      const res: any = await createOrderApi(ids);
       dispatch(addOrder(res));
       return res;
     } catch (error) {
@@ -15,15 +15,17 @@ export const createOrder = createAsyncThunk(
   },
 );
 
+const initialState: any = {
+  orders: [],
+  orderRequest: false,
+  orderFailed: false,
+};
+
 const ordersSlice = createSlice({
   name: 'orders',
-  initialState: {
-    orders: [],
-    orderRequest: false,
-    orderFailed: false,
-  },
+  initialState,
   reducers: {
-    addOrder: (state, action) => {
+    addOrder: (state, action: any) => {
       state.orders.push(action.payload);
     },
   },
