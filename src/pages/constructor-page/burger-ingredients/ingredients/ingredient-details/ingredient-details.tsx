@@ -1,16 +1,16 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC, useEffect } from 'react';
 
+import { useAppDispatch } from './../../../../../hooks/rtk-hooks';
+import { IIngredientsDetails } from './ingredient-details-props';
 import styles from './ingredient-details.module.css';
 
 import {
   setViewingIngredient,
   clearViewingIngredient,
 } from '../../../../../services/reducers/viewing-ingredient';
-import { ingredientType } from '../../../../../utils/types';
 
-export default function IngredientDetails({ ingredient }) {
-  const dispatch = useDispatch();
+const IngredientDetails: FC<IIngredientsDetails> = ({ ingredient }) => {
+  const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(setViewingIngredient(ingredient));
 
@@ -53,8 +53,6 @@ export default function IngredientDetails({ ingredient }) {
       </div>
     </div>
   );
-}
-
-IngredientDetails.propTypes = {
-  ingredient: ingredientType,
 };
+
+export default IngredientDetails;

@@ -1,14 +1,15 @@
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons';
+import { FC } from 'react';
 
 import { useDrag } from 'react-dnd/dist/hooks';
 import { Link, useLocation } from 'react-router-dom';
 
+import { IIngredientCartProps } from './ingredient-cart-props';
+
 import styles from './ingredient-cart.module.css';
 
-import { ingredientType } from '../../../../../utils/types';
-
-export default function IngredientCart({ ingredient }) {
+const IngredientCart: FC<IIngredientCartProps> = ({ ingredient }) => {
   const location = useLocation();
 
   const [{ isDrag }, dragRef] = useDrag({
@@ -19,7 +20,7 @@ export default function IngredientCart({ ingredient }) {
     }),
   });
 
-  const opacity = isDrag ? 0.5 : 1;
+  const opacity: number = isDrag ? 0.5 : 1;
 
   return (
     <Link
@@ -35,13 +36,11 @@ export default function IngredientCart({ ingredient }) {
       </div>
       <div className={styles.price + ' mb-1'}>
         <span className='text text_type_digits-default'>{ingredient.price}</span>
-        <CurrencyIcon />
+        <CurrencyIcon type='primary' />
       </div>
       <h2 className={styles.name + ' text text_type_main-default'}>{ingredient.name}</h2>
     </Link>
   );
-}
-
-IngredientCart.propTypes = {
-  ingredient: ingredientType,
 };
+
+export default IngredientCart;

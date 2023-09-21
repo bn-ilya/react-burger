@@ -12,7 +12,6 @@ import {
   moveIngredients,
   removeIngredient,
 } from '../../../../../services/reducers/ingredients-constructor';
-import { ingredientType } from '../../../../../utils/types';
 
 export default function DraggableConstructorElement({ ingredient, index }) {
   const dispatch = useDispatch();
@@ -92,8 +91,3 @@ export default function DraggableConstructorElement({ ingredient, index }) {
     </div>
   );
 }
-
-DraggableConstructorElement.propTypes = {
-  ingredient: ingredientType,
-  index: PropTypes.number.isRequired,
-};
