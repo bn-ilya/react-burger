@@ -15,7 +15,6 @@ import {
   selectOrderRequest,
   selectTotalPrice,
 } from '../../../../services/selectors';
-import { IIngredient } from '../../../../utils/types';
 
 const Info: FC = () => {
   const isAuth = useAppSelector(selectIsAuth);

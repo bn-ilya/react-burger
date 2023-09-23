@@ -2,8 +2,6 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from './reducers';
 
-import { IIngredient } from '../utils/types';
-
 export const selectNameUser = (state: RootState) => state.profile.name;
 export const selectEmailUser = (state: RootState) => state.profile.email;
 
