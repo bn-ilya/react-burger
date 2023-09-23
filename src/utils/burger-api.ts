@@ -1,10 +1,12 @@
+import { IError } from './types';
+
 const URL_API = 'https://norma.nomoreparties.space/api';
 
-const checkResponse = (res) => {
+const checkResponse = (res: Response) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
-export const request = (url, options = null) => {
+export const request = (url: string, options: RequestInit) => {
   return fetch(url, options)
     .then(checkResponse)
     .then((data) => {
@@ -13,12 +15,7 @@ export const request = (url, options = null) => {
     });
 };
 
-export const getIngredients = async () => {
-  const res = await request(`${URL_API}/ingredients`);
-  return res.data;
-};
-
-export const createOrder = async (ingredientsIds) => {
+export const createOrder = async (ingredientsIds: Array<string>) => {
   const res = await request(`${URL_API}/orders`, {
     method: 'post',
     headers: {
@@ -33,7 +30,7 @@ export const createOrder = async (ingredientsIds) => {
   return { name: res.name, order: res.order };
 };
 
-export const forgotPassword = async (email) => {
+export const forgotPassword = async (email: string) => {
   const res = await request(`${URL_API}/password-reset`, {
     method: 'post',
     headers: {
@@ -47,7 +44,7 @@ export const forgotPassword = async (email) => {
   return res;
 };
 
-export const resetPassword = async (password, token) => {
+export const resetPassword = async (password: string, token: string) => {
   const res = await request(`${URL_API}/password-reset/reset`, {
     method: 'post',
     headers: {
@@ -62,7 +59,7 @@ export const resetPassword = async (password, token) => {
   return res;
 };
 
-export const register = async (email, password, name) => {
+export const register = async (email: string, password: string, name: string) => {
   const res = await request(`${URL_API}/auth/register`, {
     method: 'post',
     headers: {
@@ -81,7 +78,7 @@ export const register = async (email, password, name) => {
   return res;
 };
 
-export const login = async (email, password) => {
+export const login = async (email: string, password: string) => {
   const res = await request(`${URL_API}/auth/login`, {
     method: 'post',
     headers: {
@@ -114,7 +111,7 @@ export const logout = async () => {
   return res;
 };
 
-export const refreshToken = async () => {
+export const refreshToken = async (): Promise<any> => {
   await request(`${URL_API}/auth/token`, {
     method: 'POST',
     headers: {
@@ -126,19 +123,20 @@ export const refreshToken = async () => {
   });
 };
 
-export const fetchWithRefresh = async (url, options) => {
+export const fetchWithRefresh = async (url: string, options: RequestInit) => {
   try {
     if (!localStorage.getItem('accessToken'))
       return Promise.reject('Токен авторизации не обноружен');
     const res = await request(url, options);
     return res;
   } catch (error) {
-    if (error.message === 'jwt expired') {
+    const errorObject = error as IError;
+    if (errorObject.message === 'jwt expired') {
       const refreshData = await refreshToken();
       if (!refreshData.success) return Promise.reject(refreshData);
       localStorage.setItem('refreshToken', refreshData.refreshToken);
       localStorage.setItem('accessToken', refreshData.accessToken.split('Bearer ')[1]);
-      options.headers.Authorization = refreshData.accessToken;
+      options.headers = { Authorization: refreshData.accessToken };
       const res = await request(url, options);
       return res;
     } else {
@@ -156,7 +154,7 @@ export const getUserData = () => {
   });
 };
 
-export const updateUserData = (name, email, password) => {
+export const updateUserData = (name: string, email: string, password: string) => {
   return fetchWithRefresh(`${URL_API}/auth/user`, {
     method: 'PATCH',
     headers: {
