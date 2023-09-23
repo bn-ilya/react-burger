@@ -1,17 +1,18 @@
-import { PropTypes } from 'prop-types';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect, FC } from 'react';
 
 import { Navigate, useLocation } from 'react-router-dom';
 
+import { IProtectedRouteElement } from './protected-route-element-props';
+
+import { useAppDispatch, useAppSelector } from '../../hooks/rtk-hooks';
 import { getUserData } from '../../services/reducers/profile';
 import { selectIsAuth } from '../../services/selectors';
 
-export default function ProtectedRouteElement({ element, accessAuth }) {
+const ProtectedRouteElement: FC<IProtectedRouteElement> = ({ element, accessAuth }) => {
   const [isUserLoaded, setIsUserLoaded] = useState(false);
   const location = useLocation();
-  const isAuth = useSelector(selectIsAuth);
-  const dispatch = useDispatch();
+  const isAuth = useAppSelector(selectIsAuth);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const init = async () => {
@@ -28,9 +29,6 @@ export default function ProtectedRouteElement({ element, accessAuth }) {
   } else {
     return isAuth ? <Navigate to={'/'} replace /> : element;
   }
-}
-
-ProtectedRouteElement.propTypes = {
-  element: PropTypes.element.isRequired,
-  accessAuth: PropTypes.bool.isRequired,
 };
+
+export default ProtectedRouteElement;
