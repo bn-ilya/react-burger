@@ -25,11 +25,12 @@ const Info: FC = () => {
   const totalPrice = useAppSelector(selectTotalPrice);
   const navigate = useNavigate();
 
-  const handleClick = (): void => {
-    const ids: Array<number> = [
+  const handleClick = (): void | null => {
+    if (!bunTop || !bunBottom) return null;
+    const ids: Array<string> = [
       bunTop['_id'],
       bunBottom['_id'],
-      ...ingredients.map((topping: IIngredient) => topping['_id']),
+      ...ingredients.map((topping) => topping['_id']),
     ];
     if (!isAuth) {
       navigate('/login');

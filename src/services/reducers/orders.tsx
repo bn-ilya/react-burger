@@ -4,7 +4,7 @@ import { createOrder as createOrderApi } from '../../utils/burger-api';
 
 export const createOrder = createAsyncThunk(
   'orders/createOrder',
-  async function (ids: Array<number>, { rejectWithValue, dispatch }) {
+  async function (ids: Array<string>, { rejectWithValue, dispatch }) {
     try {
       const res: any = await createOrderApi(ids);
       dispatch(addOrder(res));

@@ -1,4 +1,4 @@
 export interface ITitles {
-    node: HTMLHeadingElement,
-    topPosition: number
+  node: HTMLHeadingElement;
+  topPosition: number;
 }

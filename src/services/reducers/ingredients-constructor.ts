@@ -1,12 +1,27 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice, nanoid, type PayloadAction } from '@reduxjs/toolkit';
+
+import { IIngredient } from '../../utils/types';
+
+interface IIngredientConstructor extends IIngredient {
+  uniqueId: string;
+  index?: number;
+}
+
+interface IInitialState {
+  ingredients: Array<IIngredientConstructor>;
+  bunTop: IIngredient | null;
+  bunBottom: IIngredient | null;
+}
+
+const initialState: IInitialState = {
+  ingredients: [],
+  bunTop: null,
+  bunBottom: null,
+};
 
 const ingredientsConstructorSlice = createSlice({
   name: 'ingredientsConstructor',
-  initialState: {
-    ingredients: [],
-    bunTop: null,
-    bunBottom: null,
-  },
+  initialState,
   reducers: {
     setIngredients: (state, action) => {
       state.ingredients = action.payload;
@@ -18,15 +33,12 @@ const ingredientsConstructorSlice = createSlice({
       state.bunBottom = action.payload;
     },
     addIngredients: {
-      reducer: (state, action) => {
-        state.ingredients.push({
-          ...action.payload.ingredient,
-          uniqueId: action.payload.uniqueId,
-        });
+      reducer: (state, action: PayloadAction<IIngredientConstructor>) => {
+        state.ingredients.push(action.payload);
       },
-      prepare: (ingredient) => {
+      prepare: (ingredient: IIngredient) => {
         const uniqueId = nanoid();
-        return { payload: { ingredient, uniqueId } };
+        return { payload: { ...ingredient, uniqueId } };
       },
     },
     removeIngredient: (state, action) => {
@@ -42,6 +54,7 @@ const ingredientsConstructorSlice = createSlice({
     },
     sortedIngredients: (state) => {
       state.ingredients.sort((a, b) => {
+        if (!a.index || !b.index) return 0;
         return a.index - b.index;
       });
     },
@@ -62,5 +75,4 @@ export const {
   updateIndexIngredients,
   moveIngredients,
   sortedIngredients,
-  changeIndexIngredients,
 } = ingredientsConstructorSlice.actions;

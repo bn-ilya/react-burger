@@ -39,6 +39,7 @@ const Modal: FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    if (!typeModal || !contentModal) return;
     switch (typeModal) {
       case 'viewingIngredient':
         setHeader(<span className='text text_type_main-large'>Детали ингредиента</span>);
