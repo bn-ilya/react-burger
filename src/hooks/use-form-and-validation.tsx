@@ -1,15 +1,10 @@
-import { ChangeEvent, KeyboardEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 
-interface IValues {
-  [key: string]: string;
-}
-interface IErrors {
-  [key: string]: string;
-}
+import { IErrorsForm, IValuesForm } from '../utils/types';
 
-const useFormAndValidation = (initialValues: IValues = {}) => {
-  const [values, setValues] = useState<IValues>(initialValues ?? {});
-  const [errors, setErrors] = useState<IErrors>({});
+const useFormAndValidation = (initialValues: IValuesForm = {}) => {
+  const [values, setValues] = useState<IValuesForm>(initialValues ?? {});
+  const [errors, setErrors] = useState<IErrorsForm>({});
   const [isValid, setIsValid] = useState<boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

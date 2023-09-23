@@ -1,6 +1,6 @@
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { FormEvent } from 'react';
+import { FC, FormEvent } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ import { openModal } from '../../../../services/reducers/modal';
 import { selectForgotPasswordRequest } from '../../../../services/selectors';
 import { IError } from '../../../../utils/types';
 
-const ForgotPasswordForm = () => {
+const ForgotPasswordForm: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { values, isValid, handleChange } = useFormAndValidation();

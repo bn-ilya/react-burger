@@ -1,7 +1,6 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { PropTypes } from 'prop-types';
-import { memo } from 'react';
+import { FC, memo } from 'react';
 import { useSelector } from 'react-redux';
 
 import styles from './controls.module.css';
@@ -9,7 +8,12 @@ import styles from './controls.module.css';
 import ButtonLoader from '../../../../../components/button-loader/button-loader';
 import { selectUpdateUserDataRequest } from '../../../../../services/selectors';
 
-const Controls = memo(function Controls({ isValid, cancel }) {
+interface ControlsProps {
+  isValid: boolean;
+  cancel: () => void;
+}
+
+const Controls: FC<ControlsProps> = memo(function Controls({ isValid, cancel }) {
   const updateUserDataRequest = useSelector(selectUpdateUserDataRequest);
 
   return (
@@ -32,8 +36,3 @@ const Controls = memo(function Controls({ isValid, cancel }) {
 });
 
 export default Controls;
-
-Controls.propTypes = {
-  isValid: PropTypes.bool.isRequired,
-  cancel: PropTypes.func,
-};

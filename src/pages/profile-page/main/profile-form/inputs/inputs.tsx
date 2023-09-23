@@ -1,10 +1,12 @@
 import { PasswordInput, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { PropTypes } from 'prop-types';
+import { FC } from 'react';
+
+import { IInputsProps } from './inputs-props';
 
 import InputEdit from '../../../../../components/input-edit/input-edit';
 
-export default function Inputs({ values, errors, handleChange }) {
+const Inputs: FC<IInputsProps> = ({ values, errors, handleChange }) => {
   return (
     <>
       <InputEdit
@@ -22,10 +24,7 @@ export default function Inputs({ values, errors, handleChange }) {
         onChange={handleChange}
         name={'email'}
         value={values.email ?? ''}
-        error={!!errors.email}
-        errorText={errors.email}
         isIcon={true}
-        icon={'EditIcon'}
         size={'default'}
       />
       <PasswordInput
@@ -34,16 +33,10 @@ export default function Inputs({ values, errors, handleChange }) {
         icon={'EditIcon'}
         name={'password'}
         value={values.password ?? ''}
-        error={!!errors.password}
-        errorText={errors.password}
         size={'default'}
       />
     </>
   );
-}
-
-Inputs.propTypes = {
-  values: PropTypes.object.isRequired,
-  errors: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
-  handleChange: PropTypes.func.isRequired,
 };
+
+export default Inputs;

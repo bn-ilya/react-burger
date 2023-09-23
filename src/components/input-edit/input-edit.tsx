@@ -1,9 +1,10 @@
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { FC, useRef, useState } from 'react';
+import { ComponentProps, FC, useRef, useState } from 'react';
 
-const InputEdit: FC<typeof Input> = (props) => {
+type TInputEdit = ComponentProps<typeof Input>;
+
+const InputEdit: FC<TInputEdit> = ({ value, onChange, ...props }) => {
   const [disabled, setDisabled] = useState(true);
-  const [value, setValue] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleIconClick = () => {
@@ -24,7 +25,7 @@ const InputEdit: FC<typeof Input> = (props) => {
       onIconClick={handleIconClick}
       onBlur={handleBlurInput}
       value={value}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={onChange}
       {...props}
     />
   );

@@ -53,3 +53,11 @@ export interface IAdditionalAction {
 export interface IError {
   message: string;
 }
+
+export interface IValuesForm {
+  [key: string]: string;
+}
+
+export interface IErrorsForm {
+  [key: string]: string;
+}
