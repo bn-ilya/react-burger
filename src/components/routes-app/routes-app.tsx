@@ -12,17 +12,7 @@ import {
   IngredientViewPage,
 } from '../../pages';
 import IngredientModal from '../../pages/constructor-page/burger-ingredients/ingredients/ingredient-modal/ingredient-modal';
-import {
-  home,
-  login,
-  register,
-  resetPassword,
-  forgotPassword,
-  profile,
-  profileOrders,
-  ingredientId,
-  all,
-} from '../../utils/routes';
+import { ERoutes } from '../../utils/types';
 import ProtectedRouteElement from '../protected-route-element/protected-route-element';
 import ProtectedRouteResetPassword from '../protected-route-reset-password/protected-route-reset-password';
 
@@ -35,41 +25,41 @@ const RoutesApp: FC = () => {
   return (
     <>
       <Routes location={background || location}>
-        <Route path={home} element={<ConstructorPage />} />
+        <Route path={ERoutes.home} element={<ConstructorPage />} />
         <Route
-          path={login}
+          path={ERoutes.login}
           element={<ProtectedRouteElement element={<LoginPage />} accessAuth={false} />}
         />
         <Route
-          path={register}
+          path={ERoutes.register}
           element={<ProtectedRouteElement element={<RegisterPage />} accessAuth={false} />}
         />
         <Route
-          path={resetPassword}
+          path={ERoutes.resetPassword}
           element={
             <ProtectedRouteResetPassword element={<ResetPasswordPage />} accessAuth={false} />
           }
         />
         <Route
-          path={forgotPassword}
+          path={ERoutes.forgotPassword}
           element={<ProtectedRouteElement element={<ForgotPasswordPage />} accessAuth={false} />}
         />
         <Route
-          path={profile}
+          path={ERoutes.profile}
           element={<ProtectedRouteElement element={<ProfilePage />} accessAuth={true} />}
         />
         <Route
-          path={profileOrders}
+          path={ERoutes.profileOrders}
           element={<ProtectedRouteElement element={<ProfilePage />} accessAuth={true} />}
         />
-        <Route path={ingredientId} element={<IngredientViewPage />} />
-        <Route path={all} element={<NotFoundPage />} />
+        <Route path={ERoutes.ingredientId} element={<IngredientViewPage />} />
+        <Route path={ERoutes.all} element={<NotFoundPage />} />
       </Routes>
 
       {background && (
         <Routes>
           <Route
-            path={ingredientId}
+            path={ERoutes.ingredientId}
             element={
               <>
                 <IngredientModal />

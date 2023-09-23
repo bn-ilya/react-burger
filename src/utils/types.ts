@@ -4,6 +4,18 @@ export enum EIngredients {
   MAIN = 'main',
 }
 
+export enum ERoutes {
+  home = '/',
+  login = '/login',
+  register = '/register',
+  resetPassword = '/reset-password',
+  forgotPassword = '/forgot-password',
+  profile = '/profile',
+  profileOrders = '/profile/orders',
+  ingredientId = '/ingredients/:id',
+  all = '*',
+}
+
 export interface IIngredient {
   _id: string;
   name: string;
