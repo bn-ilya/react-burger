@@ -1,11 +1,6 @@
 import { createSlice, nanoid, type PayloadAction } from '@reduxjs/toolkit';
 
-import { IIngredient } from '../../utils/types';
-
-interface IIngredientConstructor extends IIngredient {
-  uniqueId: string;
-  index?: number;
-}
+import { IIngredient, IIngredientConstructor } from '../../utils/types';
 
 interface IInitialState {
   ingredients: Array<IIngredientConstructor>;

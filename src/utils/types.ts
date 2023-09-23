@@ -22,12 +22,10 @@ export interface IIngredient {
   count?: number;
 }
 
-export const modalHeaderType = PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-  PropTypes.element,
-  PropTypes.node,
-]);
+export interface IIngredientConstructor extends IIngredient {
+  uniqueId: string;
+  index?: number;
+}
 
 export const additionalAction = PropTypes.shape({
   text: PropTypes.string.isRequired,
