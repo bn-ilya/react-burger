@@ -9,6 +9,8 @@ import { FC } from 'react';
 import styles from './header.module.css';
 import Link from './link/link';
 
+import { TIconTypes } from '../../utils/types';
+
 const Header: FC = () => {
   return (
     <header className={styles.header + ' pt-4 pb-4'}>
@@ -36,7 +38,7 @@ const Header: FC = () => {
         </div>
         <div className={styles.profile}>
           <Link
-            iconCb={(type) => <ProfileIcon type={type} />}
+            iconCb={(type: TIconTypes) => <ProfileIcon type={type} />}
             label={'Личный кабинет'}
             to={'/profile'}
           >

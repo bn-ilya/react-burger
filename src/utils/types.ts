@@ -61,3 +61,5 @@ export interface IValuesForm {
 export interface IErrorsForm {
   [key: string]: string;
 }
+
+export type TIconTypes = 'secondary' | 'primary' | 'error' | 'success';
