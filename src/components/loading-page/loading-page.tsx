@@ -1,8 +1,10 @@
+import { FC } from 'react';
+
 import styles from './loading-page.module.css';
 
 import BurgerSpinLoader from '../ui/loaders/burger-spin-loader';
 
-export default function LoadingPage() {
+const LoadingPage: FC = () => {
   return (
     <div className={styles.content}>
       <div className={styles.loaderContainer}>
@@ -13,4 +15,6 @@ export default function LoadingPage() {
       </div>
     </div>
   );
-}
+};
+
+export default LoadingPage;
