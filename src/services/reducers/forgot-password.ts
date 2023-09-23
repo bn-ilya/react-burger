@@ -4,7 +4,7 @@ import { forgotPassword as forgotPasswordApi } from '../../utils/burger-api';
 
 export const forgotPassword = createAsyncThunk(
   'forgotPassword/forgotPassword',
-  async function (email, { rejectWithValue, dispatch }) {
+  async function (email: any, { rejectWithValue, dispatch }) {
     try {
       const res = await forgotPasswordApi(email);
       dispatch(setForgotPassword(true));

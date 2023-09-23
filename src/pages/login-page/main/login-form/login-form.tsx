@@ -11,10 +11,7 @@ import useFormAndValidation from '../../../../hooks/use-form-and-validation';
 import { openModal } from '../../../../services/reducers/modal';
 import { login } from '../../../../services/reducers/profile';
 import { selectUserDataRequest } from '../../../../services/selectors';
-
-interface IError {
-  message: string;
-}
+import { IError } from '../../../../utils/types';
 
 const LoginForm = () => {
   const location = useLocation();

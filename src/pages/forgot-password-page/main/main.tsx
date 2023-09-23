@@ -1,9 +1,11 @@
+import { FC } from 'react';
+
 import ForgotPasswordForm from './forgot-password-form/forgot-password-form';
 import styles from './main.module.css';
 
 import AdditionalActionsForm from '../../../components/additional-actions-form/additional-actions-form';
 
-export default function Main() {
+const Main: FC = () => {
   const additionalActions = [{ text: 'Вспомнили пароль?', link: '/login', linkText: 'Войти' }];
 
   return (
@@ -12,4 +14,6 @@ export default function Main() {
       <AdditionalActionsForm additionalActions={additionalActions} />
     </div>
   );
-}
+};
+
+export default Main;

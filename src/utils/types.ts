@@ -49,3 +49,7 @@ export interface IAdditionalAction {
   link: string;
   linkText: string;
 }
+
+export interface IError {
+  message: string;
+}

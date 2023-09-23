@@ -1,31 +1,34 @@
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { FormEvent } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 import styles from './forgot-password-form.module.css';
 
 import ButtonLoader from '../../../../components/button-loader/button-loader';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
 import useFormAndValidation from '../../../../hooks/use-form-and-validation';
 import { forgotPassword } from '../../../../services/reducers/forgot-password';
 import { openModal } from '../../../../services/reducers/modal';
 import { selectForgotPasswordRequest } from '../../../../services/selectors';
+import { IError } from '../../../../utils/types';
 
-export default function ForgotPasswordForm() {
-  const dispatch = useDispatch();
+const ForgotPasswordForm = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { values, errors, isValid, handleChange } = useFormAndValidation();
-  const forgotPasswordRequest = useSelector(selectForgotPasswordRequest);
+  const { values, isValid, handleChange } = useFormAndValidation();
+  const forgotPasswordRequest = useAppSelector(selectForgotPasswordRequest);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
     try {
       await dispatch(forgotPassword(values.email)).unwrap();
       navigate('/reset-password', { replace: true });
     } catch (error) {
-      dispatch(openModal({ content: error.message, type: 'error' }));
+      const errorObject = error as IError;
+      dispatch(openModal({ content: errorObject.message, type: 'error' }));
     }
   };
 
@@ -37,8 +40,6 @@ export default function ForgotPasswordForm() {
         value={values.email ?? ''}
         name='email'
         onChange={handleChange}
-        error={!!errors.email}
-        errorText={errors.email}
         size={'default'}
         required={true}
       />
@@ -54,4 +55,6 @@ export default function ForgotPasswordForm() {
       </ButtonLoader>
     </form>
   );
-}
+};
+
+export default ForgotPasswordForm;
