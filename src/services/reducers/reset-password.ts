@@ -4,7 +4,7 @@ import { resetPassword as resetPasswordApi } from '../../utils/burger-api';
 
 export const resetPassword = createAsyncThunk(
   'resetPassword/resetPassword',
-  async function ({ password, token }, { rejectWithValue }) {
+  async function ({ password, token }: any, { rejectWithValue }) {
     try {
       const res = await resetPasswordApi(password, token);
 

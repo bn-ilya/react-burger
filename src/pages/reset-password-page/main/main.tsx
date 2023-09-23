@@ -1,10 +1,15 @@
+import { FC } from 'react';
+
 import styles from './main.module.css';
 import ResetPasswordForm from './reset-password-form/reset-password-form';
 
 import AdditionalActionsForm from '../../../components/additional-actions-form/additional-actions-form';
+import { IAdditionalAction } from '../../../utils/types';
 
-export default function Main() {
-  const additionalActions = [{ text: 'Вспомнили пароль?', link: '/login', linkText: 'Войти' }];
+const Main: FC = () => {
+  const additionalActions: Array<IAdditionalAction> = [
+    { text: 'Вспомнили пароль?', link: '/login', linkText: 'Войти' },
+  ];
 
   return (
     <div className={styles.content}>
@@ -12,4 +17,6 @@ export default function Main() {
       <AdditionalActionsForm additionalActions={additionalActions} />
     </div>
   );
-}
+};
+
+export default Main;
