@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from '../../../../../hooks/rtk-hooks';
 
 import { openModal } from '../../../../../services/reducers/modal';
 import { selectIngredientById } from '../../../../../services/selectors';
 
 export default function IngredientModal() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { id } = useParams();
-  const ingredient = useSelector(selectIngredientById(id));
+  const ingredient = useAppSelector(selectIngredientById(id));
 
   useEffect(() => {
     ingredient &&
