@@ -4,7 +4,7 @@ import ContainerPage from '../../components/container-page/container-page';
 import Header from '../../components/header/header';
 import NotFoundImg from '../../images/404.png';
 
-export default function NotFoundPage() {
+const NotFoundPage = () => {
   return (
     <ContainerPage>
       <Header />
@@ -13,4 +13,6 @@ export default function NotFoundPage() {
       </div>
     </ContainerPage>
   );
-}
+};
+
+export default NotFoundPage;
