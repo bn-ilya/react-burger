@@ -1,11 +1,13 @@
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { PropTypes } from 'prop-types';
 
+import { FC } from 'react';
+
+import { IOrderDetailsProps } from './order-details-props';
 import styles from './order-details.module.css';
 
 import IconsBackground from '../../../components/ui/icons/icons-background';
 
-export default function OrderDetails({ number }) {
+const OrderDetails: FC<IOrderDetailsProps> = ({ number }) => {
   return (
     <div className={styles.content}>
       <div className={styles.info}>
@@ -14,7 +16,7 @@ export default function OrderDetails({ number }) {
       </div>
       <div className={styles.doneLabel}>
         <div className={styles.doneIcon}>
-          <CheckMarkIcon />
+          <CheckMarkIcon type='primary' />
         </div>
         <IconsBackground />
       </div>
@@ -26,8 +28,6 @@ export default function OrderDetails({ number }) {
       </div>
     </div>
   );
-}
-
-OrderDetails.propTypes = {
-  number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
+
+export default OrderDetails;
