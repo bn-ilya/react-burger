@@ -1,4 +1,6 @@
-export default function IconsBackground() {
+import { FC } from 'react';
+
+const IconsBackground: FC = () => {
   return (
     <svg
       width='107'
@@ -65,4 +67,6 @@ export default function IconsBackground() {
       </defs>
     </svg>
   );
-}
+};
+
+export default IconsBackground;
