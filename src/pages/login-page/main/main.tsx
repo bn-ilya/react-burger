@@ -1,10 +1,13 @@
+import { FC } from 'react';
+
 import LoginForm from './login-form/login-form';
 import styles from './main.module.css';
 
 import AdditionalActionsForm from '../../../components/additional-actions-form/additional-actions-form';
+import { IAdditionalAction } from '../../../utils/types';
 
-export default function Main() {
-  const additionalActions = [
+const Main: FC = () => {
+  const additionalActions: Array<IAdditionalAction> = [
     {
       text: 'Вы новый пользователь?',
       link: '/register',
@@ -23,4 +26,6 @@ export default function Main() {
       <AdditionalActionsForm additionalActions={additionalActions} />
     </div>
   );
-}
+};
+
+export default Main;

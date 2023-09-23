@@ -1,9 +1,5 @@
-interface additionalAction {
-  text: string;
-  link: string;
-  linkText: string;
-}
+import { IAdditionalAction } from '../../utils/types';
 
 export interface IAdditionalActionsForm {
-  additionalActions: Array<additionalAction>;
+  additionalActions: Array<IAdditionalAction>;
 }

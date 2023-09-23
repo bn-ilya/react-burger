@@ -43,3 +43,9 @@ export interface IProtectedRouteElement {
   element: ReactElement;
   accessAuth: boolean;
 }
+
+export interface IAdditionalAction {
+  text: string;
+  link: string;
+  linkText: string;
+}

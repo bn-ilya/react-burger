@@ -1,25 +1,29 @@
 import { PasswordInput, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { useDispatch, useSelector } from 'react-redux';
-
+import { FormEvent } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import styles from './login-form.module.css';
 
 import ButtonLoader from '../../../../components/button-loader/button-loader';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
 import useFormAndValidation from '../../../../hooks/use-form-and-validation';
 import { openModal } from '../../../../services/reducers/modal';
 import { login } from '../../../../services/reducers/profile';
 import { selectUserDataRequest } from '../../../../services/selectors';
 
-export default function LoginForm() {
-  const location = useLocation();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const userDataRequest = useSelector(selectUserDataRequest);
-  const { values, errors, isValid, handleChange } = useFormAndValidation();
+interface IError {
+  message: string;
+}
 
-  const handleSubmit = async (e) => {
+const LoginForm = () => {
+  const location = useLocation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const userDataRequest = useAppSelector(selectUserDataRequest);
+  const { values, isValid, handleChange } = useFormAndValidation();
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await dispatch(login(values)).unwrap();
@@ -27,20 +31,19 @@ export default function LoginForm() {
         ? navigate(location.state.goBack.pathname, { replace: true })
         : navigate('/', { replace: true });
     } catch (error) {
-      dispatch(openModal({ content: error.message, type: 'error' }));
+      const errorObject = error as IError;
+      dispatch(openModal({ content: errorObject.message, type: 'error' }));
     }
   };
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h1 className={'text text_type_main-medium ' + styles.title}>Вход</h1>
+      <h1 className={'text text_type_main-medium'}>Вход</h1>
       <EmailInput
         placeholder={'E-mail'}
         onChange={handleChange}
         name={'email'}
         value={values.email ?? ''}
-        error={!!errors.email}
-        errorText={errors.email}
         size={'default'}
         required={true}
       />
@@ -50,8 +53,6 @@ export default function LoginForm() {
         icon={'ShowIcon'}
         name={'password'}
         value={values.password ?? ''}
-        error={!!errors.password}
-        errorText={errors.password}
         size={'default'}
         required={true}
       />
@@ -67,4 +68,6 @@ export default function LoginForm() {
       </ButtonLoader>
     </form>
   );
-}
+};
+
+export default LoginForm;

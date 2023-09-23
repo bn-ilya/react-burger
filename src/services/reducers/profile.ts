@@ -21,7 +21,7 @@ const initialState = {
 
 export const register = createAsyncThunk(
   'profile/register',
-  async function ({ email, password, name }, { rejectWithValue, dispatch }) {
+  async function ({ email, password, name }: any, { rejectWithValue, dispatch }) {
     try {
       const res = await registerApi(email, password, name);
       dispatch(setName(res.user.name));
@@ -35,7 +35,7 @@ export const register = createAsyncThunk(
 
 export const login = createAsyncThunk(
   'profile/login',
-  async function ({ email, password }, { rejectWithValue, dispatch }) {
+  async function ({ email, password }: any, { rejectWithValue, dispatch }) {
     try {
       const res = await loginApi(email, password);
       dispatch(setName(res.user.name));
@@ -81,7 +81,7 @@ export const getUserData = createAsyncThunk(
 
 export const updateUserData = createAsyncThunk(
   'profile/updateUserData',
-  async function ({ name, email, password }, { rejectWithValue, dispatch }) {
+  async function ({ name, email, password }: any, { rejectWithValue, dispatch }) {
     try {
       const res = await updateUserDataApi(name, email, password);
       dispatch(setName(res.user.name));
