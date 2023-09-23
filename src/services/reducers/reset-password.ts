@@ -23,6 +23,7 @@ const initialState = {
 const resetPasswordSlice = createSlice({
   name: 'resetPassword',
   initialState,
+  reducers: {},
   extraReducers: (buider) => {
     buider
       .addCase(resetPassword.pending, (state) => {
