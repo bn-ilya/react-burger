@@ -1,13 +1,14 @@
 import { CloseIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { useDispatch } from 'react-redux';
+import { FC } from 'react';
 
 import styles from './error-request-page.module.css';
 
+import { useAppDispatch } from '../../hooks/rtk-hooks';
 import { getIngredients } from '../../services/reducers/ingredients';
 
-export default function ErrorRequestPage() {
-  const dispatch = useDispatch();
+const ErrorRequestPage: FC = () => {
+  const dispatch = useAppDispatch();
   const handleClick = () => {
     dispatch(getIngredients());
   };
@@ -36,4 +37,6 @@ export default function ErrorRequestPage() {
       </div>
     </div>
   );
-}
+};
+
+export default ErrorRequestPage;
