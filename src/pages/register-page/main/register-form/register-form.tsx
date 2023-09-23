@@ -3,31 +3,34 @@ import {
   EmailInput,
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC, FormEvent } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 import styles from './register-form.module.css';
 
 import ButtonLoader from '../../../../components/button-loader/button-loader';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
 import useFormAndValidation from '../../../../hooks/use-form-and-validation';
 import { openModal } from '../../../../services/reducers/modal';
 import { register } from '../../../../services/reducers/profile';
 import { selectUserDataRequest } from '../../../../services/selectors';
+import { IError } from '../../../../utils/types';
 
-export default function RegisterForm() {
-  const dispatch = useDispatch();
+const RegisterForm: FC = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { values, errors, isValid, handleChange } = useFormAndValidation();
-  const userDataRequest = useSelector(selectUserDataRequest);
+  const userDataRequest = useAppSelector(selectUserDataRequest);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await dispatch(register(values)).unwrap();
       navigate('/profile', { replace: true });
     } catch (error) {
-      dispatch(openModal({ content: error.message, type: 'error' }));
+      const errorObject = error as IError;
+      dispatch(openModal({ content: errorObject.message, type: 'error' }));
     }
   };
 
@@ -50,8 +53,6 @@ export default function RegisterForm() {
         onChange={handleChange}
         name={'email'}
         value={values.email ?? ''}
-        error={!!errors.email}
-        errorText={errors.email}
         size={'default'}
         required={true}
       />
@@ -61,9 +62,6 @@ export default function RegisterForm() {
         icon={'ShowIcon'}
         name={'password'}
         value={values.password ?? ''}
-        error={!!errors.password}
-        errorText={errors.password}
-        size={'default'}
         required={true}
       />
       <ButtonLoader
@@ -78,4 +76,6 @@ export default function RegisterForm() {
       </ButtonLoader>
     </form>
   );
-}
+};
+
+export default RegisterForm;
