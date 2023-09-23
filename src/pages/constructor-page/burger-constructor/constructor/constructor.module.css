@@ -17,6 +17,16 @@
   scroll-snap-type: y mandatory;
 }
 
+.elements-empty {
+  border: 2px dashed var(--background-element);;
+  border-radius: 20px;
+  margin-left: 32px;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .elements div {
   scroll-snap-align: start;
 }
