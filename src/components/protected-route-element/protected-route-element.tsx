@@ -2,11 +2,10 @@ import { useState, useEffect, FC } from 'react';
 
 import { Navigate, useLocation } from 'react-router-dom';
 
-import { IProtectedRouteElement } from './protected-route-element-props';
-
 import { useAppDispatch, useAppSelector } from '../../hooks/rtk-hooks';
 import { getUserData } from '../../services/reducers/profile';
 import { selectIsAuth } from '../../services/selectors';
+import { IProtectedRouteElement } from '../../utils/types';
 
 const ProtectedRouteElement: FC<IProtectedRouteElement> = ({ element, accessAuth }) => {
   const [isUserLoaded, setIsUserLoaded] = useState(false);

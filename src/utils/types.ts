@@ -1,3 +1,5 @@
+import { ReactElement } from 'react';
+
 export enum EIngredients {
   BUN = 'bun',
   SAUCE = 'sauce',
@@ -35,4 +37,9 @@ export interface IIngredient {
 export interface IIngredientConstructor extends IIngredient {
   uniqueId: string;
   index?: number;
+}
+
+export interface IProtectedRouteElement {
+  element: ReactElement;
+  accessAuth: boolean;
 }
