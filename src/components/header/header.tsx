@@ -4,15 +4,16 @@ import {
   ProfileIcon,
   Logo,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { FC } from 'react';
 
 import styles from './header.module.css';
 import Link from './link/link';
 
-export default function Header() {
+const Header: FC = () => {
   return (
     <header className={styles.header + ' pt-4 pb-4'}>
       <div className={styles.content}>
-        <nav className={styles.navigation}>
+        <nav>
           <ul className={styles.navigationList}>
             <li>
               <Link iconCb={(type) => <BurgerIcon type={type} />} label={'Конструктор'} to={'/'}>
@@ -45,4 +46,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;
