@@ -8,8 +8,8 @@ const InputEdit: FC<typeof Input> = (props) => {
 
   const handleIconClick = () => {
     setDisabled(false);
-    if (inputRef.current instanceof HTMLInputElement) {
-      requestAnimationFrame(() => inputRef.current!.focus());
+    if (inputRef.current) {
+      requestAnimationFrame(() => inputRef.current?.focus());
     }
   };
 
