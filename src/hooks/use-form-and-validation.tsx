@@ -1,7 +1,7 @@
-import { KeyboardEvent, useCallback, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useCallback, useState } from 'react';
 
 interface IValues {
-  [key: string]: string | number;
+  [key: string]: string;
 }
 interface IErrors {
   [key: string]: string;
@@ -12,7 +12,7 @@ const useFormAndValidation = (initialValues: IValues = {}) => {
   const [errors, setErrors] = useState<IErrors>({});
   const [isValid, setIsValid] = useState<boolean>(false);
 
-  const handleChange = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target instanceof HTMLInputElement) {
       const { name, value } = e.target;
       setValues({ ...values, [name]: value });
