@@ -1,5 +1,5 @@
 import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ComponentProps, FC } from 'react';
+import { FC } from 'react';
 
 import { TBuregerSpinLoader } from './burger-spin-loader-props';
 
