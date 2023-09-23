@@ -1,11 +1,11 @@
-import { PropTypes } from 'prop-types';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
+
+import { IAdditionalActionsForm } from './additional-actions-form-props';
 
 import styles from './additional-actions-form.module.css';
 
-import { additionalAction } from '../../utils/types';
-
-export default function AdditionalActionsForm({ additionalActions }) {
+const AdditionalActionsForm: FC<IAdditionalActionsForm> = ({ additionalActions }) => {
   return (
     <div className={styles.content}>
       {additionalActions.map((additionalAction, index) => (
@@ -18,8 +18,6 @@ export default function AdditionalActionsForm({ additionalActions }) {
       ))}
     </div>
   );
-}
-
-AdditionalActionsForm.propTypes = {
-  additionalActions: PropTypes.arrayOf(additionalAction),
 };
+
+export default AdditionalActionsForm;

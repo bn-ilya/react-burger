@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 export enum EIngredients {
   BUN = 'bun',
   SAUCE = 'sauce',
@@ -26,9 +24,3 @@ export interface IIngredientConstructor extends IIngredient {
   uniqueId: string;
   index?: number;
 }
-
-export const additionalAction = PropTypes.shape({
-  text: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
-  linkText: PropTypes.string.isRequired,
-});
