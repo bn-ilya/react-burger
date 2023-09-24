@@ -8,7 +8,6 @@ import styled from './draggable-constructor-element.module.css';
 
 import { useAppDispatch } from '../../../../../hooks/rtk-hooks';
 import {
-  updateIndexIngredients,
   moveIngredients,
   removeIngredient,
 } from '../../../../../services/reducers/ingredients-constructor';
@@ -20,6 +19,7 @@ interface ICollectedProps {
 
 interface IDragObject {
   ingredient: IIngredientConstructor;
+  index: number;
 }
 
 const DraggableConstructorElement: FC<IDraggableConstructorElement> = ({ ingredient, index }) => {
@@ -33,7 +33,7 @@ const DraggableConstructorElement: FC<IDraggableConstructorElement> = ({ ingredi
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover: ({ ingredient }, monitor) => {
+    hover: (ingredient, monitor) => {
       if (!ref.current) {
         return;
       }
@@ -61,9 +61,9 @@ const DraggableConstructorElement: FC<IDraggableConstructorElement> = ({ ingredi
         moveIngredients({
           dragIndex: dragIndex,
           hoverIndex: hoverIndex,
-          ingredient: ingredient,
         }),
       );
+
       ingredient.index = hoverIndex;
     },
   });
@@ -80,7 +80,6 @@ const DraggableConstructorElement: FC<IDraggableConstructorElement> = ({ ingredi
 
   const handleClose = () => {
     dispatch(removeIngredient(ingredient.uniqueId));
-    dispatch(updateIndexIngredients());
   };
 
   dragRef(dropRef(ref));

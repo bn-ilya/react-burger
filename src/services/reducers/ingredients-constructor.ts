@@ -47,15 +47,10 @@ const ingredientsConstructorSlice = createSlice({
         index: index,
       }));
     },
-    sortedIngredients: (state) => {
-      state.ingredients.sort((a, b) => {
-        if (!a.index || !b.index) return 0;
-        return a.index - b.index;
-      });
-    },
     moveIngredients: (state, action) => {
+      const ingredient = state.ingredients[action.payload.dragIndex];
       state.ingredients.splice(action.payload.dragIndex, 1);
-      state.ingredients.splice(action.payload.hoverIndex, 0, action.payload.ingredient);
+      state.ingredients.splice(action.payload.hoverIndex, 0, { ...ingredient });
     },
   },
 });
@@ -69,5 +64,4 @@ export const {
   removeIngredient,
   updateIndexIngredients,
   moveIngredients,
-  sortedIngredients,
 } = ingredientsConstructorSlice.actions;

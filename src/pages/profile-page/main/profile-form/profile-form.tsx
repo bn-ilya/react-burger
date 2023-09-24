@@ -28,12 +28,12 @@ const ProfileForm: FC = () => {
 
   useEffect(() => {
     if (request) return;
-    if (name !== values.name || email !== values.email) {
+    if (name !== values.name || email !== values.email || password !== values.password) {
       setShowControls(true);
     } else {
       showControls && setShowControls(false);
     }
-  }, [values, name, email, showControls, request]);
+  }, [values, name, email, password, showControls, request]);
 
   const save = async () => {
     try {

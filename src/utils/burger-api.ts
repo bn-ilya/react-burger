@@ -6,13 +6,18 @@ const checkResponse = (res: Response) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
-export const request = (url: string, options: RequestInit) => {
+export const request = (url: string, options: RequestInit | undefined = undefined) => {
   return fetch(url, options)
     .then(checkResponse)
     .then((data) => {
       if (data?.success) return data;
       return Promise.reject(data);
     });
+};
+
+export const getIngredients = async () => {
+  const res = await request(`${URL_API}/ingredients`);
+  return res.data;
 };
 
 export const createOrder = async (ingredientsIds: Array<string>) => {
