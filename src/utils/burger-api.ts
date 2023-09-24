@@ -14,8 +14,8 @@ export const createOrder = async <T>(ingredientsIds: Array<string>): Promise<T> 
   return res.data;
 };
 
-export const forgotPassword = async (email: string) => {
-  const res = await instanceAxios.post(`password-reset`, {
+export const forgotPassword = async <T>(email: string): Promise<T> => {
+  const res = await instanceAxios.post<T>(`password-reset`, {
     email,
   });
 

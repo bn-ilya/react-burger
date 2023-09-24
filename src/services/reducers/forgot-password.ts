@@ -2,11 +2,16 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { forgotPassword as forgotPasswordApi } from '../../utils/burger-api';
 
+interface IForgotPasswordResponse {
+  success: boolean;
+  message: string;
+}
+
 export const forgotPassword = createAsyncThunk(
   'forgotPassword/forgotPassword',
-  async function (email: any, { rejectWithValue, dispatch }) {
+  async function (email: string, { rejectWithValue, dispatch }) {
     try {
-      const res = await forgotPasswordApi(email);
+      const res = await forgotPasswordApi<IForgotPasswordResponse>(email);
       dispatch(setForgotPassword(true));
       return res;
     } catch (error) {
