@@ -1,0 +1,9 @@
+export const home = "/";
+export const login = "/login";
+export const register = "/register";
+export const resetPassword = "/reset-password";
+export const forgotPassword = "/forgot-password";
+export const profile = "/profile";
+export const profileOrders = "/profile/orders";
+export const ingredientId = "/ingredients/:id";
+export const all = "*";

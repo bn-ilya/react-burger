@@ -21,3 +21,9 @@ export const modalHeaderType = PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.node
 ])
+
+export const additionalAction = PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+    linkText: PropTypes.string.isRequired
+})

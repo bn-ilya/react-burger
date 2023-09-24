@@ -1,0 +1,21 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 80px;
+}
+
+.linkActive, .linkInActive {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 64px;
+}
+
+.linkInActive:hover {
+    color: #6b6b90;
+    transition: 0.2s ease-out;
+}
+
+.description {
+    color: #8585AD;
+}

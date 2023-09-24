@@ -6,6 +6,9 @@ import ordersSlice from './orders'
 import totalPriceSlice from "./total-price";
 import modalSlice from './modal';
 import tabsSlice from './tabs';
+import forgotPasswordSlice from './forgot-password';
+import resetPasswordSlice from './reset-password';
+import profileSlice from './profile';
 
 const rootReducer = combineReducers({
     ingredients: ingredientsSlice,
@@ -14,7 +17,10 @@ const rootReducer = combineReducers({
     orders: ordersSlice,
     totalPrice: totalPriceSlice,
     modal: modalSlice,
-    tabs: tabsSlice
+    tabs: tabsSlice,
+    forgotPassword: forgotPasswordSlice,
+    resetPassword: resetPasswordSlice,
+    profile: profileSlice
 })
 
 export const store = configureStore({

@@ -1,6 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // Api
 import { getIngredients as getIngredientsApi } from '../../utils/burger-api';
+
+export const getIngredients = createAsyncThunk(
+    "ingredients/getIngredients",
+    async function (_, { rejectWithValue, dispatch }) {
+        try {
+            const res = await getIngredientsApi();
+            dispatch(setIngredients(res));
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
+    }
+)
 
 const ingredientsSlice = createSlice({
     name: "ingredients",
@@ -17,38 +29,29 @@ const ingredientsSlice = createSlice({
             state.sauces = action.payload.filter(ingredient => ingredient.type === 'sauce');
             state.mains = action.payload.filter(ingredient => ingredient.type === 'main');
         },
-        setIngredientsRequest: (state, action) => {
-            state.ingredientsRequest = action.payload
-        },
-        setIngredientsFailed: (state, action) => {
-            state.ingredientsFailed = action.payload
-        },
         setCountIngredients: (state, action) => {
-            state.sauces = state.sauces.map(sauce => action.payload[sauce['_id']] ? { ...sauce, count: action.payload[sauce['_id']] } : {...sauce, count: null});
-            state.mains = state.mains.map(main => action.payload[main['_id']] ? { ...main, count: action.payload[main['_id']] } : {...main, count: null});
+            state.sauces = state.sauces.map(sauce => action.payload[sauce['_id']] ? { ...sauce, count: action.payload[sauce['_id']] } : { ...sauce, count: null });
+            state.mains = state.mains.map(main => action.payload[main['_id']] ? { ...main, count: action.payload[main['_id']] } : { ...main, count: null });
         },
         setCountBuns: (state, action) => {
-            state.buns = state.buns.map(bun => action.payload[bun['_id']] ? { ...bun, count: action.payload[bun['_id']] } : {...bun, count: null});
+            state.buns = state.buns.map(bun => action.payload[bun['_id']] ? { ...bun, count: action.payload[bun['_id']] } : { ...bun, count: null });
         }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getIngredients.pending, (state) => {
+                state.ingredientsRequest = true
+            })
+            .addCase(getIngredients.fulfilled, (state) => {
+                state.ingredientsRequest = false
+                state.ingredientsFailed = false
+            })
+            .addCase(getIngredients.rejected, (state) => {
+                state.ingredientsRequest = false
+                state.ingredientsFailed = true
+            })
     }
 })
 
-export const getIngredients = () => {
-    return (dispatch) => {
-        dispatch(setIngredientsRequest(true));
-        getIngredientsApi()
-            .then(data => {
-                dispatch(setIngredients(data))
-                dispatch(setIngredientsFailed(false))
-            })
-            .catch(() => {
-                dispatch(setIngredientsFailed(true))
-            })
-            .finally(() => {
-                dispatch(setIngredientsRequest(false))
-            })
-    }
-}
-
 export default ingredientsSlice.reducer;
-export const { setIngredients, setIngredientsFailed, setIngredientsRequest, setCountIngredients, setCountBuns } = ingredientsSlice.actions;
+export const { setIngredients, setCountIngredients, setCountBuns } = ingredientsSlice.actions;

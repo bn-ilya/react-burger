@@ -1,0 +1,17 @@
+.linkActive, .linkInActive {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 40px;
+    transition: 0.2s ease-out;
+}
+
+.linkIcon {
+    display: flex;
+    align-items: center;
+}
+
+.linkInActive:hover {
+    color: #6b6b90;
+    transition: 0.2s ease-out;
+}

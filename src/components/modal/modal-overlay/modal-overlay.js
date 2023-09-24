@@ -1,4 +1,5 @@
 import styles from './modal-overlay.module.css';
+import {PropTypes} from 'prop-types';
 
 export default function ModalOverlay({closeModal}) {
 
@@ -10,4 +11,8 @@ export default function ModalOverlay({closeModal}) {
     return (
         <div onClick={handlerClick} className={styles.content}></div>
     )
+}
+
+ModalOverlay.propTypes = {
+    closeModal: PropTypes.func.isRequired
 }
