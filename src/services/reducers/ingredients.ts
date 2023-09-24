@@ -1,30 +1,48 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
+
+import { IError, IIngredient } from './../../utils/types';
 
 import { getIngredients as getIngredientsApi } from '../../utils/burger-api';
+
+interface IGetIngredientsResponse {
+  data: Array<IIngredient>;
+  success: boolean;
+}
+
+interface IInitialState {
+  buns: Array<IIngredient>;
+  sauces: Array<IIngredient>;
+  mains: Array<IIngredient>;
+  ingredientsRequest: boolean;
+  ingredientsFailed: boolean;
+}
 
 export const getIngredients = createAsyncThunk(
   'ingredients/getIngredients',
   async function (_, { rejectWithValue, dispatch }) {
     try {
-      const res = await getIngredientsApi();
-      dispatch(setIngredients(res));
+      const res = await getIngredientsApi<IGetIngredientsResponse>();
+      dispatch(setIngredients(res.data));
     } catch (error) {
-      return rejectWithValue(error.message);
+      const errorObject = error as IError;
+      return rejectWithValue(errorObject.message);
     }
   },
 );
 
+const initialState: IInitialState = {
+  buns: [],
+  sauces: [],
+  mains: [],
+  ingredientsRequest: false,
+  ingredientsFailed: false,
+};
+
 const ingredientsSlice = createSlice({
   name: 'ingredients',
-  initialState: {
-    buns: [],
-    sauces: [],
-    mains: [],
-    ingredientsRequest: false,
-    ingredientsFailed: false,
-  },
+  initialState,
   reducers: {
-    setIngredients: (state, action) => {
+    setIngredients: (state, action: PayloadAction<Array<IIngredient>>) => {
       state.buns = action.payload.filter((ingredient) => ingredient.type === 'bun');
       state.sauces = action.payload.filter((ingredient) => ingredient.type === 'sauce');
       state.mains = action.payload.filter((ingredient) => ingredient.type === 'main');

@@ -1,85 +1,42 @@
-import axios from 'axios';
-
+import { instanceAxios } from './api-config';
 import { IError } from './types';
 
-const URL_API = 'https://norma.nomoreparties.space/api';
-
-export const instanceAxios = axios.create({
-  baseURL: URL_API,
-});
-
-instanceAxios.interceptors.response.use(
-  function (response) {
-    if (response.data?.success) return response;
-    const objectError: IError = { message: 'Failed success data' };
-    return Promise.reject(objectError);
-  },
-  function (error) {
-    return Promise.reject(error);
-  },
-);
-
-instanceAxios.interceptors.request.use(
-  (config) => {
-    if (config.method === 'post' && !config.headers.length) {
-      config.headers['Accept'] = 'application/json';
-      config.headers['Content-Type'] = 'application/json';
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
-);
-
-export const getIngredients = async () => {
-  const res = await instanceAxios.get('ingredients');
-  return res.data.data;
+export const getIngredients = async <T>(): Promise<T> => {
+  const res = await instanceAxios.get<T>('ingredients');
+  return res.data;
 };
 
-export const createOrder = async (ingredientsIds: Array<string>) => {
-  const res = await instanceAxios.post(
-    `orders`,
-    JSON.stringify({
-      ingredients: ingredientsIds,
-    }),
-  );
+export const createOrder = async <T>(ingredientsIds: Array<string>): Promise<T> => {
+  const res = await instanceAxios.post<T>(`orders`, {
+    ingredients: ingredientsIds,
+  });
 
-  return { name: res.data.name, order: res.data.order };
+  return res.data;
 };
 
 export const forgotPassword = async (email: string) => {
-  const res = await instanceAxios.post(
-    `password-reset`,
-    JSON.stringify({
-      email,
-    }),
-  );
+  const res = await instanceAxios.post(`password-reset`, {
+    email,
+  });
 
   return res.data;
 };
 
 export const resetPassword = async (password: string, token: string) => {
-  const res = await instanceAxios.post(
-    `password-reset/reset`,
-    JSON.stringify({
-      password,
-      token,
-    }),
-  );
+  const res = await instanceAxios.post(`password-reset/reset`, {
+    password,
+    token,
+  });
 
   return res.data;
 };
 
 export const register = async (email: string, password: string, name: string) => {
-  const res = await instanceAxios.post(
-    `auth/register`,
-    JSON.stringify({
-      name,
-      email,
-      password,
-    }),
-  );
+  const res = await instanceAxios.post(`auth/register`, {
+    name,
+    email,
+    password,
+  });
 
   localStorage.setItem('accessToken', res.data.accessToken.split('Bearer ')[1]);
   localStorage.setItem('refreshToken', res.data.refreshToken);
@@ -87,13 +44,10 @@ export const register = async (email: string, password: string, name: string) =>
 };
 
 export const login = async (email: string, password: string) => {
-  const res = await instanceAxios.post(
-    `auth/login`,
-    JSON.stringify({
-      email,
-      password,
-    }),
-  );
+  const res = await instanceAxios.post(`auth/login`, {
+    email,
+    password,
+  });
 
   localStorage.setItem('accessToken', res.data.accessToken.split('Bearer ')[1]);
   localStorage.setItem('refreshToken', res.data.refreshToken);
@@ -101,12 +55,9 @@ export const login = async (email: string, password: string) => {
 };
 
 export const logout = async () => {
-  const res = await instanceAxios.post(
-    `auth/logout`,
-    JSON.stringify({
-      token: localStorage.getItem('refreshToken'),
-    }),
-  );
+  const res = await instanceAxios.post(`auth/logout`, {
+    token: localStorage.getItem('refreshToken'),
+  });
 
   localStorage.setItem('accessToken', '');
   localStorage.setItem('refreshToken', '');
@@ -114,12 +65,9 @@ export const logout = async () => {
 };
 
 export const refreshToken = async () => {
-  const res = await instanceAxios.post(
-    `auth/token`,
-    JSON.stringify({
-      token: localStorage.getItem('refreshToken'),
-    }),
-  );
+  const res = await instanceAxios.post(`auth/token`, {
+    token: localStorage.getItem('refreshToken'),
+  });
 
   return res.data;
 };
@@ -157,7 +105,7 @@ export const getUserData = () => {
 
 export const updateUserData = (name: string, email: string, password: string) => {
   return fetchWithRefresh(`auth/user`, {
-    method: 'PATCH',
+    method: 'patch',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
       Authorization: 'Bearer ' + localStorage.getItem('accessToken'),

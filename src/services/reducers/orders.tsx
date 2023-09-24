@@ -1,21 +1,39 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 
 import { createOrder as createOrderApi } from '../../utils/burger-api';
+
+interface IOrder {
+  name: string;
+  order: {
+    number: number;
+  };
+}
+
+interface ICreateOrderRespone extends IOrder {
+  success: boolean;
+}
+
+interface IInitialState {
+  orders: Array<IOrder>;
+  orderRequest: boolean;
+  orderFailed: boolean;
+}
 
 export const createOrder = createAsyncThunk(
   'orders/createOrder',
   async function (ids: Array<string>, { rejectWithValue, dispatch }) {
     try {
-      const res: any = await createOrderApi(ids);
-      dispatch(addOrder(res));
-      return res;
+      const res = await createOrderApi<ICreateOrderRespone>(ids);
+      const order: IOrder = { name: res.name, order: res.order };
+      dispatch(addOrder(order));
+      return order;
     } catch (error) {
       return rejectWithValue(error);
     }
   },
 );
 
-const initialState: any = {
+const initialState: IInitialState = {
   orders: [],
   orderRequest: false,
   orderFailed: false,
@@ -25,7 +43,7 @@ const ordersSlice = createSlice({
   name: 'orders',
   initialState,
   reducers: {
-    addOrder: (state, action: any) => {
+    addOrder: (state, action: PayloadAction<IOrder>) => {
       state.orders.push(action.payload);
     },
   },
