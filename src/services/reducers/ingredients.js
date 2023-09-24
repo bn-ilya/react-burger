@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Api
 import { getIngredients as getIngredientsApi } from '../../utils/burger-api';
 
 export const getIngredients = createAsyncThunk(

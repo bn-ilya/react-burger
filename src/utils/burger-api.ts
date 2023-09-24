@@ -1,139 +1,135 @@
+import axios from 'axios';
+
 import { IError } from './types';
 
 const URL_API = 'https://norma.nomoreparties.space/api';
 
-const checkResponse = (res: Response) => {
-  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
-};
+export const instanceAxios = axios.create({
+  baseURL: URL_API,
+});
 
-export const request = (url: string, options: RequestInit | undefined = undefined) => {
-  return fetch(url, options)
-    .then(checkResponse)
-    .then((data) => {
-      if (data?.success) return data;
-      return Promise.reject(data);
-    });
-};
+instanceAxios.interceptors.response.use(
+  function (response) {
+    if (response.data?.success) return response;
+    const objectError: IError = { message: 'Failed success data' };
+    return Promise.reject(objectError);
+  },
+  function (error) {
+    return Promise.reject(error);
+  },
+);
+
+instanceAxios.interceptors.request.use(
+  (config) => {
+    if (config.method === 'post' && !config.headers.length) {
+      config.headers['Accept'] = 'application/json';
+      config.headers['Content-Type'] = 'application/json';
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
 
 export const getIngredients = async () => {
-  const res = await request(`${URL_API}/ingredients`);
-  return res.data;
+  const res = await instanceAxios.get('ingredients');
+  return res.data.data;
 };
 
 export const createOrder = async (ingredientsIds: Array<string>) => {
-  const res = await request(`${URL_API}/orders`, {
-    method: 'post',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
+  const res = await instanceAxios.post(
+    `orders`,
+    JSON.stringify({
       ingredients: ingredientsIds,
     }),
-  });
+  );
 
-  return { name: res.name, order: res.order };
+  return { name: res.data.name, order: res.data.order };
 };
 
 export const forgotPassword = async (email: string) => {
-  const res = await request(`${URL_API}/password-reset`, {
-    method: 'post',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
+  const res = await instanceAxios.post(
+    `password-reset`,
+    JSON.stringify({
       email,
     }),
-  });
-  return res;
+  );
+
+  return res.data;
 };
 
 export const resetPassword = async (password: string, token: string) => {
-  const res = await request(`${URL_API}/password-reset/reset`, {
-    method: 'post',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
+  const res = await instanceAxios.post(
+    `password-reset/reset`,
+    JSON.stringify({
       password,
       token,
     }),
-  });
-  return res;
+  );
+
+  return res.data;
 };
 
 export const register = async (email: string, password: string, name: string) => {
-  const res = await request(`${URL_API}/auth/register`, {
-    method: 'post',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
+  const res = await instanceAxios.post(
+    `auth/register`,
+    JSON.stringify({
       name,
       email,
       password,
     }),
-  });
+  );
 
-  localStorage.setItem('accessToken', res.accessToken.split('Bearer ')[1]);
-  localStorage.setItem('refreshToken', res.refreshToken);
-  return res;
+  localStorage.setItem('accessToken', res.data.accessToken.split('Bearer ')[1]);
+  localStorage.setItem('refreshToken', res.data.refreshToken);
+  return res.data;
 };
 
 export const login = async (email: string, password: string) => {
-  const res = await request(`${URL_API}/auth/login`, {
-    method: 'post',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
+  const res = await instanceAxios.post(
+    `auth/login`,
+    JSON.stringify({
       email,
       password,
     }),
-  });
-  localStorage.setItem('accessToken', res.accessToken.split('Bearer ')[1]);
-  localStorage.setItem('refreshToken', res.refreshToken);
-  return res;
+  );
+
+  localStorage.setItem('accessToken', res.data.accessToken.split('Bearer ')[1]);
+  localStorage.setItem('refreshToken', res.data.refreshToken);
+  return res.data;
 };
 
 export const logout = async () => {
-  const res = await request(`${URL_API}/auth/logout`, {
-    method: 'post',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
+  const res = await instanceAxios.post(
+    `auth/logout`,
+    JSON.stringify({
       token: localStorage.getItem('refreshToken'),
     }),
-  });
+  );
+
   localStorage.setItem('accessToken', '');
   localStorage.setItem('refreshToken', '');
   return res;
 };
 
-export const refreshToken = async (): Promise<any> => {
-  await request(`${URL_API}/auth/token`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    body: JSON.stringify({
+export const refreshToken = async () => {
+  const res = await instanceAxios.post(
+    `auth/token`,
+    JSON.stringify({
       token: localStorage.getItem('refreshToken'),
     }),
-  });
+  );
+
+  return res.data;
 };
 
-export const fetchWithRefresh = async (url: string, options: RequestInit) => {
+export const fetchWithRefresh = async (url: string, options: any) => {
   try {
     if (!localStorage.getItem('accessToken'))
       return Promise.reject('Токен авторизации не обноружен');
-    const res = await request(url, options);
-    return res;
+    const res = await instanceAxios(url, options);
+    return res.data;
   } catch (error) {
     const errorObject = error as IError;
     if (errorObject.message === 'jwt expired') {
@@ -142,8 +138,8 @@ export const fetchWithRefresh = async (url: string, options: RequestInit) => {
       localStorage.setItem('refreshToken', refreshData.refreshToken);
       localStorage.setItem('accessToken', refreshData.accessToken.split('Bearer ')[1]);
       options.headers = { Authorization: refreshData.accessToken };
-      const res = await request(url, options);
-      return res;
+      const res = await instanceAxios(url, options);
+      return res.data;
     } else {
       return Promise.reject(error);
     }
@@ -151,7 +147,7 @@ export const fetchWithRefresh = async (url: string, options: RequestInit) => {
 };
 
 export const getUserData = () => {
-  return fetchWithRefresh(`${URL_API}/auth/user`, {
+  return fetchWithRefresh(`auth/user`, {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
       Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
@@ -160,7 +156,7 @@ export const getUserData = () => {
 };
 
 export const updateUserData = (name: string, email: string, password: string) => {
-  return fetchWithRefresh(`${URL_API}/auth/user`, {
+  return fetchWithRefresh(`auth/user`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
