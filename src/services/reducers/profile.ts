@@ -8,24 +8,33 @@ import {
   updateUserData as updateUserDataApi,
 } from '../../utils/burger-api';
 
+interface IUser {
+  email: string;
+  name: string;
+}
+
 interface IRegisterRespone {
   success: boolean;
-  user: {
-    email: string;
-    name: string;
-  };
+  user: IUser;
   accessToken: string;
   refreshToken: string;
 }
 
 interface ILoginResponse {
   success: boolean;
-  user: {
-    email: string;
-    name: string;
-  };
+  user: IUser;
   accessToken: string;
   refreshToken: string;
+}
+
+interface ILogoutRespone {
+  success: boolean;
+  message: string;
+}
+
+interface IGetUserResponse {
+  success: boolean;
+  user: IUser;
 }
 
 const initialState = {
@@ -79,7 +88,11 @@ export const logout = createAsyncThunk(
   'profile/logout',
   async function (_, { rejectWithValue, dispatch }) {
     try {
-      const res = await logoutApi();
+      const res = await logoutApi<ILogoutRespone>();
+
+      localStorage.setItem('accessToken', '');
+      localStorage.setItem('refreshToken', '');
+
       dispatch(setName(initialState.name));
       dispatch(setEmail(initialState.email));
       return res;
@@ -95,7 +108,7 @@ export const getUserData = createAsyncThunk(
   'profile/getUserData',
   async function (_, { rejectWithValue, dispatch }) {
     try {
-      const res = await getUserDataApi();
+      const res = await getUserDataApi<IGetUserResponse>();
       dispatch(setName(res.user.name));
       dispatch(setEmail(res.user.email));
       return res;
@@ -111,7 +124,7 @@ export const updateUserData = createAsyncThunk(
   'profile/updateUserData',
   async function ({ name, email, password }: any, { rejectWithValue, dispatch }) {
     try {
-      const res = await updateUserDataApi(name, email, password);
+      const res = await updateUserDataApi<IGetUserResponse>(name, email, password);
       dispatch(setName(res.user.name));
       dispatch(setEmail(res.user.email));
       return res;

@@ -1,5 +1,5 @@
 import { instanceAxios } from './api-config';
-import { IError } from './types';
+import { IError, IRefreshRespone } from './types';
 
 export const getIngredients = async <T>(): Promise<T> => {
   const res = await instanceAxios.get<T>('ingredients');
@@ -50,39 +50,37 @@ export const login = async <T>(email: string, password: string): Promise<T> => {
   return res.data;
 };
 
-export const logout = async () => {
-  const res = await instanceAxios.post(`auth/logout`, {
-    token: localStorage.getItem('refreshToken'),
-  });
-
-  localStorage.setItem('accessToken', '');
-  localStorage.setItem('refreshToken', '');
-  return res;
-};
-
-export const refreshToken = async () => {
-  const res = await instanceAxios.post(`auth/token`, {
+export const logout = async <T>(): Promise<T> => {
+  const res = await instanceAxios.post<T>(`auth/logout`, {
     token: localStorage.getItem('refreshToken'),
   });
 
   return res.data;
 };
 
-export const fetchWithRefresh = async (url: string, options: any) => {
+export const refreshToken = async <T>(): Promise<T> => {
+  const res = await instanceAxios.post<T>(`auth/token`, {
+    token: localStorage.getItem('refreshToken'),
+  });
+
+  return res.data;
+};
+
+export const fetchWithRefresh = async <T>(url: string, options: any): Promise<T> => {
   try {
     if (!localStorage.getItem('accessToken'))
       return Promise.reject('Токен авторизации не обноружен');
-    const res = await instanceAxios(url, options);
+    const res = await instanceAxios<T>({ ...options, url: url });
     return res.data;
   } catch (error) {
     const errorObject = error as IError;
     if (errorObject.message === 'jwt expired') {
-      const refreshData = await refreshToken();
+      const refreshData = await refreshToken<IRefreshRespone>();
       if (!refreshData.success) return Promise.reject(refreshData);
       localStorage.setItem('refreshToken', refreshData.refreshToken);
       localStorage.setItem('accessToken', refreshData.accessToken.split('Bearer ')[1]);
       options.headers = { Authorization: refreshData.accessToken };
-      const res = await instanceAxios(url, options);
+      const res = await instanceAxios<T>({ ...options, url: url });
       return res.data;
     } else {
       return Promise.reject(error);
@@ -90,26 +88,35 @@ export const fetchWithRefresh = async (url: string, options: any) => {
   }
 };
 
-export const getUserData = () => {
-  return fetchWithRefresh(`auth/user`, {
+export const getUserData = async <T>(): Promise<T> => {
+  const res = await fetchWithRefresh<T>(`auth/user`, {
+    method: 'get',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
       Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
     },
   });
+
+  return res;
 };
 
-export const updateUserData = (name: string, email: string, password: string) => {
-  return fetchWithRefresh(`auth/user`, {
+export const updateUserData = async <T>(
+  name: string,
+  email: string,
+  password: string,
+): Promise<T> => {
+  const res = await fetchWithRefresh<T>('auth/user', {
     method: 'patch',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
       Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
     },
-    body: JSON.stringify({
+    data: {
       name,
       email,
       password,
-    }),
+    },
   });
+
+  return res;
 };

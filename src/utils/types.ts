@@ -63,3 +63,9 @@ export interface IErrorsForm {
 }
 
 export type TIconTypes = 'secondary' | 'primary' | 'error' | 'success';
+
+export interface IRefreshRespone {
+  success: boolean;
+  accessToken: string;
+  refreshToken: string;
+}
