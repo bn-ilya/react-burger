@@ -8,6 +8,21 @@ import {
   updateUserData as updateUserDataApi,
 } from '../../utils/burger-api';
 
+interface IRegisterRequestSuccess {
+  success: boolean;
+  user: {
+    email: string;
+    name: string;
+  };
+  accessToken: string;
+  refreshToken: string;
+}
+
+interface IRegisterRequestError {
+  success: boolean;
+  message: boolean;
+}
+
 const initialState = {
   name: '',
   email: '',
@@ -23,7 +38,11 @@ export const register = createAsyncThunk(
   'profile/register',
   async function ({ email, password, name }: any, { rejectWithValue, dispatch }) {
     try {
-      const res = await registerApi(email, password, name);
+      const res = await registerApi<IRegisterRequestSuccess>(email, password, name);
+
+      localStorage.setItem('accessToken', res.accessToken.split('Bearer ')[1]);
+      localStorage.setItem('refreshToken', res.refreshToken);
+
       dispatch(setName(res.user.name));
       dispatch(setEmail(res.user.email));
       return res;

@@ -31,15 +31,13 @@ export const resetPassword = async <T>(password: string, token: string): Promise
   return res.data;
 };
 
-export const register = async (email: string, password: string, name: string) => {
-  const res = await instanceAxios.post(`auth/register`, {
+export const register = async <T>(email: string, password: string, name: string): Promise<T> => {
+  const res = await instanceAxios.post<T>(`auth/register`, {
     name,
     email,
     password,
   });
 
-  localStorage.setItem('accessToken', res.data.accessToken.split('Bearer ')[1]);
-  localStorage.setItem('refreshToken', res.data.refreshToken);
   return res.data;
 };
 
