@@ -41,14 +41,12 @@ export const register = async <T>(email: string, password: string, name: string)
   return res.data;
 };
 
-export const login = async (email: string, password: string) => {
-  const res = await instanceAxios.post(`auth/login`, {
+export const login = async <T>(email: string, password: string): Promise<T> => {
+  const res = await instanceAxios.post<T>(`auth/login`, {
     email,
     password,
   });
 
-  localStorage.setItem('accessToken', res.data.accessToken.split('Bearer ')[1]);
-  localStorage.setItem('refreshToken', res.data.refreshToken);
   return res.data;
 };
 
