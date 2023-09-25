@@ -22,8 +22,8 @@ export const forgotPassword = async <T>(email: string): Promise<T> => {
   return res.data;
 };
 
-export const resetPassword = async (password: string, token: string) => {
-  const res = await instanceAxios.post(`password-reset/reset`, {
+export const resetPassword = async <T>(password: string, token: string): Promise<T> => {
+  const res = await instanceAxios.post<T>(`password-reset/reset`, {
     password,
     token,
   });
