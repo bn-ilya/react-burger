@@ -1,19 +1,19 @@
 .content {
-    width: 100%;
-    padding: 100px 0px 52px 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 40px;
-    overflow: hidden;
+  width: 100%;
+  padding: 100px 0px 52px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  overflow: hidden;
 }
 
 .main {
-    flex: 1 1 auto;
-    overflow: auto;
-    padding-right: -8px;
+  flex: 1 1 auto;
+  overflow: auto;
+  padding-right: -8px;
 }
 
 .footer {
-    flex: 0 0 auto;
+  flex: 0 0 auto;
 }

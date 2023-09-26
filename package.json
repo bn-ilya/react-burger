@@ -12,6 +12,7 @@
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.14.0",
+    "axios": "^1.5.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-content-loader": "^6.2.1",
@@ -32,7 +33,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "eslint": "npx eslint \"src/**/*.{js,jsx,ts,tsx}\""
+    "lint": "eslint -c .eslintrc --ext .js,.jsx,.ts,.tsx .",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,json}' --config ./.prettierrc.json"
   },
   "browserslist": {
     "production": [
@@ -45,5 +48,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.3",
+    "typescript-plugin-css-modules": "^5.0.1"
   }
 }

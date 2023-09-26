@@ -13,8 +13,8 @@ menu {
 }
 
 button,
-input[type="submit"],
-input[type="reset"] {
+input[type='submit'],
+input[type='reset'] {
   background: none;
   color: inherit;
   border: none;
@@ -39,10 +39,12 @@ li {
   width: 8px; /* в основном для вертикальных полос прокрутки */
   height: 8px; /* в основном для горизонтальных полос прокрутки */
 }
-*::-webkit-scrollbar-thumb { /* плашка-бегунок */
-  background: #8585AD; /* фон */
+*::-webkit-scrollbar-thumb {
+  /* плашка-бегунок */
+  background: #8585ad; /* фон */
 }
-*::-webkit-scrollbar-track { /* фон */
+*::-webkit-scrollbar-track {
+  /* фон */
   width: 0 0 0 8px;
-  background: #2F2F37;
+  background: #2f2f37;
 }
