@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 
-import { IError, IIngredient } from './../../utils/types';
+import { AppDispatch } from '.';
+
+import { IError, IIngredient, IIngredientsCount } from './../../utils/types';
 
 import { getIngredients as getIngredientsApi } from '../../utils/burger-api';
 
@@ -17,18 +19,20 @@ interface IInitialState {
   ingredientsFailed: boolean;
 }
 
-export const getIngredients = createAsyncThunk(
-  'ingredients/getIngredients',
-  async function (_, { rejectWithValue, dispatch }) {
-    try {
-      const res = await getIngredientsApi<IGetIngredientsResponse>();
-      dispatch(setIngredients(res.data));
-    } catch (error) {
-      const errorObject = error as IError;
-      return rejectWithValue(errorObject.message);
-    }
-  },
-);
+export const getIngredients = createAsyncThunk<
+  IGetIngredientsResponse,
+  undefined,
+  { rejectValue: IError; dispatch: AppDispatch }
+>('ingredients/getIngredients', async function (_, { rejectWithValue, dispatch }) {
+  try {
+    const res = await getIngredientsApi<IGetIngredientsResponse>();
+    dispatch(setIngredients(res.data));
+    return res;
+  } catch (error) {
+    const errorObject = error as IError;
+    return rejectWithValue(errorObject);
+  }
+});
 
 const initialState: IInitialState = {
   buns: [],
@@ -47,23 +51,23 @@ const ingredientsSlice = createSlice({
       state.sauces = action.payload.filter((ingredient) => ingredient.type === 'sauce');
       state.mains = action.payload.filter((ingredient) => ingredient.type === 'main');
     },
-    setCountIngredients: (state, action) => {
+    setCountIngredients: (state, action: PayloadAction<IIngredientsCount>) => {
       state.sauces = state.sauces.map((sauce) =>
         action.payload[sauce['_id']]
           ? { ...sauce, count: action.payload[sauce['_id']] }
-          : { ...sauce, count: null },
+          : { ...sauce, count: undefined },
       );
       state.mains = state.mains.map((main) =>
         action.payload[main['_id']]
           ? { ...main, count: action.payload[main['_id']] }
-          : { ...main, count: null },
+          : { ...main, count: undefined },
       );
     },
-    setCountBuns: (state, action) => {
+    setCountBuns: (state, action: PayloadAction<IIngredientsCount>) => {
       state.buns = state.buns.map((bun) =>
         action.payload[bun['_id']]
           ? { ...bun, count: action.payload[bun['_id']] }
-          : { ...bun, count: null },
+          : { ...bun, count: undefined },
       );
     },
   },
