@@ -12,7 +12,7 @@ import useFormAndValidation from '../../../../hooks/use-form-and-validation';
 import { openModal } from '../../../../services/reducers/modal';
 import { resetPassword } from '../../../../services/reducers/reset-password';
 import { selectResetPasswordRequest } from '../../../../services/selectors';
-import { IError } from '../../../../utils/types';
+import { ETypesModal, IError } from '../../../../utils/types';
 
 const ResetPasswordForm: FC = () => {
   const dispatch = useAppDispatch();
@@ -27,7 +27,7 @@ const ResetPasswordForm: FC = () => {
       navigate('/login', { replace: true });
     } catch (error) {
       const errorObject = error as IError;
-      dispatch(openModal({ content: errorObject.message, type: 'error' }));
+      dispatch(openModal({ contentModal: errorObject.message, typeModal: ETypesModal.ERROR }));
     }
   };
 
