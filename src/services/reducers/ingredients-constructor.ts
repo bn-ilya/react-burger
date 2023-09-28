@@ -1,6 +1,6 @@
 import { createSlice, nanoid, type PayloadAction } from '@reduxjs/toolkit';
 
-import { IIngredient, IIngredientConstructor } from '../../utils/types';
+import { IIngredient, IIngredientConstructor, TIdIngredient } from '../../utils/types';
 
 interface IInitialState {
   ingredients: Array<IIngredientConstructor>;
@@ -18,13 +18,13 @@ const ingredientsConstructorSlice = createSlice({
   name: 'ingredientsConstructor',
   initialState,
   reducers: {
-    setIngredients: (state, action) => {
+    setIngredients: (state, action: PayloadAction<Array<IIngredientConstructor>>) => {
       state.ingredients = action.payload;
     },
-    setBunTop: (state, action) => {
+    setBunTop: (state, action: PayloadAction<IIngredient>) => {
       state.bunTop = action.payload;
     },
-    setBunBottom: (state, action) => {
+    setBunBottom: (state, action: PayloadAction<IIngredient>) => {
       state.bunBottom = action.payload;
     },
     addIngredients: {
@@ -36,7 +36,7 @@ const ingredientsConstructorSlice = createSlice({
         return { payload: { ...ingredient, uniqueId } };
       },
     },
-    removeIngredient: (state, action) => {
+    removeIngredient: (state, action: PayloadAction<TIdIngredient>) => {
       state.ingredients = state.ingredients.filter(
         (ingredient) => ingredient.uniqueId !== action.payload,
       );
@@ -47,7 +47,7 @@ const ingredientsConstructorSlice = createSlice({
         index: index,
       }));
     },
-    moveIngredients: (state, action) => {
+    moveIngredients: (state, action: PayloadAction<{ dragIndex: number; hoverIndex: number }>) => {
       const ingredient = state.ingredients[action.payload.dragIndex];
       state.ingredients.splice(action.payload.dragIndex, 1);
       state.ingredients.splice(action.payload.hoverIndex, 0, { ...ingredient });
