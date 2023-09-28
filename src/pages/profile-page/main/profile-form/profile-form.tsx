@@ -10,7 +10,7 @@ import useFormAndValidation from '../../../../hooks/use-form-and-validation';
 import { openModal } from '../../../../services/reducers/modal';
 import { updateUserData } from '../../../../services/reducers/profile';
 import { selectUserData, selectUserDataFetch } from '../../../../services/selectors';
-import { IError } from '../../../../utils/types';
+import { ETypesModal, IError } from '../../../../utils/types';
 
 const ProfileForm: FC = () => {
   const dispatch = useAppDispatch();
@@ -40,7 +40,7 @@ const ProfileForm: FC = () => {
       await dispatch(updateUserData(values)).unwrap();
     } catch (error) {
       const errorObject = error as IError;
-      dispatch(openModal({ content: errorObject.message, type: 'error' }));
+      dispatch(openModal({ contentModal: errorObject.message, typeModal: ETypesModal.ERROR }));
     }
   };
 
@@ -55,7 +55,7 @@ const ProfileForm: FC = () => {
   };
 
   if (request) return <SceletonLoader />;
-  if (failed) dispatch(openModal({ content: '', type: 'error' }));
+  if (failed) dispatch(openModal({ contentModal: '', typeModal: ETypesModal.ERROR }));
 
   return (
     <form className={styles.form} onSubmit={handleSubmitForm}>

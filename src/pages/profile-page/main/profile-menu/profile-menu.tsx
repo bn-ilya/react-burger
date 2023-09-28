@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../../../hooks/rtk-hooks';
 import { openModal } from '../../../../services/reducers/modal';
 
 import { logout } from '../../../../services/reducers/profile';
-import { IError } from '../../../../utils/types';
+import { ETypesModal, IError } from '../../../../utils/types';
 
 const ProfileMenu = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +25,7 @@ const ProfileMenu = () => {
       navigate('/login', { replace: true });
     } catch (error) {
       const errorObject = error as IError;
-      openModal({ content: errorObject.message, type: 'error' });
+      openModal({ contentModal: errorObject.message, typeModal: ETypesModal.ERROR });
     }
   };
 

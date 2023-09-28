@@ -15,7 +15,7 @@ import useFormAndValidation from '../../../../hooks/use-form-and-validation';
 import { openModal } from '../../../../services/reducers/modal';
 import { register } from '../../../../services/reducers/profile';
 import { selectUserDataRequest } from '../../../../services/selectors';
-import { IError } from '../../../../utils/types';
+import { ETypesModal, IError } from '../../../../utils/types';
 
 const RegisterForm: FC = () => {
   const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ const RegisterForm: FC = () => {
       navigate('/profile', { replace: true });
     } catch (error) {
       const errorObject = error as IError;
-      dispatch(openModal({ content: errorObject.message, type: 'error' }));
+      dispatch(openModal({ contentModal: errorObject.message, typeModal: ETypesModal.ERROR }));
     }
   };
 

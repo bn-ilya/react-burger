@@ -75,3 +75,9 @@ export interface IRefreshRespone {
 export interface IIngredientsCount {
   [id: string]: number;
 }
+
+export enum ETypesModal {
+  ERROR = 'error',
+  ORDER = 'order',
+  VIEWING_INGREDIENTS = 'viewingIngredient',
+}

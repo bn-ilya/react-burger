@@ -11,7 +11,7 @@ import useFormAndValidation from '../../../../hooks/use-form-and-validation';
 import { openModal } from '../../../../services/reducers/modal';
 import { login } from '../../../../services/reducers/profile';
 import { selectUserDataRequest } from '../../../../services/selectors';
-import { IError } from '../../../../utils/types';
+import { ETypesModal, IError } from '../../../../utils/types';
 
 const LoginForm = () => {
   const location = useLocation();
@@ -29,7 +29,7 @@ const LoginForm = () => {
         : navigate('/', { replace: true });
     } catch (error) {
       const errorObject = error as IError;
-      dispatch(openModal({ content: errorObject.message, type: 'error' }));
+      dispatch(openModal({ contentModal: errorObject.message, typeModal: ETypesModal.ERROR }));
     }
   };
 

@@ -15,6 +15,7 @@ import {
   selectOrderRequest,
   selectTotalPrice,
 } from '../../../../services/selectors';
+import { ETypesModal } from '../../../../utils/types';
 
 const Info: FC = () => {
   const isAuth = useAppSelector(selectIsAuth);
@@ -38,10 +39,10 @@ const Info: FC = () => {
     dispatch(createOrder(ids))
       .unwrap()
       .then((res) => {
-        dispatch(openModal({ content: res.order.number, type: 'order' }));
+        dispatch(openModal({ contentModal: res.order.number, typeModal: ETypesModal.ORDER }));
       })
       .catch((error) => {
-        dispatch(openModal({ content: error.message, type: 'error' }));
+        dispatch(openModal({ contentModal: error.message, typeModal: ETypesModal.ERROR }));
       });
   };
 

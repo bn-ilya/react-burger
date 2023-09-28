@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../../../hooks/rtk-hooks';
 
 import { openModal } from '../../../../../services/reducers/modal';
 import { selectIngredientById } from '../../../../../services/selectors';
+import { ETypesModal } from '../../../../../utils/types';
 
 export default function IngredientModal() {
   const dispatch = useAppDispatch();
@@ -15,8 +16,8 @@ export default function IngredientModal() {
     ingredient &&
       dispatch(
         openModal({
-          content: ingredient,
-          type: 'viewingIngredient',
+          contentModal: ingredient,
+          typeModal: ETypesModal.VIEWING_INGREDIENTS,
           goBack: true,
         }),
       );
