@@ -20,11 +20,7 @@ import {
 
 import { setTotalPrice } from '../../../../services/reducers/total-price';
 import { selectAllIngredientsConstructor } from '../../../../services/selectors';
-import { IIngredient } from '../../../../utils/types';
-
-interface IIngredientsCount {
-  [id: string]: number;
-}
+import { IIngredient, IIngredientsCount } from '../../../../utils/types';
 
 const Constructor: FC = () => {
   const dispatch = useDispatch();

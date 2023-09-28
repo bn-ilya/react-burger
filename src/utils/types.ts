@@ -71,3 +71,7 @@ export interface IRefreshRespone {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface IIngredientsCount {
+  [id: string]: number;
+}
