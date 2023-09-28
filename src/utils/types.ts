@@ -18,8 +18,10 @@ export enum ERoutes {
   all = '*',
 }
 
+export type TIdIngredient = string;
+
 export interface IIngredient {
-  _id: string;
+  _id: TIdIngredient;
   name: string;
   type: string;
   proteins: number;
