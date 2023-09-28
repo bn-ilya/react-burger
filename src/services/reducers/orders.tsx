@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 
+import { AppDispatch } from '.';
+
 import { createOrder as createOrderApi } from '../../utils/burger-api';
+import { IError, TIdIngredient } from '../../utils/types';
 
 interface IOrder {
   name: string;
@@ -19,19 +22,21 @@ interface IInitialState {
   orderFailed: boolean;
 }
 
-export const createOrder = createAsyncThunk(
-  'orders/createOrder',
-  async function (ids: Array<string>, { rejectWithValue, dispatch }) {
-    try {
-      const res = await createOrderApi<ICreateOrderRespone>(ids);
-      const order: IOrder = { name: res.name, order: res.order };
-      dispatch(addOrder(order));
-      return order;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  },
-);
+export const createOrder = createAsyncThunk<
+  IOrder,
+  Array<TIdIngredient>,
+  { rejectValue: IError; dispatch: AppDispatch }
+>('orders/createOrder', async function (ids, { rejectWithValue, dispatch }) {
+  try {
+    const res = await createOrderApi<ICreateOrderRespone>(ids);
+    const order: IOrder = { name: res.name, order: res.order };
+    dispatch(addOrder(order));
+    return order;
+  } catch (error) {
+    const errorObject = error as IError;
+    return rejectWithValue(errorObject);
+  }
+});
 
 const initialState: IInitialState = {
   orders: [],
