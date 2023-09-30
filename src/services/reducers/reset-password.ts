@@ -1,26 +1,36 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+import { AppDispatch } from '.';
+
 import { resetPassword as resetPasswordApi } from '../../utils/burger-api';
+import { IError, TPasswordUser } from '../../utils/types';
 
 interface IResetPasswordRespone {
   message: string;
   success: boolean;
 }
 
-export const resetPassword = createAsyncThunk(
-  'resetPassword/resetPassword',
-  async function ({ password, token }: any, { rejectWithValue }) {
-    try {
-      const res = await resetPasswordApi<IResetPasswordRespone>(password, token);
+export const resetPassword = createAsyncThunk<
+  IResetPasswordRespone,
+  { password: TPasswordUser; token: string },
+  { rejectValue: IError; dispatch: AppDispatch }
+>('resetPassword/resetPassword', async function ({ password, token }, { rejectWithValue }) {
+  try {
+    const res = await resetPasswordApi<IResetPasswordRespone>(password, token);
 
-      return res;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  },
-);
+    return res;
+  } catch (error) {
+    const errorObject = error as IError;
+    return rejectWithValue(errorObject);
+  }
+});
 
-const initialState = {
+interface IInitialState {
+  resetPasswordRequest: boolean;
+  resetPasswordFailed: boolean;
+}
+
+const initialState: IInitialState = {
   resetPasswordRequest: false,
   resetPasswordFailed: false,
 };
