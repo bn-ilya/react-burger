@@ -56,10 +56,6 @@ export interface IError {
   message: string;
 }
 
-export interface IValuesForm {
-  [key: string]: string;
-}
-
 export interface IErrorsForm {
   [key: string]: string;
 }
@@ -81,3 +77,7 @@ export enum ETypesModal {
   ORDER = 'order',
   VIEWING_INGREDIENTS = 'viewingIngredient',
 }
+
+export type TEmailUser = string;
+export type TNameUser = string;
+export type TPasswordUser = string;

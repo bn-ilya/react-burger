@@ -10,13 +10,13 @@ import useFormAndValidation from '../../../../hooks/use-form-and-validation';
 import { openModal } from '../../../../services/reducers/modal';
 import { updateUserData } from '../../../../services/reducers/profile';
 import { selectUserData, selectUserDataFetch } from '../../../../services/selectors';
-import { ETypesModal, IError } from '../../../../utils/types';
+import { ETypesModal, IError, TPasswordUser } from '../../../../utils/types';
 
 const ProfileForm: FC = () => {
   const dispatch = useAppDispatch();
   const { request, failed } = useAppSelector(selectUserDataFetch);
   const { name, email } = useAppSelector(selectUserData);
-  const password: string | number = '';
+  const password: TPasswordUser = '';
 
   const { values, errors, isValid, handleChange, resetForm } = useFormAndValidation({
     name: name,
@@ -28,6 +28,7 @@ const ProfileForm: FC = () => {
 
   useEffect(() => {
     if (request) return;
+    if (!values) return;
     if (name !== values.name || email !== values.email || password !== values.password) {
       setShowControls(true);
     } else {
@@ -37,7 +38,9 @@ const ProfileForm: FC = () => {
 
   const save = async () => {
     try {
-      await dispatch(updateUserData(values)).unwrap();
+      if (values) {
+        await dispatch(updateUserData(values)).unwrap();
+      }
     } catch (error) {
       const errorObject = error as IError;
       dispatch(openModal({ contentModal: errorObject.message, typeModal: ETypesModal.ERROR }));

@@ -12,19 +12,24 @@ import useFormAndValidation from '../../../../hooks/use-form-and-validation';
 import { openModal } from '../../../../services/reducers/modal';
 import { resetPassword } from '../../../../services/reducers/reset-password';
 import { selectResetPasswordRequest } from '../../../../services/selectors';
-import { ETypesModal, IError } from '../../../../utils/types';
+import { ETypesModal, IError, TPasswordUser } from '../../../../utils/types';
 
 const ResetPasswordForm: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const resetPasswordRequest = useSelector(selectResetPasswordRequest);
-  const { values, errors, isValid, handleChange } = useFormAndValidation();
+  const { values, errors, isValid, handleChange } = useFormAndValidation<{
+    password: TPasswordUser;
+    token: string;
+  }>();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await dispatch(resetPassword(values)).unwrap();
-      navigate('/login', { replace: true });
+      if (values) {
+        await dispatch(resetPassword(values)).unwrap();
+        navigate('/login', { replace: true });
+      }
     } catch (error) {
       const errorObject = error as IError;
       dispatch(openModal({ contentModal: errorObject.message, typeModal: ETypesModal.ERROR }));
@@ -36,7 +41,7 @@ const ResetPasswordForm: FC = () => {
       <h1 className={'text text_type_main-medium ' + styles.title}>Восстановление пароля</h1>
       <PasswordInput
         placeholder={'Введите новый пароль'}
-        value={values.password ?? ''}
+        value={values?.password ?? ''}
         onChange={handleChange}
         name={'password'}
         icon={'ShowIcon'}
@@ -46,7 +51,7 @@ const ResetPasswordForm: FC = () => {
       <Input
         type={'text'}
         placeholder={'Введите код из письма'}
-        value={values.token ?? ''}
+        value={values?.token ?? ''}
         onChange={handleChange}
         name={'token'}
         error={!!errors.token}

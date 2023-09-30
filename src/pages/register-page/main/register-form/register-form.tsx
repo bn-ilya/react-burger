@@ -15,19 +15,25 @@ import useFormAndValidation from '../../../../hooks/use-form-and-validation';
 import { openModal } from '../../../../services/reducers/modal';
 import { register } from '../../../../services/reducers/profile';
 import { selectUserDataRequest } from '../../../../services/selectors';
-import { ETypesModal, IError } from '../../../../utils/types';
+import { ETypesModal, IError, TEmailUser, TNameUser, TPasswordUser } from '../../../../utils/types';
 
 const RegisterForm: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { values, errors, isValid, handleChange } = useFormAndValidation();
+  const { values, errors, isValid, handleChange } = useFormAndValidation<{
+    name: TNameUser;
+    password: TPasswordUser;
+    email: TEmailUser;
+  }>();
   const userDataRequest = useAppSelector(selectUserDataRequest);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await dispatch(register(values)).unwrap();
-      navigate('/profile', { replace: true });
+      if (values) {
+        await dispatch(register(values)).unwrap();
+        navigate('/profile', { replace: true });
+      }
     } catch (error) {
       const errorObject = error as IError;
       dispatch(openModal({ contentModal: errorObject.message, typeModal: ETypesModal.ERROR }));
@@ -42,7 +48,7 @@ const RegisterForm: FC = () => {
         placeholder={'Имя'}
         onChange={handleChange}
         name={'name'}
-        value={values.name ?? ''}
+        value={values?.name ?? ''}
         error={!!errors.name}
         errorText={errors.name}
         size={'default'}
@@ -52,7 +58,7 @@ const RegisterForm: FC = () => {
         placeholder={'E-mail'}
         onChange={handleChange}
         name={'email'}
-        value={values.email ?? ''}
+        value={values?.email ?? ''}
         size={'default'}
         required={true}
       />
@@ -61,7 +67,7 @@ const RegisterForm: FC = () => {
         onChange={handleChange}
         icon={'ShowIcon'}
         name={'password'}
-        value={values.password ?? ''}
+        value={values?.password ?? ''}
         required={true}
       />
       <ButtonLoader
