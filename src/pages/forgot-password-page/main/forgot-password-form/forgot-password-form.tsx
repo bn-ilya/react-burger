@@ -12,20 +12,22 @@ import useFormAndValidation from '../../../../hooks/use-form-and-validation';
 import { forgotPassword } from '../../../../services/reducers/forgot-password';
 import { openModal } from '../../../../services/reducers/modal';
 import { selectForgotPasswordRequest } from '../../../../services/selectors';
-import { ETypesModal, IError } from '../../../../utils/types';
+import { ETypesModal, IError, TEmailUser } from '../../../../utils/types';
 
 const ForgotPasswordForm: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { values, isValid, handleChange } = useFormAndValidation();
+  const { values, isValid, handleChange } = useFormAndValidation<{ email: TEmailUser }>();
   const forgotPasswordRequest = useAppSelector(selectForgotPasswordRequest);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
     try {
-      await dispatch(forgotPassword(values.email)).unwrap();
-      navigate('/reset-password', { replace: true });
+      if (values) {
+        await dispatch(forgotPassword(values.email)).unwrap();
+        navigate('/reset-password', { replace: true });
+      }
     } catch (error) {
       const errorObject = error as IError;
       dispatch(openModal({ contentModal: errorObject.message, typeModal: ETypesModal.ERROR }));
@@ -37,7 +39,7 @@ const ForgotPasswordForm: FC = () => {
       <h1 className={'text text_type_main-medium ' + styles.title}>Восстановление пароля</h1>
       <EmailInput
         placeholder={'E-mail'}
-        value={values.email ?? ''}
+        value={values?.email ?? ''}
         name='email'
         onChange={handleChange}
         size={'default'}

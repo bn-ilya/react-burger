@@ -1,5 +1,5 @@
 import { instanceAxios } from './api-config';
-import { IError, IRefreshRespone } from './types';
+import { IError, IRefreshRespone, TEmailUser, TNameUser, TPasswordUser } from './types';
 
 export const getIngredients = async <T>(): Promise<T> => {
   const res = await instanceAxios.get<T>('ingredients');
@@ -31,7 +31,11 @@ export const resetPassword = async <T>(password: string, token: string): Promise
   return res.data;
 };
 
-export const register = async <T>(email: string, password: string, name: string): Promise<T> => {
+export const register = async <T>(
+  email: TEmailUser,
+  password: TPasswordUser,
+  name: TNameUser,
+): Promise<T> => {
   const res = await instanceAxios.post<T>(`auth/register`, {
     name,
     email,
@@ -41,7 +45,7 @@ export const register = async <T>(email: string, password: string, name: string)
   return res.data;
 };
 
-export const login = async <T>(email: string, password: string): Promise<T> => {
+export const login = async <T>(email: TEmailUser, password: TPasswordUser): Promise<T> => {
   const res = await instanceAxios.post<T>(`auth/login`, {
     email,
     password,
