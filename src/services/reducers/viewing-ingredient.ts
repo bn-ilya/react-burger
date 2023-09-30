@@ -1,14 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
-  viewingIngredient: {},
+import { IIngredient } from '../../utils/types';
+
+interface IInitialSTate {
+  viewingIngredient: IIngredient | null;
+}
+
+const initialState: IInitialSTate = {
+  viewingIngredient: null,
 };
 
 const viewingIngredientSlice = createSlice({
   name: 'viewingIngredient',
   initialState,
   reducers: {
-    setViewingIngredient: (state, action) => {
+    setViewingIngredient: (state, action: PayloadAction<IIngredient>) => {
       state.viewingIngredient = action.payload;
     },
     clearViewingIngredient: (state) => {
