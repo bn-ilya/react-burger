@@ -9,6 +9,7 @@ import { useAppSelector, useAppDispatch } from '../../../../hooks/rtk-hooks';
 
 import { setActiveTab } from '../../../../services/reducers/tabs';
 import { selectActiveTab } from '../../../../services/selectors';
+import { EIngredients } from '../../../../utils/types';
 
 const getTitleData = (ref: RefObject<HTMLHeadingElement>): ITitles | null => {
   const node = ref.current;
@@ -51,7 +52,7 @@ const Ingredients: FC = () => {
     const closestTitleId: string | null = closestTitleNode.getAttribute('id');
 
     if (!closestTitleId) return;
-    activeTab !== closestTitleId && dispatch(setActiveTab(closestTitleId));
+    activeTab !== closestTitleId && dispatch(setActiveTab(closestTitleId as EIngredients));
   };
 
   const { buns, sauces, mains } = useAppSelector((state) => state.ingredients);
