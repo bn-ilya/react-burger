@@ -1,3 +1,5 @@
+import { type AxiosRequestConfig } from 'axios';
+
 import { instanceAxios } from './api-config';
 import { IError, IRefreshRespone, TEmailUser, TNameUser, TPasswordUser } from './types';
 
@@ -70,7 +72,7 @@ export const refreshToken = async <T>(): Promise<T> => {
   return res.data;
 };
 
-export const fetchWithRefresh = async <T>(url: string, options: any): Promise<T> => {
+export const fetchWithRefresh = async <T>(url: string, options: AxiosRequestConfig): Promise<T> => {
   try {
     if (!localStorage.getItem('accessToken'))
       return Promise.reject('Токен авторизации не обноружен');
