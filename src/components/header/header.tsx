@@ -26,7 +26,7 @@ const Header: FC = () => {
               <Link
                 iconCb={(type) => <ListIcon type={type} />}
                 label={'Лента заказов'}
-                to={'/undefined'}
+                to={'/feed'}
               >
                 Лента заказов
               </Link>

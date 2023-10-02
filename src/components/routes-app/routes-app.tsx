@@ -10,6 +10,7 @@ import {
   ForgotPasswordPage,
   ProfilePage,
   IngredientViewPage,
+  FeedPage,
 } from '../../pages';
 import IngredientModal from '../../pages/constructor-page/burger-ingredients/ingredients/ingredient-modal/ingredient-modal';
 import { ERoutes } from '../../utils/types';
@@ -53,6 +54,7 @@ const RoutesApp: FC = () => {
           element={<ProtectedRouteElement element={<ProfilePage />} accessAuth={true} />}
         />
         <Route path={ERoutes.ingredientId} element={<IngredientViewPage />} />
+        <Route path={ERoutes.feed} element={<FeedPage />} />
         <Route path={ERoutes.all} element={<NotFoundPage />} />
       </Routes>
 
