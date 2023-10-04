@@ -3,6 +3,12 @@ import { FC } from 'react';
 
 import styles from './feed-cart.module.css';
 
+const ingredients = [
+  'https://code.s3.yandex.net/react/code/bun-01.png',
+  'https://code.s3.yandex.net/react/code/sauce-02.png',
+  'https://code.s3.yandex.net/react/code/sauce-01.png',
+];
+
 const FeedCart: FC = () => {
   return (
     <article className={styles.cart}>
@@ -15,15 +21,15 @@ const FeedCart: FC = () => {
       </div>
       <footer className={styles['cart-footer']}>
         <div className={styles['cart-ingredients']}>
-          <div className={styles['cart-ingredient']}>
-            <img src='https://code.s3.yandex.net/react/code/bun-01.png' alt='' />
-          </div>
-          <div className={styles['cart-ingredient']}>
-            <img src='https://code.s3.yandex.net/react/code/sauce-02.png' alt='' />
-          </div>
-          <div className={styles['cart-ingredient']}>
-            <img src='https://code.s3.yandex.net/react/code/sauce-01.png' alt='' />
-          </div>
+          {ingredients.map((ingredient, index) => (
+            <div
+              key={index}
+              style={{ zIndex: ingredients.length - index }}
+              className={styles['cart-ingredient']}
+            >
+              <img src={ingredient} alt='' />
+            </div>
+          ))}
         </div>
         <div className={styles['cart-price']}>
           <span className='text text_type_digits-default'>480</span>
