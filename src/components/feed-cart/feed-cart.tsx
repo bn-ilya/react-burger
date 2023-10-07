@@ -16,8 +16,9 @@ const FeedCart: FC = () => {
         <span className='text text_type_digits-default'>#034535</span>
         <span className='text text_type_main-default text_color_inactive'>Сегодня, 16:20</span>
       </header>
-      <div>
+      <div className={styles['cart-body']}>
         <span className='text text_type_main-medium'>Death Star Starship Main бургер</span>
+        <span className='text text_type_main-default'>Создан</span>
       </div>
       <footer className={styles['cart-footer']}>
         <div className={styles['cart-ingredients']}>

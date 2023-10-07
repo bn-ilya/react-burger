@@ -1,12 +1,11 @@
-import { FC } from 'react';
-
-import styles from './feed-list.module.css';
+import styles from './profile-orders.module.css';
 
 import FeedCart from '../../../../components/feed-cart/feed-cart';
 
-const FeedList: FC = () => {
+const ProfileOrders = () => {
   return (
     <div className={styles.content}>
+      <FeedCart />
       <FeedCart />
       <FeedCart />
       <FeedCart />
@@ -16,4 +15,4 @@ const FeedList: FC = () => {
   );
 };
 
-export default FeedList;
+export default ProfileOrders;

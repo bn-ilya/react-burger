@@ -30,7 +30,7 @@ const ProfileMenu = () => {
   };
 
   return (
-    <div>
+    <div className={styles.content}>
       <ul className={styles.list}>
         <NavLink
           to='/profile'

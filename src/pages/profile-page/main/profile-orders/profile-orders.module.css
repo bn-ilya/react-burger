@@ -1,0 +1,8 @@
+.content {
+  margin-top: 40px;
+  grid-column: 2/4;
+  overflow: auto;
+  display: grid;
+  grid-gap: 24px;
+  padding-right: 8px;
+}

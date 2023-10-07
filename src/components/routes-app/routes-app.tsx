@@ -50,10 +50,6 @@ const RoutesApp: FC = () => {
           path={ERoutes.profile}
           element={<ProtectedRouteElement element={<ProfilePage />} accessAuth={true} />}
         />
-        <Route
-          path={ERoutes.profileOrders}
-          element={<ProtectedRouteElement element={<ProfilePage />} accessAuth={true} />}
-        />
         <Route path={ERoutes.ingredientId} element={<IngredientViewPage />} />
         <Route path={ERoutes.feed} element={<FeedPage />} />
         <Route path={ERoutes.feedId} element={<FeedInfoPage />} />
