@@ -58,14 +58,8 @@ const RoutesApp: FC = () => {
 
       {background && (
         <Routes>
-          <Route
-            path={ERoutes.ingredientId}
-            element={
-              <>
-                <IngredientModal />
-              </>
-            }
-          />
+          <Route path={ERoutes.ingredientId} element={<IngredientModal />} />
+          <Route path={ERoutes.feedId} element={< />}></Route>
         </Routes>
       )}
     </>
