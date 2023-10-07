@@ -5,7 +5,7 @@ import Main from './main/main';
 import ContainerPage from '../../components/container-page/container-page';
 import Header from '../../components/header/header';
 
-const FeedInfoPage: FC = () => {
+const FeedDetailsPage: FC = () => {
   return (
     <ContainerPage>
       <Header />
@@ -14,4 +14,4 @@ const FeedInfoPage: FC = () => {
   );
 };
 
-export default FeedInfoPage;
+export default FeedDetailsPage;

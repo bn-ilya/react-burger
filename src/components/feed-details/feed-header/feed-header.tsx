@@ -1,11 +1,15 @@
 import { FC } from 'react';
 
+import { IFeedHeaderProps } from './feed-header-props';
+
 import styles from './feed-header.module.css';
 
-const FeedHeader: FC = () => {
+const FeedHeader: FC<IFeedHeaderProps> = ({ showNumberFeed = true }) => {
   return (
     <header className={styles.header}>
-      <span className={`text text_type_digits-default ${styles['feed-number']}`}>#034533</span>
+      {showNumberFeed && (
+        <span className={`text text_type_digits-default ${styles['feed-number']}`}>#034533</span>
+      )}
       <span className={`text text_type_main-medium ${styles['feed-title']}`}>
         Black Hole Singularity острый бургер
       </span>

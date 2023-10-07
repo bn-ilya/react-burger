@@ -16,6 +16,7 @@ import OrderDetails from '../../pages/constructor-page/order-details/order-detai
 import { closeModal } from '../../services/reducers/modal';
 import { selectModal } from '../../services/selectors';
 import { ETypesModal, IIngredient } from '../../utils/types';
+import FeedDetails from '../feed-details/feed-details';
 import ModalError from '../ui/modal-error/modal-error';
 
 import type { FC, ReactNode, KeyboardEvent as ReactKeyboardEvent } from 'react';
@@ -45,6 +46,18 @@ const Modal: FC = () => {
       case ETypesModal.VIEWING_INGREDIENTS:
         setHeader(<span className='text text_type_main-large'>Детали ингредиента</span>);
         setMain(<IngredientDetails ingredient={contentModal as IIngredient} />);
+        break;
+      case ETypesModal.VIEWING_FEED:
+        // TODO: Убрать статику
+        setHeader(
+          <div
+            className='text text_type_digits-default'
+            style={{ marginTop: '10px', marginBottom: '20px' }}
+          >
+            #034533
+          </div>,
+        );
+        setMain(<FeedDetails showNumberFeed={false} />);
         break;
       case ETypesModal.ORDER:
         setMain(<OrderDetails number={contentModal as number} />);

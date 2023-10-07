@@ -14,6 +14,7 @@ export enum ERoutes {
   forgotPassword = '/forgot-password',
   profile = '/profile/*',
   profileOrders = 'orders',
+  profileOrdersId = '/profile/orders/:id',
   ingredientId = '/ingredients/:id',
   feed = '/feed',
   feedId = '/feed/:id',
@@ -78,6 +79,7 @@ export enum ETypesModal {
   ERROR = 'error',
   ORDER = 'order',
   VIEWING_INGREDIENTS = 'viewingIngredient',
+  VIEWING_FEED = 'viewingFeed',
 }
 
 export type TEmailUser = string;
