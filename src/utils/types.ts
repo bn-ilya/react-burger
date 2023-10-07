@@ -16,6 +16,7 @@ export enum ERoutes {
   profileOrders = '/profile/orders',
   ingredientId = '/ingredients/:id',
   feed = '/feed',
+  feedId = '/feed/:id',
   all = '*',
 }
 

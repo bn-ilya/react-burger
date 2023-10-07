@@ -11,6 +11,7 @@ import {
   ProfilePage,
   IngredientViewPage,
   FeedPage,
+  FeedInfoPage,
 } from '../../pages';
 import IngredientModal from '../../pages/constructor-page/burger-ingredients/ingredients/ingredient-modal/ingredient-modal';
 import { ERoutes } from '../../utils/types';
@@ -55,6 +56,7 @@ const RoutesApp: FC = () => {
         />
         <Route path={ERoutes.ingredientId} element={<IngredientViewPage />} />
         <Route path={ERoutes.feed} element={<FeedPage />} />
+        <Route path={ERoutes.feedId} element={<FeedInfoPage />} />
         <Route path={ERoutes.all} element={<NotFoundPage />} />
       </Routes>
 

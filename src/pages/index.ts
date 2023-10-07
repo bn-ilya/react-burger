@@ -1,4 +1,5 @@
 import ConstructorPage from './constructor-page/constructor-page';
+import FeedInfoPage from './feed-info-page/feed-info-page';
 import FeedPage from './feed-page/feed-page';
 import ForgotPasswordPage from './forgot-password-page/forgot-password-page';
 import IngredientViewPage from './ingredient-view-page/ingredient-view-page';
@@ -18,4 +19,5 @@ export {
   ProfilePage,
   IngredientViewPage,
   FeedPage,
+  FeedInfoPage,
 };
