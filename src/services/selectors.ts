@@ -80,3 +80,5 @@ export const selectAllIngredientsConstructor = createSelector(
     return { ingredients, bunTop, bunBottom };
   },
 );
+// Feeds
+export const selectFeeds = (state: RootState) => state.wsFeeds.feeds;
