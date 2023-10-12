@@ -1,5 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
+import { SliceActions } from '../../utils/types';
+
 interface IInitialState {
   totalPrice: number;
 }
@@ -20,3 +22,4 @@ const totalPriceSlice = createSlice({
 
 export default totalPriceSlice.reducer;
 export const { setTotalPrice } = totalPriceSlice.actions;
+export type TTotalPriceSliceActions = SliceActions<typeof totalPriceSlice.actions>;

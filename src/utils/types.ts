@@ -1,5 +1,7 @@
 import { ReactElement } from 'react';
 
+import type { ActionCreatorWithoutPayload, ActionCreatorWithPayload } from '@reduxjs/toolkit';
+
 export enum EIngredients {
   BUN = 'bun',
   SAUCE = 'sauce',
@@ -85,3 +87,16 @@ export enum ETypesModal {
 export type TEmailUser = string;
 export type TNameUser = string;
 export type TPasswordUser = string;
+
+export interface IWsActions {
+  init: ActionCreatorWithoutPayload;
+  send: ActionCreatorWithoutPayload;
+  onsuccess: ActionCreatorWithoutPayload;
+  onerror: ActionCreatorWithPayload<any>;
+  onclose: ActionCreatorWithoutPayload;
+  onmessage: ActionCreatorWithPayload<any>;
+}
+
+export type SliceActions<T> = {
+  [K in keyof T]: T[K] extends (...args: any[]) => infer A ? A : never;
+}[keyof T];

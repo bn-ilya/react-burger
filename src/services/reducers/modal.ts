@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { ReactElement } from 'react';
 
-import { ETypesModal, IIngredient } from '../../utils/types';
+import { ETypesModal, IIngredient, SliceActions } from '../../utils/types';
 
 interface IInitialState {
   isModalOpen?: boolean;
@@ -38,3 +38,4 @@ const modalSlice = createSlice({
 
 export default modalSlice.reducer;
 export const { openModal, closeModal } = modalSlice.actions;
+export type TModalSliceActions = SliceActions<typeof modalSlice.actions>;

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/tool
 
 import { AppDispatch } from '.';
 
-import { IError, IIngredient, IIngredientsCount } from './../../utils/types';
+import { IError, IIngredient, IIngredientsCount, SliceActions } from './../../utils/types';
 
 import { getIngredients as getIngredientsApi } from '../../utils/burger-api';
 
@@ -89,3 +89,4 @@ const ingredientsSlice = createSlice({
 
 export default ingredientsSlice.reducer;
 export const { setIngredients, setCountIngredients, setCountBuns } = ingredientsSlice.actions;
+export type TIngredientsSliceActions = SliceActions<typeof ingredientsSlice.actions>;

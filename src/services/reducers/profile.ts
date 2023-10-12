@@ -9,7 +9,7 @@ import {
   getUserData as getUserDataApi,
   updateUserData as updateUserDataApi,
 } from '../../utils/burger-api';
-import { IError, TEmailUser, TNameUser, TPasswordUser } from '../../utils/types';
+import { IError, SliceActions, TEmailUser, TNameUser, TPasswordUser } from '../../utils/types';
 
 interface IUser {
   email: TEmailUser;
@@ -243,3 +243,4 @@ const profileSlice = createSlice({
 
 export default profileSlice.reducer;
 const { setEmail, setName } = profileSlice.actions;
+export type TProfileSliceActions = SliceActions<typeof profileSlice.actions>;

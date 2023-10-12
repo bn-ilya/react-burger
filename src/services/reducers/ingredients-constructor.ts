@@ -1,6 +1,11 @@
 import { createSlice, nanoid, type PayloadAction } from '@reduxjs/toolkit';
 
-import { IIngredient, IIngredientConstructor, TIdIngredient } from '../../utils/types';
+import {
+  IIngredient,
+  IIngredientConstructor,
+  SliceActions,
+  TIdIngredient,
+} from '../../utils/types';
 
 interface IInitialState {
   ingredients: Array<IIngredientConstructor>;
@@ -65,3 +70,6 @@ export const {
   updateIndexIngredients,
   moveIngredients,
 } = ingredientsConstructorSlice.actions;
+export type TIngredientsConstructorSliceActions = SliceActions<
+  typeof ingredientsConstructorSlice.actions
+>;

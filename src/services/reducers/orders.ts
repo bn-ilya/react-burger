@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/tool
 import { AppDispatch } from '.';
 
 import { createOrder as createOrderApi } from '../../utils/burger-api';
-import { IError, TIdIngredient } from '../../utils/types';
+import { IError, SliceActions, TIdIngredient } from '../../utils/types';
 
 interface IOrder {
   name: string;
@@ -70,3 +70,4 @@ const ordersSlice = createSlice({
 
 export default ordersSlice.reducer;
 export const { addOrder } = ordersSlice.actions;
+export type TOrdersSliceActions = SliceActions<typeof ordersSlice.actions>;

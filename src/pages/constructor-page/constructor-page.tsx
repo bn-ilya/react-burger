@@ -10,6 +10,7 @@ import LoadingPage from '../../components/loading-page/loading-page';
 import { useAppSelector, useAppDispatch } from '../../hooks/rtk-hooks';
 
 import { getIngredients } from '../../services/reducers/ingredients';
+import { wsConnectionSuccess, wsInit } from '../../services/reducers/wsFeeds';
 import { selectIngredientsRequest, selectIngredientsFailed } from '../../services/selectors';
 
 import type { FC } from 'react';
@@ -21,6 +22,7 @@ const ConstructorPage: FC = () => {
 
   useEffect(() => {
     dispatch(getIngredients());
+    dispatch(wsInit());
   }, [dispatch]);
 
   if (isFetchIngredients) return <LoadingPage />;
