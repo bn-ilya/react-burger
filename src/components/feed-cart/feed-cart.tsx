@@ -1,28 +1,34 @@
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+import { TFeedCartProps } from './feed-cart-props';
+
 import styles from './feed-cart.module.css';
 
-const ingredients = [
-  'https://code.s3.yandex.net/react/code/bun-01.png',
-  'https://code.s3.yandex.net/react/code/sauce-02.png',
-  'https://code.s3.yandex.net/react/code/sauce-01.png',
-];
-
-const FeedCart: FC = () => {
+const FeedCart: FC<TFeedCartProps> = ({
+  ingredients,
+  _id,
+  status,
+  name,
+  number,
+  createdAt,
+  updatedAt,
+}) => {
   const location = useLocation();
 
   return (
-    <Link to={`${location?.pathname}/1`} state={{ background: location }}>
+    <Link to={`${location?.pathname}/${_id}`} state={{ background: location }}>
       <article className={styles.cart}>
         <header className={styles['cart-header']}>
-          <span className='text text_type_digits-default'>#034535</span>
-          <span className='text text_type_main-default text_color_inactive'>Сегодня, 16:20</span>
+          <span className='text text_type_digits-default'>#{number}</span>
+          <span className='text text_type_main-default text_color_inactive'>
+            <FormattedDate date={new Date(createdAt)} />
+          </span>
         </header>
         <div className={styles['cart-body']}>
-          <span className='text text_type_main-medium'>Death Star Starship Main бургер</span>
-          <span className='text text_type_main-default'>Создан</span>
+          <span className='text text_type_main-medium'>{name}</span>
+          <span className='text text_type_main-default'>{status}</span>
         </div>
         <footer className={styles['cart-footer']}>
           <div className={styles['cart-ingredients']}>

@@ -12,7 +12,7 @@ const FeedList: FC = () => {
   return (
     <div className={styles.content}>
       {feeds.map((feed) => (
-        <FeedCart key={feed._id} />
+        <FeedCart key={feed._id} {...feed} />
       ))}
     </div>
   );
