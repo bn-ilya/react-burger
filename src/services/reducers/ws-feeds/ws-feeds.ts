@@ -1,6 +1,6 @@
 import { createAction, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { IWsActions, SliceActions } from '../../utils/types';
+import { IWsActions, SliceActions } from '../../../utils/types';
 
 interface IInitialState {
   wsConnected: boolean;

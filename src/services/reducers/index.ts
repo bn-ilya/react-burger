@@ -1,7 +1,5 @@
 import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
-import thunkMiddleware from 'redux-thunk';
-
 import forgotPasswordSlice, { TForgotPasswordSliceActions } from './forgot-password';
 import ingredientsSlice, { TIngredientsSliceActions } from './ingredients';
 import ingredientsConstructorSlice, {
@@ -15,9 +13,9 @@ import tabsSlice, { TTabsSliceActions } from './tabs';
 import totalPriceSlice, { TTotalPriceSliceActions } from './total-price';
 import viewingIngredientSlice, { TViewingIngredientSliceActions } from './viewing-ingredient';
 
-import { TWsFeedSliceActions, wsActionsFeeds } from './wsFeeds';
+import { TWsFeedSliceActions, wsActionsFeeds } from './ws-feeds/ws-feeds';
 
-import { socketMiddleware } from '../middleware/socketMiddleware';
+import { socketMiddleware } from '../middleware/socket-middleware';
 
 const rootReducer = combineReducers({
   ingredients: ingredientsSlice,
