@@ -1,10 +1,14 @@
 import { createAction, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
+import { type Order, type ResponseFeedsAll } from './types';
+
 import { IWsActions, SliceActions } from '../../../utils/types';
 
 interface IInitialState {
   wsConnected: boolean;
-  feeds: Array<any>;
+  feeds: Array<Order>;
+  total: number;
+  totalToday: number;
 
   error?: Event;
 }
@@ -12,6 +16,8 @@ interface IInitialState {
 const initialState: IInitialState = {
   wsConnected: false,
   feeds: [],
+  total: 0,
+  totalToday: 0,
 };
 
 const nameSlice = 'wsFeeds';
@@ -31,10 +37,8 @@ const wsFeedsSlice = createSlice({
       store.error = undefined;
       store.wsConnected = false;
     },
-    // TODO: Должна быть сигнатура data
-    wsGetFeeds: (store, action: PayloadAction<any>) => {
-      console.log(wsGetFeeds);
-      store.feeds.push(action.payload);
+    wsGetFeeds: (store, action: PayloadAction<ResponseFeedsAll>) => {
+      store.feeds = [...store.feeds, ...action.payload.orders];
     },
   },
 });
