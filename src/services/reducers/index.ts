@@ -13,7 +13,7 @@ import tabsSlice, { TTabsSliceActions } from './tabs';
 import totalPriceSlice, { TTotalPriceSliceActions } from './total-price';
 import viewingIngredientSlice, { TViewingIngredientSliceActions } from './viewing-ingredient';
 
-import { TWsFeedSliceActions, wsActionsFeeds } from './ws-feeds/ws-feeds';
+import wsFeedsSlice, { TWsFeedSliceActions, wsActionsFeeds } from './ws-feeds/ws-feeds';
 
 import { socketMiddleware } from '../middleware/socket-middleware';
 
@@ -28,6 +28,7 @@ const rootReducer = combineReducers({
   forgotPassword: forgotPasswordSlice,
   resetPassword: resetPasswordSlice,
   profile: profileSlice,
+  wsFeeds: wsFeedsSlice,
 });
 
 export const store = configureStore({
