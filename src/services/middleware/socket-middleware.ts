@@ -27,7 +27,7 @@ export const socketMiddleware = <T extends IWsActions>(wsUrl: string, actions: T
         socket.onmessage = (event) => {
           // TODO: Должна быть сигнатура data
           const { data } = event;
-          dispatch(onmessage(data));
+          dispatch(onmessage(JSON.parse(data)));
         };
 
         socket.onclose = () => {
