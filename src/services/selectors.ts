@@ -2,6 +2,8 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from './reducers';
 
+import { IIngredient } from '../utils/types';
+
 export const selectNameUser = (state: RootState) => state.profile.name;
 export const selectEmailUser = (state: RootState) => state.profile.email;
 
@@ -49,6 +51,12 @@ export const selectIngredientsFailed = (state: RootState) => state.ingredients.i
 export const selectSauces = (state: RootState) => state.ingredients.sauces;
 export const selectMains = (state: RootState) => state.ingredients.mains;
 export const selectBuns = (state: RootState) => state.ingredients.buns;
+export const selectIngredients = createSelector(
+  [selectSauces, selectMains, selectBuns],
+  (sauces, mains, buns) => {
+    return [...sauces, ...mains, ...buns];
+  },
+);
 
 export const selectIngredientById = (ingredientId: string | undefined) =>
   createSelector([selectBuns, selectMains, selectSauces], (buns, mains, sauces) => {
@@ -82,3 +90,15 @@ export const selectAllIngredientsConstructor = createSelector(
 );
 // Feeds
 export const selectFeeds = (state: RootState) => state.wsFeeds.feeds;
+export const selectWsFeedsConnected = (state: RootState) => state.wsFeeds.wsConnected;
+export const selectImagesIngredients = (ingredientsId: Array<IIngredient['_id']>) =>
+  createSelector([selectBuns, selectMains, selectSauces], (buns, mains, sauces) => {
+    const ingredients = [...buns, ...mains, ...sauces];
+
+    const ingredientsImages = ingredientsId.map((ingredientId) => {
+      const ingredient = ingredients.find((ingredient) => ingredient._id === ingredientId);
+      return ingredient?.image_mobile;
+    });
+
+    return ingredientsImages;
+  });

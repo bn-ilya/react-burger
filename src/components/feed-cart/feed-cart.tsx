@@ -6,6 +6,9 @@ import { TFeedCartProps } from './feed-cart-props';
 
 import styles from './feed-cart.module.css';
 
+import { useAppSelector } from '../../hooks/rtk-hooks';
+import { selectImagesIngredients } from '../../services/selectors';
+
 const FeedCart: FC<TFeedCartProps> = ({
   ingredients,
   _id,
@@ -16,6 +19,7 @@ const FeedCart: FC<TFeedCartProps> = ({
   updatedAt,
 }) => {
   const location = useLocation();
+  const ingredientsImages = useAppSelector(selectImagesIngredients(ingredients));
 
   return (
     <Link to={`${location?.pathname}/${_id}`} state={{ background: location }}>
@@ -32,13 +36,13 @@ const FeedCart: FC<TFeedCartProps> = ({
         </div>
         <footer className={styles['cart-footer']}>
           <div className={styles['cart-ingredients']}>
-            {ingredients.map((ingredient, index) => (
+            {ingredientsImages.map((ingredientImage, index) => (
               <div
                 key={index}
                 style={{ zIndex: ingredients.length - index }}
                 className={styles['cart-ingredient']}
               >
-                <img src={ingredient} alt='' />
+                <img src={ingredientImage} alt='' />
               </div>
             ))}
           </div>
