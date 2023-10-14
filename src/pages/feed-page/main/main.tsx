@@ -6,15 +6,26 @@ import FeedList from './feed-list/feed-list';
 
 import styles from './main.module.css';
 
-import { useAppDispatch } from '../../../hooks/rtk-hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/rtk-hooks';
+import { getIngredients } from '../../../services/reducers/ingredients';
 import { wsInit } from '../../../services/reducers/ws-feeds/ws-feeds';
+import { selectFeeds, selectIngredients } from '../../../services/selectors';
 
 const Main: FC = () => {
   const dispatch = useAppDispatch();
 
+  const ingredients = useAppSelector(selectIngredients);
+  const feeds = useAppSelector(selectFeeds);
+
   useEffect(() => {
+    if (feeds.length) return;
     dispatch(wsInit());
-  }, []);
+  }, [dispatch, feeds]);
+
+  useEffect(() => {
+    if (ingredients.length) return;
+    dispatch(getIngredients());
+  }, [dispatch, ingredients]);
 
   return (
     <div className={styles.main}>
