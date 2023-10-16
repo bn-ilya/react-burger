@@ -30,6 +30,8 @@
 }
 
 .cart-ingredient {
+    overflow: hidden;
+    position: relative;
     display: flex;
     width: 64px;
     height: 64px;
@@ -50,6 +52,30 @@
     width: 90px;
     height: auto;
 }
+
+.remain-number {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remain-number::after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(19, 19, 22, 0.5);
+}
+
 
 .cart-price {
     display: flex;

@@ -30,15 +30,34 @@ const FeedCart: FC<TFeedCartProps> = ({ ingredients, _id, status, name, number, 
         </div>
         <footer className={styles['cart-footer']}>
           <div className={styles['cart-ingredients']}>
-            {ingredientsImages.map((ingredientImage, index) => (
-              <div
-                key={index}
-                style={{ zIndex: ingredients.length - index }}
-                className={styles['cart-ingredient']}
-              >
-                <img src={ingredientImage} alt='Ингредиент' />
-              </div>
-            ))}
+            {ingredientsImages.map((ingredientImage, index) => {
+              if (index < 5) {
+                return (
+                  <div
+                    key={index}
+                    style={{ zIndex: ingredients.length - index }}
+                    className={styles['cart-ingredient']}
+                  >
+                    <img src={ingredientImage} alt='Ингредиент' />
+                  </div>
+                );
+              } else if (index === 5) {
+                return (
+                  <div
+                    key={index}
+                    style={{ zIndex: ingredients.length - index }}
+                    className={`${styles['cart-ingredient']}`}
+                  >
+                    <div className={`${styles['remain-number']} text text_type_main-default`}>
+                      +{ingredientsImages.length - index}
+                    </div>
+                    <img src={ingredientImage} alt='Ингредиент' />
+                  </div>
+                );
+              } else {
+                return;
+              }
+            })}
           </div>
           <div className={styles['cart-price']}>
             <span className='text text_type_digits-default'>{total}</span>
