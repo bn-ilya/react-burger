@@ -8,14 +8,6 @@ export const getIngredients = async <T>(): Promise<T> => {
   return res.data;
 };
 
-export const createOrder = async <T>(ingredientsIds: Array<string>): Promise<T> => {
-  const res = await instanceAxios.post<T>(`orders`, {
-    ingredients: ingredientsIds,
-  });
-
-  return res.data;
-};
-
 export const forgotPassword = async <T>(email: string): Promise<T> => {
   const res = await instanceAxios.post<T>(`password-reset`, {
     email,
@@ -92,6 +84,19 @@ export const fetchWithRefresh = async <T>(url: string, options: AxiosRequestConf
       return Promise.reject(error);
     }
   }
+};
+
+export const createOrder = async <T>(ingredientsIds: Array<string>): Promise<T> => {
+  const res = await fetchWithRefresh<T>(`orders`, {
+    method: 'post',
+    data: { ingredients: ingredientsIds },
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+    },
+  });
+
+  return res;
 };
 
 export const getUserData = async <T>(): Promise<T> => {
