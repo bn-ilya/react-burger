@@ -111,3 +111,5 @@ export const selectTotalPriceFeeds = (ingredientsId: Array<IIngredient['_id']>) 
 
     return total;
   });
+export const selectTotalTodayFeeds = (state: RootState) => state.wsFeeds.totalToday;
+export const selectTotalFeeds = (state: RootState) => state.wsFeeds.total;
