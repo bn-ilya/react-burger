@@ -2,7 +2,7 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from './reducers';
 
-import { IIngredient } from '../utils/types';
+import { EStatuses, IIngredient } from '../utils/types';
 
 export const selectNameUser = (state: RootState) => state.profile.name;
 export const selectEmailUser = (state: RootState) => state.profile.email;
@@ -113,3 +113,11 @@ export const selectTotalPriceFeeds = (ingredientsId: Array<IIngredient['_id']>) 
   });
 export const selectTotalTodayFeeds = (state: RootState) => state.wsFeeds.totalToday;
 export const selectTotalFeeds = (state: RootState) => state.wsFeeds.total;
+export const selectFeedsReady = createSelector([selectFeeds], (feeds) => {
+  const ready = feeds.filter((feed) => feed.status === EStatuses.DONE);
+  return ready;
+});
+export const selectFeedsPending = createSelector([selectFeeds], (feeds) => {
+  const pending = feeds.filter((feed) => feed.status === EStatuses.PENDING);
+  return pending;
+});

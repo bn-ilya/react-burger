@@ -1,32 +1,19 @@
 import { FC } from 'react';
 
 import { sliceArraySection } from './../../../../../utils/utils';
+
 import styles from './feed-statuses.module.css';
 
-const FeedStatuses: FC = () => {
-  const feedsReady: Array<string> = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-  ];
+import { useAppSelector } from '../../../../../hooks/rtk-hooks';
+import { Order } from '../../../../../services/reducers/ws-feeds/types';
+import { selectFeedsPending, selectFeedsReady } from '../../../../../services/selectors';
 
-  const feedsReadyCols = sliceArraySection<string>(feedsReady, 10);
-  const feedsProgressCols = sliceArraySection<string>(feedsReady, 10);
+const FeedStatuses: FC = () => {
+  const feedsReady = useAppSelector(selectFeedsReady);
+  const feedsPending = useAppSelector(selectFeedsPending);
+
+  const feedsReadyCols = sliceArraySection<Order>(feedsReady, 10);
+  const feedsProgressCols = sliceArraySection<Order>(feedsPending, 10);
 
   return (
     <div className={styles['feed-statuses']}>
@@ -37,7 +24,7 @@ const FeedStatuses: FC = () => {
             <div key={index} className={styles['feed-numbers-col']}>
               {feedReadyCol.map((feedReady, index) => (
                 <span key={index} className='text text_type_digits-default'>
-                  {feedReady}
+                  {feedReady.number}
                 </span>
               ))}
             </div>
@@ -51,7 +38,7 @@ const FeedStatuses: FC = () => {
             <div key={index} className={styles['feed-numbers-col']}>
               {feedProgressCol.map((feedProgress, index) => (
                 <span key={index} className='text text_type_digits-default'>
-                  {feedProgress}
+                  {feedProgress.number}
                 </span>
               ))}
             </div>

@@ -1,9 +1,9 @@
-import { TStatuses } from '../../../utils/types';
+import { EStatuses } from '../../../utils/types';
 
 export interface Order {
   ingredients: string[];
   _id: string;
-  status: TStatuses;
+  status: EStatuses;
   name: string;
   number: number;
   createdAt: string;

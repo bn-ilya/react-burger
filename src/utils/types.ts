@@ -109,4 +109,8 @@ export interface IStatusesClasses {
   [key: string]: 'status-pending' | 'status-done';
 }
 
-export type TStatuses = 'created' | 'pending' | 'done';
+export enum EStatuses {
+  CREATED = 'created',
+  PENDING = 'pending',
+  DONE = 'done',
+}

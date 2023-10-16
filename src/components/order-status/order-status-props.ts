@@ -1,5 +1,5 @@
-import { TStatuses } from '../../utils/types';
+import { EStatuses } from '../../utils/types';
 
 export interface IOrderStatusProps {
-  status: TStatuses;
+  status: EStatuses;
 }
