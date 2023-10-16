@@ -1,7 +1,9 @@
+import { TStatuses } from '../../../utils/types';
+
 export interface Order {
   ingredients: string[];
   _id: string;
-  status: string;
+  status: TStatuses;
   name: string;
   number: number;
   createdAt: string;

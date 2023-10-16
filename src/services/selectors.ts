@@ -102,3 +102,12 @@ export const selectImagesIngredients = (ingredientsId: Array<IIngredient['_id']>
 
     return ingredientsImages;
   });
+export const selectTotalPriceFeeds = (ingredientsId: Array<IIngredient['_id']>) =>
+  createSelector([selectIngredients], (ingredients) => {
+    const total = ingredientsId.reduce((reduce, ingredientId) => {
+      const price = ingredients.find((ingredient) => ingredientId === ingredient._id);
+      return price ? price.price + reduce : reduce;
+    }, 0);
+
+    return total;
+  });

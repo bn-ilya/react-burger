@@ -100,3 +100,13 @@ export interface IWsActions {
 export type SliceActions<T> = {
   [K in keyof T]: T[K] extends (...args: any[]) => infer A ? A : never;
 }[keyof T];
+
+export interface IStatusesNames {
+  [key: string]: string;
+}
+
+export interface IStatusesClasses {
+  [key: string]: 'status-pending' | 'status-done';
+}
+
+export type TStatuses = 'created' | 'pending' | 'done';

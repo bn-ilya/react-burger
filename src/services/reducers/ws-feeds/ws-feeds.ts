@@ -38,7 +38,7 @@ const wsFeedsSlice = createSlice({
       store.wsConnected = false;
     },
     wsGetFeeds: (store, action: PayloadAction<ResponseFeedsAll>) => {
-      store.feeds = [...store.feeds, ...action.payload.orders];
+      store.feeds = action.payload.orders;
       store.total = action.payload.total;
       store.totalToday = action.payload.totalToday;
     },

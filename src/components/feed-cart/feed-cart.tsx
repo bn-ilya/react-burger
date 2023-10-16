@@ -7,19 +7,13 @@ import { TFeedCartProps } from './feed-cart-props';
 import styles from './feed-cart.module.css';
 
 import { useAppSelector } from '../../hooks/rtk-hooks';
-import { selectImagesIngredients } from '../../services/selectors';
+import { selectImagesIngredients, selectTotalPriceFeeds } from '../../services/selectors';
+import { OrderStatus } from '../order-status/order-status';
 
-const FeedCart: FC<TFeedCartProps> = ({
-  ingredients,
-  _id,
-  status,
-  name,
-  number,
-  createdAt,
-  updatedAt,
-}) => {
+const FeedCart: FC<TFeedCartProps> = ({ ingredients, _id, status, name, number, createdAt }) => {
   const location = useLocation();
   const ingredientsImages = useAppSelector(selectImagesIngredients(ingredients));
+  const total = useAppSelector(selectTotalPriceFeeds(ingredients));
 
   return (
     <Link to={`${location?.pathname}/${_id}`} state={{ background: location }}>
@@ -32,7 +26,7 @@ const FeedCart: FC<TFeedCartProps> = ({
         </header>
         <div className={styles['cart-body']}>
           <span className='text text_type_main-medium'>{name}</span>
-          <span className='text text_type_main-default'>{status}</span>
+          <OrderStatus status={status} />
         </div>
         <footer className={styles['cart-footer']}>
           <div className={styles['cart-ingredients']}>
@@ -42,12 +36,12 @@ const FeedCart: FC<TFeedCartProps> = ({
                 style={{ zIndex: ingredients.length - index }}
                 className={styles['cart-ingredient']}
               >
-                <img src={ingredientImage} alt='' />
+                <img src={ingredientImage} alt='Ингредиент' />
               </div>
             ))}
           </div>
           <div className={styles['cart-price']}>
-            <span className='text text_type_digits-default'>480</span>
+            <span className='text text_type_digits-default'>{total}</span>
             <CurrencyIcon type='primary' />
           </div>
         </footer>
