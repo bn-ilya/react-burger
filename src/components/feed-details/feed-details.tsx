@@ -8,11 +8,16 @@ import FeedHeader from './feed-header/feed-header';
 import FeedInfo from './feed-info/feed-info';
 import FeedStructure from './feed-structure/feed-structure';
 
-const FeedDetails: FC<IFeedDetailsProps> = ({ showNumberFeed }) => {
+const FeedDetails: FC<IFeedDetailsProps> = ({ showNumberFeed, order }) => {
   return (
     <div className={styles['feed-details']}>
-      <FeedHeader showNumberFeed={showNumberFeed} />
-      <FeedStructure />
+      <FeedHeader
+        name={order.name}
+        number={order.number}
+        status={order.status}
+        showNumberFeed={showNumberFeed}
+      />
+      <FeedStructure ingredientsId={order.ingredients} />
       <FeedInfo />
     </div>
   );

@@ -1,9 +1,11 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { FC } from 'react';
 
+import FeedStructureProps from './feed-structure-props';
+
 import styles from './feed-structure.module.css';
 
-const FeedStructure: FC = () => {
+const FeedStructure: FC<FeedStructureProps> = ({ ingredientsId }) => {
   return (
     <div className={styles.structure}>
       <span className='text text_type_main-medium'>Состав:</span>

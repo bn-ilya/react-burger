@@ -2,6 +2,8 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from './reducers';
 
+import { Order } from './reducers/ws-feeds/types';
+
 import { EStatuses, IIngredient } from '../utils/types';
 
 export const selectNameUser = (state: RootState) => state.profile.name;
@@ -90,6 +92,8 @@ export const selectAllIngredientsConstructor = createSelector(
 );
 // Feeds
 export const selectFeeds = (state: RootState) => state.wsFeeds.feeds;
+export const selectFeedById = (id: Order['_id']) =>
+  createSelector([selectFeeds], (feeds) => feeds.find((feed) => feed._id === id));
 export const selectWsFeedsConnected = (state: RootState) => state.wsFeeds.wsConnected;
 export const selectImagesIngredients = (ingredientsId: Array<IIngredient['_id']>) =>
   createSelector([selectBuns, selectMains, selectSauces], (buns, mains, sauces) => {
