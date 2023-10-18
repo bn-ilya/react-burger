@@ -18,7 +18,7 @@ const FeedDetails: FC<IFeedDetailsProps> = ({ showNumberFeed, order }) => {
         showNumberFeed={showNumberFeed}
       />
       <FeedStructure ingredientsId={order.ingredients} />
-      <FeedInfo />
+      <FeedInfo createdAt={order.createdAt} ingredients={order.ingredients} />
     </div>
   );
 };
