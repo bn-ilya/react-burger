@@ -5,107 +5,34 @@ import FeedStructureProps from './feed-structure-props';
 
 import styles from './feed-structure.module.css';
 
+import { useAppSelector } from '../../../hooks/rtk-hooks';
+import { useFilteredIngredients } from '../../../hooks/useFilteredIngredients';
+import { selectIngredientsByIds } from '../../../services/selectors';
+
 const FeedStructure: FC<FeedStructureProps> = ({ ingredientsId }) => {
+  const ingredients = useAppSelector(selectIngredientsByIds(ingredientsId));
+  const filteredIngredients = useFilteredIngredients(ingredients);
+
   return (
     <div className={styles.structure}>
       <span className='text text_type_main-medium'>Состав:</span>
       <div className={styles['structure-list']}>
-        <article className={styles['ingredient']}>
-          <div className={styles['ingredient-left']}>
-            <div className={styles['ingredient-pic']}>
-              <img src='https://code.s3.yandex.net/react/code/sauce-01.png' alt='Привет' />
+        {filteredIngredients.map((ingredient) => (
+          <article key={ingredient._id} className={styles['ingredient']}>
+            <div className={styles['ingredient-left']}>
+              <div className={styles['ingredient-pic']}>
+                <img src={ingredient.image} alt='Привет' />
+              </div>
+              <span className='text text_type_main-default'>{ingredient.name}</span>
             </div>
-            <span className='text text_type_main-default'>Флюоресцентная булка R2-D3</span>
-          </div>
-          <div className={styles['ingredient-right']}>
-            <span className='text text_type_digits-default'>2 x 20</span>
-            <CurrencyIcon type='primary' />
-          </div>
-        </article>
-        <article className={styles['ingredient']}>
-          <div className={styles['ingredient-left']}>
-            <div className={styles['ingredient-pic']}>
-              <img src='https://code.s3.yandex.net/react/code/sauce-01.png' alt='Привет' />
+            <div className={styles['ingredient-right']}>
+              <span className='text text_type_digits-default'>
+                {ingredient.count} x {ingredient.price}
+              </span>
+              <CurrencyIcon type='primary' />
             </div>
-            <span className='text text_type_main-default'>Флюоресцентная булка R2-D3</span>
-          </div>
-          <div className={styles['ingredient-right']}>
-            <span className='text text_type_digits-default'>2 x 20</span>
-            <CurrencyIcon type='primary' />
-          </div>
-        </article>
-        <article className={styles['ingredient']}>
-          <div className={styles['ingredient-left']}>
-            <div className={styles['ingredient-pic']}>
-              <img src='https://code.s3.yandex.net/react/code/sauce-01.png' alt='Привет' />
-            </div>
-            <span className='text text_type_main-default'>Флюоресцентная булка R2-D3</span>
-          </div>
-          <div className={styles['ingredient-right']}>
-            <span className='text text_type_digits-default'>2 x 20</span>
-            <CurrencyIcon type='primary' />
-          </div>
-        </article>
-        <article className={styles['ingredient']}>
-          <div className={styles['ingredient-left']}>
-            <div className={styles['ingredient-pic']}>
-              <img src='https://code.s3.yandex.net/react/code/sauce-01.png' alt='Привет' />
-            </div>
-            <span className='text text_type_main-default'>Флюоресцентная булка R2-D3</span>
-          </div>
-          <div className={styles['ingredient-right']}>
-            <span className='text text_type_digits-default'>2 x 20</span>
-            <CurrencyIcon type='primary' />
-          </div>
-        </article>
-        <article className={styles['ingredient']}>
-          <div className={styles['ingredient-left']}>
-            <div className={styles['ingredient-pic']}>
-              <img src='https://code.s3.yandex.net/react/code/sauce-01.png' alt='Привет' />
-            </div>
-            <span className='text text_type_main-default'>Флюоресцентная булка R2-D3</span>
-          </div>
-          <div className={styles['ingredient-right']}>
-            <span className='text text_type_digits-default'>2 x 20</span>
-            <CurrencyIcon type='primary' />
-          </div>
-        </article>
-        <article className={styles['ingredient']}>
-          <div className={styles['ingredient-left']}>
-            <div className={styles['ingredient-pic']}>
-              <img src='https://code.s3.yandex.net/react/code/sauce-01.png' alt='Привет' />
-            </div>
-            <span className='text text_type_main-default'>Флюоресцентная булка R2-D3</span>
-          </div>
-          <div className={styles['ingredient-right']}>
-            <span className='text text_type_digits-default'>2 x 20</span>
-            <CurrencyIcon type='primary' />
-          </div>
-        </article>
-        <article className={styles['ingredient']}>
-          <div className={styles['ingredient-left']}>
-            <div className={styles['ingredient-pic']}>
-              <img src='https://code.s3.yandex.net/react/code/sauce-01.png' alt='Привет' />
-            </div>
-            <span className='text text_type_main-default'>Флюоресцентная булка R2-D3</span>
-          </div>
-          <div className={styles['ingredient-right']}>
-            <span className='text text_type_digits-default'>2 x 20</span>
-            <CurrencyIcon type='primary' />
-          </div>
-        </article>
-        <article className={styles['ingredient']}>
-          <div className={styles['ingredient-left']}>
-            <div className={styles['ingredient-pic']}>
-              <img src='https://code.s3.yandex.net/react/code/sauce-01.png' alt='Привет' />
-            </div>
-            <span className='text text_type_main-default'>Флюоресцентная булка R2-D3</span>
-          </div>
-          <div className={styles['ingredient-right']}>
-            <span className='text text_type_digits-default'>2 x 20</span>
-            <CurrencyIcon type='primary' />
-          </div>
-        </article>
+          </article>
+        ))}
       </div>
     </div>
   );

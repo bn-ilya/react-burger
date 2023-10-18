@@ -59,7 +59,19 @@ export const selectIngredients = createSelector(
     return [...sauces, ...mains, ...buns];
   },
 );
+export const selectIngredientsByIds = (ingredientsId: Array<IIngredient['_id']>) =>
+  createSelector([selectIngredients], (ingredients) => {
+    const foundElements = ingredientsId.reduce<Array<IIngredient>>((acc, ingredientId) => {
+      const found = ingredients.find((ingredient) => ingredient._id === ingredientId);
+      if (found) {
+        return [...acc, found];
+      } else {
+        return acc;
+      }
+    }, []);
 
+    return foundElements;
+  });
 export const selectIngredientById = (ingredientId: string | undefined) =>
   createSelector([selectBuns, selectMains, selectSauces], (buns, mains, sauces) => {
     const ingredients = [...buns, ...mains, ...sauces];
