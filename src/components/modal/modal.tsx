@@ -14,7 +14,7 @@ import IngredientDetails from '../../pages/constructor-page/burger-ingredients/i
 import OrderDetails from '../../pages/constructor-page/order-details/order-details';
 
 import { closeModal } from '../../services/reducers/modal';
-import { Order } from '../../services/reducers/ws-feeds/types';
+import { IFeed } from '../../services/reducers/ws-feeds/types';
 import { selectModal } from '../../services/selectors';
 import { ETypesModal, IIngredient } from '../../utils/types';
 import FeedDetails from '../feed-details/feed-details';
@@ -50,8 +50,8 @@ const Modal: FC = () => {
         setMain(<IngredientDetails ingredient={contentModal as IIngredient} />);
         break;
       case ETypesModal.VIEWING_FEED:
-        setHeader(<FeedModalHeader order={contentModal as Order} />);
-        setMain(<FeedDetails showNumberFeed={false} order={contentModal as Order} />);
+        setHeader(<FeedModalHeader order={contentModal as IFeed} />);
+        setMain(<FeedDetails showNumberFeed={false} order={contentModal as IFeed} />);
         break;
       case ETypesModal.ORDER:
         setMain(<OrderDetails number={contentModal as number} />);

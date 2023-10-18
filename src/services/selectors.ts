@@ -2,7 +2,7 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from './reducers';
 
-import { Order } from './reducers/ws-feeds/types';
+import { IFeed } from './reducers/ws-feeds/types';
 
 import { EStatuses, IIngredient } from '../utils/types';
 
@@ -104,7 +104,7 @@ export const selectAllIngredientsConstructor = createSelector(
 );
 // Feeds
 export const selectFeeds = (state: RootState) => state.wsFeeds.feeds;
-export const selectFeedById = (id: Order['_id']) =>
+export const selectFeedById = (id: IFeed['_id']) =>
   createSelector([selectFeeds], (feeds) => feeds.find((feed) => feed._id === id));
 export const selectWsFeedsConnected = (state: RootState) => state.wsFeeds.wsConnected;
 export const selectImagesIngredients = (ingredientsId: Array<IIngredient['_id']>) =>

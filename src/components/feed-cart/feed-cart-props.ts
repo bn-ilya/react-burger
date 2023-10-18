@@ -1,3 +1,3 @@
-import { Order } from './../../services/reducers/ws-feeds/types';
+import { IFeed } from './../../services/reducers/ws-feeds/types';
 
-export type TFeedCartProps = Order;
+export type TFeedCartProps = IFeed;

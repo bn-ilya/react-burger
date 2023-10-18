@@ -5,15 +5,15 @@ import { sliceArraySection } from './../../../../../utils/utils';
 import styles from './feed-statuses.module.css';
 
 import { useAppSelector } from '../../../../../hooks/rtk-hooks';
-import { Order } from '../../../../../services/reducers/ws-feeds/types';
+import { IFeed } from '../../../../../services/reducers/ws-feeds/types';
 import { selectFeedsPending, selectFeedsReady } from '../../../../../services/selectors';
 
 const FeedStatuses: FC = () => {
   const feedsReady = useAppSelector(selectFeedsReady);
   const feedsPending = useAppSelector(selectFeedsPending);
 
-  const feedsReadyCols = sliceArraySection<Order>(feedsReady, 10);
-  const feedsProgressCols = sliceArraySection<Order>(feedsPending, 10);
+  const feedsReadyCols = sliceArraySection<IFeed>(feedsReady, 10);
+  const feedsProgressCols = sliceArraySection<IFeed>(feedsPending, 10);
 
   return (
     <div className={styles['feed-statuses']}>

@@ -1,12 +1,12 @@
 import { createAction, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { type Order, type ResponseFeedsAll } from './types';
+import { type IFeed, type ResponseFeedsAll } from './types';
 
 import { IWsActions, SliceActions } from '../../../utils/types';
 
 interface IInitialState {
   wsConnected: boolean;
-  feeds: Array<Order>;
+  feeds: Array<IFeed>;
   total: number;
   totalToday: number;
 

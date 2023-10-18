@@ -6,12 +6,12 @@ import styles from './main.module.css';
 
 import FeedDetails from '../../../components/feed-details/feed-details';
 import { useAppSelector } from '../../../hooks/rtk-hooks';
-import { Order } from '../../../services/reducers/ws-feeds/types';
+import { IFeed } from '../../../services/reducers/ws-feeds/types';
 import { selectFeedById } from '../../../services/selectors';
 
 const Main: FC = () => {
   const { id } = useParams();
-  const feed = useAppSelector(selectFeedById(id as Order['_id']));
+  const feed = useAppSelector(selectFeedById(id as IFeed['_id']));
 
   return (
     <div className={styles.main}>

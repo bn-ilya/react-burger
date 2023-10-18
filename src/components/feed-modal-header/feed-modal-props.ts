@@ -1,5 +1,5 @@
-import { Order } from '../../services/reducers/ws-feeds/types';
+import { IFeed } from '../../services/reducers/ws-feeds/types';
 
 export interface IFeedModalProps {
-  order: Order;
+  order: IFeed;
 }

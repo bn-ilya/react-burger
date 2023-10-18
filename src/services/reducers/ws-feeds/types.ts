@@ -1,6 +1,6 @@
 import { EStatuses } from '../../../utils/types';
 
-export interface Order {
+export interface IFeed {
   ingredients: string[];
   _id: string;
   status: EStatuses;
@@ -12,7 +12,7 @@ export interface Order {
 
 export interface ResponseFeedsAll {
   success: boolean;
-  orders: Order[];
+  orders: IFeed[];
   total: number;
   totalToday: number;
 }
