@@ -91,6 +91,7 @@ export type TPasswordUser = string;
 export interface IWsActions {
   init: ActionCreatorWithoutPayload | ActionCreatorWithPayload<any>;
   send: ActionCreatorWithoutPayload;
+  close: ActionCreatorWithoutPayload;
   onsuccess: ActionCreatorWithoutPayload;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onerror: ActionCreatorWithPayload<any>;

@@ -8,7 +8,7 @@ import styles from './main.module.css';
 
 import { useAppDispatch } from '../../../hooks/rtk-hooks';
 import { useIngredients } from '../../../hooks/useIngredients';
-import { wsInit } from '../../../services/reducers/ws-feeds/ws-feeds';
+import { wsClose, wsInit } from '../../../services/reducers/ws-feeds/ws-feeds';
 
 const Main: FC = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +16,10 @@ const Main: FC = () => {
 
   useEffect(() => {
     dispatch(wsInit());
+
+    return () => {
+      dispatch(wsClose());
+    };
   }, [dispatch]);
 
   return (

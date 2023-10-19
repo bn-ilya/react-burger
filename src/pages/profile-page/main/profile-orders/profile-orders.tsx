@@ -5,7 +5,7 @@ import styles from './profile-orders.module.css';
 import FeedCart from '../../../../components/feed-cart/feed-cart';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
 import { useIngredients } from '../../../../hooks/useIngredients';
-import { wsInit } from '../../../../services/reducers/ws-orders/ws-orders';
+import { wsClose, wsInit } from '../../../../services/reducers/ws-orders/ws-orders';
 import { selectOrders } from '../../../../services/selectors';
 
 const ProfileOrders = () => {
@@ -15,6 +15,10 @@ const ProfileOrders = () => {
 
   useEffect(() => {
     dispatch({ ...wsInit(), payload: localStorage.getItem('accessToken') });
+
+    return () => {
+      dispatch(wsClose());
+    };
   }, [dispatch]);
 
   return (

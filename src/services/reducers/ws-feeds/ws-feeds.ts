@@ -85,6 +85,7 @@ const wsFeedsSlice = createSlice({
 });
 export const wsInit = createAction(`${nameSlice}/wsInit`);
 export const wsSend = createAction(`${nameSlice}/wsSend`);
+export const wsClose = createAction(`${nameSlice}/wsClose`);
 
 export default wsFeedsSlice.reducer;
 
@@ -94,6 +95,7 @@ export const { wsConnectionSuccess, wsConnectionError, wsConnectionClosed, wsGet
 export const wsActionsFeeds: IWsActions = {
   init: wsInit,
   send: wsSend,
+  close: wsClose,
   onsuccess: wsConnectionSuccess,
   onerror: wsConnectionError,
   onclose: wsConnectionClosed,

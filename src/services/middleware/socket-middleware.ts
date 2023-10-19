@@ -10,7 +10,7 @@ export const socketMiddleware = <T extends IWsActions>(wsUrl: string, actions: T
     return (next) => (action: TAllAppActions) => {
       const { dispatch } = store;
 
-      const { init, send, onsuccess, onerror, onmessage, onclose } = actions;
+      const { init, send, close, onsuccess, onerror, onmessage, onclose } = actions;
 
       if (action.type === init.type) {
         socket = action.payload
@@ -38,6 +38,9 @@ export const socketMiddleware = <T extends IWsActions>(wsUrl: string, actions: T
         if (action.type === send.type) {
           const message = action.payload;
           socket.send(JSON.stringify(message));
+        }
+        if (action.type === close.type) {
+          socket.close(1000, 'работа закончена');
         }
       }
 
