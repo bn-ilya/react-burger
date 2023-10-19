@@ -10,9 +10,14 @@ export interface IFeed {
   updatedAt: string;
 }
 
-export interface ResponseFeedsAll {
+export interface IFeedsAllResponse {
   success: boolean;
   orders: IFeed[];
   total: number;
   totalToday: number;
+}
+
+export interface IFeedByNumberResponse {
+  success: boolean;
+  orders: IFeed[];
 }

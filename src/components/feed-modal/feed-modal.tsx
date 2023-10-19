@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/rtk-hooks';
+import { useAppDispatch } from '../../hooks/rtk-hooks';
+import { useFeedByNumber } from '../../hooks/useFeedByNumber';
 import { openModal } from '../../services/reducers/modal';
 import { IFeed } from '../../services/reducers/ws-feeds/types';
-import { selectFeedById } from '../../services/selectors';
-import { ETypesModal } from '../../utils/types';
+import { ETypesModal, IRouteParams } from '../../utils/types';
 
 export default function FeedModal() {
   const dispatch = useAppDispatch();
-  const { id } = useParams();
-  const feed = useAppSelector(selectFeedById(id as IFeed['_id']));
+  const { number } = useParams<IRouteParams>();
+  const feed = useFeedByNumber(Number(number) as IFeed['number']);
 
   useEffect(() => {
     if (!feed) return;
@@ -21,6 +21,6 @@ export default function FeedModal() {
         goBack: true,
       }),
     );
-  }, [dispatch]);
+  }, [dispatch, feed]);
   return null;
 }

@@ -10,13 +10,13 @@ import { useAppSelector } from '../../hooks/rtk-hooks';
 import { selectImagesIngredients, selectTotalPriceFeeds } from '../../services/selectors';
 import { OrderStatus } from '../order-status/order-status';
 
-const FeedCart: FC<TFeedCartProps> = ({ ingredients, _id, status, name, number, createdAt }) => {
+const FeedCart: FC<TFeedCartProps> = ({ ingredients, status, name, number, createdAt }) => {
   const location = useLocation();
   const ingredientsImages = useAppSelector(selectImagesIngredients(ingredients));
   const total = useAppSelector(selectTotalPriceFeeds(ingredients));
 
   return (
-    <Link to={`${location?.pathname}/${_id}`} state={{ background: location }}>
+    <Link to={`${location?.pathname}/${number}`} state={{ background: location }}>
       <article className={styles.cart}>
         <header className={styles['cart-header']}>
           <span className='text text_type_digits-default'>#{number}</span>

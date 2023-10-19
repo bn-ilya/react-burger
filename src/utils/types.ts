@@ -1,5 +1,9 @@
 import { ReactElement } from 'react';
 
+import { Route } from 'react-router-dom';
+
+import { IFeed } from '../services/reducers/ws-feeds/types';
+
 import type { ActionCreatorWithoutPayload, ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 export enum EIngredients {
@@ -19,7 +23,7 @@ export enum ERoutes {
   profileOrdersId = '/profile/orders/:id',
   ingredientId = '/ingredients/:id',
   feed = '/feed',
-  feedId = '/feed/:id',
+  feedId = '/feed/:number',
   all = '*',
 }
 
@@ -114,3 +118,8 @@ export enum EStatuses {
   PENDING = 'pending',
   DONE = 'done',
 }
+
+export type IRouteParams = {
+  id: string;
+  number: string;
+};

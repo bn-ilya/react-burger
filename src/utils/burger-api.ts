@@ -3,8 +3,15 @@ import { type AxiosRequestConfig } from 'axios';
 import { instanceAxios } from './api-config';
 import { IError, IRefreshRespone, TEmailUser, TNameUser, TPasswordUser } from './types';
 
+import { IFeed } from '../services/reducers/ws-feeds/types';
+
 export const getIngredients = async <T>(): Promise<T> => {
   const res = await instanceAxios.get<T>('ingredients');
+  return res.data;
+};
+
+export const getFeedByNumber = async <T>(number: IFeed['number']): Promise<T> => {
+  const res = await instanceAxios.get<T>(`orders/${number}`);
   return res.data;
 };
 

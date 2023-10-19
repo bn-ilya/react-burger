@@ -7,9 +7,11 @@ import styles from './feed-structure.module.css';
 
 import { useAppSelector } from '../../../hooks/rtk-hooks';
 import { useFilteredIngredients } from '../../../hooks/useFilteredIngredients';
+import { useIngredients } from '../../../hooks/useIngredients';
 import { selectIngredientsByIds } from '../../../services/selectors';
 
 const FeedStructure: FC<FeedStructureProps> = ({ ingredientsId }) => {
+  useIngredients();
   const ingredients = useAppSelector(selectIngredientsByIds(ingredientsId));
   const filteredIngredients = useFilteredIngredients(ingredients);
 

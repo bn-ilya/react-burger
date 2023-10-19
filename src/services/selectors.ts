@@ -106,6 +106,8 @@ export const selectAllIngredientsConstructor = createSelector(
 export const selectFeeds = (state: RootState) => state.wsFeeds.feeds;
 export const selectFeedById = (id: IFeed['_id']) =>
   createSelector([selectFeeds], (feeds) => feeds.find((feed) => feed._id === id));
+export const selectFeedByNumber = (number: IFeed['number']) =>
+  createSelector([selectFeeds], (feeds) => feeds.find((feed) => feed.number === number));
 export const selectWsFeedsConnected = (state: RootState) => state.wsFeeds.wsConnected;
 export const selectImagesIngredients = (ingredientsId: Array<IIngredient['_id']>) =>
   createSelector([selectBuns, selectMains, selectSauces], (buns, mains, sauces) => {
