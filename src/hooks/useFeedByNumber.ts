@@ -13,7 +13,7 @@ export const useFeedByNumber = (number: IOrder['number']) => {
   useEffect(() => {
     if (feed) return;
     dispatch(getFeedByNumber(number));
-  }, [feed]);
+  }, [feed, number, dispatch]);
 
   return feed;
 };
