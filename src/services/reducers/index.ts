@@ -42,7 +42,7 @@ export const store = configureStore({
         wsActionsFeeds,
       ),
       socketMiddleware<typeof wsActionsOrders>(
-        `wss://norma.nomoreparties.space/orders?token=${localStorage.getItem('accessToken')}`,
+        `wss://norma.nomoreparties.space/orders`,
         wsActionsOrders,
       ),
     ),

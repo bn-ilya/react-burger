@@ -14,7 +14,7 @@ const ProfileOrders = () => {
   useIngredients();
 
   useEffect(() => {
-    dispatch(wsInit());
+    dispatch({ ...wsInit(), payload: localStorage.getItem('accessToken') });
   }, [dispatch]);
 
   return (

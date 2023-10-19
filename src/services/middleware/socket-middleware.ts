@@ -13,7 +13,9 @@ export const socketMiddleware = <T extends IWsActions>(wsUrl: string, actions: T
       const { init, send, onsuccess, onerror, onmessage, onclose } = actions;
 
       if (action.type === init.type) {
-        socket = new WebSocket(wsUrl);
+        socket = action.payload
+          ? new WebSocket(`${wsUrl}?token=${action.payload}`)
+          : new WebSocket(wsUrl);
       }
       if (socket) {
         socket.onopen = () => {
