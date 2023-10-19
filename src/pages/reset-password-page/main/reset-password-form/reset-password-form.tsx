@@ -1,13 +1,12 @@
 import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { FC, FormEvent } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './reset-password-form.module.css';
 
 import ButtonLoader from '../../../../components/button-loader/button-loader';
-import { useAppDispatch } from '../../../../hooks/rtk-hooks';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
 import useFormAndValidation from '../../../../hooks/useFormAndValidation';
 import { openModal } from '../../../../services/reducers/modal';
 import { resetPassword } from '../../../../services/reducers/reset-password';
@@ -17,7 +16,7 @@ import { ETypesModal, IError, TPasswordUser } from '../../../../utils/types';
 const ResetPasswordForm: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const resetPasswordRequest = useSelector(selectResetPasswordRequest);
+  const resetPasswordRequest = useAppSelector(selectResetPasswordRequest);
   const { values, errors, isValid, handleChange } = useFormAndValidation<{
     password: TPasswordUser;
     token: string;
