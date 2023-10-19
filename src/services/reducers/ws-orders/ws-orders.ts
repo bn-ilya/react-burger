@@ -1,12 +1,14 @@
 import { createAction, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { IOrderWithOwner, IWsActions, SliceActions } from '../../../utils/types';
+import { IOrdersAllResponse } from './types';
+
+import { IOrder, IWsActions, SliceActions } from '../../../utils/types';
 
 const nameSlice = 'wsOrder';
 
 interface IInitalState {
   wsConnected: boolean;
-  orders: Array<IOrderWithOwner>;
+  orders: Array<IOrder>;
   error?: Event;
 }
 
@@ -31,8 +33,8 @@ const wsOrdersSlice = createSlice({
       store.error = undefined;
       store.wsConnected = false;
     },
-    wsGetOrders: (store, action: PayloadAction<any>) => {
-      store.orders = action.payload.orders;
+    wsGetOrders: (store, action: PayloadAction<IOrdersAllResponse>) => {
+      store.orders = action.payload.orders.reverse();
     },
   },
 });

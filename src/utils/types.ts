@@ -16,7 +16,7 @@ export enum ERoutes {
   forgotPassword = '/forgot-password',
   profile = '/profile/*',
   profileOrders = 'orders',
-  profileOrdersId = '/profile/orders/:id',
+  profileOrdersId = '/profile/orders/:number',
   ingredientId = '/ingredients/:id',
   feed = '/feed',
   feedId = '/feed/:number',

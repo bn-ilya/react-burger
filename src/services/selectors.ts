@@ -137,3 +137,5 @@ export const selectFeedsPending = createSelector([selectFeeds], (feeds) => {
   const pending = feeds.filter((feed) => feed.status === EStatuses.PENDING);
   return pending;
 });
+// Orders
+export const selectOrders = (state: RootState) => state.wsOrders.orders;
