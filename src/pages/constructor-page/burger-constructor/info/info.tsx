@@ -39,7 +39,7 @@ const Info: FC = () => {
     dispatch(createOrder(ids))
       .unwrap()
       .then((res) => {
-        dispatch(openModal({ contentModal: res.order.number, typeModal: ETypesModal.ORDER }));
+        dispatch(openModal({ contentModal: res.number, typeModal: ETypesModal.ORDER }));
       })
       .catch((error) => {
         dispatch(openModal({ contentModal: error.message, typeModal: ETypesModal.ERROR }));

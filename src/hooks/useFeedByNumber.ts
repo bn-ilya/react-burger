@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from './rtk-hooks';
 
-import { IFeed } from '../services/reducers/ws-feeds/types';
 import { getFeedByNumber } from '../services/reducers/ws-feeds/ws-feeds';
 import { selectFeedByNumber } from '../services/selectors';
+import { IOrder } from '../utils/types';
 
-export const useFeedByNumber = (number: IFeed['number']) => {
+export const useFeedByNumber = (number: IOrder['number']) => {
   const feed = useAppSelector(selectFeedByNumber(number));
   const dispatch = useAppDispatch();
 

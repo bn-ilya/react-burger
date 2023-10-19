@@ -1,3 +1,2 @@
-import { IFeed } from './../../services/reducers/ws-feeds/types';
-
-export type TFeedCartProps = IFeed;
+import { IOrder } from '../../utils/types';
+export type TFeedCartProps = IOrder;

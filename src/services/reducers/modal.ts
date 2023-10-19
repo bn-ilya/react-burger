@@ -1,13 +1,11 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { ReactElement } from 'react';
 
-import { IFeed } from './ws-feeds/types';
-
-import { ETypesModal, IIngredient, SliceActions } from '../../utils/types';
+import { IOrder, ETypesModal, IIngredient, SliceActions } from '../../utils/types';
 
 interface IInitialState {
   isModalOpen?: boolean;
-  contentModal: ReactElement | IIngredient | IFeed | string | number | null;
+  contentModal: ReactElement | IIngredient | IOrder | string | number | null;
   typeModal: ETypesModal | null;
   goBack?: boolean | null;
 }

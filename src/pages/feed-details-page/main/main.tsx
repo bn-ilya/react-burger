@@ -5,15 +5,12 @@ import { useParams } from 'react-router-dom';
 import styles from './main.module.css';
 
 import FeedDetails from '../../../components/feed-details/feed-details';
-import { useAppSelector } from '../../../hooks/rtk-hooks';
 import { useFeedByNumber } from '../../../hooks/useFeedByNumber';
-import { IFeed } from '../../../services/reducers/ws-feeds/types';
-import { selectFeedById } from '../../../services/selectors';
-import { IRouteParams } from '../../../utils/types';
+import { IOrder, IRouteParams } from '../../../utils/types';
 
 const Main: FC = () => {
   const { number } = useParams<IRouteParams>();
-  const feed = useFeedByNumber(Number(number) as IFeed['number']);
+  const feed = useFeedByNumber(Number(number) as IOrder['number']);
 
   return (
     <div className={styles.main}>

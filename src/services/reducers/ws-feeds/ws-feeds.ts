@@ -1,14 +1,14 @@
 import { createAction, createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { IFeedByNumberResponse, type IFeed, type IFeedsAllResponse } from './types';
+import { IFeedByNumberResponse, type IFeedsAllResponse } from './types';
 
 import { AppDispatch } from '..';
 import { getFeedByNumber as getFeedByNumberApi } from '../../../utils/burger-api';
-import { IError, IWsActions, SliceActions } from '../../../utils/types';
+import { IOrder, IError, IWsActions, SliceActions } from '../../../utils/types';
 
 interface IInitialState {
   wsConnected: boolean;
-  feeds: Array<IFeed>;
+  feeds: Array<IOrder>;
   total: number;
   totalToday: number;
   feedRequest: boolean;
@@ -29,8 +29,8 @@ const initialState: IInitialState = {
 const nameSlice = 'wsFeeds';
 
 export const getFeedByNumber = createAsyncThunk<
-  IFeed,
-  IFeed['number'],
+  IOrder,
+  IOrder['number'],
   { rejectValue: IError; dispatch: AppDispatch }
 >(`${nameSlice}/getFeedByNumber`, async function (number, { rejectWithValue, dispatch }) {
   try {
@@ -47,7 +47,7 @@ const wsFeedsSlice = createSlice({
   name: nameSlice,
   initialState,
   reducers: {
-    setFeed: (store, action: PayloadAction<IFeed>) => {
+    setFeed: (store, action: PayloadAction<IOrder>) => {
       store.feeds = [...store.feeds, action.payload];
     },
     wsConnectionSuccess: (store) => {

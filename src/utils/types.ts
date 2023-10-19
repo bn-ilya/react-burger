@@ -1,9 +1,5 @@
 import { ReactElement } from 'react';
 
-import { Route } from 'react-router-dom';
-
-import { IFeed } from '../services/reducers/ws-feeds/types';
-
 import type { ActionCreatorWithoutPayload, ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 export enum EIngredients {
@@ -123,3 +119,24 @@ export type IRouteParams = {
   id: string;
   number: string;
 };
+
+export interface Owner {
+  name: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface IOrder {
+  ingredients: string[];
+  _id: string;
+  status: EStatuses;
+  name: string;
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface IOrderWithOwner extends IOrder {
+  owner: Owner;
+}

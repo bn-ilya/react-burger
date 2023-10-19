@@ -1,6 +1,6 @@
-import { IFeed } from '../../services/reducers/ws-feeds/types';
+import { IOrder } from '../../utils/types';
 
 export interface IFeedDetailsProps {
   showNumberFeed?: boolean;
-  order: IFeed;
+  order: IOrder;
 }
