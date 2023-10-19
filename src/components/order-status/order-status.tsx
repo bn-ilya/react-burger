@@ -7,12 +7,14 @@ import { IStatusesClasses, IStatusesNames } from '../../utils/types';
 
 export const OrderStatus: FC<IOrderStatusProps> = ({ status }) => {
   const statusesName: IStatusesNames = {
+    cancelled: 'Отменен',
     created: 'Создаётся',
     pending: 'В работе',
     done: 'Выполнено',
   };
 
   const statusesClasses: IStatusesClasses = {
+    canceled: 'status-pending',
     created: 'status-pending',
     pending: 'status-pending',
     done: 'status-done',

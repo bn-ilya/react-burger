@@ -113,6 +113,7 @@ export interface IStatusesClasses {
 }
 
 export enum EStatuses {
+  CANCELLED = 'canceled',
   CREATED = 'created',
   PENDING = 'pending',
   DONE = 'done',
