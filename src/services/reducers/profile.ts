@@ -8,8 +8,16 @@ import {
   logout as logoutApi,
   getUserData as getUserDataApi,
   updateUserData as updateUserDataApi,
+  refreshToken,
 } from '../../utils/burger-api';
-import { IError, SliceActions, TEmailUser, TNameUser, TPasswordUser } from '../../utils/types';
+import {
+  IError,
+  IRefreshRespone,
+  SliceActions,
+  TEmailUser,
+  TNameUser,
+  TPasswordUser,
+} from '../../utils/types';
 
 interface IUser {
   email: TEmailUser;
@@ -95,7 +103,6 @@ export const login = createAsyncThunk<
 >('profile/login', async function ({ email, password }, { rejectWithValue, dispatch }) {
   try {
     const res = await loginApi<ILoginResponse>(email, password);
-
     localStorage.setItem('accessToken', res.accessToken.split('Bearer ')[1]);
     localStorage.setItem('refreshToken', res.refreshToken);
 
@@ -167,6 +174,15 @@ export const updateUserData = createAsyncThunk<
       const errorObject = error as IError;
       return rejectWithValue(errorObject);
     }
+  },
+);
+
+export const updateToken = createAsyncThunk<IRefreshRespone>(
+  'profile/updateToken',
+  async function () {
+    const res = await refreshToken<IRefreshRespone>();
+
+    return res;
   },
 );
 

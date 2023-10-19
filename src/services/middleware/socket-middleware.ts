@@ -3,6 +3,7 @@ import { type MiddlewareAPI, type Middleware } from 'redux';
 import { IWsActions } from '../../utils/types';
 
 import { AppDispatch, RootState, TAllAppActions } from '../reducers';
+import { updateToken } from '../reducers/profile';
 
 export const socketMiddleware = <T extends IWsActions>(wsUrl: string, actions: T): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
@@ -28,7 +29,11 @@ export const socketMiddleware = <T extends IWsActions>(wsUrl: string, actions: T
 
         socket.onmessage = (event) => {
           const { data } = event;
-          dispatch(onmessage(JSON.parse(data)));
+          if (data === 'Invalid or missing token') {
+            dispatch(updateToken());
+          } else {
+            dispatch(onmessage(JSON.parse(data)));
+          }
         };
 
         socket.onclose = () => {
