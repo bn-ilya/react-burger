@@ -92,12 +92,15 @@ export interface IWsActions {
   init: ActionCreatorWithoutPayload;
   send: ActionCreatorWithoutPayload;
   onsuccess: ActionCreatorWithoutPayload;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onerror: ActionCreatorWithPayload<any>;
   onclose: ActionCreatorWithoutPayload;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onmessage: ActionCreatorWithPayload<any>;
 }
 
 export type SliceActions<T> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [K in keyof T]: T[K] extends (...args: any[]) => infer A ? A : never;
 }[keyof T];
 

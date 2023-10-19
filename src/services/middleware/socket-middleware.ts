@@ -1,4 +1,4 @@
-import { type MiddlewareAPI, type Middleware, type Action } from 'redux';
+import { type MiddlewareAPI, type Middleware } from 'redux';
 
 import { IWsActions } from '../../utils/types';
 
