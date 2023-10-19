@@ -14,6 +14,7 @@ import totalPriceSlice, { TTotalPriceSliceActions } from './total-price';
 import viewingIngredientSlice, { TViewingIngredientSliceActions } from './viewing-ingredient';
 
 import wsFeedsSlice, { TWsFeedSliceActions, wsActionsFeeds } from './ws-feeds/ws-feeds';
+import wsOrdersSlice, { TWsOrdersSliceActions, wsActionsOrders } from './ws-orders/ws-orders';
 
 import { socketMiddleware } from '../middleware/socket-middleware';
 
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   resetPassword: resetPasswordSlice,
   profile: profileSlice,
   wsFeeds: wsFeedsSlice,
+  wsOrders: wsOrdersSlice,
 });
 
 export const store = configureStore({
@@ -38,6 +40,10 @@ export const store = configureStore({
       socketMiddleware<typeof wsActionsFeeds>(
         'wss://norma.nomoreparties.space/orders/all',
         wsActionsFeeds,
+      ),
+      socketMiddleware<typeof wsActionsOrders>(
+        `wss://norma.nomoreparties.space/orders?token=${localStorage.getItem('accessToken')}`,
+        wsActionsOrders,
       ),
     ),
   devTools: process.env.NODE_ENV === 'development',
@@ -55,4 +61,5 @@ export type TAllAppActions =
   | TTabsSliceActions
   | TTotalPriceSliceActions
   | TViewingIngredientSliceActions
-  | TWsFeedSliceActions;
+  | TWsFeedSliceActions
+  | TWsOrdersSliceActions;
