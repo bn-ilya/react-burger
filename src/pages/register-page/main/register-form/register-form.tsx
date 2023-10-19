@@ -11,7 +11,7 @@ import styles from './register-form.module.css';
 
 import ButtonLoader from '../../../../components/button-loader/button-loader';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
-import useFormAndValidation from '../../../../hooks/use-form-and-validation';
+import useFormAndValidation from '../../../../hooks/useFormAndValidation';
 import { openModal } from '../../../../services/reducers/modal';
 import { register } from '../../../../services/reducers/profile';
 import { selectUserDataRequest } from '../../../../services/selectors';

@@ -6,7 +6,7 @@ import styles from './profile-form.module.css';
 import SceletonLoader from './sceleton-loader/sceleton-loader';
 
 import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
-import useFormAndValidation from '../../../../hooks/use-form-and-validation';
+import useFormAndValidation from '../../../../hooks/useFormAndValidation';
 import { openModal } from '../../../../services/reducers/modal';
 import { updateUserData } from '../../../../services/reducers/profile';
 import { selectUserData, selectUserDataFetch } from '../../../../services/selectors';

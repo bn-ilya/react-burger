@@ -8,7 +8,7 @@ import styles from './reset-password-form.module.css';
 
 import ButtonLoader from '../../../../components/button-loader/button-loader';
 import { useAppDispatch } from '../../../../hooks/rtk-hooks';
-import useFormAndValidation from '../../../../hooks/use-form-and-validation';
+import useFormAndValidation from '../../../../hooks/useFormAndValidation';
 import { openModal } from '../../../../services/reducers/modal';
 import { resetPassword } from '../../../../services/reducers/reset-password';
 import { selectResetPasswordRequest } from '../../../../services/selectors';
