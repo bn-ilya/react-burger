@@ -2,6 +2,8 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from './reducers';
 
+import { IOrder, EStatuses, IIngredient } from '../utils/types';
+
 export const selectNameUser = (state: RootState) => state.profile.name;
 export const selectEmailUser = (state: RootState) => state.profile.email;
 
@@ -49,7 +51,25 @@ export const selectIngredientsFailed = (state: RootState) => state.ingredients.i
 export const selectSauces = (state: RootState) => state.ingredients.sauces;
 export const selectMains = (state: RootState) => state.ingredients.mains;
 export const selectBuns = (state: RootState) => state.ingredients.buns;
+export const selectIngredients = createSelector(
+  [selectSauces, selectMains, selectBuns],
+  (sauces, mains, buns) => {
+    return [...sauces, ...mains, ...buns];
+  },
+);
+export const selectIngredientsByIds = (ingredientsId: Array<IIngredient['_id']>) =>
+  createSelector([selectIngredients], (ingredients) => {
+    const foundElements = ingredientsId.reduce<Array<IIngredient>>((acc, ingredientId) => {
+      const found = ingredients.find((ingredient) => ingredient._id === ingredientId);
+      if (found) {
+        return [...acc, found];
+      } else {
+        return acc;
+      }
+    }, []);
 
+    return foundElements;
+  });
 export const selectIngredientById = (ingredientId: string | undefined) =>
   createSelector([selectBuns, selectMains, selectSauces], (buns, mains, sauces) => {
     const ingredients = [...buns, ...mains, ...sauces];
@@ -80,3 +100,42 @@ export const selectAllIngredientsConstructor = createSelector(
     return { ingredients, bunTop, bunBottom };
   },
 );
+// Feeds
+export const selectFeeds = (state: RootState) => state.wsFeeds.feeds;
+export const selectFeedById = (id: IOrder['_id']) =>
+  createSelector([selectFeeds], (feeds) => feeds.find((feed) => feed._id === id));
+export const selectFeedByNumber = (number: IOrder['number']) =>
+  createSelector([selectFeeds], (feeds) => feeds.find((feed) => feed.number === number));
+export const selectWsFeedsConnected = (state: RootState) => state.wsFeeds.wsConnected;
+export const selectImagesIngredients = (ingredientsId: Array<IIngredient['_id']>) =>
+  createSelector([selectBuns, selectMains, selectSauces], (buns, mains, sauces) => {
+    const ingredients = [...buns, ...mains, ...sauces];
+
+    const ingredientsImages = ingredientsId.map((ingredientId) => {
+      const ingredient = ingredients.find((ingredient) => ingredient._id === ingredientId);
+      return ingredient?.image_mobile;
+    });
+
+    return ingredientsImages;
+  });
+export const selectTotalPriceFeeds = (ingredientsId: Array<IIngredient['_id']>) =>
+  createSelector([selectIngredients], (ingredients) => {
+    const total = ingredientsId.reduce((reduce, ingredientId) => {
+      const price = ingredients.find((ingredient) => ingredientId === ingredient._id);
+      return price ? price.price + reduce : reduce;
+    }, 0);
+
+    return total;
+  });
+export const selectTotalTodayFeeds = (state: RootState) => state.wsFeeds.totalToday;
+export const selectTotalFeeds = (state: RootState) => state.wsFeeds.total;
+export const selectFeedsReady = createSelector([selectFeeds], (feeds) => {
+  const ready = feeds.filter((feed) => feed.status === EStatuses.DONE);
+  return ready;
+});
+export const selectFeedsPending = createSelector([selectFeeds], (feeds) => {
+  const pending = feeds.filter((feed) => feed.status === EStatuses.PENDING);
+  return pending;
+});
+// Orders
+export const selectOrders = (state: RootState) => state.wsOrders.orders;

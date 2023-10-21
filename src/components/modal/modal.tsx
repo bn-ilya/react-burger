@@ -15,6 +15,10 @@ import OrderDetails from '../../pages/constructor-page/order-details/order-detai
 
 import { closeModal } from '../../services/reducers/modal';
 import { selectModal } from '../../services/selectors';
+import { IOrder, ETypesModal, IIngredient } from '../../utils/types';
+
+import FeedDetails from '../feed-details/feed-details';
+import FeedModalHeader from '../feed-modal-header/feed-modal-header';
 import ModalError from '../ui/modal-error/modal-error';
 
 import type { FC, ReactNode, KeyboardEvent as ReactKeyboardEvent } from 'react';
@@ -41,15 +45,19 @@ const Modal: FC = () => {
   useEffect(() => {
     if (!typeModal || !contentModal) return;
     switch (typeModal) {
-      case 'viewingIngredient':
+      case ETypesModal.VIEWING_INGREDIENTS:
         setHeader(<span className='text text_type_main-large'>Детали ингредиента</span>);
-        setMain(<IngredientDetails ingredient={contentModal} />);
+        setMain(<IngredientDetails ingredient={contentModal as IIngredient} />);
         break;
-      case 'order':
-        setMain(<OrderDetails number={contentModal} />);
+      case ETypesModal.VIEWING_FEED:
+        setHeader(<FeedModalHeader order={contentModal as IOrder} />);
+        setMain(<FeedDetails showNumberFeed={false} order={contentModal as IOrder} />);
         break;
-      case 'error':
-        setMain(<ModalError error={contentModal} />);
+      case ETypesModal.ORDER:
+        setMain(<OrderDetails number={contentModal as number} />);
+        break;
+      case ETypesModal.ERROR:
+        setMain(<ModalError error={contentModal as string} />);
         break;
       default:
         break;

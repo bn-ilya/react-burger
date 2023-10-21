@@ -7,29 +7,34 @@ import styles from './login-form.module.css';
 
 import ButtonLoader from '../../../../components/button-loader/button-loader';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
-import useFormAndValidation from '../../../../hooks/use-form-and-validation';
+import useFormAndValidation from '../../../../hooks/useFormAndValidation';
 import { openModal } from '../../../../services/reducers/modal';
 import { login } from '../../../../services/reducers/profile';
 import { selectUserDataRequest } from '../../../../services/selectors';
-import { IError } from '../../../../utils/types';
+import { ETypesModal, IError, TEmailUser, TPasswordUser } from '../../../../utils/types';
 
 const LoginForm = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const userDataRequest = useAppSelector(selectUserDataRequest);
-  const { values, isValid, handleChange } = useFormAndValidation();
+  const { values, isValid, handleChange } = useFormAndValidation<{
+    email: TEmailUser;
+    password: TPasswordUser;
+  }>();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await dispatch(login(values)).unwrap();
-      location?.state?.goBack
-        ? navigate(location.state.goBack.pathname, { replace: true })
-        : navigate('/', { replace: true });
+      if (values) {
+        await dispatch(login(values)).unwrap();
+        location?.state?.goBack
+          ? navigate(location.state.goBack.pathname, { replace: true })
+          : navigate('/', { replace: true });
+      }
     } catch (error) {
       const errorObject = error as IError;
-      dispatch(openModal({ content: errorObject.message, type: 'error' }));
+      dispatch(openModal({ contentModal: errorObject.message, typeModal: ETypesModal.ERROR }));
     }
   };
 
@@ -40,7 +45,7 @@ const LoginForm = () => {
         placeholder={'E-mail'}
         onChange={handleChange}
         name={'email'}
-        value={values.email ?? ''}
+        value={values?.email ?? ''}
         size={'default'}
         required={true}
       />
@@ -49,7 +54,7 @@ const LoginForm = () => {
         onChange={handleChange}
         icon={'ShowIcon'}
         name={'password'}
-        value={values.password ?? ''}
+        value={values?.password ?? ''}
         size={'default'}
         required={true}
       />

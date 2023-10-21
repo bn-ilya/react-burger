@@ -1,0 +1,7 @@
+.status-pending {
+  color: var(--text-inactive-color);
+}
+
+.status-done {
+  color: var(--colors-interface-success);
+}

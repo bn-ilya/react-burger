@@ -1,0 +1,19 @@
+.content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap:60px;
+    overflow: auto;
+}
+
+.feed-statistics {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 60px
+}
+
+.feed-statistic {
+    display: grid;
+    grid-template-columns: 1fr;
+}

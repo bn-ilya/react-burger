@@ -13,7 +13,7 @@ const Inputs: FC<IInputsProps> = ({ values, errors, handleChange }) => {
         placeholder={'Имя'}
         onChange={handleChange}
         name={'name'}
-        value={values.name ?? ''}
+        value={values?.name ?? ''}
         error={!!errors.name}
         errorText={errors.name}
         icon={'EditIcon'}
@@ -23,7 +23,7 @@ const Inputs: FC<IInputsProps> = ({ values, errors, handleChange }) => {
         placeholder={'Логин'}
         onChange={handleChange}
         name={'email'}
-        value={values.email ?? ''}
+        value={values?.email ?? ''}
         isIcon={true}
         size={'default'}
       />
@@ -32,7 +32,7 @@ const Inputs: FC<IInputsProps> = ({ values, errors, handleChange }) => {
         onChange={handleChange}
         icon={'EditIcon'}
         name={'password'}
-        value={values.password ?? ''}
+        value={values?.password ?? ''}
         size={'default'}
       />
     </>

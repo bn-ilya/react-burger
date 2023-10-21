@@ -1,11 +1,11 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { FC, memo } from 'react';
-import { useSelector } from 'react-redux';
 
 import styles from './controls.module.css';
 
 import ButtonLoader from '../../../../../components/button-loader/button-loader';
+import { useAppSelector } from '../../../../../hooks/rtk-hooks';
 import { selectUpdateUserDataRequest } from '../../../../../services/selectors';
 
 interface ControlsProps {
@@ -14,7 +14,7 @@ interface ControlsProps {
 }
 
 const Controls: FC<ControlsProps> = memo(function Controls({ isValid, cancel }) {
-  const updateUserDataRequest = useSelector(selectUpdateUserDataRequest);
+  const updateUserDataRequest = useAppSelector(selectUpdateUserDataRequest);
 
   return (
     <div className={styles.content}>

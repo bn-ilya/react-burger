@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { forgotPassword as forgotPasswordApi } from '../../utils/burger-api';
+import { SliceActions } from '../../utils/types';
 
 interface IForgotPasswordResponse {
   success: boolean;
@@ -53,3 +54,4 @@ const forgotPasswordSlice = createSlice({
 
 export default forgotPasswordSlice.reducer;
 export const { setForgotPassword } = forgotPasswordSlice.actions;
+export type TForgotPasswordSliceActions = SliceActions<typeof forgotPasswordSlice.actions>;

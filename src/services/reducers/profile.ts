@@ -1,4 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
+
+import { AppDispatch } from '.';
 
 import {
   register as registerApi,
@@ -6,11 +8,20 @@ import {
   logout as logoutApi,
   getUserData as getUserDataApi,
   updateUserData as updateUserDataApi,
+  refreshToken,
 } from '../../utils/burger-api';
+import {
+  IError,
+  IRefreshRespone,
+  SliceActions,
+  TEmailUser,
+  TNameUser,
+  TPasswordUser,
+} from '../../utils/types';
 
 interface IUser {
-  email: string;
-  name: string;
+  email: TEmailUser;
+  name: TNameUser;
 }
 
 interface IRegisterRespone {
@@ -37,7 +48,18 @@ interface IGetUserResponse {
   user: IUser;
 }
 
-const initialState = {
+interface IInitialState {
+  name: TNameUser;
+  email: TPasswordUser;
+  logoutRequest: boolean;
+  logoutFailed: boolean;
+  getUserDataRequest: boolean;
+  getUserDataFailed: boolean;
+  updateUserDataRequest: boolean;
+  updateUserDataFailed: boolean;
+}
+
+const initialState: IInitialState = {
   name: '',
   email: '',
   logoutRequest: false,
@@ -48,89 +70,119 @@ const initialState = {
   updateUserDataFailed: false,
 };
 
-export const register = createAsyncThunk(
-  'profile/register',
-  async function ({ email, password, name }: any, { rejectWithValue, dispatch }) {
-    try {
-      const res = await registerApi<IRegisterRespone>(email, password, name);
+export const register = createAsyncThunk<
+  IRegisterRespone,
+  { email: TEmailUser; password: TPasswordUser; name: TNameUser },
+  {
+    rejectValue: IError;
+    dispatch: AppDispatch;
+  }
+>('profile/register', async function ({ email, password, name }, { rejectWithValue, dispatch }) {
+  try {
+    const res = await registerApi<IRegisterRespone>(email, password, name);
 
-      localStorage.setItem('accessToken', res.accessToken.split('Bearer ')[1]);
-      localStorage.setItem('refreshToken', res.refreshToken);
+    localStorage.setItem('accessToken', res.accessToken.split('Bearer ')[1]);
+    localStorage.setItem('refreshToken', res.refreshToken);
 
-      dispatch(setName(res.user.name));
-      dispatch(setEmail(res.user.email));
-      return res;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  },
-);
+    dispatch(setName(res.user.name));
+    dispatch(setEmail(res.user.email));
+    return res;
+  } catch (error) {
+    const errorObject = error as IError;
+    return rejectWithValue(errorObject);
+  }
+});
 
-export const login = createAsyncThunk(
-  'profile/login',
-  async function ({ email, password }: any, { rejectWithValue, dispatch }) {
-    try {
-      const res = await loginApi<ILoginResponse>(email, password);
+export const login = createAsyncThunk<
+  ILoginResponse,
+  { email: TEmailUser; password: TPasswordUser },
+  {
+    rejectValue: IError;
+    dispatch: AppDispatch;
+  }
+>('profile/login', async function ({ email, password }, { rejectWithValue, dispatch }) {
+  try {
+    const res = await loginApi<ILoginResponse>(email, password);
+    localStorage.setItem('accessToken', res.accessToken.split('Bearer ')[1]);
+    localStorage.setItem('refreshToken', res.refreshToken);
 
-      localStorage.setItem('accessToken', res.accessToken.split('Bearer ')[1]);
-      localStorage.setItem('refreshToken', res.refreshToken);
+    dispatch(setName(res.user.name));
+    dispatch(setEmail(res.user.email));
+    return res;
+  } catch (error) {
+    const errorObject = error as IError;
+    return rejectWithValue(errorObject);
+  }
+});
 
-      dispatch(setName(res.user.name));
-      dispatch(setEmail(res.user.email));
-      return res;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  },
-);
+export const logout = createAsyncThunk<
+  ILogoutRespone,
+  undefined,
+  {
+    rejectValue: IError;
+    dispatch: AppDispatch;
+  }
+>('profile/logout', async function (_, { rejectWithValue, dispatch }) {
+  try {
+    const res = await logoutApi<ILogoutRespone>();
 
-export const logout = createAsyncThunk(
-  'profile/logout',
-  async function (_, { rejectWithValue, dispatch }) {
-    try {
-      const res = await logoutApi<ILogoutRespone>();
+    localStorage.setItem('accessToken', '');
+    localStorage.setItem('refreshToken', '');
 
-      localStorage.setItem('accessToken', '');
-      localStorage.setItem('refreshToken', '');
+    dispatch(setName(initialState.name));
+    dispatch(setEmail(initialState.email));
+    return res;
+  } catch (error) {
+    dispatch(setName(initialState.name));
+    dispatch(setEmail(initialState.email));
+    const errorObject = error as IError;
+    return rejectWithValue(errorObject);
+  }
+});
 
-      dispatch(setName(initialState.name));
-      dispatch(setEmail(initialState.email));
-      return res;
-    } catch (error) {
-      dispatch(setName(initialState.name));
-      dispatch(setEmail(initialState.email));
-      return rejectWithValue(error);
-    }
-  },
-);
+export const getUserData = createAsyncThunk<
+  IGetUserResponse,
+  undefined,
+  { rejectValue: IError; dispatch: AppDispatch }
+>('profile/getUserData', async function (_, { rejectWithValue, dispatch }) {
+  try {
+    const res = await getUserDataApi<IGetUserResponse>();
+    dispatch(setName(res.user.name));
+    dispatch(setEmail(res.user.email));
+    return res;
+  } catch (error) {
+    dispatch(setName(initialState.name));
+    dispatch(setEmail(initialState.email));
+    const errorObject = error as IError;
+    return rejectWithValue(errorObject);
+  }
+});
 
-export const getUserData = createAsyncThunk(
-  'profile/getUserData',
-  async function (_, { rejectWithValue, dispatch }) {
-    try {
-      const res = await getUserDataApi<IGetUserResponse>();
-      dispatch(setName(res.user.name));
-      dispatch(setEmail(res.user.email));
-      return res;
-    } catch (error) {
-      dispatch(setName(initialState.name));
-      dispatch(setEmail(initialState.email));
-      return rejectWithValue(error);
-    }
-  },
-);
-
-export const updateUserData = createAsyncThunk(
+export const updateUserData = createAsyncThunk<
+  IGetUserResponse,
+  { name: TNameUser; email: TEmailUser; password: TPasswordUser },
+  { rejectValue: IError; dispatch: AppDispatch }
+>(
   'profile/updateUserData',
-  async function ({ name, email, password }: any, { rejectWithValue, dispatch }) {
+  async function ({ name, email, password }, { rejectWithValue, dispatch }) {
     try {
       const res = await updateUserDataApi<IGetUserResponse>(name, email, password);
       dispatch(setName(res.user.name));
       dispatch(setEmail(res.user.email));
       return res;
     } catch (error) {
-      return rejectWithValue(error);
+      const errorObject = error as IError;
+      return rejectWithValue(errorObject);
     }
+  },
+);
+
+export const updateToken = createAsyncThunk<IRefreshRespone>(
+  'profile/updateToken',
+  async function () {
+    const res = await refreshToken<IRefreshRespone>();
+
+    return res;
   },
 );
 
@@ -138,10 +190,10 @@ const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    setName: (state, action) => {
+    setName: (state, action: PayloadAction<TNameUser>) => {
       state.name = action.payload;
     },
-    setEmail: (state, action) => {
+    setEmail: (state, action: PayloadAction<TEmailUser>) => {
       state.email = action.payload;
     },
   },
@@ -207,3 +259,4 @@ const profileSlice = createSlice({
 
 export default profileSlice.reducer;
 const { setEmail, setName } = profileSlice.actions;
+export type TProfileSliceActions = SliceActions<typeof profileSlice.actions>;

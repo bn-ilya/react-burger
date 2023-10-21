@@ -3,13 +3,13 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 import { FC, useEffect } from 'react';
 
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
-import { useSelector, useDispatch } from 'react-redux';
 
 import ConstructorElementMock from './constructor-element-mock/constructor-element-mock';
 import styles from './constructor.module.css';
 
 import DraggableConstructorElement from './draggable-constructor-element/draggable-constructor-element';
 
+import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
 import { setCountIngredients, setCountBuns } from '../../../../services/reducers/ingredients';
 import {
   addIngredients,
@@ -20,15 +20,11 @@ import {
 
 import { setTotalPrice } from '../../../../services/reducers/total-price';
 import { selectAllIngredientsConstructor } from '../../../../services/selectors';
-import { IIngredient } from '../../../../utils/types';
-
-interface IIngredientsCount {
-  [id: string]: number;
-}
+import { IIngredient, IIngredientsCount } from '../../../../utils/types';
 
 const Constructor: FC = () => {
-  const dispatch = useDispatch();
-  const { ingredients, bunTop, bunBottom } = useSelector(selectAllIngredientsConstructor);
+  const dispatch = useAppDispatch();
+  const { ingredients, bunTop, bunBottom } = useAppSelector(selectAllIngredientsConstructor);
 
   useEffect(() => {
     if (!ingredients) return;

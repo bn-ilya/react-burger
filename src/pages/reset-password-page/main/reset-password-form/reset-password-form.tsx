@@ -1,33 +1,37 @@
 import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { FC, FormEvent } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './reset-password-form.module.css';
 
 import ButtonLoader from '../../../../components/button-loader/button-loader';
-import { useAppDispatch } from '../../../../hooks/rtk-hooks';
-import useFormAndValidation from '../../../../hooks/use-form-and-validation';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
+import useFormAndValidation from '../../../../hooks/useFormAndValidation';
 import { openModal } from '../../../../services/reducers/modal';
 import { resetPassword } from '../../../../services/reducers/reset-password';
 import { selectResetPasswordRequest } from '../../../../services/selectors';
-import { IError } from '../../../../utils/types';
+import { ETypesModal, IError, TPasswordUser } from '../../../../utils/types';
 
 const ResetPasswordForm: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const resetPasswordRequest = useSelector(selectResetPasswordRequest);
-  const { values, errors, isValid, handleChange } = useFormAndValidation();
+  const resetPasswordRequest = useAppSelector(selectResetPasswordRequest);
+  const { values, errors, isValid, handleChange } = useFormAndValidation<{
+    password: TPasswordUser;
+    token: string;
+  }>();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await dispatch(resetPassword(values)).unwrap();
-      navigate('/login', { replace: true });
+      if (values) {
+        await dispatch(resetPassword(values)).unwrap();
+        navigate('/login', { replace: true });
+      }
     } catch (error) {
       const errorObject = error as IError;
-      dispatch(openModal({ content: errorObject.message, type: 'error' }));
+      dispatch(openModal({ contentModal: errorObject.message, typeModal: ETypesModal.ERROR }));
     }
   };
 
@@ -36,7 +40,7 @@ const ResetPasswordForm: FC = () => {
       <h1 className={'text text_type_main-medium ' + styles.title}>Восстановление пароля</h1>
       <PasswordInput
         placeholder={'Введите новый пароль'}
-        value={values.password ?? ''}
+        value={values?.password ?? ''}
         onChange={handleChange}
         name={'password'}
         icon={'ShowIcon'}
@@ -46,7 +50,7 @@ const ResetPasswordForm: FC = () => {
       <Input
         type={'text'}
         placeholder={'Введите код из письма'}
-        value={values.token ?? ''}
+        value={values?.token ?? ''}
         onChange={handleChange}
         name={'token'}
         error={!!errors.token}

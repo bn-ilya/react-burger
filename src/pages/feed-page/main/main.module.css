@@ -1,0 +1,29 @@
+.main {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 40px;
+	min-height: 0;
+	flex: 1;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	max-width: 1240px;
+	width: 100%;
+	gap: 20px;
+	min-height: 0;
+}
+
+.header {
+	width: 100%;
+}
+
+.body {
+	display: flex;
+	gap: 64px;
+	width: 100%;
+	min-height: 0;
+	min-width: 0;
+}

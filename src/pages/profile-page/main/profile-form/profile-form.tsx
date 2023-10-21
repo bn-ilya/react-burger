@@ -6,17 +6,17 @@ import styles from './profile-form.module.css';
 import SceletonLoader from './sceleton-loader/sceleton-loader';
 
 import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
-import useFormAndValidation from '../../../../hooks/use-form-and-validation';
+import useFormAndValidation from '../../../../hooks/useFormAndValidation';
 import { openModal } from '../../../../services/reducers/modal';
 import { updateUserData } from '../../../../services/reducers/profile';
 import { selectUserData, selectUserDataFetch } from '../../../../services/selectors';
-import { IError } from '../../../../utils/types';
+import { ETypesModal, IError, TPasswordUser } from '../../../../utils/types';
 
 const ProfileForm: FC = () => {
   const dispatch = useAppDispatch();
   const { request, failed } = useAppSelector(selectUserDataFetch);
   const { name, email } = useAppSelector(selectUserData);
-  const password: string | number = '';
+  const password: TPasswordUser = '';
 
   const { values, errors, isValid, handleChange, resetForm } = useFormAndValidation({
     name: name,
@@ -28,6 +28,7 @@ const ProfileForm: FC = () => {
 
   useEffect(() => {
     if (request) return;
+    if (!values) return;
     if (name !== values.name || email !== values.email || password !== values.password) {
       setShowControls(true);
     } else {
@@ -37,10 +38,12 @@ const ProfileForm: FC = () => {
 
   const save = async () => {
     try {
-      await dispatch(updateUserData(values)).unwrap();
+      if (values) {
+        await dispatch(updateUserData(values)).unwrap();
+      }
     } catch (error) {
       const errorObject = error as IError;
-      dispatch(openModal({ content: errorObject.message, type: 'error' }));
+      dispatch(openModal({ contentModal: errorObject.message, typeModal: ETypesModal.ERROR }));
     }
   };
 
@@ -55,7 +58,7 @@ const ProfileForm: FC = () => {
   };
 
   if (request) return <SceletonLoader />;
-  if (failed) dispatch(openModal({ content: '', type: 'error' }));
+  if (failed) dispatch(openModal({ contentModal: '', typeModal: ETypesModal.ERROR }));
 
   return (
     <form className={styles.form} onSubmit={handleSubmitForm}>

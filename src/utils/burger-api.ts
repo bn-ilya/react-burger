@@ -1,16 +1,15 @@
+import { type AxiosRequestConfig } from 'axios';
+
 import { instanceAxios } from './api-config';
-import { IError, IRefreshRespone } from './types';
+import { IError, IRefreshRespone, TEmailUser, TNameUser, TPasswordUser, IOrder } from './types';
 
 export const getIngredients = async <T>(): Promise<T> => {
   const res = await instanceAxios.get<T>('ingredients');
   return res.data;
 };
 
-export const createOrder = async <T>(ingredientsIds: Array<string>): Promise<T> => {
-  const res = await instanceAxios.post<T>(`orders`, {
-    ingredients: ingredientsIds,
-  });
-
+export const getFeedByNumber = async <T>(number: IOrder['number']): Promise<T> => {
+  const res = await instanceAxios.get<T>(`orders/${number}`);
   return res.data;
 };
 
@@ -31,7 +30,11 @@ export const resetPassword = async <T>(password: string, token: string): Promise
   return res.data;
 };
 
-export const register = async <T>(email: string, password: string, name: string): Promise<T> => {
+export const register = async <T>(
+  email: TEmailUser,
+  password: TPasswordUser,
+  name: TNameUser,
+): Promise<T> => {
   const res = await instanceAxios.post<T>(`auth/register`, {
     name,
     email,
@@ -41,7 +44,7 @@ export const register = async <T>(email: string, password: string, name: string)
   return res.data;
 };
 
-export const login = async <T>(email: string, password: string): Promise<T> => {
+export const login = async <T>(email: TEmailUser, password: TPasswordUser): Promise<T> => {
   const res = await instanceAxios.post<T>(`auth/login`, {
     email,
     password,
@@ -66,7 +69,7 @@ export const refreshToken = async <T>(): Promise<T> => {
   return res.data;
 };
 
-export const fetchWithRefresh = async <T>(url: string, options: any): Promise<T> => {
+export const fetchWithRefresh = async <T>(url: string, options: AxiosRequestConfig): Promise<T> => {
   try {
     if (!localStorage.getItem('accessToken'))
       return Promise.reject('Токен авторизации не обноружен');
@@ -86,6 +89,19 @@ export const fetchWithRefresh = async <T>(url: string, options: any): Promise<T>
       return Promise.reject(error);
     }
   }
+};
+
+export const createOrder = async <T>(ingredientsIds: Array<string>): Promise<T> => {
+  const res = await fetchWithRefresh<T>(`orders`, {
+    method: 'post',
+    data: { ingredients: ingredientsIds },
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+    },
+  });
+
+  return res;
 };
 
 export const getUserData = async <T>(): Promise<T> => {
