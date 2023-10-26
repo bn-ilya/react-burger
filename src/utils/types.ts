@@ -132,16 +132,20 @@ export interface Owner {
   updatedAt: string;
 }
 
+type TStatuses = `${EStatuses}`;
+
 export interface IOrder {
   ingredients: string[];
   _id: string;
-  status: EStatuses;
+  status: TStatuses;
   name: string;
   number: number;
   createdAt: string;
   updatedAt: string;
+  price: number;
 }
 
-export interface IOrderWithOwner extends IOrder {
+export interface IOrderWithOwner extends Omit<IOrder, 'ingredients'> {
   owner: Owner;
+  ingredients: IIngredient[];
 }

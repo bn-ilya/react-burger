@@ -7,7 +7,7 @@ import styles from './ingredients.module.css';
 
 import { useAppSelector, useAppDispatch } from '../../../../hooks/rtk-hooks';
 
-import { setActiveTab } from '../../../../services/reducers/tabs';
+import { setActiveTab } from '../../../../services/reducers/tabs/tabs';
 import { selectActiveTab } from '../../../../services/selectors';
 import { EIngredients } from '../../../../utils/types';
 

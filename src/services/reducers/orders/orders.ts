@@ -10,7 +10,7 @@ interface ICreateOrderRespone {
   order: IOrderWithOwner;
 }
 
-interface IInitialState {
+export interface IInitialState {
   orders: Array<IOrderWithOwner>;
   orderRequest: boolean;
   orderFailed: boolean;
