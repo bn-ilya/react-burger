@@ -6,13 +6,13 @@ import { IOrder, IWsActions, SliceActions } from '../../../utils/types';
 
 const nameSlice = 'wsOrder';
 
-interface IInitalState {
+export interface IInitialState {
   wsConnected: boolean;
   orders: Array<IOrder>;
   error?: Event;
 }
 
-const initialState: IInitalState = {
+const initialState: IInitialState = {
   wsConnected: false,
   orders: [],
 };
