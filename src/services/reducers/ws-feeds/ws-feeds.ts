@@ -6,7 +6,7 @@ import { AppDispatch } from '..';
 import { getFeedByNumber as getFeedByNumberApi } from '../../../utils/burger-api';
 import { IOrder, IError, IWsActions, SliceActions } from '../../../utils/types';
 
-interface IInitialState {
+export interface IInitialState {
   wsConnected: boolean;
   feeds: Array<IOrder>;
   total: number;
@@ -74,11 +74,11 @@ const wsFeedsSlice = createSlice({
         state.feedRequest = true;
       })
       .addCase(getFeedByNumber.fulfilled, (state) => {
-        state.feedRequest = true;
+        state.feedRequest = false;
         state.feedFailed = false;
       })
       .addCase(getFeedByNumber.rejected, (state) => {
-        state.feedRequest = true;
+        state.feedRequest = false;
         state.feedFailed = true;
       });
   },

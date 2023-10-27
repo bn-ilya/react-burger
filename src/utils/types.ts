@@ -139,13 +139,15 @@ export interface IOrder {
   _id: string;
   status: TStatuses;
   name: string;
+  owner?: string;
   number: number;
   createdAt: string;
   updatedAt: string;
-  price: number;
+  price?: number;
+  __v?: number;
 }
 
-export interface IOrderWithOwner extends Omit<IOrder, 'ingredients'> {
+export interface IOrderWithOwner extends Omit<IOrder, 'ingredients' | 'owner'> {
   owner: Owner;
   ingredients: IIngredient[];
 }
