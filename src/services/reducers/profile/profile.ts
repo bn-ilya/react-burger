@@ -48,7 +48,7 @@ interface IGetUserResponse {
   user: IUser;
 }
 
-interface IInitialState {
+export interface IInitialState {
   name: TNameUser;
   email: TPasswordUser;
   logoutRequest: boolean;
@@ -258,5 +258,5 @@ const profileSlice = createSlice({
 });
 
 export default profileSlice.reducer;
-const { setEmail, setName } = profileSlice.actions;
+export const { setEmail, setName } = profileSlice.actions;
 export type TProfileSliceActions = SliceActions<typeof profileSlice.actions>;
