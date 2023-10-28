@@ -7,8 +7,6 @@ import wsOrdersReducer, {
   wsGetOrders,
 } from './ws-orders';
 
-import { IOrder } from '../../../utils/types';
-
 const initialState: IInitialState = {
   wsConnected: false,
   orders: [],
