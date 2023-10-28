@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { AppDispatch } from '.';
+import { AppDispatch } from '..';
 
-import { resetPassword as resetPasswordApi } from '../../utils/burger-api';
-import { IError, TPasswordUser } from '../../utils/types';
+import { resetPassword as resetPasswordApi } from '../../../utils/burger-api';
+import { IError, TPasswordUser } from '../../../utils/types';
 
 interface IResetPasswordRespone {
   message: string;

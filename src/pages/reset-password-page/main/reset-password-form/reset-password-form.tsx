@@ -9,7 +9,7 @@ import ButtonLoader from '../../../../components/button-loader/button-loader';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
 import useFormAndValidation from '../../../../hooks/useFormAndValidation';
 import { openModal } from '../../../../services/reducers/modal/modal';
-import { resetPassword } from '../../../../services/reducers/reset-password';
+import { resetPassword } from '../../../../services/reducers/reset-password/reset-password';
 import { selectResetPasswordRequest } from '../../../../services/selectors';
 import { ETypesModal, IError, TPasswordUser } from '../../../../utils/types';
 
