@@ -10,7 +10,10 @@ import styles from './constructor.module.css';
 import DraggableConstructorElement from './draggable-constructor-element/draggable-constructor-element';
 
 import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
-import { setCountIngredients, setCountBuns } from '../../../../services/reducers/ingredients';
+import {
+  setCountIngredients,
+  setCountBuns,
+} from '../../../../services/reducers/ingredients/ingredients';
 import {
   addIngredients,
   setBunBottom,

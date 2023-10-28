@@ -1,10 +1,9 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 
-import { AppDispatch } from '.';
+import { AppDispatch } from '..';
 
-import { IError, IIngredient, IIngredientsCount, SliceActions } from './../../utils/types';
-
-import { getIngredients as getIngredientsApi } from '../../utils/burger-api';
+import { getIngredients as getIngredientsApi } from '../../../utils/burger-api';
+import { IError, IIngredient, IIngredientsCount, SliceActions } from '../../../utils/types';
 
 interface IGetIngredientsResponse {
   data: Array<IIngredient>;

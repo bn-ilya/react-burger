@@ -3,7 +3,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import forgotPasswordSlice, {
   TForgotPasswordSliceActions,
 } from './forgot-password/forgot-password';
-import ingredientsSlice, { TIngredientsSliceActions } from './ingredients';
+import ingredientsSlice, { TIngredientsSliceActions } from './ingredients/ingredients';
 import ingredientsConstructorSlice, {
   TIngredientsConstructorSliceActions,
 } from './ingredients-constructor/ingredients-constructor';
