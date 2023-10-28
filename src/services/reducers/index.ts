@@ -6,7 +6,7 @@ import forgotPasswordSlice, {
 import ingredientsSlice, { TIngredientsSliceActions } from './ingredients';
 import ingredientsConstructorSlice, {
   TIngredientsConstructorSliceActions,
-} from './ingredients-constructor';
+} from './ingredients-constructor/ingredients-constructor';
 import modalSlice, { TModalSliceActions } from './modal';
 import ordersSlice, { TOrdersSliceActions } from './orders/orders';
 import profileSlice, { TProfileSliceActions } from './profile';

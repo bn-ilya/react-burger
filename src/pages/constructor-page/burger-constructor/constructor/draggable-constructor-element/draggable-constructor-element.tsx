@@ -10,7 +10,7 @@ import { useAppDispatch } from '../../../../../hooks/rtk-hooks';
 import {
   moveIngredients,
   removeIngredient,
-} from '../../../../../services/reducers/ingredients-constructor';
+} from '../../../../../services/reducers/ingredients-constructor/ingredients-constructor';
 import { IIngredientConstructor } from '../../../../../utils/types';
 
 interface ICollectedProps {

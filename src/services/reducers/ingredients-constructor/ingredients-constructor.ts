@@ -5,7 +5,7 @@ import {
   IIngredientConstructor,
   SliceActions,
   TIdIngredient,
-} from '../../utils/types';
+} from '../../../utils/types';
 
 interface IInitialState {
   ingredients: Array<IIngredientConstructor>;
