@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { useAppDispatch } from '../../hooks/rtk-hooks';
 import { useFeedByNumber } from '../../hooks/useFeedByNumber';
-import { openModal } from '../../services/reducers/modal';
+import { openModal } from '../../services/reducers/modal/modal';
 import { IOrder, ETypesModal, IRouteParams } from '../../utils/types';
 
 export default function FeedModal() {

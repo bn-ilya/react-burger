@@ -1,9 +1,9 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { ReactElement } from 'react';
 
-import { IOrder, ETypesModal, IIngredient, SliceActions } from '../../utils/types';
+import { IOrder, ETypesModal, IIngredient, SliceActions } from '../../../utils/types';
 
-interface IInitialState {
+export interface IInitialState {
   isModalOpen?: boolean;
   contentModal: ReactElement | IIngredient | IOrder | string | number | null;
   typeModal: ETypesModal | null;

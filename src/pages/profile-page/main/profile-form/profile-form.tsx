@@ -7,7 +7,7 @@ import SceletonLoader from './sceleton-loader/sceleton-loader';
 
 import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
 import useFormAndValidation from '../../../../hooks/useFormAndValidation';
-import { openModal } from '../../../../services/reducers/modal';
+import { openModal } from '../../../../services/reducers/modal/modal';
 import { updateUserData } from '../../../../services/reducers/profile';
 import { selectUserData, selectUserDataFetch } from '../../../../services/selectors';
 import { ETypesModal, IError, TPasswordUser } from '../../../../utils/types';

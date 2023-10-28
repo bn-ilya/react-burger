@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/rtk-hooks';
 import IngredientDetails from '../../pages/constructor-page/burger-ingredients/ingredients/ingredient-details/ingredient-details';
 import OrderDetails from '../../pages/constructor-page/order-details/order-details';
 
-import { closeModal } from '../../services/reducers/modal';
+import { closeModal } from '../../services/reducers/modal/modal';
 import { selectModal } from '../../services/selectors';
 import { IOrder, ETypesModal, IIngredient } from '../../utils/types';
 

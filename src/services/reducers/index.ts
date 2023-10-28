@@ -7,7 +7,7 @@ import ingredientsSlice, { TIngredientsSliceActions } from './ingredients/ingred
 import ingredientsConstructorSlice, {
   TIngredientsConstructorSliceActions,
 } from './ingredients-constructor/ingredients-constructor';
-import modalSlice, { TModalSliceActions } from './modal';
+import modalSlice, { TModalSliceActions } from './modal/modal';
 import ordersSlice, { TOrdersSliceActions } from './orders/orders';
 import profileSlice, { TProfileSliceActions } from './profile';
 import resetPasswordSlice from './reset-password';

@@ -12,7 +12,7 @@ import styles from './register-form.module.css';
 import ButtonLoader from '../../../../components/button-loader/button-loader';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
 import useFormAndValidation from '../../../../hooks/useFormAndValidation';
-import { openModal } from '../../../../services/reducers/modal';
+import { openModal } from '../../../../services/reducers/modal/modal';
 import { register } from '../../../../services/reducers/profile';
 import { selectUserDataRequest } from '../../../../services/selectors';
 import { ETypesModal, IError, TEmailUser, TNameUser, TPasswordUser } from '../../../../utils/types';

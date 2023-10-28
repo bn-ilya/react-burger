@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/rtk-hooks';
 
-import { openModal } from '../../../../../services/reducers/modal';
+import { openModal } from '../../../../../services/reducers/modal/modal';
 import { selectIngredientById } from '../../../../../services/selectors';
 import { ETypesModal } from '../../../../../utils/types';
 
