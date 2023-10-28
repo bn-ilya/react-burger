@@ -82,17 +82,15 @@ describe('ingredientsConstructor reducer', () => {
 
     const action = addIngredients(mockIngredient);
 
-    const computed = ingredientsConstructorReducer(initialState, action);
-
     const expectedState = {
       ...initialState,
       ingredients: [
         ...initialState.ingredients,
-        { ...mockIngredient, uniqueId: computed.ingredients[0].uniqueId },
+        { ...mockIngredient, uniqueId: expect.any(String) },
       ],
     };
 
-    expect(computed).toEqual(expectedState);
+    expect(ingredientsConstructorReducer(initialState, action)).toEqual(expectedState);
   });
 
   it('should handle removeIngredient', () => {
