@@ -81,12 +81,13 @@ const Modal: FC = () => {
     ? createPortal(
         <>
           <section className={styles.modal}>
-            <div className={styles.content}>
+            <div className={styles.content} data-cy='modal'>
               <button
                 tabIndex={0}
                 onKeyDown={handleKeyDown}
                 onClick={() => close()}
                 className={styles.close}
+                data-cy='btn-close-modal'
               >
                 <CloseIcon type='primary' />
               </button>

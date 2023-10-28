@@ -59,6 +59,7 @@ const Info: FC = () => {
         htmlType='button'
         type='primary'
         size='large'
+        dataCy='btn-create-order'
       >
         <span>Оформить заказ</span>
       </ButtonLoader>

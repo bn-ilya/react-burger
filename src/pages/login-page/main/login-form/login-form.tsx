@@ -48,6 +48,7 @@ const LoginForm = () => {
         value={values?.email ?? ''}
         size={'default'}
         required={true}
+        data-cy={'input-login'}
       />
       <PasswordInput
         placeholder={'Пароль'}
@@ -57,6 +58,7 @@ const LoginForm = () => {
         value={values?.password ?? ''}
         size={'default'}
         required={true}
+        data-cy={'password-login'}
       />
       <ButtonLoader
         disabled={!isValid}
@@ -65,6 +67,7 @@ const LoginForm = () => {
         htmlType='submit'
         type='primary'
         size='medium'
+        data-cy={'btn-login'}
       >
         Войти
       </ButtonLoader>
