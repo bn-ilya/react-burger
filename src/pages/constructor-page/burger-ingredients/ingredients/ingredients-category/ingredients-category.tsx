@@ -13,7 +13,7 @@ const IngredientsCategory = forwardRef<HTMLHeadingElement, IIngredientsCategory>
         <h2 id={id} ref={ref} className='text text_type_main-medium mb-6'>
           {name}
         </h2>
-        <div className={styles.ingredientsRow + ' pl-4 pr-2'}>
+        <div data-cy={id} className={styles.ingredientsRow + ' pl-4 pr-2'}>
           {ingredients.map((ingredient) => (
             <IngredientCart key={ingredient['_id']} ingredient={ingredient} />
           ))}
