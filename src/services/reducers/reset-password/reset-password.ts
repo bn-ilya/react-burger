@@ -25,7 +25,7 @@ export const resetPassword = createAsyncThunk<
   }
 });
 
-interface IInitialState {
+export interface IInitialState {
   resetPasswordRequest: boolean;
   resetPasswordFailed: boolean;
 }
