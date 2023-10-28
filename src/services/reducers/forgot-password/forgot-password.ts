@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { forgotPassword as forgotPasswordApi } from '../../utils/burger-api';
-import { SliceActions } from '../../utils/types';
+import { forgotPassword as forgotPasswordApi } from '../../../utils/burger-api';
+import { SliceActions } from '../../../utils/types';
 
 interface IForgotPasswordResponse {
   success: boolean;

@@ -9,7 +9,7 @@ import styles from './forgot-password-form.module.css';
 import ButtonLoader from '../../../../components/button-loader/button-loader';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
 import useFormAndValidation from '../../../../hooks/useFormAndValidation';
-import { forgotPassword } from '../../../../services/reducers/forgot-password';
+import { forgotPassword } from '../../../../services/reducers/forgot-password/forgot-password';
 import { openModal } from '../../../../services/reducers/modal';
 import { selectForgotPasswordRequest } from '../../../../services/selectors';
 import { ETypesModal, IError, TEmailUser } from '../../../../utils/types';

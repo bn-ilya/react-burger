@@ -1,6 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import forgotPasswordSlice, { TForgotPasswordSliceActions } from './forgot-password';
+import forgotPasswordSlice, {
+  TForgotPasswordSliceActions,
+} from './forgot-password/forgot-password';
 import ingredientsSlice, { TIngredientsSliceActions } from './ingredients';
 import ingredientsConstructorSlice, {
   TIngredientsConstructorSliceActions,
