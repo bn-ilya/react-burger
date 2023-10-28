@@ -12,7 +12,7 @@ import ordersSlice, { TOrdersSliceActions } from './orders/orders';
 import profileSlice, { TProfileSliceActions } from './profile/profile';
 import resetPasswordSlice from './reset-password/reset-password';
 import tabsSlice, { TTabsSliceActions } from './tabs/tabs';
-import totalPriceSlice, { TTotalPriceSliceActions } from './total-price';
+import totalPriceSlice, { TTotalPriceSliceActions } from './total-price/total-price';
 import viewingIngredientSlice, { TViewingIngredientSliceActions } from './viewing-ingredient';
 
 import wsFeedsSlice, { TWsFeedSliceActions, wsActionsFeeds } from './ws-feeds/ws-feeds';

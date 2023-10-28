@@ -21,7 +21,7 @@ import {
   updateIndexIngredients,
 } from '../../../../services/reducers/ingredients-constructor/ingredients-constructor';
 
-import { setTotalPrice } from '../../../../services/reducers/total-price';
+import { setTotalPrice } from '../../../../services/reducers/total-price/total-price';
 import { selectAllIngredientsConstructor } from '../../../../services/selectors';
 import { IIngredient, IIngredientsCount } from '../../../../utils/types';
 
