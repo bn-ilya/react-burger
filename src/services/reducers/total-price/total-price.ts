@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { SliceActions } from '../../../utils/types';
 
-interface IInitialState {
+export interface IInitialState {
   totalPrice: number;
 }
 
