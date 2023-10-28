@@ -10,7 +10,7 @@ interface IGetIngredientsResponse {
   success: boolean;
 }
 
-interface IInitialState {
+export interface IInitialState {
   buns: Array<IIngredient>;
   sauces: Array<IIngredient>;
   mains: Array<IIngredient>;
