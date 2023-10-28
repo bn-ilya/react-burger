@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { IIngredient, SliceActions } from '../../utils/types';
+import { IIngredient, SliceActions } from '../../../utils/types';
 
 interface IInitialSTate {
   viewingIngredient: IIngredient | null;

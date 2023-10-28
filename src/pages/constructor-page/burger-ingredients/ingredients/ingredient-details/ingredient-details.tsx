@@ -7,7 +7,7 @@ import styles from './ingredient-details.module.css';
 import {
   setViewingIngredient,
   clearViewingIngredient,
-} from '../../../../../services/reducers/viewing-ingredient';
+} from '../../../../../services/reducers/viewing-ingredient/viewing-ingredient';
 
 const IngredientDetails: FC<IIngredientsDetails> = ({ ingredient }) => {
   const dispatch = useAppDispatch();
