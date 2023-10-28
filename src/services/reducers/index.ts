@@ -9,7 +9,7 @@ import ingredientsConstructorSlice, {
 } from './ingredients-constructor/ingredients-constructor';
 import modalSlice, { TModalSliceActions } from './modal/modal';
 import ordersSlice, { TOrdersSliceActions } from './orders/orders';
-import profileSlice, { TProfileSliceActions } from './profile';
+import profileSlice, { TProfileSliceActions } from './profile/profile';
 import resetPasswordSlice from './reset-password';
 import tabsSlice, { TTabsSliceActions } from './tabs/tabs';
 import totalPriceSlice, { TTotalPriceSliceActions } from './total-price';

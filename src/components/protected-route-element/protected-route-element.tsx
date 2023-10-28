@@ -3,7 +3,7 @@ import { useState, useEffect, FC } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/rtk-hooks';
-import { getUserData } from '../../services/reducers/profile';
+import { getUserData } from '../../services/reducers/profile/profile';
 import { selectIsAuth } from '../../services/selectors';
 import { IProtectedRouteElement } from '../../utils/types';
 
