@@ -3,20 +3,12 @@ import ingredientsReducer, {
   setCountBuns,
   setCountIngredients,
   setIngredients,
-  type IInitialState,
+  initialState,
 } from './ingredients';
 
 import { IIngredient } from '../../../utils/types';
 
 describe('ingredients reducer', () => {
-  const initialState: IInitialState = {
-    buns: [],
-    sauces: [],
-    mains: [],
-    ingredientsRequest: false,
-    ingredientsFailed: false,
-  };
-
   it('should handle initial state', () => {
     const action = { type: 'unknown' };
     expect(ingredientsReducer(initialState, action)).toEqual(initialState);

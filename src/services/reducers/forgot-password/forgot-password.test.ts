@@ -1,16 +1,10 @@
 import forgotPasswordReducer, {
   forgotPassword,
-  IInitialState,
+  initialState,
   setForgotPassword,
 } from './forgot-password';
 
 describe('ForgotPassword reducer', () => {
-  const initialState: IInitialState = {
-    forgotPassword: false,
-    forgotPasswordRequest: false,
-    forgotPasswordFailed: false,
-  };
-
   it('should handle initial state', () => {
     const action = { type: 'unknown' };
     expect(forgotPasswordReducer(initialState, action)).toEqual(initialState);

@@ -6,18 +6,12 @@ import ingredientsConstructorReducer, {
   setBunBottom,
   setBunTop,
   updateIndexIngredients,
-  type IInitialState,
+  initialState,
 } from './ingredients-constructor';
 
 import { IIngredientConstructor } from '../../../utils/types';
 
 describe('ingredientsConstructor reducer', () => {
-  const initialState: IInitialState = {
-    ingredients: [],
-    bunTop: null,
-    bunBottom: null,
-  };
-
   it('should handle initialState', () => {
     const action = { type: 'unknown' };
     expect(ingredientsConstructorReducer(initialState, action)).toEqual(initialState);
@@ -52,33 +46,31 @@ describe('ingredientsConstructor reducer', () => {
   it('should handle removeIngredient', () => {
     const mockIngredientUniqueId: IIngredientConstructor['uniqueId'] = '643d69a5c3f7b9001cfa093c';
 
-    const state: IInitialState = {
+    const state: typeof initialState = {
+      ...initialState,
       ingredients: [
         {
           ...mockIngredientConstructor,
           uniqueId: mockIngredientUniqueId,
         },
       ],
-      bunTop: null,
-      bunBottom: null,
     };
 
     const expectedStateIngredients = state.ingredients.filter(
       (ingredient) => ingredient.uniqueId !== mockIngredientUniqueId,
     );
     const action = removeIngredient(mockIngredientUniqueId);
-    const expectedState = { ...initialState, ingredients: expectedStateIngredients };
-    expect(ingredientsConstructorReducer(initialState, action)).toEqual(expectedState);
+    const expectedState = { ...state, ingredients: expectedStateIngredients };
+    expect(ingredientsConstructorReducer(state, action)).toEqual(expectedState);
   });
 
   it('should handle updateIndexIngredients', () => {
-    const state: IInitialState = {
+    const state: typeof initialState = {
+      ...initialState,
       ingredients: [
         { ...mockIngredientConstructor, index: 1 },
         { ...mockIngredientConstructor, index: 3 },
       ],
-      bunTop: null,
-      bunBottom: null,
     };
 
     const action = updateIndexIngredients();
@@ -93,12 +85,11 @@ describe('ingredientsConstructor reducer', () => {
   });
 
   it('should handle moveIngredients', () => {
-    const state: IInitialState = {
+    const state: typeof initialState = {
       ingredients: [mockIngredientConstructor, mockIngredientConstructor],
       bunTop: null,
       bunBottom: null,
     };
-
     const action = moveIngredients({ dragIndex: 0, hoverIndex: 1 });
     const expectedState = {
       ...state,

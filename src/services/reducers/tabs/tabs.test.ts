@@ -1,17 +1,19 @@
-import TabsSlice, { IInitialState } from './tabs';
+import tabsReducer, { initialState, setActiveTab } from './tabs';
 
 import { EIngredients } from '../../../utils/types';
 
-describe('Order reducer', () => {
-  const state: IInitialState = {
-    activeTab: EIngredients.BUN,
-  };
-
+describe('tabs reducer', () => {
   it('should handle initial state', () => {
-    const initialState: IInitialState = state;
     const action = { type: 'unknown' };
-    const expectedState = initialState;
 
-    expect(TabsSlice(initialState, action)).toEqual(expectedState);
+    expect(tabsReducer(initialState, action)).toEqual(initialState);
+  });
+
+  it('should handle setActiveTab', () => {
+    const mockActiveTab = EIngredients.MAIN;
+
+    const action = setActiveTab(mockActiveTab);
+    const expectedState = { ...initialState, activeTab: mockActiveTab };
+    expect(tabsReducer(initialState, action)).toEqual(expectedState);
   });
 });

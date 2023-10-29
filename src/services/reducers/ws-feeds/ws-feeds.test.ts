@@ -1,7 +1,7 @@
 import { IFeedsAllResponse } from './types';
 import wsFeedsReducer, {
   getFeedByNumber,
-  IInitialState,
+  initialState,
   setFeed,
   wsConnectionClosed,
   wsConnectionError,
@@ -10,15 +10,6 @@ import wsFeedsReducer, {
 } from './ws-feeds';
 
 import { IOrder } from '../../../utils/types';
-
-const initialState: IInitialState = {
-  wsConnected: false,
-  feeds: [],
-  total: 0,
-  totalToday: 0,
-  feedRequest: false,
-  feedFailed: false,
-};
 
 describe('WsFeeds reducer', () => {
   it('should handle initial state', () => {

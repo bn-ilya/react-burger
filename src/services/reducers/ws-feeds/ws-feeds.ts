@@ -6,7 +6,7 @@ import { AppDispatch } from '..';
 import { getFeedByNumber as getFeedByNumberApi } from '../../../utils/burger-api';
 import { IOrder, IError, IWsActions, SliceActions } from '../../../utils/types';
 
-export interface IInitialState {
+interface IInitialState {
   wsConnected: boolean;
   feeds: Array<IOrder>;
   total: number;
@@ -17,7 +17,7 @@ export interface IInitialState {
   error?: Event;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   wsConnected: false,
   feeds: [],
   total: 0,

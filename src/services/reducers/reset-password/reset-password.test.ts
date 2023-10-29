@@ -1,11 +1,6 @@
-import resetPasswordReducer, { resetPassword, IInitialState } from './reset-password';
+import resetPasswordReducer, { resetPassword, initialState } from './reset-password';
 
 describe('resetPassword reducer', () => {
-  const initialState: IInitialState = {
-    resetPasswordRequest: false,
-    resetPasswordFailed: false,
-  };
-
   it('should handle initial state', () => {
     const action = { type: 'unknown' };
     expect(resetPasswordReducer(initialState, action)).toEqual(initialState);

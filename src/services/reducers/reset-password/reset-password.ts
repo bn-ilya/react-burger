@@ -25,12 +25,12 @@ export const resetPassword = createAsyncThunk<
   }
 });
 
-export interface IInitialState {
+interface IInitialState {
   resetPasswordRequest: boolean;
   resetPasswordFailed: boolean;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   resetPasswordRequest: false,
   resetPasswordFailed: false,
 };

@@ -1,22 +1,15 @@
-import modalReducer, { closeModal, openModal, type IInitialState } from './modal';
+import modalReducer, { closeModal, openModal, initialState } from './modal';
 
 import { ETypesModal } from '../../../utils/types';
 
 describe('modal reducer', () => {
-  const initialState: IInitialState = {
-    isModalOpen: false,
-    contentModal: null,
-    typeModal: null,
-    goBack: false,
-  };
-
   it('should handle initial state', () => {
     const action = { type: 'unknown' };
     expect(modalReducer(initialState, action)).toEqual(initialState);
   });
 
   it('should handle openModal', () => {
-    const mockModal: IInitialState = {
+    const mockModal = {
       isModalOpen: true,
       contentModal: 'test',
       typeModal: ETypesModal.ORDER,

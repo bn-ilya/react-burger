@@ -1,16 +1,11 @@
 import { IOrdersAllResponse } from './types';
 import wsOrdersReducer, {
-  IInitialState,
+  initialState,
   wsConnectionClosed,
   wsConnectionError,
   wsConnectionSuccess,
   wsGetOrders,
 } from './ws-orders';
-
-const initialState: IInitialState = {
-  wsConnected: false,
-  orders: [],
-};
 
 describe('WsFeeds reducer', () => {
   it('should handle initial state', () => {
