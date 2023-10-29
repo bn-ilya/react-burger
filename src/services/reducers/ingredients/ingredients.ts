@@ -33,7 +33,7 @@ export const getIngredients = createAsyncThunk<
   }
 });
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   buns: [],
   sauces: [],
   mains: [],

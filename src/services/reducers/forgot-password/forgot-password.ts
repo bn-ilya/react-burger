@@ -22,13 +22,13 @@ export const forgotPassword = createAsyncThunk(
   },
 );
 
-export interface IInitialState {
+interface IInitialState {
   forgotPassword: boolean;
   forgotPasswordRequest: boolean;
   forgotPasswordFailed: boolean;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   forgotPassword: false,
   forgotPasswordRequest: false,
   forgotPasswordFailed: false,

@@ -2,11 +2,11 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { SliceActions } from '../../../utils/types';
 
-export interface IInitialState {
+interface IInitialState {
   totalPrice: number;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   totalPrice: 0,
 };
 

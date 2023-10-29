@@ -2,13 +2,13 @@ import { createSlice, nanoid, type PayloadAction } from '@reduxjs/toolkit';
 
 import { IIngredient, IIngredientConstructor, SliceActions } from '../../../utils/types';
 
-export interface IInitialState {
+interface IInitialState {
   ingredients: Array<IIngredientConstructor>;
   bunTop: IIngredient | null;
   bunBottom: IIngredient | null;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   ingredients: [],
   bunTop: null,
   bunBottom: null,

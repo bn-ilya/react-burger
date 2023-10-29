@@ -3,14 +3,14 @@ import { ReactElement } from 'react';
 
 import { IOrder, ETypesModal, IIngredient, SliceActions } from '../../../utils/types';
 
-export interface IInitialState {
+interface IInitialState {
   isModalOpen?: boolean;
   contentModal: ReactElement | IIngredient | IOrder | string | number | null;
   typeModal: ETypesModal | null;
   goBack?: boolean | null;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   isModalOpen: false,
   contentModal: null,
   typeModal: null,

@@ -1,6 +1,6 @@
 import profileReducer, {
   getUserData,
-  IInitialState,
+  initialState,
   login,
   logout,
   register,
@@ -10,17 +10,6 @@ import profileReducer, {
 } from './profile';
 
 describe('profile reducer', () => {
-  const initialState: IInitialState = {
-    name: '',
-    email: '',
-    logoutRequest: false,
-    logoutFailed: false,
-    getUserDataRequest: false,
-    getUserDataFailed: false,
-    updateUserDataRequest: false,
-    updateUserDataFailed: false,
-  };
-
   it('should handle initial state', () => {
     const action = { type: 'unknown' };
     expect(profileReducer(initialState, action)).toEqual(initialState);

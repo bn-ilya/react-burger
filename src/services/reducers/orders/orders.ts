@@ -10,7 +10,7 @@ interface ICreateOrderRespone {
   order: IOrderWithOwner;
 }
 
-export interface IInitialState {
+interface IInitialState {
   orders: Array<IOrderWithOwner>;
   orderRequest: boolean;
   orderFailed: boolean;
@@ -32,7 +32,7 @@ export const createOrder = createAsyncThunk<
   }
 });
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   orders: [],
   orderRequest: false,
   orderFailed: false,

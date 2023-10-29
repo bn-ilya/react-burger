@@ -1,16 +1,12 @@
 import viewingIngredientReducer, {
   clearViewingIngredient,
-  IInitialState,
+  initialState,
   setViewingIngredient,
 } from './viewing-ingredient';
 
 import { IIngredient } from '../../../utils/types';
 
 describe('viewingIngredient reducer', () => {
-  const initialState: IInitialState = {
-    viewingIngredient: null,
-  };
-
   it('should handle initial state', () => {
     const action = { type: 'unknown' };
     expect(viewingIngredientReducer(initialState, action)).toEqual(initialState);
@@ -38,7 +34,7 @@ describe('viewingIngredient reducer', () => {
   });
 
   it('should handle setViewingIngredient', () => {
-    const state: IInitialState = {
+    const state = {
       viewingIngredient: {
         _id: '143d69a5c3f7b9001cfa093c',
         name: 'Краторная булка N-200i',

@@ -1,14 +1,8 @@
-import OrderReducer, { addOrder, type IInitialState, createOrder } from './orders';
+import OrderReducer, { addOrder, initialState, createOrder } from './orders';
 
 import { IOrderWithOwner } from '../../../utils/types';
 
 describe('Order reducer', () => {
-  const initialState: IInitialState = {
-    orders: [],
-    orderRequest: false,
-    orderFailed: false,
-  };
-
   it('should handle initial state', () => {
     const action = { type: 'unknown' };
     const expectedState = initialState;

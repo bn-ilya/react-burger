@@ -48,7 +48,7 @@ interface IGetUserResponse {
   user: IUser;
 }
 
-export interface IInitialState {
+interface IInitialState {
   name: TNameUser;
   email: TPasswordUser;
   logoutRequest: boolean;
@@ -59,7 +59,7 @@ export interface IInitialState {
   updateUserDataFailed: boolean;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   name: '',
   email: '',
   logoutRequest: false,
