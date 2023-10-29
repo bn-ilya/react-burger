@@ -1,4 +1,6 @@
 import '@4tw/cypress-drag-drop';
+import { URL_API } from './../../../src/utils/api-config';
+
 import {
   getBtnCloseModalSelector,
   getBunSelector,
@@ -57,7 +59,7 @@ describe('modals tests', () => {
     cy.get('[data-cy="btn-login"]').click();
 
     // Create order
-    cy.intercept('POST', 'https://norma.nomoreparties.space/api/orders').as('apiRequest');
+    cy.intercept('POST', `${URL_API}/orders`).as('apiRequest');
 
     cy.get('[data-cy="btn-create-order"]').click();
 
