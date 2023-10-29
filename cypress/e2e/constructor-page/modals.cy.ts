@@ -1,4 +1,9 @@
 import '@4tw/cypress-drag-drop';
+import {
+  getBtnCloseModalSelector,
+  getBunSelector,
+  getModalSelector,
+} from '../../support/selectors';
 
 describe('modals tests', () => {
   beforeEach(() => {
@@ -6,33 +11,34 @@ describe('modals tests', () => {
   });
 
   it('open and close modal ingredient', () => {
-    cy.get('[data-cy="bun"]').find('a').first().click();
+    cy.get(getBunSelector);
+    cy.get(getBunSelector).find('a').first().click();
 
-    cy.get('[data-cy="modal"]').should('exist');
+    cy.get(getModalSelector).should('exist');
 
-    cy.get('[data-cy="btn-close-modal"]').click();
+    cy.get(getBtnCloseModalSelector).click();
 
-    cy.get('[data-cy="modal"]').should('not.exist');
+    cy.get(getModalSelector).should('not.exist');
   });
 
   it('open and close modal ingredient and check description', () => {
-    cy.get('[data-cy="bun"]').find('a').first().click();
+    cy.get(getBunSelector).find('a').first().click();
 
-    cy.get('[data-cy="modal"]').should('exist');
+    cy.get(getModalSelector).should('exist');
 
     cy.get('[data-cy="ingredient-data-calories"]').should('exist');
     cy.get('[data-cy="ingredient-data-proteins"]').should('exist');
     cy.get('[data-cy="ingredient-data-fat"]').should('exist');
     cy.get('[data-cy="ingredient-data-carbohydrates"]').should('exist');
 
-    cy.get('[data-cy="btn-close-modal"]').click();
+    cy.get(getBtnCloseModalSelector).click();
 
-    cy.get('[data-cy="modal"]').should('not.exist');
+    cy.get(getModalSelector).should('not.exist');
   });
 
   it('open and close modal order', () => {
     // Construct burger
-    cy.get('[data-cy="bun"]').find('a').first().drag('[data-cy="drop-zone-ingredient"]');
+    cy.get(getBunSelector).find('a').first().drag('[data-cy="drop-zone-ingredient"]');
     cy.get('.constructor-element_pos_top').should('exist');
     cy.get('.constructor-element_pos_bottom').should('exist');
 
@@ -58,10 +64,10 @@ describe('modals tests', () => {
     cy.wait('@apiRequest').its('response.statusCode').should('eq', 200);
 
     // Check modal
-    cy.get('[data-cy="modal"]').should('exist');
+    cy.get(getModalSelector).should('exist');
 
-    cy.get('[data-cy="btn-close-modal"]').click();
+    cy.get(getBtnCloseModalSelector).click();
 
-    cy.get('[data-cy="modal"]').should('not.exist');
+    cy.get(getModalSelector).should('not.exist');
   });
 });
