@@ -9,7 +9,7 @@ import wsFeedsReducer, {
   wsGetFeeds,
 } from './ws-feeds';
 
-import { IOrder } from '../../../utils/types';
+import { mockOrder } from '../../mocks/order.mock';
 
 describe('WsFeeds reducer', () => {
   it('should handle initial state', () => {
@@ -18,26 +18,8 @@ describe('WsFeeds reducer', () => {
   });
 
   it('should handle setFeed', () => {
-    const mockFeed: IOrder = {
-      _id: '653c1da752b4cf001d86e0c0',
-      ingredients: [
-        '643d69a5c3f7b9001cfa0943',
-        '643d69a5c3f7b9001cfa0943',
-        '643d69a5c3f7b9001cfa0942',
-        '643d69a5c3f7b9001cfa0945',
-        '643d69a5c3f7b9001cfa093d',
-      ],
-      owner: '6537d2eb52b4cf001d86d031',
-      status: 'done',
-      name: 'Space антарианский флюоресцентный spicy бургер',
-      createdAt: '2023-10-27T20:29:27.735Z',
-      updatedAt: '2023-10-27T20:29:27.967Z',
-      number: 24526,
-      __v: 0,
-    };
-
-    const action = setFeed(mockFeed);
-    const expectedState = { ...initialState, feeds: [...initialState.feeds, mockFeed] };
+    const action = setFeed(mockOrder);
+    const expectedState = { ...initialState, feeds: [...initialState.feeds, mockOrder] };
     expect(wsFeedsReducer(initialState, action)).toEqual(expectedState);
   });
 
@@ -63,66 +45,7 @@ describe('WsFeeds reducer', () => {
   it('should handle wsGetFeeds', () => {
     const mockResponse: IFeedsAllResponse = {
       success: true,
-      orders: [
-        {
-          _id: '653c235752b4cf001d86e0dc',
-          ingredients: [
-            '643d69a5c3f7b9001cfa0945',
-            '643d69a5c3f7b9001cfa0943',
-            '643d69a5c3f7b9001cfa0942',
-            '643d69a5c3f7b9001cfa0943',
-            '643d69a5c3f7b9001cfa093d',
-          ],
-          status: 'done',
-          name: 'Space антарианский флюоресцентный spicy бургер',
-          createdAt: '2023-10-27T20:53:43.116Z',
-          updatedAt: '2023-10-27T20:53:43.369Z',
-          number: 24528,
-        },
-        {
-          _id: '653c209852b4cf001d86e0cf',
-          ingredients: [
-            '643d69a5c3f7b9001cfa0943',
-            '643d69a5c3f7b9001cfa0943',
-            '643d69a5c3f7b9001cfa0943',
-            '643d69a5c3f7b9001cfa093d',
-          ],
-          status: 'done',
-          name: 'Space флюоресцентный бургер',
-          createdAt: '2023-10-27T20:42:00.011Z',
-          updatedAt: '2023-10-27T20:42:00.286Z',
-          number: 24527,
-        },
-        {
-          _id: '653c1da752b4cf001d86e0c0',
-          ingredients: [
-            '643d69a5c3f7b9001cfa0943',
-            '643d69a5c3f7b9001cfa0943',
-            '643d69a5c3f7b9001cfa0942',
-            '643d69a5c3f7b9001cfa0945',
-            '643d69a5c3f7b9001cfa093d',
-          ],
-          status: 'done',
-          name: 'Space антарианский флюоресцентный spicy бургер',
-          createdAt: '2023-10-27T20:29:27.735Z',
-          updatedAt: '2023-10-27T20:29:27.967Z',
-          number: 24526,
-        },
-        {
-          _id: '653c1c6452b4cf001d86e0bd',
-          ingredients: [
-            '643d69a5c3f7b9001cfa0943',
-            '643d69a5c3f7b9001cfa0943',
-            '643d69a5c3f7b9001cfa0943',
-            '643d69a5c3f7b9001cfa093d',
-          ],
-          status: 'done',
-          name: 'Space флюоресцентный бургер',
-          createdAt: '2023-10-27T20:24:04.392Z',
-          updatedAt: '2023-10-27T20:24:04.654Z',
-          number: 24525,
-        },
-      ],
+      orders: [mockOrder, mockOrder, mockOrder],
       total: 24154,
       totalToday: 33,
     };

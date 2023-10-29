@@ -7,6 +7,7 @@ import ingredientsReducer, {
 } from './ingredients';
 
 import { IIngredient } from '../../../utils/types';
+import { mockIngredient } from '../../mocks/ingredient.mock';
 
 describe('ingredients reducer', () => {
   it('should handle initial state', () => {
@@ -16,48 +17,9 @@ describe('ingredients reducer', () => {
 
   it('should handle setIngredients', () => {
     const mockArrayIngredients: Array<IIngredient> = [
-      {
-        _id: '643d69a5c3f7b9001cfa093c',
-        name: 'Краторная булка N-200i',
-        type: 'bun',
-        proteins: 80,
-        fat: 24,
-        carbohydrates: 53,
-        calories: 420,
-        price: 1255,
-        image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-        image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-        image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
-        __v: 0,
-      },
-      {
-        _id: '643d69a5c3f7b9001cfa093c',
-        name: 'Краторная булка N-200i',
-        type: 'sauce',
-        proteins: 80,
-        fat: 24,
-        carbohydrates: 53,
-        calories: 420,
-        price: 1255,
-        image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-        image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-        image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
-        __v: 0,
-      },
-      {
-        _id: '643d69a5c3f7b9001cfa093c',
-        name: 'Краторная булка N-200i',
-        type: 'main',
-        proteins: 80,
-        fat: 24,
-        carbohydrates: 53,
-        calories: 420,
-        price: 1255,
-        image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-        image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-        image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
-        __v: 0,
-      },
+      { ...mockIngredient, type: 'bun' },
+      { ...mockIngredient, type: 'sauce' },
+      { ...mockIngredient, type: 'main' },
     ];
 
     const action = setIngredients(mockArrayIngredients);
@@ -71,56 +33,10 @@ describe('ingredients reducer', () => {
   });
 
   it('should handle setCountIngredients', () => {
-    const state = {
+    const state: typeof initialState = {
       ...initialState,
-      buns: [
-        {
-          _id: '143d69a5c3f7b9001cfa093c',
-          name: 'Краторная булка N-200i',
-          type: 'bun',
-          proteins: 80,
-          fat: 24,
-          carbohydrates: 53,
-          calories: 420,
-          price: 1255,
-          image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-          image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-          image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
-          __v: 0,
-        },
-      ],
-      mains: [
-        {
-          _id: '343d69a5c3f7b9001cfa093c',
-          name: 'Краторная булка N-200i',
-          type: 'main',
-          proteins: 80,
-          fat: 24,
-          carbohydrates: 53,
-          calories: 420,
-          price: 1255,
-          image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-          image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-          image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
-          __v: 0,
-        },
-      ],
-      sauces: [
-        {
-          _id: '243d69a5c3f7b9001cfa093c',
-          name: 'Краторная булка N-200i',
-          type: 'sauce',
-          proteins: 80,
-          fat: 24,
-          carbohydrates: 53,
-          calories: 420,
-          price: 1255,
-          image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-          image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-          image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
-          __v: 0,
-        },
-      ],
+      mains: [{ ...mockIngredient, _id: '343d69a5c3f7b9001cfa093c', type: 'main' }],
+      sauces: [{ ...mockIngredient, type: 'sauce' }],
     };
 
     const expectedState = {
@@ -134,56 +50,9 @@ describe('ingredients reducer', () => {
   });
 
   it('should handle setCountBuns', () => {
-    const state = {
+    const state: typeof initialState = {
       ...initialState,
-      buns: [
-        {
-          _id: '143d69a5c3f7b9001cfa093c',
-          name: 'Краторная булка N-200i',
-          type: 'bun',
-          proteins: 80,
-          fat: 24,
-          carbohydrates: 53,
-          calories: 420,
-          price: 1255,
-          image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-          image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-          image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
-          __v: 0,
-        },
-      ],
-      mains: [
-        {
-          _id: '343d69a5c3f7b9001cfa093c',
-          name: 'Краторная булка N-200i',
-          type: 'main',
-          proteins: 80,
-          fat: 24,
-          carbohydrates: 53,
-          calories: 420,
-          price: 1255,
-          image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-          image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-          image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
-          __v: 0,
-        },
-      ],
-      sauces: [
-        {
-          _id: '243d69a5c3f7b9001cfa093c',
-          name: 'Краторная булка N-200i',
-          type: 'sauce',
-          proteins: 80,
-          fat: 24,
-          carbohydrates: 53,
-          calories: 420,
-          price: 1255,
-          image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-          image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-          image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
-          __v: 0,
-        },
-      ],
+      buns: [{ ...mockIngredient, _id: '143d69a5c3f7b9001cfa093c', type: 'bun' }],
     };
 
     const expectedState = {
