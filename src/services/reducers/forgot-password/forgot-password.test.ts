@@ -28,14 +28,14 @@ describe('ForgotPassword reducer', () => {
     });
   });
 
-  it('should change status with "createOrder.pending" action', () => {
+  it('should change status with "forgotPassword.pending" action', () => {
     const action = { type: forgotPassword.pending.type };
     const state = forgotPasswordReducer(initialState, action);
 
     expect(state).toEqual({ ...initialState, forgotPasswordRequest: true });
   });
 
-  it('should change status with "createOrder.fulfilled" action', () => {
+  it('should change status with "forgotPassword.fulfilled" action', () => {
     const action = { type: forgotPassword.fulfilled.type };
     const state = forgotPasswordReducer(initialState, action);
 
@@ -46,7 +46,7 @@ describe('ForgotPassword reducer', () => {
     });
   });
 
-  it('should change status with "createOrder.rejected" action', () => {
+  it('should change status with "forgotPassword.rejected" action', () => {
     const action = { type: forgotPassword.rejected.type };
     const state = forgotPasswordReducer(initialState, action);
 
