@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { IError } from './types';
 
-const URL_API = 'https://norma.nomoreparties.space/api';
+export const URL_API = 'https://norma.nomoreparties.space/api';
 
 export const instanceAxios = axios.create({
   baseURL: URL_API,

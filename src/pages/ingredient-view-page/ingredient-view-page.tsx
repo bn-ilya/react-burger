@@ -8,7 +8,7 @@ import Header from '../../components/header/header';
 import LoadingPage from '../../components/loading-page/loading-page';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/rtk-hooks';
-import { getIngredients } from '../../services/reducers/ingredients';
+import { getIngredients } from '../../services/reducers/ingredients/ingredients';
 import { selectIsLoadedIngredients } from '../../services/selectors';
 
 const IngredientViewPage: FC = () => {

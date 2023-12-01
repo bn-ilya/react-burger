@@ -1,17 +1,21 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import forgotPasswordSlice, { TForgotPasswordSliceActions } from './forgot-password';
-import ingredientsSlice, { TIngredientsSliceActions } from './ingredients';
+import forgotPasswordSlice, {
+  TForgotPasswordSliceActions,
+} from './forgot-password/forgot-password';
+import ingredientsSlice, { TIngredientsSliceActions } from './ingredients/ingredients';
 import ingredientsConstructorSlice, {
   TIngredientsConstructorSliceActions,
-} from './ingredients-constructor';
-import modalSlice, { TModalSliceActions } from './modal';
-import ordersSlice, { TOrdersSliceActions } from './orders';
-import profileSlice, { TProfileSliceActions } from './profile';
-import resetPasswordSlice from './reset-password';
-import tabsSlice, { TTabsSliceActions } from './tabs';
-import totalPriceSlice, { TTotalPriceSliceActions } from './total-price';
-import viewingIngredientSlice, { TViewingIngredientSliceActions } from './viewing-ingredient';
+} from './ingredients-constructor/ingredients-constructor';
+import modalSlice, { TModalSliceActions } from './modal/modal';
+import ordersSlice, { TOrdersSliceActions } from './orders/orders';
+import profileSlice, { TProfileSliceActions } from './profile/profile';
+import resetPasswordSlice from './reset-password/reset-password';
+import tabsSlice, { TTabsSliceActions } from './tabs/tabs';
+import totalPriceSlice, { TTotalPriceSliceActions } from './total-price/total-price';
+import viewingIngredientSlice, {
+  TViewingIngredientSliceActions,
+} from './viewing-ingredient/viewing-ingredient';
 
 import wsFeedsSlice, { TWsFeedSliceActions, wsActionsFeeds } from './ws-feeds/ws-feeds';
 import wsOrdersSlice, { TWsOrdersSliceActions, wsActionsOrders } from './ws-orders/ws-orders';

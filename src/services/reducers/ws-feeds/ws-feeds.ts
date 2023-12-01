@@ -17,7 +17,7 @@ interface IInitialState {
   error?: Event;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   wsConnected: false,
   feeds: [],
   total: 0,
@@ -74,11 +74,11 @@ const wsFeedsSlice = createSlice({
         state.feedRequest = true;
       })
       .addCase(getFeedByNumber.fulfilled, (state) => {
-        state.feedRequest = true;
+        state.feedRequest = false;
         state.feedFailed = false;
       })
       .addCase(getFeedByNumber.rejected, (state) => {
-        state.feedRequest = true;
+        state.feedRequest = false;
         state.feedFailed = true;
       });
   },

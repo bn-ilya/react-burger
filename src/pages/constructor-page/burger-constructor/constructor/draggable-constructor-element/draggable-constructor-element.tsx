@@ -10,7 +10,7 @@ import { useAppDispatch } from '../../../../../hooks/rtk-hooks';
 import {
   moveIngredients,
   removeIngredient,
-} from '../../../../../services/reducers/ingredients-constructor';
+} from '../../../../../services/reducers/ingredients-constructor/ingredients-constructor';
 import { IIngredientConstructor } from '../../../../../utils/types';
 
 interface ICollectedProps {
@@ -86,7 +86,13 @@ const DraggableConstructorElement: FC<IDraggableConstructorElement> = ({ ingredi
 
   const opacity = isDragging ? 0.5 : 1;
   return (
-    <div className={styled.dragElement} ref={ref} style={{ opacity }} data-handler-id={handlerId}>
+    <div
+      data-cy={`constructor-${ingredient.type}`}
+      className={styled.dragElement}
+      ref={ref}
+      style={{ opacity }}
+      data-handler-id={handlerId}
+    >
       <DragIcon type='primary' />
       <ConstructorElement
         text={ingredient.name}

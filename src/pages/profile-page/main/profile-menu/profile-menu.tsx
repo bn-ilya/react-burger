@@ -4,9 +4,9 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './profile-menu.module.css';
 
 import { useAppDispatch } from '../../../../hooks/rtk-hooks';
-import { openModal } from '../../../../services/reducers/modal';
+import { openModal } from '../../../../services/reducers/modal/modal';
 
-import { logout } from '../../../../services/reducers/profile';
+import { logout } from '../../../../services/reducers/profile/profile';
 import { ETypesModal, IError } from '../../../../utils/types';
 
 const ProfileMenu = () => {

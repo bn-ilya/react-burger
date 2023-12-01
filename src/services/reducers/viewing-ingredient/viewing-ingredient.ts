@@ -1,12 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { IIngredient, SliceActions } from '../../utils/types';
+import { IIngredient, SliceActions } from '../../../utils/types';
 
-interface IInitialSTate {
+interface IInitialState {
   viewingIngredient: IIngredient | null;
 }
 
-const initialState: IInitialSTate = {
+export const initialState: IInitialState = {
   viewingIngredient: null,
 };
 

@@ -10,15 +10,18 @@ import styles from './constructor.module.css';
 import DraggableConstructorElement from './draggable-constructor-element/draggable-constructor-element';
 
 import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
-import { setCountIngredients, setCountBuns } from '../../../../services/reducers/ingredients';
+import {
+  setCountIngredients,
+  setCountBuns,
+} from '../../../../services/reducers/ingredients/ingredients';
 import {
   addIngredients,
   setBunBottom,
   setBunTop,
   updateIndexIngredients,
-} from '../../../../services/reducers/ingredients-constructor';
+} from '../../../../services/reducers/ingredients-constructor/ingredients-constructor';
 
-import { setTotalPrice } from '../../../../services/reducers/total-price';
+import { setTotalPrice } from '../../../../services/reducers/total-price/total-price';
 import { selectAllIngredientsConstructor } from '../../../../services/selectors';
 import { IIngredient, IIngredientsCount } from '../../../../utils/types';
 
@@ -74,7 +77,7 @@ const Constructor: FC = () => {
   }, [ingredients, bunTop, bunBottom, dispatch]);
 
   return (
-    <div className={styles.content}>
+    <div className={styles.content} ref={dropRef} data-cy='drop-zone-ingredient'>
       <div className={styles.header}>
         {bunTop ? (
           <ConstructorElement
@@ -83,15 +86,13 @@ const Constructor: FC = () => {
             text={bunTop.name + ' (верх)'}
             price={bunTop.price}
             thumbnail={bunTop.image}
+            data-cy='bun-top-constructor'
           />
         ) : (
           <ConstructorElementMock direction='top' text={'Переместите булку'} />
         )}
       </div>
-      <div
-        className={`${styles.elements} ${!ingredients.length && styles['elements-empty']}`}
-        ref={dropRef}
-      >
+      <div className={`${styles.elements} ${!ingredients.length && styles['elements-empty']}`}>
         {ingredients.length ? (
           ingredients.map((ingredient, index) => (
             <DraggableConstructorElement

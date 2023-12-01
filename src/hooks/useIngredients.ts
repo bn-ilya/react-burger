@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from './rtk-hooks';
 
-import { getIngredients } from '../services/reducers/ingredients';
+import { getIngredients } from '../services/reducers/ingredients/ingredients';
 import { selectIngredients } from '../services/selectors';
 
 export const useIngredients = () => {

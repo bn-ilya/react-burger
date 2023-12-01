@@ -8,8 +8,8 @@ import styles from './login-form.module.css';
 import ButtonLoader from '../../../../components/button-loader/button-loader';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
 import useFormAndValidation from '../../../../hooks/useFormAndValidation';
-import { openModal } from '../../../../services/reducers/modal';
-import { login } from '../../../../services/reducers/profile';
+import { openModal } from '../../../../services/reducers/modal/modal';
+import { login } from '../../../../services/reducers/profile/profile';
 import { selectUserDataRequest } from '../../../../services/selectors';
 import { ETypesModal, IError, TEmailUser, TPasswordUser } from '../../../../utils/types';
 
@@ -48,6 +48,7 @@ const LoginForm = () => {
         value={values?.email ?? ''}
         size={'default'}
         required={true}
+        data-cy={'input-login'}
       />
       <PasswordInput
         placeholder={'Пароль'}
@@ -57,6 +58,7 @@ const LoginForm = () => {
         value={values?.password ?? ''}
         size={'default'}
         required={true}
+        data-cy={'password-login'}
       />
       <ButtonLoader
         disabled={!isValid}
@@ -65,6 +67,7 @@ const LoginForm = () => {
         htmlType='submit'
         type='primary'
         size='medium'
+        data-cy={'btn-login'}
       >
         Войти
       </ButtonLoader>

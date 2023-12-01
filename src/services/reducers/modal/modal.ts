@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { ReactElement } from 'react';
 
-import { IOrder, ETypesModal, IIngredient, SliceActions } from '../../utils/types';
+import { IOrder, ETypesModal, IIngredient, SliceActions } from '../../../utils/types';
 
 interface IInitialState {
   isModalOpen?: boolean;
@@ -10,7 +10,7 @@ interface IInitialState {
   goBack?: boolean | null;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   isModalOpen: false,
   contentModal: null,
   typeModal: null,

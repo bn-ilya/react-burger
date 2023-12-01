@@ -1,5 +1,5 @@
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/rtk-hooks';
 import IngredientDetails from '../../pages/constructor-page/burger-ingredients/ingredients/ingredient-details/ingredient-details';
 import OrderDetails from '../../pages/constructor-page/order-details/order-details';
 
-import { closeModal } from '../../services/reducers/modal';
+import { closeModal } from '../../services/reducers/modal/modal';
 import { selectModal } from '../../services/selectors';
 import { IOrder, ETypesModal, IIngredient } from '../../utils/types';
 
@@ -21,7 +21,7 @@ import FeedDetails from '../feed-details/feed-details';
 import FeedModalHeader from '../feed-modal-header/feed-modal-header';
 import ModalError from '../ui/modal-error/modal-error';
 
-import type { FC, ReactNode, KeyboardEvent as ReactKeyboardEvent } from 'react';
+import type { FC, ReactNode } from 'react';
 
 const modalRoot: HTMLElement | null = document.getElementById('react-modals');
 
@@ -31,16 +31,6 @@ const Modal: FC = () => {
   const { contentModal, typeModal, isModalOpen, goBack } = useAppSelector(selectModal);
   const [header, setHeader] = useState<ReactNode>();
   const [main, setMain] = useState<ReactNode>();
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      e.code === 'Escape' && dispatch(closeModal());
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [dispatch]);
 
   useEffect(() => {
     if (!typeModal || !contentModal) return;
@@ -64,29 +54,37 @@ const Modal: FC = () => {
     }
   }, [typeModal, contentModal]);
 
-  if (!isModalOpen) return null;
-
-  const close = (): void => {
+  const close = useCallback((): void => {
     goBack && navigate(-1);
     dispatch(closeModal());
-  };
+  }, [goBack, dispatch, navigate]);
 
-  const handleKeyDown = (e: ReactKeyboardEvent<HTMLButtonElement>): void => {
-    if (e.key === 'Enter' || e.key === 'Escape') {
-      close();
-    }
-  };
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent): void => {
+      if (e.key === 'Enter' || e.key === 'Escape') {
+        close();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [close]);
+
+  if (!isModalOpen) return null;
 
   return modalRoot
     ? createPortal(
         <>
           <section className={styles.modal}>
-            <div className={styles.content}>
+            <div className={styles.content} data-cy='modal'>
               <button
                 tabIndex={0}
-                onKeyDown={handleKeyDown}
                 onClick={() => close()}
                 className={styles.close}
+                data-cy='btn-close-modal'
               >
                 <CloseIcon type='primary' />
               </button>

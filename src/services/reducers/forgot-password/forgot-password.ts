@@ -1,7 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 
-import { forgotPassword as forgotPasswordApi } from '../../utils/burger-api';
-import { SliceActions } from '../../utils/types';
+import { forgotPassword as forgotPasswordApi } from '../../../utils/burger-api';
+import { SliceActions } from '../../../utils/types';
 
 interface IForgotPasswordResponse {
   success: boolean;
@@ -22,7 +22,13 @@ export const forgotPassword = createAsyncThunk(
   },
 );
 
-const initialState = {
+interface IInitialState {
+  forgotPassword: boolean;
+  forgotPasswordRequest: boolean;
+  forgotPasswordFailed: boolean;
+}
+
+export const initialState: IInitialState = {
   forgotPassword: false,
   forgotPasswordRequest: false,
   forgotPasswordFailed: false,
@@ -32,7 +38,7 @@ const forgotPasswordSlice = createSlice({
   name: 'forgotPassword',
   initialState,
   reducers: {
-    setForgotPassword: (state, action) => {
+    setForgotPassword: (state, action: PayloadAction<boolean>) => {
       state.forgotPassword = action.payload;
     },
   },

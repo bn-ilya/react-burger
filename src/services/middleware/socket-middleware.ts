@@ -3,7 +3,7 @@ import { type MiddlewareAPI, type Middleware } from 'redux';
 import { IWsActions } from '../../utils/types';
 
 import { AppDispatch, RootState, TAllAppActions } from '../reducers';
-import { updateToken } from '../reducers/profile';
+import { updateToken } from '../reducers/profile/profile';
 
 export const socketMiddleware = <T extends IWsActions>(wsUrl: string, actions: T): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, RootState>) => {

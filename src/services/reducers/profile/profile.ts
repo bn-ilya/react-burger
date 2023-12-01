@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 
-import { AppDispatch } from '.';
+import { AppDispatch } from '..';
 
 import {
   register as registerApi,
@@ -9,7 +9,7 @@ import {
   getUserData as getUserDataApi,
   updateUserData as updateUserDataApi,
   refreshToken,
-} from '../../utils/burger-api';
+} from '../../../utils/burger-api';
 import {
   IError,
   IRefreshRespone,
@@ -17,7 +17,7 @@ import {
   TEmailUser,
   TNameUser,
   TPasswordUser,
-} from '../../utils/types';
+} from '../../../utils/types';
 
 interface IUser {
   email: TEmailUser;
@@ -59,7 +59,7 @@ interface IInitialState {
   updateUserDataFailed: boolean;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   name: '',
   email: '',
   logoutRequest: false,
@@ -258,5 +258,5 @@ const profileSlice = createSlice({
 });
 
 export default profileSlice.reducer;
-const { setEmail, setName } = profileSlice.actions;
+export const { setEmail, setName } = profileSlice.actions;
 export type TProfileSliceActions = SliceActions<typeof profileSlice.actions>;

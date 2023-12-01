@@ -1,12 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { EIngredients, SliceActions } from '../../utils/types';
+import { EIngredients, SliceActions } from '../../../utils/types';
 
 interface IInitialState {
   activeTab: EIngredients;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   activeTab: EIngredients.BUN,
 };
 

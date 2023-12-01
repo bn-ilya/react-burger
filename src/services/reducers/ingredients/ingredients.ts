@@ -1,17 +1,16 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 
-import { AppDispatch } from '.';
+import { AppDispatch } from '..';
 
-import { IError, IIngredient, IIngredientsCount, SliceActions } from './../../utils/types';
-
-import { getIngredients as getIngredientsApi } from '../../utils/burger-api';
+import { getIngredients as getIngredientsApi } from '../../../utils/burger-api';
+import { IError, IIngredient, IIngredientsCount, SliceActions } from '../../../utils/types';
 
 interface IGetIngredientsResponse {
   data: Array<IIngredient>;
   success: boolean;
 }
 
-interface IInitialState {
+export interface IInitialState {
   buns: Array<IIngredient>;
   sauces: Array<IIngredient>;
   mains: Array<IIngredient>;
@@ -34,7 +33,7 @@ export const getIngredients = createAsyncThunk<
   }
 });
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   buns: [],
   sauces: [],
   mains: [],

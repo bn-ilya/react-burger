@@ -5,7 +5,7 @@ import { FC } from 'react';
 import styles from './error-request-page.module.css';
 
 import { useAppDispatch } from '../../hooks/rtk-hooks';
-import { getIngredients } from '../../services/reducers/ingredients';
+import { getIngredients } from '../../services/reducers/ingredients/ingredients';
 
 const ErrorRequestPage: FC = () => {
   const dispatch = useAppDispatch();

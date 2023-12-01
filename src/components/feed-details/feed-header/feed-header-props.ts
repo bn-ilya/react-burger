@@ -4,5 +4,5 @@ export interface IFeedHeaderProps {
   showNumberFeed?: boolean;
   number: number;
   name: string;
-  status: EStatuses;
+  status: `${EStatuses}`;
 }

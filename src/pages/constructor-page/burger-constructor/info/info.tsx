@@ -7,8 +7,8 @@ import styles from './info.module.css';
 
 import ButtonLoader from '../../../../components/button-loader/button-loader';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/rtk-hooks';
-import { openModal } from '../../../../services/reducers/modal';
-import { createOrder } from '../../../../services/reducers/orders';
+import { openModal } from '../../../../services/reducers/modal/modal';
+import { createOrder } from '../../../../services/reducers/orders/orders';
 import {
   selectAllIngredientsConstructor,
   selectIsAuth,
@@ -59,6 +59,7 @@ const Info: FC = () => {
         htmlType='button'
         type='primary'
         size='large'
+        dataCy='btn-create-order'
       >
         <span>Оформить заказ</span>
       </ButtonLoader>
